@@ -17,8 +17,8 @@ import androidx.recyclerview.widget.RecyclerView
 import appvian.water.buddy.R
 import appvian.water.buddy.model.data.Category
 import appvian.water.buddy.model.data.Intake
+import appvian.water.buddy.viewmodel.CategoryRecyclerViewAdapter
 import appvian.water.buddy.viewmodel.HomeViewModel
-import appvian.water.buddy.viewmodel.MyRecyclerviewAdapter
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.coroutines.InternalCoroutinesApi
@@ -47,7 +47,7 @@ class SetIntakeModal : BottomSheetDialogFragment() {
         recyclerview.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
-            adapter = MyRecyclerviewAdapter(context,categoryList) {category ->
+            adapter = CategoryRecyclerViewAdapter(context,categoryList) { category ->
                 typeofDrink = category.id
             }
         }

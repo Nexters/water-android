@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.RecyclerView
 import appvian.water.buddy.R
 import appvian.water.buddy.model.data.Category
 
-class MyRecyclerviewAdapter (val context : Context, val categoryList : ArrayList<Category>, val itemClick: (Category) -> Unit) :
-    RecyclerView.Adapter<MyRecyclerviewAdapter.MyViewHolder>(){
+class CategoryRecyclerViewAdapter (val context : Context, val categoryList : ArrayList<Category>, val itemClick: (Category) -> Unit) :
+    RecyclerView.Adapter<CategoryRecyclerViewAdapter.MyViewHolder>(){
 
     private var selectedPosition = -1
 
