@@ -21,6 +21,7 @@ import appvian.water.buddy.viewmodel.CategoryRecyclerViewAdapter
 import appvian.water.buddy.viewmodel.HomeViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import kotlinx.android.synthetic.main.bottom_sheet_modal.*
 import kotlinx.coroutines.InternalCoroutinesApi
 
 
@@ -37,13 +38,10 @@ class SetIntakeModal : BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        setCategory()
+
         val v = inflater.inflate(R.layout.bottom_sheet_modal,container,false)
-        val recyclerview : RecyclerView = v.findViewById(R.id.recyclerview)
-        val numberPicker : NumberPicker = v.findViewById(R.id.numberpicker)
-        val cancelText : TextView = v.findViewById(R.id.cancelButton)
-        val setButton : Button = v.findViewById(R.id.setButton)
         var typeofDrink = -1
+        setCategory()
         recyclerview.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
@@ -51,14 +49,13 @@ class SetIntakeModal : BottomSheetDialogFragment() {
                 typeofDrink = category.id
             }
         }
-
-        setNumberPicker(numberPicker)
+        setNumberPicker()
 
         homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
 
         setButton.setBackgroundColor(Color.CYAN)
         setButton.setOnClickListener {
-            val pickedNum = numberPicker.value*50
+            val pickedNum = numberpicker.value*50
             val now = System.currentTimeMillis()
             val intake = Intake(now,typeofDrink,pickedNum)
             homeViewModel.insert(intake)
@@ -66,7 +63,7 @@ class SetIntakeModal : BottomSheetDialogFragment() {
             onDestroy()
         }
 
-        cancelText.setOnClickListener{
+        cancelButton.setOnClickListener{
             onDestroyView()
             onDestroy()
         }
@@ -82,12 +79,12 @@ class SetIntakeModal : BottomSheetDialogFragment() {
         categoryList.add(Category(5,"Milk",""))
     }
 
-    private fun setNumberPicker(numberPicker: NumberPicker){
+    private fun setNumberPicker(){
         val num_of_value = 10
         val displayedValues = arrayOf("0ml","50ml","100ml","150ml","200ml","250ml","300ml","350ml","400ml","450ml","500ml")
-        numberPicker.minValue = 0
-        numberPicker.maxValue = num_of_value
-        numberPicker.displayedValues = displayedValues
+        numberpicker.minValue = 0
+        numberpicker.maxValue = num_of_value
+        numberpicker.displayedValues = displayedValues
     }
 
     override fun onDismiss(dialog: DialogInterface) {

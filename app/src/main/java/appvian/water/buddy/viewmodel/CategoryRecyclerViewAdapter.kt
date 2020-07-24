@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import appvian.water.buddy.R
 import appvian.water.buddy.model.data.Category
+import kotlinx.android.synthetic.main.my_recyclerview_item.view.*
 
 class CategoryRecyclerViewAdapter (val context : Context, val categoryList : ArrayList<Category>, val itemClick: (Category) -> Unit) :
     RecyclerView.Adapter<CategoryRecyclerViewAdapter.CategoryViewHolder>(){
@@ -18,17 +19,15 @@ class CategoryRecyclerViewAdapter (val context : Context, val categoryList : Arr
     private var selectedPosition = -1
 
     inner class CategoryViewHolder(itemView : View, itemClick: (Category) -> Unit) : RecyclerView.ViewHolder(itemView) {
-        val cimg = itemView.findViewById<ImageView>(R.id.categoryImg)
-        val ctext = itemView.findViewById<TextView>(R.id.cname)
 
         fun bind (category : Category, position: Int, context: Context){
             if(category.icon != ""){
                 val resourceId = context.resources.getIdentifier(category.icon, "drawable", context.packageName)
-                cimg.setImageResource(resourceId)
+                itemView.categoryImg.setImageResource(resourceId)
             } else{
-                cimg.setImageResource(R.mipmap.ic_launcher_round)
+                itemView.categoryImg.setImageResource(R.mipmap.ic_launcher_round)
             }
-            ctext.text = category.name
+            itemView.cname.text = category.name
             itemView.setOnClickListener {
                 itemClick(category)
                 selectedPosition=position
