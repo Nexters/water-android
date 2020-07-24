@@ -37,12 +37,7 @@ class SetIntakeModal : BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        categoryList.add(Category(0,"Water",""))
-        categoryList.add(Category(1,"Coffee",""))
-        categoryList.add(Category(2,"Juice",""))
-        categoryList.add(Category(3,"Coke",""))
-        categoryList.add(Category(4,"Alcohol",""))
-        categoryList.add(Category(5,"Milk",""))
+        setCategory()
         val v = inflater.inflate(R.layout.bottom_sheet_modal,container,false)
         val recyclerview : RecyclerView = v.findViewById(R.id.recyclerview)
         val numberPicker : NumberPicker = v.findViewById(R.id.numberpicker)
@@ -57,11 +52,7 @@ class SetIntakeModal : BottomSheetDialogFragment() {
             }
         }
 
-        val num_of_value = 10
-        var displayedValues = arrayOf("0ml","50ml","100ml","150ml","200ml","250ml","300ml","350ml","400ml","450ml","500ml")
-        numberPicker.minValue = 0
-        numberPicker.maxValue = num_of_value
-        numberPicker.displayedValues = displayedValues
+        setNumberPicker(numberPicker)
 
         homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
 
@@ -80,6 +71,23 @@ class SetIntakeModal : BottomSheetDialogFragment() {
             onDestroy()
         }
         return v
+    }
+
+    private fun setCategory(){
+        categoryList.add(Category(0,"Water",""))
+        categoryList.add(Category(1,"Coffee",""))
+        categoryList.add(Category(2,"Juice",""))
+        categoryList.add(Category(3,"Coke",""))
+        categoryList.add(Category(4,"Alcohol",""))
+        categoryList.add(Category(5,"Milk",""))
+    }
+
+    private fun setNumberPicker(numberPicker: NumberPicker){
+        val num_of_value = 10
+        val displayedValues = arrayOf("0ml","50ml","100ml","150ml","200ml","250ml","300ml","350ml","400ml","450ml","500ml")
+        numberPicker.minValue = 0
+        numberPicker.maxValue = num_of_value
+        numberPicker.displayedValues = displayedValues
     }
 
     override fun onDismiss(dialog: DialogInterface) {
