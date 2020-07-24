@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.TranslateAnimation
 import android.widget.TextView
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import appvian.water.buddy.R
 import appvian.water.buddy.viewmodel.HomeViewModel
@@ -47,7 +46,7 @@ class MainFragment : Fragment() {
         val animV1 : LottieAnimationView = view.findViewById(R.id.animation_view1)
         val animV2 : LottieAnimationView = view.findViewById(R.id.animation_view2)
         animV2.setOnClickListener {
-            val bottomSheet = MyModalBottomSheet()
+            val bottomSheet = SetIntakeModal()
             val fragmentManager = childFragmentManager
             bottomSheet.show(fragmentManager,bottomSheet.tag)
         }

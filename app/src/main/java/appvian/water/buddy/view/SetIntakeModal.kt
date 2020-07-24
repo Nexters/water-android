@@ -24,7 +24,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.coroutines.InternalCoroutinesApi
 
 
-class MyModalBottomSheet : BottomSheetDialogFragment() {
+class SetIntakeModal : BottomSheetDialogFragment() {
     private lateinit var homeViewModel: HomeViewModel
     var categoryList = arrayListOf<Category>()
     override fun getTheme(): Int = R.style.RoundBottomSheetDialog
