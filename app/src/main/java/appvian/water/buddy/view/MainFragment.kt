@@ -57,7 +57,7 @@ class MainFragment : Fragment() {
         animV1.startAnimation(anim_tranlate1)
 
         homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
-        homeViewModel.getDaily(getToday(),getTomorrow()).observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+        homeViewModel.getDaily().observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             drinkedAmount=0
             for(i in it){
                 drinkedAmount+=i.amount
