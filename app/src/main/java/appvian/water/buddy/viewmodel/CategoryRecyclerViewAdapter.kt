@@ -13,11 +13,11 @@ import appvian.water.buddy.R
 import appvian.water.buddy.model.data.Category
 
 class CategoryRecyclerViewAdapter (val context : Context, val categoryList : ArrayList<Category>, val itemClick: (Category) -> Unit) :
-    RecyclerView.Adapter<CategoryRecyclerViewAdapter.MyViewHolder>(){
+    RecyclerView.Adapter<CategoryRecyclerViewAdapter.CategoryViewHolder>(){
 
     private var selectedPosition = -1
 
-    inner class MyViewHolder(itemView : View, itemClick: (Category) -> Unit) : RecyclerView.ViewHolder(itemView) {
+    inner class CategoryViewHolder(itemView : View, itemClick: (Category) -> Unit) : RecyclerView.ViewHolder(itemView) {
         val cimg = itemView.findViewById<ImageView>(R.id.categoryImg)
         val ctext = itemView.findViewById<TextView>(R.id.cname)
 
@@ -42,12 +42,12 @@ class CategoryRecyclerViewAdapter (val context : Context, val categoryList : Arr
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.my_recyclerview_item,parent,false)
-        return MyViewHolder(view,itemClick)
+        return CategoryViewHolder(view,itemClick)
     }
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         holder.bind(categoryList[position],position,context)
     }
 
