@@ -34,6 +34,12 @@ class MainViewModel(val activity: FragmentActivity) {
 
     }
 
+    init {
+        activity.supportFragmentManager.beginTransaction()
+            .add(R.id.fragment, fragmentList[0])
+            .commit()
+    }
+
     private fun replaceFragment(fragment: Fragment) {
         activity.supportFragmentManager.beginTransaction()
             .replace(R.id.fragment, fragment)
