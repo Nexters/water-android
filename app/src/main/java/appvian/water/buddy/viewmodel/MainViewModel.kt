@@ -5,11 +5,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import appvian.water.buddy.R
 import appvian.water.buddy.view.MainFragment
+import appvian.water.buddy.view.analytics.AnalyticsFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainViewModel(val activity: FragmentActivity) {
 
-    private var fragmentList: List<Fragment> = listOf(MainFragment())
+    private var fragmentList: List<Fragment> = listOf(MainFragment(), AnalyticsFragment())
 
     val menuListener = object : BottomNavigationView.OnNavigationItemSelectedListener {
         override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -20,6 +21,7 @@ class MainViewModel(val activity: FragmentActivity) {
                 }
 
                 R.id.menu_analytics -> {
+                    replaceFragment(fragmentList[1])
                     return true
                 }
                 R.id.menu_settings -> {
