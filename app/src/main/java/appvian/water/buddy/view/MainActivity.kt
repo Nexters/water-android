@@ -10,17 +10,9 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var homeViewModel: HomeViewModel
-
-
-    @InternalCoroutinesApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
-        homeViewModel.dailyIntake.observe(this, androidx.lifecycle.Observer {
-
-        })
 
         supportFragmentManager.beginTransaction().replace(R.id.fragment,MainFragment()).commit()
     }
