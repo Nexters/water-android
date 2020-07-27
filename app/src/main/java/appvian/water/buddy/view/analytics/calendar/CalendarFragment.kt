@@ -49,7 +49,6 @@ class CalendarFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            CalendarFragment()
+        fun newInstance() = CalendarFragment()
     }
 }

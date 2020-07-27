@@ -10,7 +10,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainViewModel(val activity: FragmentActivity) {
 
-    private var fragmentList: List<Fragment> = listOf(MainFragment(), CalendarFragment())
+    private var fragmentList: List<Fragment> =
+        listOf(MainFragment(), CalendarFragment.newInstance())
 
     val menuListener = object : BottomNavigationView.OnNavigationItemSelectedListener {
         override fun onNavigationItemSelected(item: MenuItem): Boolean {
