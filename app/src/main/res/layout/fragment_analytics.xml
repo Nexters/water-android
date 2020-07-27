@@ -5,9 +5,4 @@
     android:layout_height="match_parent"
     tools:context=".view.analytics.AnalyticsFragment">
 
-    <appvian.water.buddy.calendar.WbCalendarView
-        android:id="@+id/wb_calc_view"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"/>
-
 </FrameLayout>

@@ -1,6 +1,7 @@
-package appvian.water.buddy.calendar
+package appvian.water.buddy.view.analytics.calendar
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -8,11 +9,11 @@ import appvian.water.buddy.R
 import appvian.water.buddy.databinding.WbCalendarItemBinding
 import appvian.water.buddy.model.data.CalendarData
 
-class WbCalcAdapter : RecyclerView.Adapter<WbCalcAdapter.WbViewHolder>() {
+class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.CalViewHolder>() {
     private lateinit var binding: WbCalendarItemBinding
     private val dateList = ArrayList<CalendarData>()
 
-    inner class WbViewHolder(private val binding: WbCalendarItemBinding) :
+    inner class CalViewHolder(private val binding: WbCalendarItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: CalendarData) {
@@ -20,12 +21,12 @@ class WbCalcAdapter : RecyclerView.Adapter<WbCalcAdapter.WbViewHolder>() {
             item.img?.let { img ->
                 binding.calDayImg.setImageResource(img)
             } ?: kotlin.run {
-                binding.calDayImg.setBackgroundColor(binding.root.context.getColor(R.color.transparent))
+                binding.calDayImg.visibility = View.GONE
             }
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WbViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CalViewHolder {
         binding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
             R.layout.wb_calendar_item,
@@ -33,14 +34,14 @@ class WbCalcAdapter : RecyclerView.Adapter<WbCalcAdapter.WbViewHolder>() {
             false
         )
 
-        return WbViewHolder(binding)
+        return CalViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
         return dateList.size
     }
 
-    override fun onBindViewHolder(holder: WbViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CalViewHolder, position: Int) {
         holder.bind(dateList[position])
     }
 
