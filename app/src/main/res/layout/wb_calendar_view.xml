@@ -5,7 +5,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/cal_appbar"
@@ -75,6 +75,8 @@
             android:id="@+id/cal_veiw"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             tools:listitem="@layout/wb_calendar_item"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="7"
