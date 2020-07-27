@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
-        homeViewModel.getDaily().observe(this, androidx.lifecycle.Observer {
+        homeViewModel.dailyIntake.observe(this, androidx.lifecycle.Observer {
 
         })
 
