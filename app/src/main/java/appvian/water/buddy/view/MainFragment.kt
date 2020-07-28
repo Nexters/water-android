@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.TranslateAnimation
 import android.widget.TextView
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 import appvian.water.buddy.R
 import appvian.water.buddy.model.data.Intake
@@ -57,7 +58,7 @@ class MainFragment : Fragment() {
         view.animation_view1.startAnimation(anim_tranlate1)
 
         homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
-        homeViewModel.getDaily().observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+        homeViewModel.dailyIntake.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             adjustAnimation(view,it)
         })
         return view

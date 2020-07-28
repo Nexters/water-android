@@ -7,17 +7,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.NumberPicker
-import android.widget.TextView
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import appvian.water.buddy.R
 import appvian.water.buddy.model.data.Category
 import appvian.water.buddy.model.data.Intake
-import appvian.water.buddy.viewmodel.CategoryRecyclerViewAdapter
 import appvian.water.buddy.viewmodel.HomeViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -46,7 +40,10 @@ class SetIntakeModal : BottomSheetDialogFragment() {
         v.recyclerview.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
-            adapter = CategoryRecyclerViewAdapter(context,categoryList) { category ->
+            adapter = CategoryRecyclerViewAdapter(
+                context,
+                categoryList
+            ) { category ->
                 typeofDrink = category.id
             }
         }
