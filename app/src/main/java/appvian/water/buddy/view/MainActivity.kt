@@ -1,21 +1,19 @@
 package appvian.water.buddy.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.ViewModelProvider
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import appvian.water.buddy.R
-import appvian.water.buddy.viewmodel.HomeViewModel
-import kotlinx.coroutines.InternalCoroutinesApi
-import java.util.*
+import appvian.water.buddy.databinding.ActivityMainBinding
+import appvian.water.buddy.viewmodel.MainViewModel
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
-        supportFragmentManager.beginTransaction().replace(R.id.fragment,MainFragment()).commit()
+        val binding: ActivityMainBinding =
+            DataBindingUtil.setContentView(this@MainActivity, R.layout.activity_main)
+        binding.mainViewModel = MainViewModel(this)
     }
-
-
 }
