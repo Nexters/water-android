@@ -1,30 +1,37 @@
 package appvian.water.buddy.viewmodel
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
+import androidx.lifecycle.*
 import appvian.water.buddy.model.data.Intake
 import appvian.water.buddy.model.repository.HomeRepository
 import kotlinx.coroutines.InternalCoroutinesApi
+import kotlinx.coroutines.launch
 import java.util.*
 
 class HomeViewModel (application: Application) : AndroidViewModel(application) {
     private val repository = HomeRepository(application)
 
     @InternalCoroutinesApi
-    fun getDaily(): LiveData<List<Intake>>{
+    var dailyIntake: LiveData<List<Intake>> = getDaily()
+    @InternalCoroutinesApi
+    var weeklyIntake: LiveData<List<Intake>> = getWeekly()
+    @InternalCoroutinesApi
+    var monthlyIntake: LiveData<List<Intake>> = getMonthly()
+
+    @InternalCoroutinesApi
+    private fun getDaily(): LiveData<List<Intake>>{
         val dailyIntake = repository.getDaily(getToday(),getTomorrow())
         return dailyIntake
     }
 
     @InternalCoroutinesApi
-    fun getWeekly(): LiveData<List<Intake>>{
+    private fun getWeekly(): LiveData<List<Intake>>{
         val weeklyIntake = repository.getWeekly(getToday(),getWeekAgo())
         return weeklyIntake
     }
 
     @InternalCoroutinesApi
-    fun getMonthly(): LiveData<List<Intake>>{
+    private fun getMonthly(): LiveData<List<Intake>>{
         val monthlyIntake = repository.getMonthly(getToday(),getMonthAgo())
         return monthlyIntake
     }
