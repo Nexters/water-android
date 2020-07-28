@@ -11,7 +11,10 @@
         android:layout_height="match_parent"
         tools:context=".view.analytics.chart.WeeklyChartFragment">
 
-
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/weekly_barchart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
     </FrameLayout>
 </layout>
