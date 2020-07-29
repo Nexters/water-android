@@ -63,4 +63,7 @@ dependencies {
 
     //lottie
     implementation "com.airbnb.android:lottie:$lottie_version"
+
+    //preferences
+    implementation 'androidx.preference:preference:1.1.1'
 }
