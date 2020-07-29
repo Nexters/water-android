@@ -13,6 +13,7 @@ import appvian.water.buddy.databinding.FragmentAnalyticsBinding
 import appvian.water.buddy.view.analytics.calendar.CalendarFragment
 import appvian.water.buddy.view.analytics.chart.DailyChartFragment
 import appvian.water.buddy.view.analytics.chart.WeeklyChartFragment
+import com.google.android.material.tabs.TabLayoutMediator
 
 private const val PAGE_NUM = 3
 
@@ -33,6 +34,11 @@ class AnalyticsFragment : Fragment() {
         activity?.let {
             binding.analyticsPager.adapter = ScreenSlidePagerAdapter(it)
         }
+
+        val tabTitle = resources.getStringArray(R.array.analytics_tab_name)
+        TabLayoutMediator(binding.analyticsTab, binding.analyticsPager) { tab, position ->
+            tab.text = tabTitle[position]
+        }.attach()
     }
 
     companion object {
