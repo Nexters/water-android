@@ -14,6 +14,7 @@ import appvian.water.buddy.view.analytics.calendar.CalendarFragment
 import appvian.water.buddy.view.analytics.chart.DailyChartFragment
 import appvian.water.buddy.view.analytics.chart.WeeklyChartFragment
 import com.google.android.material.tabs.TabLayoutMediator
+import java.util.*
 
 private const val PAGE_NUM = 3
 
@@ -39,6 +40,8 @@ class AnalyticsFragment : Fragment() {
         TabLayoutMediator(binding.analyticsTab, binding.analyticsPager) { tab, position ->
             tab.text = tabTitle[position]
         }.attach()
+
+        binding.analyticsTitle.text = getString(R.string.analytics_header_title, Calendar.getInstance().get(Calendar.MONTH) + 1)
     }
 
     companion object {
