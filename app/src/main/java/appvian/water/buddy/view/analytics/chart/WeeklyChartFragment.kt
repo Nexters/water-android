@@ -44,14 +44,7 @@ class WeeklyChartFragment : Fragment() {
         intakeList.add(BarEntry(4f, 5))
         intakeList.add(BarEntry(1.3f, 6))
 
-        val day = ArrayList<String>();
-        day.add(getString(R.string.day_sun))
-        day.add(getString(R.string.day_mon))
-        day.add(getString(R.string.day_tue))
-        day.add(getString(R.string.day_wed))
-        day.add(getString(R.string.day_thu))
-        day.add(getString(R.string.day_fri))
-        day.add(getString(R.string.day_sat))
+        val day = resources.getStringArray(R.array.weekly)
 
         binding.weeklyBarchart.animateY(5000)
         val dataSet = BarDataSet(intakeList, "Intake List")
@@ -63,8 +56,11 @@ class WeeklyChartFragment : Fragment() {
         binding.weeklyBarchart.data = data
         binding.weeklyBarchart.xAxis.position = XAxis.XAxisPosition.BOTTOM
         binding.weeklyBarchart.setDescription("")
+        binding.weeklyBarchart.xAxis.textSize = 13f
         binding.weeklyBarchart.legend.isEnabled = false
-        binding.weeklyBarchart.axisLeft.addLimitLine(LimitLine(2f, "max line"))
+        binding.weeklyBarchart.axisLeft.addLimitLine(LimitLine(2f, ""))
+        binding.weeklyBarchart.axisRight.setDrawLabels(false)
+
     }
 
     companion object {
