@@ -13,4 +13,6 @@
     <string name="day_fri">Fri</string>
     <string name="day_sat">Sat</string>
 
+    <string name="analytics_header_title">%d월 수분섭취</string>
+
 </resources>
