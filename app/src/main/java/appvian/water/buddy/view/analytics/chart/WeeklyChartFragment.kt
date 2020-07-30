@@ -56,7 +56,6 @@ class WeeklyChartFragment : Fragment() {
         binding.weeklyBarchart.data = data
         binding.weeklyBarchart.xAxis.position = XAxis.XAxisPosition.BOTTOM
         binding.weeklyBarchart.setDescription("")
-        binding.weeklyBarchart.xAxis.textSize = 13f
         binding.weeklyBarchart.legend.isEnabled = false
         binding.weeklyBarchart.axisLeft.addLimitLine(LimitLine(2f, ""))
         binding.weeklyBarchart.axisRight.setDrawLabels(false)
