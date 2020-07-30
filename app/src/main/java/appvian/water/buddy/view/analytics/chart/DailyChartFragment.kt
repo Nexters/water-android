@@ -59,6 +59,7 @@ class DailyChartFragment : Fragment() {
         binding.dailyPiechart.data = data
         binding.dailyPiechart.animateXY(5000, 5000)
         binding.dailyPiechart.legend.position = Legend.LegendPosition.RIGHT_OF_CHART_CENTER
+        binding.dailyPiechart.legend.textSize = 20f
         binding.dailyPiechart.setDescription("")
         binding.dailyPiechart.invalidate()
     }
