@@ -25,7 +25,11 @@ class SetIntakeModal : BottomSheetDialogFragment() {
     var categoryList = arrayListOf<Category>()
     override fun getTheme(): Int = R.style.RoundBottomSheetDialog
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog = BottomSheetDialog(activity!!,theme)
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val dialog = BottomSheetDialog(activity!!,theme)
+        dialog.behavior.peekHeight = 1200
+        return dialog
+    }
 
     @InternalCoroutinesApi
     override fun onCreateView(
