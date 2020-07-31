@@ -2,6 +2,7 @@ package appvian.water.buddy.view
 
 import android.content.res.Resources
 import android.animation.ValueAnimator
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -51,6 +52,11 @@ class MainFragment : Fragment() {
             val bottomSheet = SetIntakeModal()
             val fragmentManager = childFragmentManager
             bottomSheet.show(fragmentManager,bottomSheet.tag)
+        }
+
+        view.intake_list_button.setOnClickListener {
+            val intent = Intent(activity,DailyIntakeListActivity::class.java)
+            startActivity(intent)
         }
 
         setAnimation(view)
