@@ -139,7 +139,7 @@ class MainFragment : Fragment() {
         if (percent>=65F && percent<100F){
             view.home_text.text = getString(R.string.home_text_4)
         }
-        if (percent==100F){
+        if (percent>=100F){
             view.home_text.text = getString(R.string.home_text_5)
         }
         view.intake_list_button.text = String.format("%.1fL 중 %.1fL 수분 섭취",requiredAmount.toDouble()/1000,drinkedAmount.toDouble()/1000)
