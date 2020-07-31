@@ -24,7 +24,6 @@ import java.util.*
 class MainFragment : Fragment() {
 
     val requiredAmount = 2000
-    var drinkedAmount = 0
     val startY1 = 650F
     val startY2 = 0F
     var currentY1 = startY1
@@ -60,16 +59,17 @@ class MainFragment : Fragment() {
         homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         homeViewModel.dailyIntake.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             adjustAnimation(view,it)
+            changeText(view,it)
         })
         return view
     }
 
     private fun adjustAnimation(view: View,it: List<Intake>){
-        drinkedAmount=0
+        var drinkedAmount=0
         for(i in it){
             drinkedAmount+=i.amount
         }
-        view.textview.text = currentPercent.toInt().toString()
+        view.percent.text = currentPercent.toInt().toString()
         val percent: Float = (drinkedAmount*100/requiredAmount).toFloat()
         val goalY1 = startY1 - (startY1 - endY1) * percent / 100
         val goalY2 = startY2 - (startY2 - endY2) * percent / 100
@@ -96,8 +96,32 @@ class MainFragment : Fragment() {
         currentPercent = percent
         anim_value.duration = 2000
         anim_value.addUpdateListener {
-            view.textview.text = it.animatedValue.toString()
+            view.percent.text = it.animatedValue.toString()
         }
         anim_value.start()
+    }
+
+    private fun changeText(view: View,it: List<Intake>){
+        var drinkedAmount=0
+        for(i in it){
+            drinkedAmount+=i.amount
+        }
+        val percent: Float = (drinkedAmount*100/requiredAmount).toFloat()
+        if (percent==0F){
+            view.home_text.text = getString(R.string.home_text_1)
+        }
+        if (percent>0F && percent<35F){
+            view.home_text.text = getString(R.string.home_text_2)
+        }
+        if (percent>=35F && percent<65F){
+            view.home_text.text = getString(R.string.home_text_3)
+        }
+        if (percent>=65F && percent<100F){
+            view.home_text.text = getString(R.string.home_text_4)
+        }
+        if (percent==100F){
+            view.home_text.text = getString(R.string.home_text_5)
+        }
+        view.intake_list_button.text = String.format("%.1fL 중 %.1fL 수분 섭취",requiredAmount.toDouble()/1000,drinkedAmount.toDouble()/1000)
     }
 }
