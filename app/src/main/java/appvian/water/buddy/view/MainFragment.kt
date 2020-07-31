@@ -1,5 +1,6 @@
 package appvian.water.buddy.view
 
+import android.content.res.Resources
 import android.animation.ValueAnimator
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,17 +9,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.TranslateAnimation
-import android.widget.TextView
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 import appvian.water.buddy.R
 import appvian.water.buddy.model.data.Intake
 import appvian.water.buddy.viewmodel.HomeViewModel
-import com.airbnb.lottie.LottieAnimationView
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.fragment_main.view.*
 import kotlinx.coroutines.InternalCoroutinesApi
-import java.util.*
+import android.util.DisplayMetrics
 
 
 class MainFragment : Fragment() {
@@ -31,6 +29,9 @@ class MainFragment : Fragment() {
     var currentPercent = 0F
     val endY1 = -600F
     val endY2 = -1300F
+
+    val startPercentTextY : Float = 250F * (Resources.getSystem().displayMetrics.densityDpi).toFloat() / DisplayMetrics.DENSITY_DEFAULT
+    var currentPercentTextY = startPercentTextY
 
     private lateinit var homeViewModel: HomeViewModel
 
@@ -51,10 +52,8 @@ class MainFragment : Fragment() {
             val fragmentManager = childFragmentManager
             bottomSheet.show(fragmentManager,bottomSheet.tag)
         }
-        val anim_tranlate1 = TranslateAnimation(0F,0F,currentY1,currentY1)
-        anim_tranlate1.duration = 2000
-        anim_tranlate1.fillAfter = true
-        view.animation_view1.startAnimation(anim_tranlate1)
+
+        setAnimation(view)
 
         homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         homeViewModel.dailyIntake.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
@@ -62,6 +61,18 @@ class MainFragment : Fragment() {
             changeText(view,it)
         })
         return view
+    }
+
+    private fun setAnimation(view: View){
+        val anim_tranlate1 = TranslateAnimation(0F,0F,currentY1,currentY1)
+        anim_tranlate1.duration = 2000
+        anim_tranlate1.fillAfter = true
+        view.animation_view1.startAnimation(anim_tranlate1)
+
+        val anim_translate_percentText = TranslateAnimation(0F,0F,currentPercentTextY,currentPercentTextY)
+        anim_translate_percentText.duration = 0
+        anim_translate_percentText.fillAfter = true
+        view.percent_text.startAnimation(anim_translate_percentText)
     }
 
     private fun adjustAnimation(view: View,it: List<Intake>){
@@ -73,8 +84,13 @@ class MainFragment : Fragment() {
         val percent: Float = (drinkedAmount*100/requiredAmount).toFloat()
         val goalY1 = startY1 - (startY1 - endY1) * percent / 100
         val goalY2 = startY2 - (startY2 - endY2) * percent / 100
+        var goalPercentY = startPercentTextY - (startY1 - endY1) * percent / 100
+        if (goalPercentY<0F){
+            goalPercentY=0F
+        }
         val newanim1 = TranslateAnimation(0F, 0F, currentY1, goalY1)
         val newanim2 = TranslateAnimation(0F, 0F, currentY2, goalY2)
+        val newanim_percent_text = TranslateAnimation(0F,0F,currentPercentTextY,goalPercentY)
         newanim2.setAnimationListener(object : Animation.AnimationListener{
             override fun onAnimationEnd(animation: Animation?) {
                 view.animation_view2.layout(animation_view2.left,animation_view2.top-(startY2-goalY2).toInt(),animation_view2.right,animation_view2.bottom-(startY2-goalY2).toInt())
@@ -89,10 +105,14 @@ class MainFragment : Fragment() {
         newanim1.fillAfter = true
         newanim2.duration = 2500
         newanim2.isFillEnabled = true
+        newanim_percent_text.duration = 2000
+        newanim_percent_text.fillAfter = true
         view.animation_view1.startAnimation(newanim1)
         view.animation_view2.startAnimation(newanim2)
+        view.percent_text.startAnimation(newanim_percent_text)
         currentY1 = goalY1
         currentY2 = goalY2
+        currentPercentTextY = goalPercentY
         currentPercent = percent
         anim_value.duration = 2000
         anim_value.addUpdateListener {
