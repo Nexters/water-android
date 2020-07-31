@@ -96,6 +96,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="@id/percent"
                 app:layout_constraintLeft_toRightOf="@id/percent"
+                android:layout_marginBottom="15dp"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
