@@ -22,6 +22,7 @@ abstract class WaterBuddyDb : RoomDatabase() {
                         WaterBuddyDb::class.java, "intake"
                     )
                         .fallbackToDestructiveMigration()
+                        .allowMainThreadQueries()
                         .build()
                 }
             }
