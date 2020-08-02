@@ -2,4 +2,15 @@
 <resources>
     <dimen name="tab_text_title">20sp</dimen>
     <dimen name="common_spacing">10dp</dimen>
+
+    <dimen name="daily_common_spacing">32dp</dimen>
+    <dimen name="daily_pie_header_spacing">53dp</dimen>
+    <dimen name="daily_pie_sys_spacing">55dp</dimen>
+    <dimen name="daily_sys_target_spacing">8dp</dimen>
+    <dimen name="daily_target_spacing">200dp</dimen>
+    <dimen name="daily_header_size">16sp</dimen>
+    <dimen name="daily_sys_size">18sp</dimen>
+    <dimen name="daily_sys_target_size">15sp</dimen>
+    <dimen name="daily_pie_chart">95dp</dimen>
+    <dimen name="daily_chart_detail_spacing">11dp</dimen>
 </resources>
