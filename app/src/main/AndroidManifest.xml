@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.MainActivity"></activity>
+        <activity android:name=".view.settings.AlarmSettingActivity"></activity>
+        <activity android:name=".view.settings.FavoriteDrinkSettingActivity" />
+        <activity android:name=".view.settings.ProfileEditActivity" />
+        <activity android:name=".view.settings.TargetAmountSettingActivity" />
+        <activity android:name=".view.MainActivity" />
         <activity android:name=".view.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

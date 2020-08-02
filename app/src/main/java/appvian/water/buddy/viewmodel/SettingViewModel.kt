@@ -2,29 +2,34 @@ package appvian.water.buddy.viewmodel
 
 import android.app.Application
 import android.content.Context
-import android.content.SharedPreferences
 import androidx.lifecycle.AndroidViewModel
-import androidx.preference.PreferenceManager
-import appvian.water.buddy.model.data.SharedPreferenceBooleanLiveData
-import appvian.water.buddy.model.data.SharedPreferenceLiveData
+import androidx.lifecycle.MutableLiveData
+import appvian.water.buddy.model.data.SharedPreferenceFloatLiveData
+import appvian.water.buddy.model.data.SharedPreferenceIntLiveData
+
 import appvian.water.buddy.model.data.SharedPreferenceStringLiveData
-import appvian.water.buddy.model.data.stringLiveData
 
 
 class SettingViewModel(application: Application) : AndroidViewModel(application) {
+    //사용자 닉네임
+    val name_pref = application.getSharedPreferences("name", Context.MODE_PRIVATE)
+    var nameLiveData: SharedPreferenceStringLiveData = SharedPreferenceStringLiveData(name_pref, "name", name_pref.getString("name", "nick name")!!)
+    //사용자 키
+    val height_pref = application.getSharedPreferences("height", Context.MODE_PRIVATE)
+    var heightLiveData = SharedPreferenceIntLiveData(height_pref, "height", 160)
+    //사용자 몸무게
+    val weight_pref = application.getSharedPreferences("weight", Context.MODE_PRIVATE)
+    var weightLiveData = SharedPreferenceIntLiveData(weight_pref, "weight", 50)
+    //사용자 목표량
+    val target_amounts_pref = application.getSharedPreferences("target_amounts", Context.MODE_PRIVATE)
+    var targetAmountLiveData = SharedPreferenceFloatLiveData(target_amounts_pref, "target_amounts", 1.6f)
 
-    val target_amount_pref = application.getSharedPreferences("target_amount", Context.MODE_PRIVATE)
-
-    private var sharedPreferenceLiveData: SharedPreferenceStringLiveData? = null
-
-    fun getSharedPrefs(): SharedPreferenceStringLiveData? {
-        return sharedPreferenceLiveData
-    }
-
-    fun setSharedPreferences(key: String, value: String) {
-        val editor = target_amount_pref.edit()
+    fun setNameLiveData(key: String, value: String) {
+        val editor = name_pref.edit()
         editor.putString(key, value)
         editor.apply()
-        sharedPreferenceLiveData = SharedPreferenceStringLiveData(target_amount_pref, key, value)
+        nameLiveData = SharedPreferenceStringLiveData(name_pref, key, value)
     }
+
+
 }

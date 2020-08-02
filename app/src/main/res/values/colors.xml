@@ -3,4 +3,7 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+    <color name="settingTxtGray">#868e96</color>
+    <color name="settingCardBack">#f1f3f5</color>
+    <color name="settingTxtBlack">#030303</color>
 </resources>

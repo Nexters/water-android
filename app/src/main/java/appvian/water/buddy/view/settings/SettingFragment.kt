@@ -1,10 +1,8 @@
-package appvian.water.buddy.view
+package appvian.water.buddy.view.settings
 
-import android.content.Context
-import android.content.SharedPreferences
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.preference.PreferenceManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,24 +25,40 @@ class SettingFragment : Fragment() {
     ): View? {
         settingviewModel = ViewModelProvider(this).get(SettingViewModel::class.java)
         fragmentSettingBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_setting, container, false)
-
-        //테스트 코드 . 초기에 목표량 설정할테니까 바로 get하면 될 듯
-        settingviewModel.setSharedPreferences("target_amount", "변경 전 ")
+        /*
+        //테스트 코드
         //참고 https://www.thetopsites.net/article/51790868.shtml
-        settingviewModel.getSharedPrefs()!!.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-            txt_test.text = it
+        settingviewModel.nameLiveData.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            fragmentSettingBinding.txtSettingName.text = it
             Log.d("TAG",it)
-            fragmentSettingBinding.executePendingBindings()
+            //fragmentSettingBinding.executePendingBindings()
         })
-
+        */
+        fragmentSettingBinding.viewModel = settingviewModel
         return fragmentSettingBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //테스트 코드
-        btn_prefs_change.setOnClickListener {
-            settingviewModel.setSharedPreferences("target_amount", "변경 후 ")
+        setUIClick()
+
+    }
+    private fun setUIClick(){
+        img_setting_edit_profile.setOnClickListener{
+            var intent = Intent(context, ProfileEditActivity::class.java)
+            startActivity(intent)
+        }
+        layout_setting_target_amount.setOnClickListener{
+            var intent = Intent(context, TargetAmountSettingActivity::class.java)
+            startActivity(intent)
+        }
+        layout_setting_favorite.setOnClickListener{
+            var intent = Intent(context, FavoriteDrinkSettingActivity::class.java)
+            startActivity(intent)
+        }
+        layout_setting_alarm.setOnClickListener{
+            var intent = Intent(context, AlarmSettingActivity::class.java)
+            startActivity(intent)
         }
     }
 
