@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import appvian.water.buddy.R
 import appvian.water.buddy.databinding.FragmentDailyChartBinding
-import com.github.mikephil.charting.components.Legend
+import appvian.water.buddy.model.repository.HomeRepository
+import appvian.water.buddy.viewmodel.analytics.DailyChartViewModel
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
@@ -17,6 +19,7 @@ import com.github.mikephil.charting.utils.ColorTemplate
 class DailyChartFragment : Fragment() {
 
     private lateinit var binding: FragmentDailyChartBinding
+    private lateinit var dailyVm: DailyChartViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,39 +32,39 @@ class DailyChartFragment : Fragment() {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_daily_chart, container, false)
 
+        activity?.let {
+            dailyVm = DailyChartViewModel(HomeRepository(it))
+        }
         initUi()
 
         return binding.root
     }
 
     private fun initUi() {
-        binding.dailyPiechart.setUsePercentValues(true)
+        dailyVm.getDailyIntake()
+        dailyVm.dailyIntake?.observe(viewLifecycleOwner, Observer {
+            val pieValues = ArrayList<Entry>()
+            val legend = ArrayList<String>()
 
-        val pieValues = ArrayList<Entry>()
-        pieValues.add(Entry(1.0f, 0))
-        pieValues.add(Entry(2.0f, 1))
-        pieValues.add(Entry(3.0f, 2))
-        pieValues.add(Entry(4.0f, 3))
-        pieValues.add(Entry(5.0f, 4))
+            for((j, i) in it.withIndex()){
+                android.util.Log.d("Daily Chart", "${i.category}, ${i.amount}")
+                pieValues.add(Entry(i.amount.toFloat(), j))
+                legend.add(i.category.toString())
+            }
 
-        val legend = ArrayList<String>()
-        legend.add("1")
-        legend.add("2")
-        legend.add("3")
-        legend.add("4")
-        legend.add("5")
+            val dataSet = PieDataSet(pieValues, "")
+            dataSet.setColors(ColorTemplate.COLORFUL_COLORS)
+            dataSet.setDrawValues(false)
 
-        val dataSet = PieDataSet(pieValues, "")
-        dataSet.setColors(ColorTemplate.COLORFUL_COLORS)
+            val data = PieData(legend, dataSet)
 
-        val data = PieData(legend, dataSet)
-
-        binding.dailyPiechart.data = data
-        binding.dailyPiechart.animateXY(5000, 5000)
-        binding.dailyPiechart.legend.position = Legend.LegendPosition.RIGHT_OF_CHART_CENTER
-        binding.dailyPiechart.legend.textSize = 20f
-        binding.dailyPiechart.setDescription("")
-        binding.dailyPiechart.invalidate()
+            binding.dailyPiechart.setUsePercentValues(true)
+            binding.dailyPiechart.data = data
+            binding.dailyPiechart.legend.isEnabled = false
+            binding.dailyPiechart.setDrawSliceText(false)
+            binding.dailyPiechart.setDescription("")
+            binding.dailyPiechart.invalidate()
+        })
     }
 
     companion object {
