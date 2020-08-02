@@ -58,6 +58,7 @@ dependencies {
 
     //coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version"
 
     //bottom navigation
     implementation "com.google.android.material:material:$material_version"
