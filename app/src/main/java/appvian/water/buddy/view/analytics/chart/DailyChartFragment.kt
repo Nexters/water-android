@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import appvian.water.buddy.R
 import appvian.water.buddy.databinding.FragmentDailyChartBinding
+import appvian.water.buddy.model.data.Intake
 import appvian.water.buddy.model.repository.HomeRepository
 import appvian.water.buddy.viewmodel.analytics.DailyChartViewModel
 import com.github.mikephil.charting.data.Entry
@@ -43,28 +44,51 @@ class DailyChartFragment : Fragment() {
     private fun initUi() {
         dailyVm.getDailyIntake()
         dailyVm.dailyIntake?.observe(viewLifecycleOwner, Observer {
-            val pieValues = ArrayList<Entry>()
-            val legend = ArrayList<String>()
 
-            for((j, i) in it.withIndex()){
-                android.util.Log.d("Daily Chart", "${i.category}, ${i.amount}")
-                pieValues.add(Entry(i.amount.toFloat(), j))
-                legend.add(i.category.toString())
+            android.util.Log.d("size", "${it.size}")
+
+            if (it.isNotEmpty()) {
+                binding.dailyViewNone.visibility = View.INVISIBLE
+                setDailyData(it)
+            } else {
+                binding.dailyChartDetail.visibility = View.INVISIBLE
+                setNoneData()
             }
-
-            val dataSet = PieDataSet(pieValues, "")
-            dataSet.setColors(ColorTemplate.COLORFUL_COLORS)
-            dataSet.setDrawValues(false)
-
-            val data = PieData(legend, dataSet)
-
-            binding.dailyPiechart.setUsePercentValues(true)
-            binding.dailyPiechart.data = data
-            binding.dailyPiechart.legend.isEnabled = false
-            binding.dailyPiechart.setDrawSliceText(false)
-            binding.dailyPiechart.setDescription("")
-            binding.dailyPiechart.invalidate()
         })
+    }
+
+    private fun setNoneData() {
+        val dataSet = PieDataSet(arrayListOf(Entry(1f, 1)), "")
+        dataSet.color = resources.getColor(R.color.grey_2, null)
+        dataSet.setDrawValues(false)
+
+        updateChart(PieData(arrayListOf("none"), dataSet))
+    }
+
+    private fun setDailyData(it: List<Intake>) {
+        val pieValues = ArrayList<Entry>()
+        val legend = ArrayList<String>()
+
+        for ((j, i) in it.withIndex()) {
+            android.util.Log.d("Daily Chart", "${i.category}, ${i.amount}")
+            pieValues.add(Entry(i.amount.toFloat(), j))
+            legend.add(i.category.toString())
+        }
+
+        val dataSet = PieDataSet(pieValues, "")
+        dataSet.setColors(ColorTemplate.COLORFUL_COLORS)
+        dataSet.setDrawValues(false)
+
+        updateChart(PieData(legend, dataSet))
+    }
+
+    private fun updateChart(data: PieData) {
+        binding.dailyPiechart.setUsePercentValues(true)
+        binding.dailyPiechart.data = data
+        binding.dailyPiechart.legend.isEnabled = false
+        binding.dailyPiechart.setDrawSliceText(false)
+        binding.dailyPiechart.setDescription("")
+        binding.dailyPiechart.invalidate()
     }
 
     companion object {
