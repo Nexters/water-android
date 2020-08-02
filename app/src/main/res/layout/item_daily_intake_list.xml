@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/daily_item_iv"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="@dimen/daily_common_spacing"
+        android:src="@mipmap/no_water_grey_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/daily_item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="커피"
+        android:textSize="15sp"
+        android:layout_marginStart="@dimen/common_spacing"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/daily_item_iv"/>
+
+    <TextView
+        android:id="@+id/daily_item_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="%dml"
+        android:textColor="@color/grey_8"
+        android:textSize="14sp"
+        android:layout_marginTop="2dp"
+        android:layout_marginStart="@dimen/common_spacing"
+        app:layout_constraintStart_toEndOf="@id/daily_item_iv"
+        app:layout_constraintTop_toBottomOf="@id/daily_item_name"/>
+
+    <TextView
+        android:id="@+id/daily_item_percent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="%f%"
+        android:textSize="15sp"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="@dimen/daily_common_spacing"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

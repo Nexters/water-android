@@ -103,7 +103,9 @@
             android:layout_height="228dp"
             android:visibility="invisible"
             app:layout_constraintTop_toBottomOf="@id/daily_piechart"
-            android:layout_marginTop="@dimen/daily_chart_detail_spacing"/>
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:layout_marginTop="@dimen/daily_chart_detail_spacing"
+            tools:listitem="@layout/item_daily_intake_list"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
