@@ -1,4 +1,4 @@
-package appvian.water.buddy.view
+package appvian.water.buddy.view.home
 
 import android.content.res.Resources
 import android.animation.ValueAnimator
@@ -12,17 +12,13 @@ import android.view.animation.Animation
 import android.view.animation.TranslateAnimation
 import androidx.lifecycle.ViewModelProvider
 import appvian.water.buddy.R
-import appvian.water.buddy.model.data.Intake
 import appvian.water.buddy.viewmodel.HomeViewModel
 import kotlinx.android.synthetic.main.fragment_main.*
-import kotlinx.android.synthetic.main.fragment_main.view.*
-import kotlinx.coroutines.InternalCoroutinesApi
 import android.util.DisplayMetrics
 import androidx.databinding.DataBindingUtil
-import appvian.water.buddy.databinding.FragmentCalendarBinding
 import appvian.water.buddy.databinding.FragmentMainBinding
-import appvian.water.buddy.view.analytics.chart.WeeklyChartFragment
-import appvian.water.buddy.viewmodel.CalendarViewModel
+import appvian.water.buddy.view.DailyIntakeListActivity
+import appvian.water.buddy.view.SetIntakeModal
 
 
 class MainFragment : Fragment() {
@@ -62,7 +58,8 @@ class MainFragment : Fragment() {
         }
 
         binding.intakeListButton.setOnClickListener {
-            val intent = Intent(activity,DailyIntakeListActivity::class.java)
+            val intent = Intent(activity,
+                DailyIntakeListActivity::class.java)
             startActivity(intent)
         }
 

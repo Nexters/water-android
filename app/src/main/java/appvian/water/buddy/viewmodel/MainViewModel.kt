@@ -4,7 +4,7 @@ import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import appvian.water.buddy.R
-import appvian.water.buddy.view.MainFragment
+import appvian.water.buddy.view.home.MainFragment
 import appvian.water.buddy.view.analytics.AnalyticsFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
