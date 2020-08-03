@@ -11,7 +11,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 class MainViewModel(val activity: FragmentActivity) {
 
     private var fragmentList: List<Fragment> =
-        listOf(MainFragment(), AnalyticsFragment.newInstance())
+        listOf(MainFragment.newInstance(), AnalyticsFragment.newInstance())
 
     val menuListener = object : BottomNavigationView.OnNavigationItemSelectedListener {
         override fun onNavigationItemSelected(item: MenuItem): Boolean {

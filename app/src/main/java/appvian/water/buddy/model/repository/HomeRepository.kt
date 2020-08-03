@@ -25,6 +25,18 @@ class HomeRepository(context: Context) {
         return dailyIntake
     }
 
+    fun getDailyAmount(today: Long, tomorrow: Long): LiveData<Int>? {
+        var dailyAmount: LiveData<Int>? = null
+
+        dailyAmount = runBlocking (Dispatchers.IO){
+            withContext(Dispatchers.Default){
+                intakedao.getDailyAmount(today, tomorrow)
+            }
+        }
+
+        return  dailyAmount
+    }
+
     fun getDailyByGroup(today: Long, tomorrow: Long): LiveData<List<Intake>>? {
         var dailyIntake: LiveData<List<Intake>>? = null
 

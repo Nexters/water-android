@@ -18,6 +18,11 @@ import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.fragment_main.view.*
 import kotlinx.coroutines.InternalCoroutinesApi
 import android.util.DisplayMetrics
+import androidx.databinding.DataBindingUtil
+import appvian.water.buddy.databinding.FragmentCalendarBinding
+import appvian.water.buddy.databinding.FragmentMainBinding
+import appvian.water.buddy.view.analytics.chart.WeeklyChartFragment
+import appvian.water.buddy.viewmodel.CalendarViewModel
 
 
 class MainFragment : Fragment() {
@@ -35,58 +40,59 @@ class MainFragment : Fragment() {
     var currentPercentTextY = startPercentTextY
 
     private lateinit var homeViewModel: HomeViewModel
+    private lateinit var binding: FragmentMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
 
-    @InternalCoroutinesApi
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
 
-        val view = inflater.inflate(R.layout.fragment_main,null)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
+        binding.homeViewModel = homeViewModel
 
-        view.animation_view2.setOnClickListener {
+        binding.animationView2.setOnClickListener {
             val bottomSheet = SetIntakeModal()
             val fragmentManager = childFragmentManager
             bottomSheet.show(fragmentManager,bottomSheet.tag)
         }
 
-        view.intake_list_button.setOnClickListener {
+        binding.intakeListButton.setOnClickListener {
             val intent = Intent(activity,DailyIntakeListActivity::class.java)
             startActivity(intent)
         }
 
-        setAnimation(view)
-
-        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
-        homeViewModel.dailyIntake?.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-            adjustAnimation(view,it)
-            changeText(view,it)
+        setAnimation()
+        homeViewModel.dailyAmount?.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            if(it!=null) {
+                adjustAnimation(it)
+                changeText(it)
+            } else{
+                adjustAnimation(0)
+                changeText(0)
+            }
         })
-        return view
+        return binding.root
     }
 
-    private fun setAnimation(view: View){
+    private fun setAnimation(){
         val anim_tranlate1 = TranslateAnimation(0F,0F,currentY1,currentY1)
         anim_tranlate1.duration = 2000
         anim_tranlate1.fillAfter = true
-        view.animation_view1.startAnimation(anim_tranlate1)
+        binding.animationView1.startAnimation(anim_tranlate1)
 
         val anim_translate_percentText = TranslateAnimation(0F,0F,currentPercentTextY,currentPercentTextY)
         anim_translate_percentText.duration = 0
         anim_translate_percentText.fillAfter = true
-        view.percent_text.startAnimation(anim_translate_percentText)
+        binding.percentText.startAnimation(anim_translate_percentText)
     }
 
-    private fun adjustAnimation(view: View,it: List<Intake>){
-        var drinkedAmount=0
-        for(i in it){
-            drinkedAmount+=i.amount
-        }
-        view.percent.text = currentPercent.toInt().toString()
+    private fun adjustAnimation(drinkedAmount: Int){
+        binding.percent.text = currentPercent.toInt().toString()
         val percent: Float = (drinkedAmount*100/requiredAmount).toFloat()
         val goalY1 = startY1 - (startY1 - endY1) * percent / 100
         val goalY2 = startY2 - (startY2 - endY2) * percent / 100
@@ -99,7 +105,7 @@ class MainFragment : Fragment() {
         val newanim_percent_text = TranslateAnimation(0F,0F,currentPercentTextY,goalPercentY)
         newanim2.setAnimationListener(object : Animation.AnimationListener{
             override fun onAnimationEnd(animation: Animation?) {
-                view.animation_view2.layout(animation_view2.left,animation_view2.top-(startY2-goalY2).toInt(),animation_view2.right,animation_view2.bottom-(startY2-goalY2).toInt())
+                binding.animationView2.layout(animation_view2.left,animation_view2.top-(startY2-goalY2).toInt(),animation_view2.right,animation_view2.bottom-(startY2-goalY2).toInt())
             }
             override fun onAnimationRepeat(animation: Animation?) {
             }
@@ -113,41 +119,35 @@ class MainFragment : Fragment() {
         newanim2.isFillEnabled = true
         newanim_percent_text.duration = 2000
         newanim_percent_text.fillAfter = true
-        view.animation_view1.startAnimation(newanim1)
-        view.animation_view2.startAnimation(newanim2)
-        view.percent_text.startAnimation(newanim_percent_text)
+        binding.animationView1.startAnimation(newanim1)
+        binding.animationView2.startAnimation(newanim2)
+        binding.percentText.startAnimation(newanim_percent_text)
         currentY1 = goalY1
         currentY2 = goalY2
         currentPercentTextY = goalPercentY
         currentPercent = percent
         anim_value.duration = 2000
         anim_value.addUpdateListener {
-            view.percent.text = it.animatedValue.toString()
+            binding.percent.text = it.animatedValue.toString()
         }
         anim_value.start()
     }
 
-    private fun changeText(view: View,it: List<Intake>){
-        var drinkedAmount=0
-        for(i in it){
-            drinkedAmount+=i.amount
-        }
+    private fun changeText(drinkedAmount: Int){
         val percent: Float = (drinkedAmount*100/requiredAmount).toFloat()
-        if (percent==0F){
-            view.home_text.text = getString(R.string.home_text_1)
+        when(percent){
+            0F -> binding.homeText.text = getString(R.string.home_text_1)
+            in 0F..35F -> binding.homeText.text = getString(R.string.home_text_2)
+            in 35F..65F -> binding.homeText.text = getString(R.string.home_text_3)
+            in 65F..99.9999F -> binding.homeText.text = getString(R.string.home_text_4)
+            else -> binding.homeText.text = getString(R.string.home_text_5)
         }
-        if (percent>0F && percent<35F){
-            view.home_text.text = getString(R.string.home_text_2)
-        }
-        if (percent>=35F && percent<65F){
-            view.home_text.text = getString(R.string.home_text_3)
-        }
-        if (percent>=65F && percent<100F){
-            view.home_text.text = getString(R.string.home_text_4)
-        }
-        if (percent>=100F){
-            view.home_text.text = getString(R.string.home_text_5)
-        }
-        view.intake_list_button.text = String.format("%.1fL 중 %.1fL 수분 섭취",requiredAmount.toDouble()/1000,drinkedAmount.toDouble()/1000)
+        binding.intakeListButton.text = String.format("%.1fL 중 %.1fL 수분 섭취",requiredAmount.toDouble()/1000,drinkedAmount.toDouble()/1000)
+    }
+
+    companion object {
+
+        @JvmStatic
+        fun newInstance() = MainFragment()
     }
 }

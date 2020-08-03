@@ -2,6 +2,7 @@ package appvian.water.buddy.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import appvian.water.buddy.model.data.Intake
 import appvian.water.buddy.model.repository.HomeRepository
@@ -15,6 +16,17 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     var weeklyIntake: LiveData<List<Intake>>? = getWeekly()
 
     var monthlyIntake: LiveData<List<Intake>>? = getMonthly()
+
+    var dailyAmount : LiveData<Int>? = getDailyDrinkedAmount()
+
+    val goalAmount = 2000
+
+    var beforeChangeAmount = 0
+
+    private fun getDailyDrinkedAmount(): LiveData<Int>? {
+        val dailyAmount = repository.getDailyAmount(getToday(), getTomorrow())
+        return dailyAmount
+    }
 
     private fun getDaily(): LiveData<List<Intake>>? {
         val dailyIntake = repository.getDaily(getToday(), getTomorrow())

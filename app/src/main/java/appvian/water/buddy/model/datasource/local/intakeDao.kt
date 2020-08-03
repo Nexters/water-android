@@ -11,6 +11,9 @@ interface intakeDao {
     @Query("SELECT * FROM intake WHERE date BETWEEN :today AND :tomorrow  ORDER BY date ASC")
     fun getDaily(today: Long, tomorrow: Long): LiveData<List<Intake>>
 
+    @Query("SELECT SUM(amount) FROM intake WHERE date BETWEEN :today AND :tomorrow")
+    fun getDailyAmount(today: Long, tomorrow: Long): LiveData<Int>
+
     @Query("SELECT * FROM intake WHERE date BETWEEN :today AND :tomorrow group BY category ORDER BY date ASC")
     fun getDailyByGroup(today: Long, tomorrow: Long): LiveData<List<Intake>>
 
