@@ -62,7 +62,7 @@ class MainFragment : Fragment() {
         setAnimation(view)
 
         homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
-        homeViewModel.dailyIntake.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+        homeViewModel.dailyIntake?.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             adjustAnimation(view,it)
             changeText(view,it)
         })
