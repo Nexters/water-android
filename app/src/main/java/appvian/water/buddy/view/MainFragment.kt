@@ -58,7 +58,7 @@ class MainFragment : Fragment() {
         view.animation_view1.startAnimation(anim_tranlate1)
 
         homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
-        homeViewModel.dailyIntake.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+        homeViewModel.dailyIntake?.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             adjustAnimation(view,it)
         })
         return view

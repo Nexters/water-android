@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="analytics_tab_name">
+        <item>월간</item>
+        <item>주간</item>
+        <item>일간</item>
+    </string-array>
+
+    <string-array name="weekly">
+        <item>일</item>
+        <item>월</item>
+        <item>화</item>
+        <item>수</item>
+        <item>목</item>
+        <item>금</item>
+        <item>토</item>
+    </string-array>
+</resources>
