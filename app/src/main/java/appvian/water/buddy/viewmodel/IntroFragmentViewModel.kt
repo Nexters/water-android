@@ -2,6 +2,6 @@ package appvian.water.buddy.viewmodel
 
 import androidx.lifecycle.ViewModel
 
-class StartViewModel : ViewModel() {
+class IntroFragmentViewModel : ViewModel() {
     // TODO: Implement the ViewModel
 }
