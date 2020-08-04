@@ -15,4 +15,16 @@
         <item>금</item>
         <item>토</item>
     </string-array>
+
+    <string-array name="drink_category">
+        <item>물</item>
+        <item>커피</item>
+        <item>차</item>
+        <item>우유</item>
+        <item>탄산</item>
+        <item>주스</item>
+        <item>알코올</item>
+        <item>이온</item>
+        <item>기타</item>
+    </string-array>
 </resources>
