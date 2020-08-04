@@ -1,4 +1,4 @@
-package appvian.water.buddy.view.analytics.chart
+package appvian.water.buddy.view.analytics.chart.daily
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -21,6 +21,7 @@ class DailyChartFragment : Fragment() {
 
     private lateinit var binding: FragmentDailyChartBinding
     private lateinit var dailyVm: DailyChartViewModel
+    val adapter: DailyAdapter = DailyAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,15 +44,19 @@ class DailyChartFragment : Fragment() {
 
     private fun initUi() {
         dailyVm.getDailyIntake()
+        binding.dailyChartDetail.adapter = adapter
+
         dailyVm.dailyIntake?.observe(viewLifecycleOwner, Observer {
 
             android.util.Log.d("size", "${it.size}")
 
             if (it.isNotEmpty()) {
+                binding.dailyChartDetail.visibility = View.VISIBLE
                 binding.dailyViewNone.visibility = View.INVISIBLE
                 setDailyData(it)
             } else {
                 binding.dailyChartDetail.visibility = View.INVISIBLE
+                binding.dailyViewNone.visibility = View.VISIBLE
                 setNoneData()
             }
         })
@@ -63,17 +68,26 @@ class DailyChartFragment : Fragment() {
         dataSet.setDrawValues(false)
 
         updateChart(PieData(arrayListOf("none"), dataSet))
+
+        binding.dailySysTarget.text = getString(R.string.daily_sys_target, 0, 2000)
     }
 
     private fun setDailyData(it: List<Intake>) {
+        adapter.setData(it)
+
         val pieValues = ArrayList<Entry>()
         val legend = ArrayList<String>()
+        var sum = 0
 
         for ((j, i) in it.withIndex()) {
             android.util.Log.d("Daily Chart", "${i.category}, ${i.amount}")
             pieValues.add(Entry(i.amount.toFloat(), j))
             legend.add(i.category.toString())
+
+            sum += i.amount
         }
+        adapter.totalSum = sum
+        binding.dailySysTarget.text = getString(R.string.daily_sys_target, sum, 2000)
 
         val dataSet = PieDataSet(pieValues, "")
         dataSet.setColors(ColorTemplate.COLORFUL_COLORS)
@@ -94,6 +108,7 @@ class DailyChartFragment : Fragment() {
     companion object {
 
         @JvmStatic
-        fun newInstance() = DailyChartFragment()
+        fun newInstance() =
+            DailyChartFragment()
     }
 }
