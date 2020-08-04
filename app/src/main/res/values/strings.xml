@@ -20,5 +20,4 @@
     <string name="daily_sys_target"> %dml/ %dml </string>
     <string name="daily_none_water_1">마신 물이 없어요!</string>
     <string name="daily_none_water_2">하루 권장량을 꼭 마셔주세요!</string>
-
 </resources>
