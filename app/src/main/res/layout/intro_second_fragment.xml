@@ -11,28 +11,60 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".view.IntroSecondFragment">
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <TextView
+                android:id="@+id/intro_second_main"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="35dp"
-                android:layout_marginTop="17dp"
-                android:text="asdfasdfasdfasdf"
+                android:text="@string/intro_second_description1"
                 android:textSize="22sp"
-                app:layout_constraintTop_toBottomOf="@+id/logo_image"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent" />
-            <ImageButton
+            <TextView
+                android:id="@+id/intro_second_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/intro_second_description2"
+                android:textSize="13sp"
+                android:layout_marginTop="13dp"
+                android:layout_marginStart="35dp"
+                app:layout_constraintTop_toBottomOf="@+id/intro_second_main"
+                app:layout_constraintLeft_toLeftOf="parent"
+                />
+            <EditText
+                android:id="@+id/name_edittext"
+                android:layout_width="290dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="70dp"
+                android:layout_marginStart="35dp"
+                android:maxLength="7"
+                android:privateImeOptions="defaultInputmode=korean"
+                android:textSize="18sp"
+                android:hint="@string/intro_second_inputhint"
+                app:layout_constraintTop_toBottomOf="@+id/intro_second_description"
+                app:layout_constraintLeft_toLeftOf="parent"
+                />
 
+            <ImageButton
                 android:layout_width="360dp"
                 android:layout_height="52dp"
-                android:src="@drawable/btn1"
+                android:src="@drawable/nextbtn1"
                 android:layout_marginStart="19dp"
                 android:layout_marginBottom="24dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
+                />
+            <TextView
+                android:id="@+id/text_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="79dp"
+                app:layout_constraintTop_toBottomOf="@+id/intro_second_description"
+                app:layout_constraintLeft_toRightOf="@id/name_edittext"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
