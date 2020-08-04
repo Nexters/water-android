@@ -6,4 +6,9 @@
     <color name="settingTxtGray">#868e96</color>
     <color name="settingCardBack">#f1f3f5</color>
     <color name="settingTxtBlack">#030303</color>
+    <color name="btnBlueNormal">#547cff</color>
+    <color name="btnBlueInactive">#a9bdff</color>
+    <color name="white">#FFFFFF</color>
+    <color name="popupLine">#dee2e6</color>
+    <color name="popupBtn">#f1f3f5</color>
 </resources>

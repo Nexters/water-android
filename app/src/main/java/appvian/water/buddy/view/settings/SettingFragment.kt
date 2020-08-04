@@ -25,15 +25,15 @@ class SettingFragment : Fragment() {
     ): View? {
         settingviewModel = ViewModelProvider(this).get(SettingViewModel::class.java)
         fragmentSettingBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_setting, container, false)
-        /*
-        //테스트 코드
+
+
         //참고 https://www.thetopsites.net/article/51790868.shtml
         settingviewModel.nameLiveData.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             fragmentSettingBinding.txtSettingName.text = it
             Log.d("TAG",it)
             //fragmentSettingBinding.executePendingBindings()
         })
-        */
+
         fragmentSettingBinding.viewModel = settingviewModel
         return fragmentSettingBinding.root
     }

@@ -25,5 +25,13 @@
         <item name="android:windowFrame">@null</item>
         <item name="android:windowIsFloating">true</item>
     </style>
-
+    <style name="EdtSettingTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorAccent">@color/settingTxtGray</item>
+        <item name="colorControlNormal">@color/settingTxtGray</item>
+    </style>
+    <style name="popupTheme" parent="Theme.AppCompat.DayNight.Dialog">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="dialogCornerRadius">6dp</item>
+    </style>
 </resources>

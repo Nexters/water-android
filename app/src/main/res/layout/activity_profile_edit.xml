@@ -1,9 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".view.settings.ProfileEditActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="viewModel"
+            type="appvian.water.buddy.viewmodel.SettingViewModel" />
+    </data>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_profile_edit"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.settings.ProfileEditActivity"
+        android:focusableInTouchMode="true"
+        android:clickable="true"
+        android:focusable="true">
+
+        <ImageView
+            android:id="@+id/img_profile_edt_arrow"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/arrow_left"
+            android:layout_marginTop="48dp"
+            android:layout_marginStart="15dp"
+            />
+        <ImageView
+            android:id="@+id/img_profile_edt"
+            android:layout_width="76dp"
+            android:layout_height="76dp"
+            android:src="@drawable/ic_launcher_foreground"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="60dp"
+            />
+        <EditText
+            android:id="@+id/edt_profile_edt"
+            android:layout_width="290dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/img_profile_edt"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:inputType="text"
+            android:theme="@style/EdtSettingTheme"
+            android:textSize="16sp"
+            android:textColor="@color/settingTxtBlack"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:maxLength="6"
+            android:text="@{viewModel.nameLiveData}"
+            android:selection="@{viewModel.nameLiveData.length()}"
+            android:layout_marginTop="35dp">
+            <requestFocus/>
+        </EditText>
+        <TextView
+            android:id="@+id/txt_profile_edt_cnt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="11sp"
+            android:textColor="@color/settingTxtGray"
+            app:layout_constraintEnd_toEndOf="@id/edt_profile_edt"
+            app:layout_constraintBottom_toBottomOf="@id/edt_profile_edt"
+            app:layout_constraintTop_toTopOf="@id/edt_profile_edt"
+            android:text="@{@string/edtLenCntFormat(viewModel.name_cnt)}"
+            />
+        <Button
+            android:id="@+id/btn_save"
+            android:layout_width="322dp"
+            android:layout_height="52dp"
+            android:background="@drawable/setting_save_btn"
+            android:text="저장"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="24dp"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

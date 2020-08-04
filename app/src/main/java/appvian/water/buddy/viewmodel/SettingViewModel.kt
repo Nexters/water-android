@@ -14,6 +14,7 @@ class SettingViewModel(application: Application) : AndroidViewModel(application)
     //사용자 닉네임
     val name_pref = application.getSharedPreferences("name", Context.MODE_PRIVATE)
     var nameLiveData: SharedPreferenceStringLiveData = SharedPreferenceStringLiveData(name_pref, "name", name_pref.getString("name", "nick name")!!)
+
     //사용자 키
     val height_pref = application.getSharedPreferences("height", Context.MODE_PRIVATE)
     var heightLiveData = SharedPreferenceIntLiveData(height_pref, "height", 160)
@@ -24,6 +25,11 @@ class SettingViewModel(application: Application) : AndroidViewModel(application)
     val target_amounts_pref = application.getSharedPreferences("target_amounts", Context.MODE_PRIVATE)
     var targetAmountLiveData = SharedPreferenceFloatLiveData(target_amounts_pref, "target_amounts", 1.6f)
 
+    //프로필 수정 화면에서 입력된 닉네임 길이
+    var name_cnt = MutableLiveData<Int>()
+    init {
+        name_cnt.value = nameLiveData.value!!.length
+    }
     fun setNameLiveData(key: String, value: String) {
         val editor = name_pref.edit()
         editor.putString(key, value)
