@@ -11,6 +11,7 @@ import appvian.water.buddy.R
 import appvian.water.buddy.databinding.FragmentDailyChartBinding
 import appvian.water.buddy.model.data.Intake
 import appvian.water.buddy.model.repository.HomeRepository
+import appvian.water.buddy.util.DrinkMapper
 import appvian.water.buddy.viewmodel.analytics.DailyChartViewModel
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.PieData
@@ -77,20 +78,21 @@ class DailyChartFragment : Fragment() {
 
         val pieValues = ArrayList<Entry>()
         val legend = ArrayList<String>()
+        val colors = ArrayList<Int>()
         var sum = 0
 
         for ((j, i) in it.withIndex()) {
             android.util.Log.d("Daily Chart", "${i.category}, ${i.amount}")
             pieValues.add(Entry(i.amount.toFloat(), j))
             legend.add(i.category.toString())
-
+            colors.add(resources.getColor(DrinkMapper.drinkColor[i.category], null))
             sum += i.amount
         }
         adapter.totalSum = sum
         binding.dailySysTarget.text = getString(R.string.daily_sys_target, sum, 2000)
 
         val dataSet = PieDataSet(pieValues, "")
-        dataSet.setColors(ColorTemplate.COLORFUL_COLORS)
+        dataSet.setColors(colors)
         dataSet.setDrawValues(false)
 
         updateChart(PieData(legend, dataSet))
