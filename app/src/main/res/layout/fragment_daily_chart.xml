@@ -18,9 +18,19 @@
             android:layout_height="wrap_content"
             android:text="@string/analytics_header_daily"
             android:textSize="@dimen/daily_header_size"
-            android:layout_marginLeft="@dimen/daily_common_spacing"
+            android:layout_marginStart="@dimen/daily_common_spacing"
             android:layout_marginTop="@dimen/daily_common_spacing"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/daily_date_picker"
+            android:layout_width="62dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="@dimen/daily_common_spacing"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/picker_background"
+            app:layout_constraintStart_toEndOf="@id/daily_header"
             app:layout_constraintTop_toTopOf="parent"/>
 
         <com.github.mikephil.charting.charts.PieChart
@@ -28,7 +38,7 @@
             android:layout_width="@dimen/daily_pie_chart"
             android:layout_height="@dimen/daily_pie_chart"
             android:layout_marginTop="@dimen/daily_pie_header_spacing"
-            android:layout_marginLeft="@dimen/daily_common_spacing"
+            android:layout_marginStart="@dimen/daily_common_spacing"
             android:fillViewport="true"
             app:layout_constraintTop_toBottomOf="@id/daily_header"
             app:layout_constraintStart_toStartOf="parent"/>
@@ -41,7 +51,7 @@
             android:textSize="@dimen/daily_sys_size"
             android:textAlignment="center"
             android:layout_marginTop="@dimen/daily_pie_header_spacing"
-            android:layout_marginLeft="@dimen/daily_pie_sys_spacing"
+            android:layout_marginStart="@dimen/daily_pie_sys_spacing"
             app:layout_constraintStart_toEndOf="@id/daily_piechart"
             app:layout_constraintTop_toBottomOf="@id/daily_header"/>
 
@@ -54,7 +64,7 @@
             android:textSize="@dimen/daily_sys_target_size"
             app:layout_constraintTop_toBottomOf="@+id/daily_sys_text"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginLeft="@dimen/daily_target_spacing"
+            android:layout_marginStart="@dimen/daily_target_spacing"
             android:layout_marginTop="@dimen/daily_sys_target_spacing" />
         
         <androidx.constraintlayout.widget.ConstraintLayout
