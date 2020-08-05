@@ -21,7 +21,7 @@ class IntroFragment : Fragment() {
     ): View? {
 
         val view = inflater.inflate(R.layout.intro_fragment, container, false)
-        view.nextbtn.setOnClickListener{
+        view.confirmbtn.setOnClickListener{
             (activity as IntroActivity).replaceFragment(IntroSecondFragment.newInstance())
         }
         return view

@@ -20,11 +20,12 @@
                     android:layout_marginStart="35dp"
                     android:text="@string/intro_main_description"
                     android:textSize="22sp"
+                    android:textColor="#000000"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     />
                 <ImageButton
-                    android:id="@+id/nextbtn"
+                    android:id="@+id/confirmbtn"
                     android:layout_width="360dp"
                     android:layout_height="52dp"
                     android:src="@drawable/btn1"

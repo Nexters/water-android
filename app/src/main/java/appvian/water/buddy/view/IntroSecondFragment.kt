@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import appvian.water.buddy.R
+import kotlinx.android.synthetic.main.intro_fragment.view.*
 import kotlinx.android.synthetic.main.intro_second_fragment.view.*
 
 class IntroSecondFragment: Fragment() {
@@ -32,8 +33,13 @@ class IntroSecondFragment: Fragment() {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 val count: Int = edittext.text.toString().length
                 textcount.text= count.toString() + getString(R.string.intro_second_textcount)
+
             }
         })
+        view.nextbtn.setOnClickListener {
+            (activity as IntroActivity).replaceFragment(IntroThirdFragment.newInstance())
+
+        }
         return view
     }
 
