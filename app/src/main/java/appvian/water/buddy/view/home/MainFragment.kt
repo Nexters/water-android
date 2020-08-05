@@ -24,15 +24,14 @@ import appvian.water.buddy.view.SetIntakeModal
 class MainFragment : Fragment() {
 
     val requiredAmount = 2000
-    val startY1 = 650F
+    val waterStartY = Resources.getSystem().displayMetrics.heightPixels.toFloat() - 100F * (Resources.getSystem().displayMetrics.densityDpi).toFloat() / DisplayMetrics.DENSITY_DEFAULT
     val startY2 = 0F
-    var currentY1 = startY1
+    var waterCurrentY = waterStartY
     var currentY2 = startY2
     var currentPercent = 0F
-    val endY1 = -600F
     val endY2 = -1300F
 
-    val startPercentTextY : Float = 250F * (Resources.getSystem().displayMetrics.densityDpi).toFloat() / DisplayMetrics.DENSITY_DEFAULT
+    val startPercentTextY : Float = Resources.getSystem().displayMetrics.heightPixels.toFloat() - 370F * (Resources.getSystem().displayMetrics.densityDpi).toFloat() / DisplayMetrics.DENSITY_DEFAULT
     var currentPercentTextY = startPercentTextY
 
     private lateinit var homeViewModel: HomeViewModel
@@ -77,10 +76,10 @@ class MainFragment : Fragment() {
     }
 
     private fun setAnimation(){
-        val anim_tranlate1 = TranslateAnimation(0F,0F,currentY1,currentY1)
+        val anim_tranlate1 = TranslateAnimation(0F,0F,waterCurrentY,waterCurrentY)
         anim_tranlate1.duration = 2000
         anim_tranlate1.fillAfter = true
-        binding.animationView1.startAnimation(anim_tranlate1)
+        binding.animationWaterFull.startAnimation(anim_tranlate1)
 
         val anim_translate_percentText = TranslateAnimation(0F,0F,currentPercentTextY,currentPercentTextY)
         anim_translate_percentText.duration = 0
@@ -91,13 +90,13 @@ class MainFragment : Fragment() {
     private fun adjustAnimation(drinkedAmount: Int){
         binding.percent.text = currentPercent.toInt().toString()
         val percent: Float = (drinkedAmount*100/requiredAmount).toFloat()
-        val goalY1 = startY1 - (startY1 - endY1) * percent / 100
+        val goalY1 = waterStartY - waterStartY * percent / 100
         val goalY2 = startY2 - (startY2 - endY2) * percent / 100
-        var goalPercentY = startPercentTextY - (startY1 - endY1) * percent / 100
+        var goalPercentY = startPercentTextY - waterStartY * percent / 100
         if (goalPercentY<0F){
             goalPercentY=0F
         }
-        val newanim1 = TranslateAnimation(0F, 0F, currentY1, goalY1)
+        val newanim1 = TranslateAnimation(0F, 0F, waterCurrentY, goalY1)
         val newanim2 = TranslateAnimation(0F, 0F, currentY2, goalY2)
         val newanim_percent_text = TranslateAnimation(0F,0F,currentPercentTextY,goalPercentY)
         newanim2.setAnimationListener(object : Animation.AnimationListener{
@@ -116,10 +115,10 @@ class MainFragment : Fragment() {
         newanim2.isFillEnabled = true
         newanim_percent_text.duration = 2000
         newanim_percent_text.fillAfter = true
-        binding.animationView1.startAnimation(newanim1)
+        binding.animationWaterFull.startAnimation(newanim1)
         binding.animationView2.startAnimation(newanim2)
         binding.percentText.startAnimation(newanim_percent_text)
-        currentY1 = goalY1
+        waterCurrentY = goalY1
         currentY2 = goalY2
         currentPercentTextY = goalPercentY
         currentPercent = percent

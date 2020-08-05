@@ -13,21 +13,37 @@
         android:layout_height="match_parent">
 
         <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/animation_view1"
-            android:layout_width="match_parent"
+            android:id="@+id/animation_water_full"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:scaleType="fitXY"
             app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            app:lottie_fileName="5596-floatingswimming-duck.json" />
+            app:lottie_fileName="water_side.json"
+            app:lottie_loop="true" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/animation_view2"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                app:lottie_autoPlay="true"
+                app:lottie_fileName="0-20/1/0-20-1.json"
+                app:lottie_imageAssetsFolder="0-20/1/images"
+                app:lottie_loop="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
         <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/animation_view2"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginLeft="250dp"
-            android:layout_marginTop="490dp"
+            android:id="@+id/animation_water_line"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             app:lottie_autoPlay="true"
-            app:lottie_fileName="spongebob.json"
+            app:lottie_fileName="water_line.json"
             app:lottie_loop="true"
             />
 
