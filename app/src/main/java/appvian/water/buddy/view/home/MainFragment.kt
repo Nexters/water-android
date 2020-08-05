@@ -1,5 +1,6 @@
 package appvian.water.buddy.view.home
 
+import android.animation.Animator
 import android.content.res.Resources
 import android.animation.ValueAnimator
 import android.content.Intent
@@ -15,21 +16,25 @@ import appvian.water.buddy.R
 import appvian.water.buddy.viewmodel.HomeViewModel
 import kotlinx.android.synthetic.main.fragment_main.*
 import android.util.DisplayMetrics
+import androidx.core.view.isGone
 import androidx.databinding.DataBindingUtil
 import appvian.water.buddy.databinding.FragmentMainBinding
 import appvian.water.buddy.view.DailyIntakeListActivity
 import appvian.water.buddy.view.SetIntakeModal
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 
 
 class MainFragment : Fragment() {
 
     val requiredAmount = 2000
     val waterStartY = Resources.getSystem().displayMetrics.heightPixels.toFloat() - 100F * (Resources.getSystem().displayMetrics.densityDpi).toFloat() / DisplayMetrics.DENSITY_DEFAULT
-    val startY2 = 0F
     var waterCurrentY = waterStartY
-    var currentY2 = startY2
+    var characterCurrentY = 0F
     var currentPercent = 0F
-    val endY2 = -1300F
+    val characterEndY = -(Resources.getSystem().displayMetrics.heightPixels.toFloat() - 100F * (Resources.getSystem().displayMetrics.densityDpi).toFloat() / DisplayMetrics.DENSITY_DEFAULT)
 
     val startPercentTextY : Float = Resources.getSystem().displayMetrics.heightPixels.toFloat() - 370F * (Resources.getSystem().displayMetrics.densityDpi).toFloat() / DisplayMetrics.DENSITY_DEFAULT
     var currentPercentTextY = startPercentTextY
@@ -50,11 +55,8 @@ class MainFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
         binding.homeViewModel = homeViewModel
 
-        binding.animationView2.setOnClickListener {
-            val bottomSheet = SetIntakeModal()
-            val fragmentManager = childFragmentManager
-            bottomSheet.show(fragmentManager,bottomSheet.tag)
-        }
+        setFirstCharacter()
+        setCharacter()
 
         binding.intakeListButton.setOnClickListener {
             val intent = Intent(activity,
@@ -62,7 +64,6 @@ class MainFragment : Fragment() {
             startActivity(intent)
         }
 
-        setAnimation()
         homeViewModel.dailyAmount?.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             if(it!=null) {
                 adjustAnimation(it)
@@ -75,35 +76,28 @@ class MainFragment : Fragment() {
         return binding.root
     }
 
-    private fun setAnimation(){
-        val anim_tranlate1 = TranslateAnimation(0F,0F,waterCurrentY,waterCurrentY)
-        anim_tranlate1.duration = 2000
-        anim_tranlate1.fillAfter = true
-        binding.animationWaterFull.startAnimation(anim_tranlate1)
-
-        val anim_translate_percentText = TranslateAnimation(0F,0F,currentPercentTextY,currentPercentTextY)
-        anim_translate_percentText.duration = 0
-        anim_translate_percentText.fillAfter = true
-        binding.percentText.startAnimation(anim_translate_percentText)
-    }
 
     private fun adjustAnimation(drinkedAmount: Int){
         binding.percent.text = currentPercent.toInt().toString()
         val percent: Float = (drinkedAmount*100/requiredAmount).toFloat()
         val goalY1 = waterStartY - waterStartY * percent / 100
-        val goalY2 = startY2 - (startY2 - endY2) * percent / 100
+        val goalY2 = characterEndY * percent / 100
         var goalPercentY = startPercentTextY - waterStartY * percent / 100
         if (goalPercentY<0F){
             goalPercentY=0F
         }
         val newanim1 = TranslateAnimation(0F, 0F, waterCurrentY, goalY1)
-        val newanim2 = TranslateAnimation(0F, 0F, currentY2, goalY2)
+        val newanim2 = TranslateAnimation(0F, 0F, characterCurrentY, goalY2)
         val newanim_percent_text = TranslateAnimation(0F,0F,currentPercentTextY,goalPercentY)
         newanim2.setAnimationListener(object : Animation.AnimationListener{
             override fun onAnimationEnd(animation: Animation?) {
-                binding.animationView2.layout(animation_view2.left,animation_view2.top-(startY2-goalY2).toInt(),animation_view2.right,animation_view2.bottom-(startY2-goalY2).toInt())
+                binding.animationCharacter.layout(animation_character.left,
+                    animation_character.top+goalY2.toInt(),
+                    animation_character.right,
+                    animation_character.bottom+goalY2.toInt())
             }
             override fun onAnimationRepeat(animation: Animation?) {
+
             }
             override fun onAnimationStart(animation: Animation?) {
             }
@@ -116,10 +110,10 @@ class MainFragment : Fragment() {
         newanim_percent_text.duration = 2000
         newanim_percent_text.fillAfter = true
         binding.animationWaterFull.startAnimation(newanim1)
-        binding.animationView2.startAnimation(newanim2)
+        binding.animationCharacter.startAnimation(newanim2)
         binding.percentText.startAnimation(newanim_percent_text)
         waterCurrentY = goalY1
-        currentY2 = goalY2
+        characterCurrentY = goalY2
         currentPercentTextY = goalPercentY
         currentPercent = percent
         anim_value.duration = 2000
@@ -139,6 +133,34 @@ class MainFragment : Fragment() {
             else -> binding.homeText.text = getString(R.string.home_text_5)
         }
         binding.intakeListButton.text = String.format("%.1fL 중 %.1fL 수분 섭취",requiredAmount.toDouble()/1000,drinkedAmount.toDouble()/1000)
+    }
+
+    private fun setFirstCharacter(){
+
+        binding.animationFirstCharacter.speed = 0.2F
+        binding.animationFirstCharacter.addAnimatorListener(object : Animator.AnimatorListener{
+            override fun onAnimationCancel(animation: Animator?) {
+            }
+
+            override fun onAnimationEnd(animation: Animator?) {
+                binding.animationFirstCharacter.visibility = View.GONE
+                binding.animationCharacter.visibility = View.VISIBLE
+            }
+
+            override fun onAnimationRepeat(animation: Animator?) {
+            }
+
+            override fun onAnimationStart(animation: Animator?) {
+            }
+        })
+
+    }
+    private fun setCharacter(){
+        binding.animationCharacter.setOnClickListener {
+            val bottomSheet = SetIntakeModal()
+            val fragmentManager = childFragmentManager
+            bottomSheet.show(fragmentManager,bottomSheet.tag)
+        }
     }
 
     companion object {
