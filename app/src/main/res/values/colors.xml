@@ -11,4 +11,7 @@
     <color name="white">#FFFFFF</color>
     <color name="popupLine">#dee2e6</color>
     <color name="popupBtn">#f1f3f5</color>
+
+    <color name="transparent">#00000000</color>
+    <color name="grey_7">#adb5bd</color>
 </resources>
