@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import appvian.water.buddy.R
@@ -64,16 +65,22 @@ class SetIntakeModal : BottomSheetDialogFragment() {
             onDestroyView()
             onDestroy()
         }
+
+        //dialog!!.window!!.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
         return v
     }
 
     private fun setCategory(){
-        categoryList.add(Category(0,"Water",""))
-        categoryList.add(Category(1,"Coffee",""))
-        categoryList.add(Category(2,"Juice",""))
-        categoryList.add(Category(3,"Coke",""))
-        categoryList.add(Category(4,"Alcohol",""))
-        categoryList.add(Category(5,"Milk",""))
+        categoryList.add(Category(0,"물","icon_water"))
+        categoryList.add(Category(1,"커피","icon_coffee"))
+        categoryList.add(Category(2,"차","icon_tea"))
+        categoryList.add(Category(3,"우유","icon_milk"))
+        categoryList.add(Category(4,"탄산음료","icon_carbon"))
+        categoryList.add(Category(5,"주스","icon_juice"))
+        categoryList.add(Category(6,"주류","icon_alcohol"))
+        categoryList.add(Category(6,"이온음료","icon_ion"))
+        categoryList.add(Category(6,"기타","icon_etc"))
+
     }
 
 

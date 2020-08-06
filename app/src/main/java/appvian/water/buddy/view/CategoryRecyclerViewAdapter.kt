@@ -10,15 +10,27 @@ import androidx.recyclerview.widget.RecyclerView
 import appvian.water.buddy.R
 import appvian.water.buddy.model.data.Category
 import kotlinx.android.synthetic.main.my_recyclerview_item.view.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 class CategoryRecyclerViewAdapter (val context : Context, val categoryList : ArrayList<Category>, val itemClick: (Category) -> Unit) :
     RecyclerView.Adapter<CategoryRecyclerViewAdapter.CategoryViewHolder>(){
 
     private var selectedPosition = -1
+    private var selected : Array<Boolean> = Array(categoryList.size, {i ->
+        if(i == 0) true
+        else false
+    })
 
     inner class CategoryViewHolder(itemView : View, itemClick: (Category) -> Unit) : RecyclerView.ViewHolder(itemView) {
 
         fun bind (category : Category, position: Int, context: Context){
+            val isSelected = selected[position]
+            if(isSelected){
+                itemView.img_check.visibility = View.VISIBLE
+            }else{
+                itemView.img_check.visibility = View.INVISIBLE
+            }
             if(category.icon != ""){
                 val resourceId = context.resources.getIdentifier(category.icon, "drawable", context.packageName)
                 itemView.categoryImg.setImageResource(resourceId)
@@ -29,13 +41,11 @@ class CategoryRecyclerViewAdapter (val context : Context, val categoryList : Arr
             itemView.setOnClickListener {
                 itemClick(category)
                 selectedPosition=position
+                Arrays.fill(selected, false)
+                selected[position] = true
                 notifyDataSetChanged()
             }
-            if(selectedPosition==position){
-                itemView.setBackgroundColor(Color.YELLOW)
-            } else{
-                itemView.setBackgroundColor(Color.WHITE)
-            }
+
         }
     }
 
