@@ -1,4 +1,4 @@
-package appvian.water.buddy.view
+package appvian.water.buddy.view.home
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

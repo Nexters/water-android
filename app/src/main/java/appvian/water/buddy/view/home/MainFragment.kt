@@ -18,7 +18,6 @@ import kotlinx.android.synthetic.main.fragment_main.*
 import android.util.DisplayMetrics
 import androidx.databinding.DataBindingUtil
 import appvian.water.buddy.databinding.FragmentMainBinding
-import appvian.water.buddy.view.DailyIntakeListActivity
 import appvian.water.buddy.view.SetIntakeModal
 
 
