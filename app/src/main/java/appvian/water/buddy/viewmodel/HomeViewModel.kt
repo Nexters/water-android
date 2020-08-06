@@ -53,13 +53,21 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
     private fun getToday(): Long {
         val calendar = Calendar.getInstance()
-        val today: Long = calendar.time.time
+        calendar.set(Calendar.HOUR_OF_DAY,0)
+        calendar.set(Calendar.MINUTE,0)
+        calendar.set(Calendar.SECOND,0)
+        calendar.set(Calendar.MILLISECOND,0)
+        val today = calendar.time.time
         return today
     }
 
     private fun getTomorrow(): Long {
         val calendar = Calendar.getInstance()
         calendar.add(Calendar.DATE, 1)
+        calendar.set(Calendar.HOUR_OF_DAY,0)
+        calendar.set(Calendar.MINUTE,0)
+        calendar.set(Calendar.SECOND,0)
+        calendar.set(Calendar.MILLISECOND,0)
         val tomorrow = calendar.time.time
         return tomorrow
     }
@@ -67,6 +75,10 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     private fun getWeekAgo(): Long {
         val calendar = Calendar.getInstance()
         calendar.add(Calendar.DATE, -6)
+        calendar.set(Calendar.HOUR_OF_DAY,0)
+        calendar.set(Calendar.MINUTE,0)
+        calendar.set(Calendar.SECOND,0)
+        calendar.set(Calendar.MILLISECOND,0)
         val aWeekAgo = calendar.time.time
         return aWeekAgo
     }
@@ -74,6 +86,10 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     private fun getMonthAgo(): Long {
         val calendar = Calendar.getInstance()
         calendar.add(Calendar.MONTH, -1)
+        calendar.set(Calendar.HOUR_OF_DAY,0)
+        calendar.set(Calendar.MINUTE,0)
+        calendar.set(Calendar.SECOND,0)
+        calendar.set(Calendar.MILLISECOND,0)
         val aMonthAgo = calendar.time.time
         return aMonthAgo
     }
