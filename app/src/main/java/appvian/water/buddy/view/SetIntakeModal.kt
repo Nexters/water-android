@@ -25,7 +25,7 @@ class SetIntakeModal : BottomSheetDialogFragment() {
     var categoryList = arrayListOf<Category>()
     override fun getTheme(): Int = R.style.RoundBottomSheetDialog
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog = BottomSheetDialog(activity!!,theme)
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog = BottomSheetDialog(requireActivity(),theme)
 
     @InternalCoroutinesApi
     override fun onCreateView(
@@ -47,13 +47,12 @@ class SetIntakeModal : BottomSheetDialogFragment() {
                 typeofDrink = category.id
             }
         }
-        setNumberPicker(v)
 
         homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
 
         v.setButton.setBackgroundColor(Color.CYAN)
         v.setButton.setOnClickListener {
-            val pickedNum = numberpicker.value*50
+            val pickedNum = edt_amount.text.toString().toInt()
             val now = System.currentTimeMillis()
             val intake = Intake(now,typeofDrink,pickedNum)
             homeViewModel.insert(intake)
@@ -61,7 +60,7 @@ class SetIntakeModal : BottomSheetDialogFragment() {
             onDestroy()
         }
 
-        v.cancelButton.setOnClickListener{
+        v.img_cancel.setOnClickListener{
             onDestroyView()
             onDestroy()
         }
@@ -77,13 +76,6 @@ class SetIntakeModal : BottomSheetDialogFragment() {
         categoryList.add(Category(5,"Milk",""))
     }
 
-    private fun setNumberPicker(v: View){
-        val num_of_value = 10
-        val displayedValues = arrayOf("0ml","50ml","100ml","150ml","200ml","250ml","300ml","350ml","400ml","450ml","500ml")
-        v.numberpicker.minValue = 0
-        v.numberpicker.maxValue = num_of_value
-        v.numberpicker.displayedValues = displayedValues
-    }
 
     override fun onDismiss(dialog: DialogInterface) {
         super.onDismiss(dialog)

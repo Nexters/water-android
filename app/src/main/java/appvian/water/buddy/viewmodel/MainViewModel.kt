@@ -27,7 +27,7 @@ class MainViewModel(val activity: FragmentActivity) {
                     return true
                 }
                 R.id.menu_settings -> {
-                    replaceFragment(fragmentList[1])
+                    replaceFragment(fragmentList[2])
                     return true
                 }
 
