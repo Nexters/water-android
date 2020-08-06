@@ -13,6 +13,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 import appvian.water.buddy.R
 import appvian.water.buddy.model.data.Intake
+import appvian.water.buddy.utilities.Code
 import appvian.water.buddy.viewmodel.HomeViewModel
 import com.airbnb.lottie.LottieAnimationView
 import kotlinx.android.synthetic.main.fragment_main.*
@@ -48,7 +49,7 @@ class MainFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_main,null)
 
         view.animation_view2.setOnClickListener {
-            val bottomSheet = SetIntakeModal()
+            val bottomSheet = SetIntakeModal(Code.MAIN_FRAGMENT)
             val fragmentManager = childFragmentManager
             bottomSheet.show(fragmentManager,bottomSheet.tag)
         }

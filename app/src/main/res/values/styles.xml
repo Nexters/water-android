@@ -34,4 +34,6 @@
         <item name="windowNoTitle">true</item>
         <item name="dialogCornerRadius">6dp</item>
     </style>
+
+
 </resources>

@@ -109,8 +109,6 @@ class ProfileEditActivity : AppCompatActivity(), TextWatcher {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        //가끔 키보드가 사라지지 않음
-        edt_profile_edt.clearFocus()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -120,5 +118,10 @@ class ProfileEditActivity : AppCompatActivity(), TextWatcher {
                 finish()
             }
         }
+    }
+
+    override fun onPause() {
+        hideKeyBoard()
+        super.onPause()
     }
 }
