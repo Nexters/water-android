@@ -22,11 +22,13 @@
             app:lottie_loop="true" />
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginEnd="-80dp"
+            >
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/animation_first_character"
-                android:layout_width="230dp"
-                android:layout_height="230dp"
+                android:layout_width="280dp"
+                android:layout_height="280dp"
                 app:lottie_autoPlay="true"
                 app:lottie_fileName="0-20/1/0-20-1.json"
                 app:lottie_imageAssetsFolder="0-20/1/images"
@@ -36,11 +38,11 @@
                 />
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/animation_character"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                android:layout_marginEnd="65dp"
+                android:layout_marginEnd="80dp"
                 app:lottie_autoPlay="true"
                 app:lottie_fileName="0-20/2/0-20-2.json"
                 app:lottie_imageAssetsFolder="0-20/2/images"

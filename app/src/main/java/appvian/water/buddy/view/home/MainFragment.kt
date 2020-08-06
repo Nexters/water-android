@@ -16,15 +16,10 @@ import appvian.water.buddy.R
 import appvian.water.buddy.viewmodel.HomeViewModel
 import kotlinx.android.synthetic.main.fragment_main.*
 import android.util.DisplayMetrics
-import androidx.core.view.isGone
 import androidx.databinding.DataBindingUtil
 import appvian.water.buddy.databinding.FragmentMainBinding
 import appvian.water.buddy.view.DailyIntakeListActivity
 import appvian.water.buddy.view.SetIntakeModal
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withContext
 
 
 class MainFragment : Fragment() {
@@ -56,7 +51,6 @@ class MainFragment : Fragment() {
         binding.homeViewModel = homeViewModel
 
         setFirstCharacter()
-        setCharacter()
 
         binding.intakeListButton.setOnClickListener {
             val intent = Intent(activity,
@@ -68,9 +62,11 @@ class MainFragment : Fragment() {
             if(it!=null) {
                 adjustAnimation(it)
                 changeText(it)
+                setCharacter(it)
             } else{
                 adjustAnimation(0)
                 changeText(0)
+                setCharacter(0)
             }
         })
         return binding.root
@@ -155,11 +151,45 @@ class MainFragment : Fragment() {
         })
 
     }
-    private fun setCharacter(){
+    private fun setCharacter(drinkedAmount: Int){
+        val percent: Float = (drinkedAmount*100/requiredAmount).toFloat()
         binding.animationCharacter.setOnClickListener {
             val bottomSheet = SetIntakeModal()
             val fragmentManager = childFragmentManager
             bottomSheet.show(fragmentManager,bottomSheet.tag)
+        }
+        when(percent){
+            in 0F..20F -> {
+                binding.animationCharacter.setPadding(0,0,0,0)
+                binding.animationCharacter.setAnimation("0-20/2/0-20-2.json")
+                binding.animationCharacter.imageAssetsFolder = "0-20/2/images"
+                binding.animationCharacter.playAnimation()
+            }
+            in 20F..40F -> {
+                binding.animationCharacter.setPadding(0,0,0,0)
+                binding.animationCharacter.setAnimation("20-40/20-40.json")
+                binding.animationCharacter.imageAssetsFolder = "20-40/images"
+                binding.animationCharacter.playAnimation()
+            }
+            in 40F..60F -> {
+                binding.animationCharacter.setPadding(0,0,0,0)
+                binding.animationCharacter.setAnimation("40-60/40-60.json")
+                binding.animationCharacter.imageAssetsFolder = "40-60/images"
+                binding.animationCharacter.playAnimation()
+            }
+
+            in 60F..80F -> {
+                binding.animationCharacter.setPadding(60,60,60,60)
+                binding.animationCharacter.setAnimation("60-80/60-80.json")
+                binding.animationCharacter.imageAssetsFolder = "60-80/images"
+                binding.animationCharacter.playAnimation()
+            }
+            else -> {
+                binding.animationCharacter.setPadding(0,0,0,0)
+                binding.animationCharacter.setAnimation("80-100/80-100.json")
+                binding.animationCharacter.imageAssetsFolder = "80-100/images"
+                binding.animationCharacter.playAnimation()
+            }
         }
     }
 
