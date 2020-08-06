@@ -76,21 +76,30 @@ class MainFragment : Fragment() {
     private fun adjustAnimation(drinkedAmount: Int){
         binding.percent.text = currentPercent.toInt().toString()
         val percent: Float = (drinkedAmount*100/requiredAmount).toFloat()
-        val goalY1 = waterStartY - waterStartY * percent / 100
-        val goalY2 = characterEndY * percent / 100
+        val waterGoalY = waterStartY - waterStartY * percent / 100
+        var characterGoalY = characterEndY * percent / 100
         var goalPercentY = startPercentTextY - waterStartY * percent / 100
         if (goalPercentY<0F){
             goalPercentY=0F
         }
-        val newanim1 = TranslateAnimation(0F, 0F, waterCurrentY, goalY1)
-        val newanim2 = TranslateAnimation(0F, 0F, characterCurrentY, goalY2)
+        val waterTranslate = TranslateAnimation(0F, 0F, waterCurrentY, waterGoalY)
         val newanim_percent_text = TranslateAnimation(0F,0F,currentPercentTextY,goalPercentY)
-        newanim2.setAnimationListener(object : Animation.AnimationListener{
+        if(percent>40F&&percent<=60F){
+            characterGoalY=-waterStartY+waterGoalY+50F*(Resources.getSystem().displayMetrics.densityDpi).toFloat() / DisplayMetrics.DENSITY_DEFAULT
+        }
+        if(percent>60F&&percent<=80F){
+            characterGoalY=-waterStartY+waterGoalY+120F*(Resources.getSystem().displayMetrics.densityDpi).toFloat() / DisplayMetrics.DENSITY_DEFAULT
+        }
+        if(percent>80F){
+            characterGoalY=-Resources.getSystem().displayMetrics.heightPixels.toFloat()/4
+        }
+        val characterTranslate = TranslateAnimation(0F, 0F, characterCurrentY, characterGoalY)
+        characterTranslate.setAnimationListener(object : Animation.AnimationListener{
             override fun onAnimationEnd(animation: Animation?) {
                 binding.animationCharacter.layout(animation_character.left,
-                    animation_character.top+goalY2.toInt(),
+                    animation_character.top+characterGoalY.toInt(),
                     animation_character.right,
-                    animation_character.bottom+goalY2.toInt())
+                    animation_character.bottom+characterGoalY.toInt())
             }
             override fun onAnimationRepeat(animation: Animation?) {
 
@@ -98,18 +107,19 @@ class MainFragment : Fragment() {
             override fun onAnimationStart(animation: Animation?) {
             }
         })
+        characterTranslate.duration = 2500
+        characterTranslate.isFillEnabled = true
+        binding.animationCharacter.startAnimation(characterTranslate)
         val anim_value = ValueAnimator.ofInt(currentPercent.toInt(), percent.toInt())
-        newanim1.duration = 2000
-        newanim1.fillAfter = true
-        newanim2.duration = 2500
-        newanim2.isFillEnabled = true
+        waterTranslate.duration = 2000
+        waterTranslate.fillAfter = true
         newanim_percent_text.duration = 2000
         newanim_percent_text.fillAfter = true
-        binding.animationWaterFull.startAnimation(newanim1)
-        binding.animationCharacter.startAnimation(newanim2)
+        binding.animationWaterFull.startAnimation(waterTranslate)
+        binding.animationWaterLine.startAnimation(waterTranslate)
         binding.percentText.startAnimation(newanim_percent_text)
-        waterCurrentY = goalY1
-        characterCurrentY = goalY2
+        waterCurrentY = waterGoalY
+        characterCurrentY = characterGoalY
         currentPercentTextY = goalPercentY
         currentPercent = percent
         anim_value.duration = 2000
@@ -132,7 +142,6 @@ class MainFragment : Fragment() {
     }
 
     private fun setFirstCharacter(){
-
         binding.animationFirstCharacter.speed = 0.2F
         binding.animationFirstCharacter.addAnimatorListener(object : Animator.AnimatorListener{
             override fun onAnimationCancel(animation: Animator?) {
@@ -149,8 +158,8 @@ class MainFragment : Fragment() {
             override fun onAnimationStart(animation: Animator?) {
             }
         })
-
     }
+
     private fun setCharacter(drinkedAmount: Int){
         val percent: Float = (drinkedAmount*100/requiredAmount).toFloat()
         binding.animationCharacter.setOnClickListener {
@@ -177,7 +186,6 @@ class MainFragment : Fragment() {
                 binding.animationCharacter.imageAssetsFolder = "40-60/images"
                 binding.animationCharacter.playAnimation()
             }
-
             in 60F..80F -> {
                 binding.animationCharacter.setPadding(60,60,60,60)
                 binding.animationCharacter.setAnimation("60-80/60-80.json")
