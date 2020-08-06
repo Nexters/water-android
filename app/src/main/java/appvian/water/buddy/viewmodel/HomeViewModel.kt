@@ -51,6 +51,10 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
         repository.delete(intake)
     }
 
+    fun deleteAll(){
+        repository.deleteAll()
+    }
+
     private fun getToday(): Long {
         val calendar = Calendar.getInstance()
         calendar.set(Calendar.HOUR_OF_DAY,0)

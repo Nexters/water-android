@@ -90,4 +90,10 @@ class HomeRepository(context: Context) {
             intakedao.delete(intake)
         }
     }
+
+    fun deleteAll() {
+        runBlocking(Dispatchers.IO) {
+            intakedao.deleteAll()
+        }
+    }
 }

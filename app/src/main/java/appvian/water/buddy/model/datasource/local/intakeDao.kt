@@ -23,6 +23,9 @@ interface intakeDao {
     @Query("SELECT * FROM intake WHERE date BETWEEN :aMonthAgo AND :today ORDER BY date ASC")
     fun getMonthly(today: Long, aMonthAgo: Long): LiveData<List<Intake>>
 
+    @Query("DELETE FROM intake")
+    fun deleteAll()
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(intake: Intake)
 
