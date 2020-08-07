@@ -39,7 +39,7 @@ class SetIntakeModal : BottomSheetDialogFragment() {
     ): View? {
 
         val v = inflater.inflate(R.layout.bottom_sheet_modal,container,false)
-        var typeofDrink = -1
+        var typeofDrink = 0
         setCategory()
         v.recyclerview.apply {
             setHasFixedSize(true)

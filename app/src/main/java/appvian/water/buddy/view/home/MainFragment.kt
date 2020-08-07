@@ -43,7 +43,6 @@ class MainFragment : Fragment() {
 
         setFirstCharacter()
         setFirstWater()
-
         binding.intakeListButton.setOnClickListener {
             val intent = Intent(activity,
                 DailyIntakeListActivity::class.java)
@@ -161,7 +160,17 @@ class MainFragment : Fragment() {
             else -> binding.homeText.text = getString(R.string.home_text_5)
         }
         homeViewModel.dailyAmount?.observe(viewLifecycleOwner, Observer {
-            binding.intakeListButton.text = String.format("%.1fL 중 %.1fL 수분 섭취",homeViewModel.requiredAmount.toDouble()/1000,it.toDouble()/1000)
+            if(it!=null) {
+                binding.intakeListButton.text = String.format(
+                    "%.1fL 중 %.1fL 수분 섭취",
+                    homeViewModel.requiredAmount.toDouble() / 1000,
+                    it.toDouble() / 1000
+                )
+            } else{
+                binding.intakeListButton.text = String.format(
+                    "%.1fL 중 0L 수분 섭취",
+                    homeViewModel.requiredAmount.toDouble() / 1000)
+            }
         })
     }
 

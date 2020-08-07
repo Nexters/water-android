@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import appvian.water.buddy.R
 import appvian.water.buddy.model.data.Category
-import kotlinx.android.synthetic.main.my_recyclerview_item.view.*
+import kotlinx.android.synthetic.main.modal_category_recyclerview_item.view.*
 
 class CategoryRecyclerViewAdapter (val context : Context, val categoryList : ArrayList<Category>, val itemClick: (Category) -> Unit) :
     RecyclerView.Adapter<CategoryRecyclerViewAdapter.CategoryViewHolder>(){
@@ -40,7 +40,7 @@ class CategoryRecyclerViewAdapter (val context : Context, val categoryList : Arr
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.my_recyclerview_item,parent,false)
+        val view = LayoutInflater.from(context).inflate(R.layout.modal_category_recyclerview_item,parent,false)
         return CategoryViewHolder(view,itemClick)
     }
 
