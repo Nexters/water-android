@@ -4,7 +4,6 @@ import android.app.Application
 import android.content.res.Resources
 import android.util.DisplayMetrics
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import appvian.water.buddy.model.data.Intake
 import appvian.water.buddy.model.repository.HomeRepository
@@ -25,6 +24,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     val characterEndY = -(Resources.getSystem().displayMetrics.heightPixels.toFloat() - 300F * (Resources.getSystem().displayMetrics.densityDpi).toFloat() / DisplayMetrics.DENSITY_DEFAULT)
     val startPercentTextY : Float = Resources.getSystem().displayMetrics.heightPixels.toFloat() - 370F * (Resources.getSystem().displayMetrics.densityDpi).toFloat() / DisplayMetrics.DENSITY_DEFAULT
     var currentPercentTextY = startPercentTextY
+    var percent = getDailyPercent()
 
     private fun getDailyDrinkedAmount(): LiveData<Int>? {
         val dailyAmount = repository.getDailyAmount(getToday(), getTomorrow())
@@ -36,6 +36,10 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
         return dailyIntake
     }
 
+    private fun getDailyPercent(): LiveData<Float>? {
+        val dailyPercent = repository.getDailyPercent(getToday(),getTomorrow(),requiredAmount)
+        return dailyPercent
+    }
     fun insert(intake: Intake) {
         repository.insert(intake)
     }

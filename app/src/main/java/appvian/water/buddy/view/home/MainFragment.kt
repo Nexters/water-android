@@ -17,6 +17,7 @@ import appvian.water.buddy.viewmodel.HomeViewModel
 import kotlinx.android.synthetic.main.fragment_main.*
 import android.util.DisplayMetrics
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import appvian.water.buddy.databinding.FragmentMainBinding
 import appvian.water.buddy.view.SetIntakeModal
 import kotlinx.coroutines.*
@@ -49,7 +50,7 @@ class MainFragment : Fragment() {
             startActivity(intent)
         }
 
-        homeViewModel.dailyAmount?.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+        homeViewModel.percent?.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             if(it!=null) {
                 if (isFirst) {
                     GlobalScope.launch(Dispatchers.Main) {
@@ -69,15 +70,15 @@ class MainFragment : Fragment() {
                     GlobalScope.launch(Dispatchers.Main) {
                         delay(1500L)
                         withContext(Dispatchers.Main) {
-                            adjustAnimation(0)
+                            adjustAnimation(0F)
                         }
                     }
                     isFirst = false
                 } else{
-                    adjustAnimation(0)
+                    adjustAnimation(0F)
                 }
-                changeText(0)
-                setCharacter(0)
+                changeText(0F)
+                setCharacter(0F)
             }
         })
 
@@ -96,9 +97,8 @@ class MainFragment : Fragment() {
         binding.percentText.startAnimation(percentTranslate)
     }
 
-    private fun adjustAnimation(drinkedAmount: Int){
+    private fun adjustAnimation(percent: Float){
         binding.percent.text = homeViewModel.currentPercent.toInt().toString()
-        val percent: Float = (drinkedAmount*100/homeViewModel.requiredAmount).toFloat()
         val waterGoalY = homeViewModel.waterStartY - homeViewModel.waterStartY * percent / 100
         var characterGoalY = homeViewModel.characterEndY * percent / 100
         var goalPercentY = homeViewModel.startPercentTextY - homeViewModel.waterStartY * percent / 100
@@ -152,8 +152,7 @@ class MainFragment : Fragment() {
         anim_value.start()
     }
 
-    private fun changeText(drinkedAmount: Int){
-        val percent: Float = (drinkedAmount*100/homeViewModel.requiredAmount).toFloat()
+    private fun changeText(percent: Float){
         when(percent){
             0F -> binding.homeText.text = getString(R.string.home_text_1)
             in 0F..35F -> binding.homeText.text = getString(R.string.home_text_2)
@@ -161,7 +160,9 @@ class MainFragment : Fragment() {
             in 65F..99.9999F -> binding.homeText.text = getString(R.string.home_text_4)
             else -> binding.homeText.text = getString(R.string.home_text_5)
         }
-        binding.intakeListButton.text = String.format("%.1fL 중 %.1fL 수분 섭취",homeViewModel.requiredAmount.toDouble()/1000,drinkedAmount.toDouble()/1000)
+        homeViewModel.dailyAmount?.observe(viewLifecycleOwner, Observer {
+            binding.intakeListButton.text = String.format("%.1fL 중 %.1fL 수분 섭취",homeViewModel.requiredAmount.toDouble()/1000,it.toDouble()/1000)
+        })
     }
 
     private fun setFirstCharacter(){
@@ -183,8 +184,7 @@ class MainFragment : Fragment() {
         })
     }
 
-    private fun setCharacter(drinkedAmount: Int){
-        val percent: Float = (drinkedAmount*100/homeViewModel.requiredAmount).toFloat()
+    private fun setCharacter(percent: Float){
         binding.animationCharacter.setOnClickListener {
             val bottomSheet = SetIntakeModal()
             val fragmentManager = childFragmentManager
