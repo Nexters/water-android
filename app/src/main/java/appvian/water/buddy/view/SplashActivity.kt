@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import appvian.water.buddy.R
+import appvian.water.buddy.view.Intro.IntroActivity
 
 class SplashActivity : AppCompatActivity() {
 

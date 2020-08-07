@@ -19,4 +19,5 @@
     <string name="intro_third_kg"> 체중 (kg) </string>
     <string name="intro_third_height"> 키 (cm) </string>
     <string name="intro_third_heighthint"> cm 없이 입력 </string>
+    <string name="intro_fourth_welcome"> 환영합니다! \n초록 토마토님의 \n하루 목표 수분 섭취량은 \n5.7L입니다. \n캐릭터 워비와 함께\n목표량을 달성 보아요. </string>
 </resources>

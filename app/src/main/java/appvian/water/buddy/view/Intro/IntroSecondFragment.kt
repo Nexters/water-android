@@ -1,4 +1,4 @@
-package appvian.water.buddy.view
+package appvian.water.buddy.view.Intro
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -9,13 +9,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import appvian.water.buddy.R
-import kotlinx.android.synthetic.main.intro_fragment.view.*
 import kotlinx.android.synthetic.main.intro_second_fragment.view.*
 
 class IntroSecondFragment: Fragment() {
     companion object {
         fun newInstance() = IntroSecondFragment()
     }
+    //private lateinit var introViewModel: IntroViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,6 +36,8 @@ class IntroSecondFragment: Fragment() {
 
             }
         })
+        //introViewModel = ViewModelProvider(this).get(IntroViewModel::class.java)
+
         view.nextbtn.setOnClickListener {
             (activity as IntroActivity).replaceFragment(IntroThirdFragment.newInstance())
 
