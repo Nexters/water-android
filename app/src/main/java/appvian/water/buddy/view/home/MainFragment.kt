@@ -19,23 +19,14 @@ import android.util.DisplayMetrics
 import androidx.databinding.DataBindingUtil
 import appvian.water.buddy.databinding.FragmentMainBinding
 import appvian.water.buddy.view.SetIntakeModal
+import kotlinx.coroutines.*
 
 
 class MainFragment : Fragment() {
 
-    val requiredAmount = 2000
-    val waterStartY = Resources.getSystem().displayMetrics.heightPixels.toFloat() - 100F * (Resources.getSystem().displayMetrics.densityDpi).toFloat() / DisplayMetrics.DENSITY_DEFAULT
-    var waterCurrentY = waterStartY
-    var characterCurrentY = 0F
-    var currentPercent = 0F
-    val characterEndY = -(Resources.getSystem().displayMetrics.heightPixels.toFloat() - 300F * (Resources.getSystem().displayMetrics.densityDpi).toFloat() / DisplayMetrics.DENSITY_DEFAULT)
-
-    val startPercentTextY : Float = Resources.getSystem().displayMetrics.heightPixels.toFloat() - 370F * (Resources.getSystem().displayMetrics.densityDpi).toFloat() / DisplayMetrics.DENSITY_DEFAULT
-    var currentPercentTextY = startPercentTextY
-
     private lateinit var homeViewModel: HomeViewModel
     private lateinit var binding: FragmentMainBinding
-
+    var isFirst = true
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -50,6 +41,7 @@ class MainFragment : Fragment() {
         binding.homeViewModel = homeViewModel
 
         setFirstCharacter()
+        setFirstWater()
 
         binding.intakeListButton.setOnClickListener {
             val intent = Intent(activity,
@@ -59,40 +51,72 @@ class MainFragment : Fragment() {
 
         homeViewModel.dailyAmount?.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             if(it!=null) {
-                adjustAnimation(it)
+                if (isFirst) {
+                    GlobalScope.launch(Dispatchers.Main) {
+                        delay(1500L)
+                        withContext(Dispatchers.Main) {
+                            adjustAnimation(it)
+                        }
+                    }
+                    isFirst = false
+                } else{
+                    adjustAnimation(it)
+                }
                 changeText(it)
                 setCharacter(it)
             } else{
-                adjustAnimation(0)
+                if(isFirst){
+                    GlobalScope.launch(Dispatchers.Main) {
+                        delay(1500L)
+                        withContext(Dispatchers.Main) {
+                            adjustAnimation(0)
+                        }
+                    }
+                    isFirst = false
+                } else{
+                    adjustAnimation(0)
+                }
                 changeText(0)
                 setCharacter(0)
             }
         })
+
         return binding.root
     }
 
+    private fun setFirstWater(){
+        val waterTranslate = TranslateAnimation(0F,0F,homeViewModel.waterCurrentY,homeViewModel.waterCurrentY)
+        waterTranslate.duration = 0
+        waterTranslate.fillAfter = true
+        binding.animationWaterFull.startAnimation(waterTranslate)
+        binding.animationWaterLine.startAnimation(waterTranslate)
+        val percentTranslate = TranslateAnimation(0F,0F,homeViewModel.currentPercentTextY,homeViewModel.currentPercentTextY)
+        percentTranslate.duration = 0
+        percentTranslate.fillAfter = true
+        binding.percentText.startAnimation(percentTranslate)
+    }
 
     private fun adjustAnimation(drinkedAmount: Int){
-        binding.percent.text = currentPercent.toInt().toString()
-        val percent: Float = (drinkedAmount*100/requiredAmount).toFloat()
-        val waterGoalY = waterStartY - waterStartY * percent / 100
-        var characterGoalY = characterEndY * percent / 100
-        var goalPercentY = startPercentTextY - waterStartY * percent / 100
+        binding.percent.text = homeViewModel.currentPercent.toInt().toString()
+        val percent: Float = (drinkedAmount*100/homeViewModel.requiredAmount).toFloat()
+        val waterGoalY = homeViewModel.waterStartY - homeViewModel.waterStartY * percent / 100
+        var characterGoalY = homeViewModel.characterEndY * percent / 100
+        var goalPercentY = homeViewModel.startPercentTextY - homeViewModel.waterStartY * percent / 100
         if (goalPercentY<0F){
             goalPercentY=0F
         }
-        val waterTranslate = TranslateAnimation(0F, 0F, waterCurrentY, waterGoalY)
-        val newanim_percent_text = TranslateAnimation(0F,0F,currentPercentTextY,goalPercentY)
+        val waterTranslate = TranslateAnimation(0F, 0F, homeViewModel.waterCurrentY, waterGoalY)
+        val newanim_percent_text = TranslateAnimation(0F,0F,homeViewModel.currentPercentTextY,goalPercentY)
         if(percent>40F&&percent<=60F){
-            characterGoalY=-waterStartY+waterGoalY+50F*(Resources.getSystem().displayMetrics.densityDpi).toFloat() / DisplayMetrics.DENSITY_DEFAULT
+            characterGoalY=-homeViewModel.waterStartY+waterGoalY+50F*(Resources.getSystem().displayMetrics.densityDpi).toFloat() / DisplayMetrics.DENSITY_DEFAULT
         }
         if(percent>60F&&percent<=80F){
-            characterGoalY=-waterStartY+waterGoalY+120F*(Resources.getSystem().displayMetrics.densityDpi).toFloat() / DisplayMetrics.DENSITY_DEFAULT
+            characterGoalY=-homeViewModel.waterStartY+waterGoalY+120F*(Resources.getSystem().displayMetrics.densityDpi).toFloat() / DisplayMetrics.DENSITY_DEFAULT
         }
         if(percent>80F){
             characterGoalY=-Resources.getSystem().displayMetrics.heightPixels.toFloat()/4
         }
-        val characterTranslate = TranslateAnimation(0F, 0F, characterCurrentY, characterGoalY)
+        val characterTranslate = TranslateAnimation(0F, 0F, homeViewModel.characterCurrentY, characterGoalY)
         characterTranslate.setAnimationListener(object : Animation.AnimationListener{
             override fun onAnimationEnd(animation: Animation?) {
                 binding.animationCharacter.layout(animation_character.left,
@@ -109,7 +133,7 @@ class MainFragment : Fragment() {
         characterTranslate.duration = 2500
         characterTranslate.isFillEnabled = true
         binding.animationCharacter.startAnimation(characterTranslate)
-        val anim_value = ValueAnimator.ofInt(currentPercent.toInt(), percent.toInt())
+        val anim_value = ValueAnimator.ofInt(homeViewModel.currentPercent.toInt(), percent.toInt())
         waterTranslate.duration = 2000
         waterTranslate.fillAfter = true
         newanim_percent_text.duration = 2000
@@ -117,10 +141,10 @@ class MainFragment : Fragment() {
         binding.animationWaterFull.startAnimation(waterTranslate)
         binding.animationWaterLine.startAnimation(waterTranslate)
         binding.percentText.startAnimation(newanim_percent_text)
-        waterCurrentY = waterGoalY
-        characterCurrentY = characterGoalY
-        currentPercentTextY = goalPercentY
-        currentPercent = percent
+        homeViewModel.waterCurrentY = waterGoalY
+        homeViewModel.characterCurrentY = characterGoalY
+        homeViewModel.currentPercentTextY = goalPercentY
+        homeViewModel.currentPercent = percent
         anim_value.duration = 2000
         anim_value.addUpdateListener {
             binding.percent.text = it.animatedValue.toString()
@@ -129,7 +153,7 @@ class MainFragment : Fragment() {
     }
 
     private fun changeText(drinkedAmount: Int){
-        val percent: Float = (drinkedAmount*100/requiredAmount).toFloat()
+        val percent: Float = (drinkedAmount*100/homeViewModel.requiredAmount).toFloat()
         when(percent){
             0F -> binding.homeText.text = getString(R.string.home_text_1)
             in 0F..35F -> binding.homeText.text = getString(R.string.home_text_2)
@@ -137,7 +161,7 @@ class MainFragment : Fragment() {
             in 65F..99.9999F -> binding.homeText.text = getString(R.string.home_text_4)
             else -> binding.homeText.text = getString(R.string.home_text_5)
         }
-        binding.intakeListButton.text = String.format("%.1fL 중 %.1fL 수분 섭취",requiredAmount.toDouble()/1000,drinkedAmount.toDouble()/1000)
+        binding.intakeListButton.text = String.format("%.1fL 중 %.1fL 수분 섭취",homeViewModel.requiredAmount.toDouble()/1000,drinkedAmount.toDouble()/1000)
     }
 
     private fun setFirstCharacter(){
@@ -160,7 +184,7 @@ class MainFragment : Fragment() {
     }
 
     private fun setCharacter(drinkedAmount: Int){
-        val percent: Float = (drinkedAmount*100/requiredAmount).toFloat()
+        val percent: Float = (drinkedAmount*100/homeViewModel.requiredAmount).toFloat()
         binding.animationCharacter.setOnClickListener {
             val bottomSheet = SetIntakeModal()
             val fragmentManager = childFragmentManager
