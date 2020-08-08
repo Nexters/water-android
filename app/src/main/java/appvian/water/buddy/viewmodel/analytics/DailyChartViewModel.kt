@@ -13,10 +13,6 @@ class DailyChartViewModel(private val repository: HomeRepository) {
     private var dailyIntake: LiveData<List<Intake>>? = null
     val observeIntake: MediatorLiveData<List<Intake>> = MediatorLiveData()
 
-    init {
-        getDailyIntake()
-    }
-
     private fun getToday(): Calendar {
         val now = Calendar.getInstance()
         now.set(Calendar.AM_PM, Calendar.AM)

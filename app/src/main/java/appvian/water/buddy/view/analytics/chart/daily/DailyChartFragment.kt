@@ -26,6 +26,7 @@ class DailyChartFragment : Fragment() {
     private lateinit var binding: FragmentDailyChartBinding
     private lateinit var dailyVm: DailyChartViewModel
     val adapter: DailyAdapter = DailyAdapter()
+    val legendAdapter:DailyLegendAdapter = DailyLegendAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,17 +57,22 @@ class DailyChartFragment : Fragment() {
     private fun initUi() {
         dailyVm.getDailyIntake()
         binding.dailyChartDetail.adapter = adapter
+        binding.dailyChartLegend.adapter = legendAdapter
 
         initSpinner()
 
         dailyVm.observeIntake.observe(viewLifecycleOwner, Observer {
-            if (it != null) {
+            legendAdapter.clearData()
+
+            if (it.isNotEmpty()) {
                 binding.dailyChartDetail.visibility = View.VISIBLE
                 binding.dailyViewNone.visibility = View.INVISIBLE
+                binding.dailyChartLegend.visibility = View.VISIBLE
                 setDailyData(it)
             } else {
                 binding.dailyChartDetail.visibility = View.INVISIBLE
                 binding.dailyViewNone.visibility = View.VISIBLE
+                binding.dailyChartLegend.visibility = View.INVISIBLE
                 setNoneData()
             }
         })
@@ -121,6 +127,8 @@ class DailyChartFragment : Fragment() {
             legend.add(i.category.toString())
             colors.add(resources.getColor(DrinkMapper.drinkColor[i.category], null))
             sum += i.amount
+
+            legendAdapter.addData(i.category)
         }
         adapter.totalSum = sum
 
