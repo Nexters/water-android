@@ -25,6 +25,7 @@ import appvian.water.buddy.R
 import appvian.water.buddy.model.data.Category
 import appvian.water.buddy.model.data.Intake
 import appvian.water.buddy.utilities.Code
+import appvian.water.buddy.viewmodel.FavoriteViewModel
 import appvian.water.buddy.viewmodel.HomeViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -36,6 +37,7 @@ import kotlinx.coroutines.InternalCoroutinesApi
 
 class SetIntakeModal(var parent_context_code : Int) : BottomSheetDialogFragment() , TextWatcher{
     private lateinit var homeViewModel: HomeViewModel
+    private lateinit var favoriteViewModel: FavoriteViewModel
     var categoryList = arrayListOf<Category>()
     //ontext changed 결과값
     var result = ""
@@ -59,7 +61,7 @@ class SetIntakeModal(var parent_context_code : Int) : BottomSheetDialogFragment(
 
         val v = inflater.inflate(R.layout.bottom_sheet_modal,container,false)
 
-        var typeofDrink = -1
+        var typeofDrink = 0
         setCategory()
         v.recyclerview.apply {
             setHasFixedSize(true)
@@ -74,7 +76,9 @@ class SetIntakeModal(var parent_context_code : Int) : BottomSheetDialogFragment(
         if(parent_context_code == Code.MAIN_FRAGMENT) {
             homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         }
-
+        if(parent_context_code == Code.FAVORITE_DRINK_SETTING_ACTIVITY){
+            favoriteViewModel = ViewModelProvider(this).get(FavoriteViewModel::class.java)
+        }
         v.setButton.setOnClickListener {
             when(parent_context_code){
                 Code.MAIN_FRAGMENT -> {
@@ -85,7 +89,13 @@ class SetIntakeModal(var parent_context_code : Int) : BottomSheetDialogFragment(
                     homeViewModel.insert(intake)
                 }
                 Code.FAVORITE_DRINK_SETTING_ACTIVITY -> {
-
+                    val regex = Regex("[^0-9]")
+                    val pickedNum = edt_amount.text.toString().replace(regex,"").toInt()
+                    if(favoriteViewModel.fav_1_livedata.value == ""){
+                        favoriteViewModel.setFav1LiveData(typeofDrink, pickedNum)
+                    }else{
+                        favoriteViewModel.setFa2LiveData(typeofDrink, pickedNum)
+                    }
                 }
             }
 
