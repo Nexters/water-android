@@ -67,7 +67,7 @@ class ProfileEditActivity : AppCompatActivity(), TextWatcher {
             onBackPressed()
         }
         btn_save.setOnClickListener {
-            settingviewModel.setNameLiveData("name", edt_profile_edt.text.toString())
+            settingviewModel.setNameLiveData(edt_profile_edt.text.toString())
             var intent = Intent(this@ProfileEditActivity, PopupActivity::class.java)
             startActivityForResult(intent, CODE_POPUP)
         }

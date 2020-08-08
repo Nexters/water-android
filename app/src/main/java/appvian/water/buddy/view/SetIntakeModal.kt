@@ -232,7 +232,6 @@ class SetIntakeModal(var parent_context_code : Int) : BottomSheetDialogFragment(
         var imm = (requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
         imm.showSoftInput(edt_amount, InputMethodManager.SHOW_FORCED)
 
-
     }
     //키보드 숨기기
     private fun hideKeyBoard(){
