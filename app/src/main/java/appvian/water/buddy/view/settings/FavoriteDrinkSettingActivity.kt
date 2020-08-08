@@ -131,17 +131,24 @@ class FavoriteDrinkSettingActivity : AppCompatActivity() {
         })
 
         binding.imgPlus.setOnClickListener{
+            //todo : 자주 마시는 음료 2개 설정 되어있는지 체크
             //modal open
-            val bottomSheet = SetIntakeModal(Code.FAVORITE_DRINK_SETTING_ACTIVITY)
-            val fragmentManager = supportFragmentManager
-            bottomSheet.show(fragmentManager,bottomSheet.tag)
+            openBottomSheet(Code.FAVORITE_DRINK_SETTING_ACTIVITY)
         }
 
-        binding.imgEdit.setOnClickListener{
+        binding.layoutFav1.setOnClickListener{
+            //todo : modal open
+            openBottomSheet(Code.FAVORITE_EDIT_1)
+        }
+        binding.layoutFav2.setOnClickListener{
+            //todo : modal open
+            openBottomSheet(Code.FAVORITE_EDIT_2)
 
         }
-        binding.imgEdit2.setOnClickListener{
-
-        }
+    }
+    private fun openBottomSheet(code : Int){
+        val bottomSheet = SetIntakeModal(code)
+        val fragmentManager = supportFragmentManager
+        bottomSheet.show(fragmentManager, bottomSheet.tag)
     }
 }
