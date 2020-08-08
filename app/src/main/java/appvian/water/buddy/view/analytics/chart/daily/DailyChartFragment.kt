@@ -120,17 +120,14 @@ class DailyChartFragment : Fragment() {
         val pieValues = ArrayList<Entry>()
         val legend = ArrayList<String>()
         val colors = ArrayList<Int>()
-        var sum = 0
 
         for ((j, i) in it.withIndex()) {
             pieValues.add(Entry(i.amount.toFloat(), j))
             legend.add(i.category.toString())
             colors.add(resources.getColor(DrinkMapper.drinkColor[i.category], null))
-            sum += i.amount
 
             legendAdapter.addData(i.category)
         }
-        adapter.totalSum = sum
 
         val dataSet = PieDataSet(pieValues, "")
         dataSet.setColors(colors)

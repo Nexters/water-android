@@ -11,11 +11,13 @@ import appvian.water.buddy.util.DrinkMapper
 
 class DailyAdapter : RecyclerView.Adapter<DailyAdapter.DailyVh>() {
     private var dailyItem = ArrayList<Intake>()
-    var totalSum: Int = 0
+    private var totalSum: Int = 0
 
     fun setData(listItem: List<Intake>) {
         dailyItem.clear()
         dailyItem.addAll(listItem)
+
+        totalSum = dailyItem.sumBy { it.amount }
 
         notifyDataSetChanged()
     }
@@ -32,7 +34,7 @@ class DailyAdapter : RecyclerView.Adapter<DailyAdapter.DailyVh>() {
     }
 
     override fun getItemCount(): Int {
-        return dailyItem.size ?: 0
+        return dailyItem.size
     }
 
     override fun onBindViewHolder(holder: DailyVh, position: Int) {
