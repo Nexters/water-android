@@ -5,7 +5,6 @@
         <item>주간</item>
         <item>일간</item>
     </string-array>
-
     <string-array name="weekly">
         <item>일</item>
         <item>월</item>

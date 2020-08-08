@@ -66,6 +66,9 @@ dependencies {
     //lottie
     implementation "com.airbnb.android:lottie:$lottie_version"
 
+    //preferences
+    implementation 'androidx.preference:preference:1.1.1'
+    
     //mpchart
     implementation "com.github.PhilJay:MPAndroidChart:$mpchart_version"
 }
