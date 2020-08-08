@@ -3,6 +3,7 @@ package appvian.water.buddy.viewmodel.analytics
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
 import appvian.water.buddy.model.data.Intake
 import appvian.water.buddy.model.repository.HomeRepository
 import java.util.*
@@ -11,7 +12,12 @@ import java.util.*
 class DailyChartViewModel(private val repository: HomeRepository) {
 
     private var dailyIntake: LiveData<List<Intake>>? = null
+    private val _maxDrink: MutableLiveData<Int> = MutableLiveData()
+
+    val maxDrink:LiveData<Int> = _maxDrink
     val observeIntake: MediatorLiveData<List<Intake>> = MediatorLiveData()
+    val todayDate = Calendar.getInstance()[Calendar.DATE] - 1
+
 
     private fun getToday(): Calendar {
         val now = Calendar.getInstance()
@@ -66,7 +72,10 @@ class DailyChartViewModel(private val repository: HomeRepository) {
         dailyIntake?.let {
             observeIntake.addSource(it, androidx.lifecycle.Observer { values ->
                 observeIntake.value = values
+                _maxDrink.value = values.maxBy { it.amount }?.category
             })
-        }
+        } ?: {
+            _maxDrink.value = -2
+        } ()
     }
 }

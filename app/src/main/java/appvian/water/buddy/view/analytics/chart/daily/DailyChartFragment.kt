@@ -26,7 +26,7 @@ class DailyChartFragment : Fragment() {
     private lateinit var binding: FragmentDailyChartBinding
     private lateinit var dailyVm: DailyChartViewModel
     val adapter: DailyAdapter = DailyAdapter()
-    val legendAdapter:DailyLegendAdapter = DailyLegendAdapter()
+    val legendAdapter: DailyLegendAdapter = DailyLegendAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +52,7 @@ class DailyChartFragment : Fragment() {
         super.onResume()
 
         dailyVm.getDailyIntake()
+        binding.dailyDatePicker.setSelection(dailyVm.todayDate)
     }
 
     private fun initUi() {
@@ -76,33 +77,42 @@ class DailyChartFragment : Fragment() {
                 setNoneData()
             }
         })
+
+        setSytemText()
     }
 
     private fun initSpinner() {
         val cal = Calendar.getInstance()
 
-        context?.let {context ->
+        context?.let { context ->
             val dayList = arrayListOf<String>()
-            for(i in 1..cal.getActualMaximum(Calendar.DAY_OF_MONTH))
+
+            for (i in 1..cal.getActualMaximum(Calendar.DAY_OF_MONTH))
                 dayList.add(String.format(getString(R.string.daily_date), i))
 
-            val arrayAdapter = ArrayAdapter<String>(context, R.layout.daily_date_picker, R.id.daily_picker_text, dayList)
+            val arrayAdapter = ArrayAdapter<String>(
+                context,
+                R.layout.daily_date_picker,
+                R.id.daily_picker_text,
+                dayList
+            )
             binding.dailyDatePicker.adapter = arrayAdapter
-            binding.dailyDatePicker.setSelection(cal.get(Calendar.DATE) - 1)
-            binding.dailyDatePicker.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
-                override fun onNothingSelected(parent: AdapterView<*>?) {             }
+            binding.dailyDatePicker.setSelection(dailyVm.todayDate)
+            binding.dailyDatePicker.onItemSelectedListener =
+                object : AdapterView.OnItemSelectedListener {
+                    override fun onNothingSelected(parent: AdapterView<*>?) {}
 
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                    val day = dayList[position].split(" ")[0].toInt()
-                    dailyVm.getDailyIntake(day)
+                    override fun onItemSelected(
+                        parent: AdapterView<*>?,
+                        view: View?,
+                        position: Int,
+                        id: Long
+                    ) {
+                        val day = dayList[position].split(" ")[0].toInt()
+                        dailyVm.getDailyIntake(day)
+                    }
+
                 }
-
-            }
         }
     }
 
@@ -143,6 +153,18 @@ class DailyChartFragment : Fragment() {
         binding.dailyPiechart.setDrawSliceText(false)
         binding.dailyPiechart.setDescription("")
         binding.dailyPiechart.invalidate()
+    }
+
+    private fun setSytemText() {
+        dailyVm.maxDrink.observe(viewLifecycleOwner, Observer {
+            if(!it.equals(-2)) {
+                val categoryName = resources.getStringArray(DrinkMapper.drinkName)[it]
+                binding.dailySysText.text =
+                    String.format(getString(R.string.daily_sys_max_drink), categoryName)
+            } else {
+                binding.dailySysText.text = getString(R.string.daily_sys_none_water)
+            }
+        })
     }
 
     companion object {

@@ -57,7 +57,7 @@
             android:layout_marginStart="@dimen/daily_pie_sys_spacing"
             app:layout_constraintStart_toEndOf="@id/daily_piechart"
             app:layout_constraintTop_toBottomOf="@id/daily_header"/>
-        
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/daily_view_none"
             android:layout_width="match_parent"
@@ -66,7 +66,7 @@
             app:layout_constraintTop_toBottomOf="@id/daily_chart_legend"
             android:layout_marginTop="@dimen/daily_chart_detail_spacing"
             android:fitsSystemWindows="true">
-            
+
             <ImageView
                 android:id="@+id/iv_no_water"
                 android:layout_width="49dp"
@@ -115,7 +115,8 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/daily_chart_legend"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent=".15"
             android:layout_marginStart="@dimen/daily_pie_sys_spacing"
             android:layout_marginTop="19dp"
             android:layout_marginEnd="@dimen/daily_common_spacing"
