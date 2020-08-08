@@ -131,17 +131,20 @@ class FavoriteDrinkSettingActivity : AppCompatActivity() {
         })
 
         binding.imgPlus.setOnClickListener{
-            //todo : 자주 마시는 음료 2개 설정 되어있는지 체크
-            //modal open
-            openBottomSheet(Code.FAVORITE_DRINK_SETTING_ACTIVITY)
+            if(viewModel.fav_1_livedata.value.isNullOrBlank() || viewModel.fav_2_livedata.value.isNullOrBlank()){
+                //modal open
+                openBottomSheet(Code.FAVORITE_DRINK_SETTING_ACTIVITY)
+            }else{
+                //popup 띄우기
+
+            }
+
         }
 
         binding.layoutFav1.setOnClickListener{
-            //todo : modal open
             openBottomSheet(Code.FAVORITE_EDIT_1)
         }
         binding.layoutFav2.setOnClickListener{
-            //todo : modal open
             openBottomSheet(Code.FAVORITE_EDIT_2)
 
         }
