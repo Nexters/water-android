@@ -28,16 +28,16 @@
             android:layout_width="62dp"
             android:layout_height="20dp"
             android:layout_marginTop="@dimen/daily_common_spacing"
-            android:layout_marginStart="8dp"
+            android:layout_marginEnd="31dp"
             android:background="@drawable/picker_background"
-            app:layout_constraintStart_toEndOf="@id/daily_header"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
         <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/daily_piechart"
             android:layout_width="@dimen/daily_pie_chart"
             android:layout_height="@dimen/daily_pie_chart"
-            android:layout_marginTop="@dimen/daily_pie_header_spacing"
+            android:layout_marginTop="@dimen/daily_common_spacing"
             android:layout_marginStart="@dimen/daily_common_spacing"
             android:fillViewport="true"
             app:layout_constraintTop_toBottomOf="@id/daily_header"
@@ -49,23 +49,11 @@
             android:layout_height="wrap_content"
             android:text="@string/daily_sys_none_water"
             android:textSize="@dimen/daily_sys_size"
-            android:textAlignment="center"
-            android:layout_marginTop="@dimen/daily_pie_header_spacing"
+            android:lineSpacingExtra="3sp"
+            android:layout_marginTop="@dimen/daily_common_spacing"
             android:layout_marginStart="@dimen/daily_pie_sys_spacing"
             app:layout_constraintStart_toEndOf="@id/daily_piechart"
             app:layout_constraintTop_toBottomOf="@id/daily_header"/>
-
-        <TextView
-            android:id="@+id/daily_sys_target"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:text="@string/daily_sys_target"
-            android:textSize="@dimen/daily_sys_target_size"
-            app:layout_constraintTop_toBottomOf="@+id/daily_sys_text"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="@dimen/daily_target_spacing"
-            android:layout_marginTop="@dimen/daily_sys_target_spacing" />
         
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/daily_view_none"

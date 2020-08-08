@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -16,7 +18,8 @@ import appvian.water.buddy.viewmodel.analytics.DailyChartViewModel
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
-import com.github.mikephil.charting.utils.ColorTemplate
+import java.util.*
+import kotlin.collections.ArrayList
 
 class DailyChartFragment : Fragment() {
 
@@ -34,6 +37,7 @@ class DailyChartFragment : Fragment() {
     ): View? {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_daily_chart, container, false)
+        binding.lifecycleOwner = this
 
         activity?.let {
             dailyVm = DailyChartViewModel(HomeRepository(it))
@@ -43,15 +47,20 @@ class DailyChartFragment : Fragment() {
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        dailyVm.getDailyIntake()
+    }
+
     private fun initUi() {
         dailyVm.getDailyIntake()
         binding.dailyChartDetail.adapter = adapter
 
-        dailyVm.dailyIntake?.observe(viewLifecycleOwner, Observer {
+        initSpinner()
 
-            android.util.Log.d("size", "${it.size}")
-
-            if (it.isNotEmpty()) {
+        dailyVm.observeIntake.observe(viewLifecycleOwner, Observer {
+            if (it != null) {
                 binding.dailyChartDetail.visibility = View.VISIBLE
                 binding.dailyViewNone.visibility = View.INVISIBLE
                 setDailyData(it)
@@ -63,14 +72,40 @@ class DailyChartFragment : Fragment() {
         })
     }
 
+    private fun initSpinner() {
+        val cal = Calendar.getInstance()
+
+        context?.let {context ->
+            val dayList = arrayListOf<String>()
+            for(i in 1..cal.getActualMaximum(Calendar.DAY_OF_MONTH))
+                dayList.add(String.format(getString(R.string.daily_date), i))
+
+            val arrayAdapter = ArrayAdapter<String>(context, R.layout.daily_date_picker, R.id.daily_picker_text, dayList)
+            binding.dailyDatePicker.adapter = arrayAdapter
+            binding.dailyDatePicker.setSelection(cal.get(Calendar.DATE) - 1)
+            binding.dailyDatePicker.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
+                override fun onNothingSelected(parent: AdapterView<*>?) {             }
+
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    val day = dayList[position].split(" ")[0].toInt()
+                    dailyVm.getDailyIntake(day)
+                }
+
+            }
+        }
+    }
+
     private fun setNoneData() {
         val dataSet = PieDataSet(arrayListOf(Entry(1f, 1)), "")
         dataSet.color = resources.getColor(R.color.grey_2, null)
         dataSet.setDrawValues(false)
 
         updateChart(PieData(arrayListOf("none"), dataSet))
-
-        binding.dailySysTarget.text = getString(R.string.daily_sys_target, 0, 2000)
     }
 
     private fun setDailyData(it: List<Intake>) {
@@ -82,14 +117,12 @@ class DailyChartFragment : Fragment() {
         var sum = 0
 
         for ((j, i) in it.withIndex()) {
-            android.util.Log.d("Daily Chart", "${i.category}, ${i.amount}")
             pieValues.add(Entry(i.amount.toFloat(), j))
             legend.add(i.category.toString())
             colors.add(resources.getColor(DrinkMapper.drinkColor[i.category], null))
             sum += i.amount
         }
         adapter.totalSum = sum
-        binding.dailySysTarget.text = getString(R.string.daily_sys_target, sum, 2000)
 
         val dataSet = PieDataSet(pieValues, "")
         dataSet.setColors(colors)
