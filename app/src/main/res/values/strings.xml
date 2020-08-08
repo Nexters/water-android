@@ -25,4 +25,7 @@
     <string name="daily_sys_target"> %dml/ %dml </string>
     <string name="daily_none_water_1">마신 물이 없어요!</string>
     <string name="daily_none_water_2">하루 권장량을 꼭 마셔주세요!</string>
+
+    <string name="analytics_weekly_header1">요일별 수분 섭취량</string>
+    <string name="analytics_weekly_header2">주간 수분 섭취량</string>
 </resources>
