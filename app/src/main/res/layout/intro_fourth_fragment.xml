@@ -15,14 +15,89 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <TextView
-                android:id="@+id/intro_fourth_main"
+                android:id="@+id/intro_fourth_main1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="35dp"
-                android:text="@string/intro_fourth_welcome"
+                android:text="@string/intro_fourth_welcome1"
                 android:textSize="22sp"
                 android:textColor="#000000"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent" />
+            <TextView
+                android:id="@+id/intro_fourth_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/btnNormalBackgroundColor"
+                android:text=""
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_marginStart="35dp"
+                app:layout_constraintTop_toBottomOf="@+id/intro_fourth_main1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                />
+            <TextView
+                android:id="@+id/intro_fourth_main2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="@string/intro_fourth_welcome2"
+                android:textSize="22sp"
+                android:textColor="#000000"
+                app:layout_constraintTop_toBottomOf="@+id/intro_fourth_main1"
+                app:layout_constraintLeft_toRightOf="@+id/intro_fourth_name" />
+            <TextView
+                android:id="@+id/intro_fourth_main3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:text="@string/intro_fourth_welcome3"
+                android:textSize="22sp"
+                android:textColor="#000000"
+                app:layout_constraintTop_toBottomOf="@+id/intro_fourth_main2"
+                app:layout_constraintLeft_toLeftOf="parent" />
+            <TextView
+                android:id="@+id/intro_fourth_Targetamount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/btnNormalBackgroundColor"
+                android:text=""
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_marginStart="35dp"
+                app:layout_constraintTop_toBottomOf="@+id/intro_fourth_main3"
+                app:layout_constraintLeft_toLeftOf="parent"
+
+                />
+            <TextView
+                android:id="@+id/intro_fourth_main4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="@string/intro_fourth_welcome4"
+                android:textSize="22sp"
+                android:textColor="#000000"
+                app:layout_constraintTop_toBottomOf="@+id/intro_fourth_main3"
+                app:layout_constraintLeft_toRightOf="@+id/intro_fourth_Targetamount" />
+            <TextView
+                android:id="@+id/intro_fourth_main5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:text="@string/intro_fourth_welcome5"
+                android:textSize="22sp"
+                android:textColor="#000000"
+                app:layout_constraintTop_toBottomOf="@+id/intro_fourth_main4"
+                app:layout_constraintLeft_toLeftOf="parent" />
+            <TextView
+                android:id="@+id/cmtext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="300dp"
+                android:text="ddd"
+                android:textSize="22sp"
+                android:textColor="#000000"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent" />
             <ImageView
                 android:layout_width="130dp"
@@ -34,13 +109,15 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 />
 
-            <ImageButton
+            <Button
                 android:id="@+id/startbtn"
                 android:layout_width="360dp"
                 android:layout_height="52dp"
-                android:src="@drawable/btn1"
-                android:layout_marginStart="19dp"
+                android:background="@drawable/radius"
+                android:text="@string/intro_fourth_btn"
+                android:textColor="@color/White"
                 android:layout_marginBottom="24dp"
+                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 />

@@ -1,25 +1,36 @@
 package appvian.water.buddy.viewmodel
 
-import androidx.fragment.app.Fragment
+import android.app.Application
 import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import appvian.water.buddy.R
 import appvian.water.buddy.view.Intro.IntroFragment
 
-class IntroViewModel(val activity: FragmentActivity): ViewModel() {
 
-    private var fragmentList: List<Fragment> = listOf(IntroFragment())
+class IntroViewModel(application: Application) : AndroidViewModel(application) {
 
-
-    init {
-        activity.supportFragmentManager.beginTransaction()
-            .add(R.id.intro_fragment, fragmentList[0])
-            .commit()
+class Factory(val application: Application) : ViewModelProvider.Factory {
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        return IntroViewModel(application) as T
     }
-    fun replaceFragment(fragment: Fragment){
-        activity.supportFragmentManager.beginTransaction()
-            .replace(R.id.intro_fragment, fragment).commit()
+}
+
+    var nameliveText: MutableLiveData<String> = MutableLiveData()
+    var kgliveText: MutableLiveData<String> = MutableLiveData()
+    var heightliveText: MutableLiveData<String> = MutableLiveData()
+
+    fun getText(): LiveData<String?>? {
+        return nameliveText
     }
 
+    fun nameSetText(text: String?) {
+        nameliveText.value = text
+    }
+    fun kgSetText(text: String?) {
+        kgliveText.value = text
+    }
+    fun heightSetText(text: String?) {
+        heightliveText.value = text
+    }
 
 }
