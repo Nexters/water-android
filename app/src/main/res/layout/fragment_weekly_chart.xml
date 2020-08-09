@@ -14,7 +14,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:context=".view.analytics.chart.WeeklyChartFragment">
+            tools:context=".view.analytics.chart.weekly.WeeklyChartFragment">
 
             <TextView
                 android:layout_width="wrap_content"
