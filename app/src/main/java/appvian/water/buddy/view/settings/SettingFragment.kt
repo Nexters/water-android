@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import appvian.water.buddy.R
 import appvian.water.buddy.databinding.FragmentSettingBinding
@@ -30,8 +31,15 @@ class SettingFragment : Fragment() {
         //참고 https://www.thetopsites.net/article/51790868.shtml
         settingviewModel.nameLiveData.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             fragmentSettingBinding.txtSettingName.text = it
-            Log.d("TAG",it)
-            //fragmentSettingBinding.executePendingBindings()
+        })
+        settingviewModel.weightLiveData.observe(viewLifecycleOwner, Observer {
+            fragmentSettingBinding.txtSettingTargetAmount.text = getString(R.string.targetAmountStrFormat, it.toString(), settingviewModel.heightLiveData.value.toString(), settingviewModel.targetAmountLiveData.value.toString())
+        })
+        settingviewModel.heightLiveData.observe(viewLifecycleOwner, Observer {
+            fragmentSettingBinding.txtSettingTargetAmount.text = getString(R.string.targetAmountStrFormat, settingviewModel.weightLiveData.value.toString(), it.toString(), settingviewModel.targetAmountLiveData.value.toString())
+        })
+        settingviewModel.targetAmountLiveData.observe(viewLifecycleOwner, Observer {
+            fragmentSettingBinding.txtSettingTargetAmount.text = getString(R.string.targetAmountStrFormat, settingviewModel.weightLiveData.value.toString(), settingviewModel.heightLiveData.value.toString(), it.toString())
         })
 
         fragmentSettingBinding.viewModel = settingviewModel
