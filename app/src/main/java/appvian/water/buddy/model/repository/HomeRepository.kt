@@ -16,7 +16,7 @@ class HomeRepository(context: Context) {
     fun getDaily(today: Long, tomorrow: Long): LiveData<List<Intake>>? {
         var dailyIntake: LiveData<List<Intake>>? = null
 
-        dailyIntake = runBlocking(Dispatchers.IO){
+        dailyIntake = runBlocking(Dispatchers.IO) {
             withContext(Dispatchers.Default) {
                 intakedao.getDaily(today, tomorrow)
             }
@@ -28,7 +28,7 @@ class HomeRepository(context: Context) {
     fun getDailyByGroup(today: Long, tomorrow: Long): LiveData<List<Intake>>? {
         var dailyIntake: LiveData<List<Intake>>? = null
 
-        dailyIntake = runBlocking(Dispatchers.IO){
+        dailyIntake = runBlocking(Dispatchers.IO) {
             withContext(Dispatchers.Default) {
                 intakedao.getDailyByGroup(today, tomorrow)
             }
@@ -40,14 +40,29 @@ class HomeRepository(context: Context) {
     fun getWeekly(today: Long, aWeekAgo: Long): LiveData<List<Intake>>? {
         var weeklyIntake: LiveData<List<Intake>>? = null
 
-        GlobalScope.launch(Dispatchers.Default) {
-            weeklyIntake = withContext(Dispatchers.Default) {
+        weeklyIntake = runBlocking(Dispatchers.IO) {
+            withContext(Dispatchers.Default) {
                 intakedao.getWeekly(
                     today,
                     aWeekAgo
                 )
             }
         }
+        return weeklyIntake
+    }
+
+    fun getWeeklyByDay(firstDay: Long, lastDay: Long): LiveData<List<Intake>>? {
+        var weeklyIntake: LiveData<List<Intake>>? = null
+
+        weeklyIntake = runBlocking(Dispatchers.IO) {
+            withContext(Dispatchers.Default) {
+                intakedao.getWeeklyByDay(
+                    firstDay,
+                    lastDay
+                )
+            }
+        }
+
         return weeklyIntake
     }
 

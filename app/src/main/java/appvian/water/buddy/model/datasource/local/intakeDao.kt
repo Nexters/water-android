@@ -20,6 +20,13 @@ interface intakeDao {
     @Query("SELECT * FROM intake WHERE date BETWEEN :aMonthAgo AND :today ORDER BY date ASC")
     fun getMonthly(today: Long, aMonthAgo: Long): LiveData<List<Intake>>
 
+    @Query(
+        "select sum(amount) as amount, category, date from (SELECT amount, category, strftime('%w', date/1000, 'unixepoch') as date " +
+                "FROM (select * from intake where date between :firstDay And :endDay order by date asc) sub) main " +
+                "group by date"
+    )
+    fun getWeeklyByDay(firstDay: Long, endDay: Long): LiveData<List<Intake>>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(intake: Intake)
 
