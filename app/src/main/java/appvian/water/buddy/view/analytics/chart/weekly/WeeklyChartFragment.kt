@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import appvian.water.buddy.R
 import appvian.water.buddy.databinding.FragmentWeeklyChartBinding
-import appvian.water.buddy.model.data.Intake
 import appvian.water.buddy.model.repository.HomeRepository
 import appvian.water.buddy.viewmodel.analytics.WeeklyViewModel
 import com.github.mikephil.charting.components.LimitLine
@@ -17,7 +16,6 @@ import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
-import com.github.mikephil.charting.utils.ColorTemplate
 
 class WeeklyChartFragment : Fragment() {
     private lateinit var binding: FragmentWeeklyChartBinding
@@ -51,6 +49,7 @@ class WeeklyChartFragment : Fragment() {
     }
 
     private fun init() {
+        weeklyVm.getWeekIntakeData()
         weeklyVm.weekObserve.observe(viewLifecycleOwner, Observer {
             if (it.isNotEmpty()) {
                 android.util.Log.d("weekly data", "${it.get(0).vals}")
@@ -76,10 +75,15 @@ class WeeklyChartFragment : Fragment() {
         binding.weeklyBarchartByWeek.axisLeft.setAxisMaxValue(3.0f)
 
         binding.weeklyBarchartByWeek.data = data
-        binding.weeklyBarchartByWeek.axisLeft.addLimitLine(LimitLine(weeklyVm.targetValue, ""))
 
-        binding.weeklyBarchartByWeek.axisLeft.axisLineColor = resources.getColor(R.color.transparent, null)
-        binding.weeklyBarchartByWeek.xAxis.axisLineColor = resources.getColor(R.color.transparent, null)
+        val limitLine = LimitLine(weeklyVm.targetValue, "")
+        limitLine.lineColor = resources.getColor(R.color.sub_red_1, null)
+        binding.weeklyBarchartByWeek.axisLeft.addLimitLine(limitLine)
+
+        binding.weeklyBarchartByWeek.axisLeft.axisLineColor =
+            resources.getColor(R.color.transparent, null)
+        binding.weeklyBarchartByWeek.xAxis.axisLineColor =
+            resources.getColor(R.color.transparent, null)
 
         binding.weeklyBarchartByWeek.setDescription("")
         binding.weeklyBarchartByWeek.legend.isEnabled = false
