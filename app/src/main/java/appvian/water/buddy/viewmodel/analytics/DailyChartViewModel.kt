@@ -72,7 +72,11 @@ class DailyChartViewModel(private val repository: HomeRepository) {
         dailyIntake?.let {
             observeIntake.addSource(it, androidx.lifecycle.Observer { values ->
                 observeIntake.value = values
-                _maxDrink.value = values.maxBy { it.amount }?.category
+
+                if(values.isNotEmpty())
+                    _maxDrink.value = values.maxBy { it.amount }?.category
+                else
+                    _maxDrink.value = -2
             })
         } ?: {
             _maxDrink.value = -2
