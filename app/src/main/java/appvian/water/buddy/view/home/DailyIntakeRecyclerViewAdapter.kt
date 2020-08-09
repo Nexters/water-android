@@ -11,11 +11,10 @@ import appvian.water.buddy.model.data.Intake
 import kotlinx.android.synthetic.main.daily_intake_recyclerview_item.view.*
 import java.text.SimpleDateFormat
 
-class DailyIntakeRecyclerViewAdapter (val context : Context, val intakeList : List<Intake>, val itemClick: (Intake) -> Unit) :
+class DailyIntakeRecyclerViewAdapter (val context : Context, val isDeleteClicked: Boolean, val intakeList : List<Intake>, val itemClick: (Intake) -> Unit) :
     RecyclerView.Adapter<DailyIntakeRecyclerViewAdapter.IntakeViewHolder>(){
 
     val categoryString = arrayListOf<String>("물","커피","차","우유","탄산음료","주스","주류","이온음료","기타")
-
     inner class IntakeViewHolder(itemView : View, itemClick: (Intake) -> Unit) : RecyclerView.ViewHolder(itemView) {
 
         fun bind (intake: Intake, position: Int, context: Context){
@@ -24,6 +23,11 @@ class DailyIntakeRecyclerViewAdapter (val context : Context, val intakeList : Li
             itemView.amountText.text = String.format("%dml",intake.amount)
             itemView.am_pm_text.text = getAmORPm(intake.date)
             itemView.time_text.text = getTime(intake.date)
+            if (isDeleteClicked){
+                itemView.delete_checkbox.visibility = View.VISIBLE
+            } else{
+                itemView.delete_checkbox.visibility = View.GONE
+            }
         }
     }
 

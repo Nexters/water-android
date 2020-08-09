@@ -3,8 +3,10 @@ package appvian.water.buddy.viewmodel
 import android.app.Application
 import android.content.res.Resources
 import android.util.DisplayMetrics
+import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import appvian.water.buddy.model.data.Intake
 import appvian.water.buddy.model.repository.HomeRepository
 import java.util.*
@@ -25,6 +27,14 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     val startPercentTextY : Float = Resources.getSystem().displayMetrics.heightPixels.toFloat() - 370F * (Resources.getSystem().displayMetrics.densityDpi).toFloat() / DisplayMetrics.DENSITY_DEFAULT
     var currentPercentTextY = startPercentTextY
     var percent = getDailyPercent()
+
+    var isDeleteButtonClicked: MutableLiveData<Boolean> = MutableLiveData(false)
+
+    val deleteButton = View.OnClickListener {
+        isDeleteButtonClicked.value = !isDeleteButtonClicked.value!!
+    }
+
+    var deleteIntakeList: MutableLiveData<List<Intake>> = MutableLiveData()
 
     private fun getDailyDrinkedAmount(): LiveData<Int>? {
         val dailyAmount = repository.getDailyAmount(getToday(), getTomorrow())

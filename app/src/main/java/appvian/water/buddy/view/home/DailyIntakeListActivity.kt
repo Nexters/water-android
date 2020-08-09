@@ -2,8 +2,8 @@ package appvian.water.buddy.view.home
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,11 +24,27 @@ class DailyIntakeListActivity : AppCompatActivity() {
                 binding.dailyIntakeRecyclerView.apply {
                     layoutManager =
                         LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-                    adapter = DailyIntakeRecyclerViewAdapter(context, it) {
+                    homeViewModel.isDeleteButtonClicked.observe(this@DailyIntakeListActivity,
+                        Observer {isDeleteClicked ->
+                            adapter = DailyIntakeRecyclerViewAdapter(context,isDeleteClicked, it) {
 
-                    }
+                            }
+                        })
                 }
             }
         })
+        binding.deleteButton.setOnClickListener(homeViewModel.deleteButton)
+        homeViewModel.isDeleteButtonClicked.observe(this, Observer {
+            if(it){
+                binding.setDeleteButton.visibility = View.VISIBLE
+            } else{
+                binding.setDeleteButton.visibility = View.GONE
+            }
+        })
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        homeViewModel.isDeleteButtonClicked.value = false
     }
 }
