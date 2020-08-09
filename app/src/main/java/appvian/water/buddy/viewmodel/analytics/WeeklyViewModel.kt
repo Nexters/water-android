@@ -33,7 +33,9 @@ class WeeklyViewModel(val repository: HomeRepository) {
             weekObserve.addSource(wr, androidx.lifecycle.Observer { values ->
                 val barList = initBarList()
 
-                for (i in values) {
+                val groupValue = values.groupBy { it.date }.mapValues { Intake(it.key, 0, it.value.sumBy { it.amount })  }.values
+
+                for (i in groupValue) {
                     val index = if (i.date.toInt() != 0) i.date.toInt() - 1 else 6
                     barList[index] = BarEntry(i.amount / 1000f, index)
                 }
