@@ -67,6 +67,14 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
         repository.deleteAll()
     }
 
+    fun modifyCategory(date: Long, category: Int){
+        repository.modifyCategory(date, category)
+    }
+
+    fun modifyAmount(date: Long, amount: Int){
+        repository.modifyAmount(date, amount)
+    }
+
     fun addDeleteList(intake: Intake){
         deleteIntakeList.value?.add(intake)
         deleteIntakeList.value = deleteIntakeList.value

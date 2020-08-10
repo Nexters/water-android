@@ -9,6 +9,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import appvian.water.buddy.R
 import appvian.water.buddy.databinding.ActivityDailyIntakeListBinding
+import appvian.water.buddy.utilities.Code
+import appvian.water.buddy.view.SetIntakeModal
 import appvian.water.buddy.viewmodel.HomeViewModel
 
 class DailyIntakeListActivity : AppCompatActivity() {
@@ -39,7 +41,10 @@ class DailyIntakeListActivity : AppCompatActivity() {
                     homeViewModel.isDeleteButtonClicked.observe(this@DailyIntakeListActivity,
                         Observer {isDeleteClicked ->
                             adapter = DailyIntakeRecyclerViewAdapter(context, this@DailyIntakeListActivity, isDeleteClicked, it) {
-
+                                intake ->
+                                val bottomSheet = ModifyIntakeModal(intake)
+                                val fragmentManager = supportFragmentManager
+                                bottomSheet.show(fragmentManager,bottomSheet.tag)
                             }
                         })
                 }

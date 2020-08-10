@@ -90,6 +90,18 @@ class HomeRepository(context: Context) {
         return monthlyIntake
     }
 
+    fun modifyCategory(date: Long, category: Int){
+        runBlocking(Dispatchers.IO) {
+            intakedao.modifyCategory(date, category)
+        }
+    }
+
+    fun modifyAmount(date: Long, amount: Int){
+        runBlocking(Dispatchers.IO) {
+            intakedao.modifyAmount(date, amount)
+        }
+    }
+
     fun insert(intake: Intake) {
         android.util.Log.d("repo", "insert $intake")
         runBlocking(Dispatchers.IO) {

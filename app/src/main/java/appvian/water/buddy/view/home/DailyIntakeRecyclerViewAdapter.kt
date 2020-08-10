@@ -78,6 +78,9 @@ class DailyIntakeRecyclerViewAdapter (val context : Context, val activity: AppCo
                 itemView.delete_checkbox.visibility = View.GONE
                 viewModel.cancelDeleteList(intake)
             }
+            itemView.setOnClickListener {
+                itemClick(intake)
+            }
         }
     }
 
