@@ -34,7 +34,14 @@ class DailyIntakeListActivity : AppCompatActivity() {
 
     private fun initRecyclerView(){
         homeViewModel.dailyIntake?.observe(this, Observer {
-            if(it!=null) {
+            var count = 0
+            for (i in it){
+                count+=1
+            }
+            if(count!=0) {
+                binding.dailyIntakeRecyclerView.visibility = View.VISIBLE
+                binding.modifyExplainText.visibility = View.VISIBLE
+                binding.noWaterLayout.visibility = View.GONE
                 binding.dailyIntakeRecyclerView.apply {
                     layoutManager =
                         LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -48,6 +55,10 @@ class DailyIntakeListActivity : AppCompatActivity() {
                             }
                         })
                 }
+            } else{
+                binding.dailyIntakeRecyclerView.visibility = View.GONE
+                binding.modifyExplainText.visibility = View.GONE
+                binding.noWaterLayout.visibility = View.VISIBLE
             }
         })
     }
