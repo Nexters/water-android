@@ -29,9 +29,10 @@
 
             <androidx.appcompat.widget.AppCompatSpinner
                 android:id="@+id/weekly_spinner"
-                android:layout_width="54dp"
-                android:layout_height="27dp"
+                android:layout_width="62dp"
+                android:layout_height="20dp"
                 android:background="@drawable/picker_background"
+                android:popupBackground="@color/blue_1"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="35dp"

@@ -1,9 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape android:shape="rectangle">
-            <corners android:radius="5dp"/>
-            <solid android:color="@color/grey_2" />
+            <corners android:radius="14.5dp"/>
+            <solid android:color="@color/blue_1" />
         </shape>
     </item>
-</selector>
+
+    <item
+        android:gravity="right"
+        android:right="12dp"
+        android:top="5dp"
+        android:bottom="5dp">
+        <vector
+            android:width="9dp"
+            android:height="6dp"
+            android:viewportWidth="9"
+            android:viewportHeight="6">
+            <path
+                android:pathData="M8.27,1.73L5.01,4.99c-0.282,0.282 -0.738,0.282 -1.02,0L0.73,1.73C0.447,1.447 0.447,0.991 0.73,0.71 0.863,0.577 1.046,0.5 1.237,0.5h6.524c0.397,0 0.72,0.322 0.72,0.72 0,0.191 -0.076,0.374 -0.211,0.51z"
+                android:fillColor="#FFF"
+                android:fillType="evenOdd"/>
+        </vector>
+
+    </item>
+</layer-list>
