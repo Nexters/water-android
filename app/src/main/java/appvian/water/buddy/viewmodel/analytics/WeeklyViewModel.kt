@@ -11,13 +11,15 @@ import java.util.*
 class WeeklyViewModel(val repository: HomeRepository) {
     private val now = Calendar.getInstance()
     var curWeek = now.get(Calendar.WEEK_OF_MONTH)
-    val totalWeeks = now.getActualMaximum(Calendar.WEEK_OF_MONTH)
+    val totalWeeks = IntArray(now.getActualMaximum(Calendar.WEEK_OF_MONTH)) { i -> i + 1 }
+
 
     private var weekDay: LiveData<List<Intake>>? = null
     val weekObserve: MediatorLiveData<List<BarEntry>> = MediatorLiveData()
     val targetValue: Float = 1.6f //Todo : sharedPreference에서 불러와야 함
 
     fun getWeekIntakeData() {
+        android.util.Log.d("weekly ", "curweek ${curWeek}")
         val firstDate = TimeUtil.getCalendarInstance()
         firstDate.set(Calendar.WEEK_OF_MONTH, curWeek)
         firstDate.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY)

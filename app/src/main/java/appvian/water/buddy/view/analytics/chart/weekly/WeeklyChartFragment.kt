@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -37,7 +39,7 @@ class WeeklyChartFragment : Fragment() {
             weeklyVm = WeeklyViewModel(HomeRepository(it))
         }
 
-        init()
+        initUi()
 
         return binding.root
     }
@@ -48,7 +50,7 @@ class WeeklyChartFragment : Fragment() {
         weeklyVm.getWeekIntakeData()
     }
 
-    private fun init() {
+    private fun initUi() {
         weeklyVm.getWeekIntakeData()
         weeklyVm.weekObserve.observe(viewLifecycleOwner, Observer {
             if (it.isNotEmpty()) {
@@ -56,6 +58,36 @@ class WeeklyChartFragment : Fragment() {
                 setData(it)
             }
         })
+
+        initSpinner()
+    }
+
+    private fun initSpinner() {
+        context?.let {
+            val spinnerAdapter = ArrayAdapter<String>(
+                it,
+                R.layout.daily_date_picker,
+                R.id.daily_picker_text,
+                weeklyVm.totalWeeks.map { getString(R.string.weekly_picker_item, it) })
+
+            binding.weeklySpinner.adapter = spinnerAdapter
+            binding.weeklySpinner.setSelection(weeklyVm.curWeek - 1)
+            binding.weeklySpinner.onItemSelectedListener =
+                object : AdapterView.OnItemSelectedListener {
+                    override fun onNothingSelected(parent: AdapterView<*>?) {}
+
+                    override fun onItemSelected(
+                        parent: AdapterView<*>?,
+                        view: View?,
+                        position: Int,
+                        id: Long
+                    ) {
+                        weeklyVm.curWeek = weeklyVm.totalWeeks[position]
+                        weeklyVm.getWeekIntakeData()
+                    }
+
+                }
+        }
     }
 
     private fun setData(values: List<BarEntry>) {
@@ -96,6 +128,9 @@ class WeeklyChartFragment : Fragment() {
         binding.weeklyBarchartByWeek.axisLeft.setDrawGridLines(false)
 
         binding.weeklyBarchartByWeek.xAxis.position = XAxis.XAxisPosition.BOTTOM
+
+        //update chart
+        binding.weeklyBarchartByWeek.invalidate()
     }
 
     companion object {

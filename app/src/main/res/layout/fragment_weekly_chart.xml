@@ -31,6 +31,7 @@
                 android:id="@+id/weekly_spinner"
                 android:layout_width="54dp"
                 android:layout_height="27dp"
+                android:background="@drawable/picker_background"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="35dp"
