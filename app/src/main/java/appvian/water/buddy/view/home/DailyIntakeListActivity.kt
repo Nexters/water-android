@@ -19,6 +19,18 @@ class DailyIntakeListActivity : AppCompatActivity() {
         homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         binding = DataBindingUtil.setContentView(this@DailyIntakeListActivity, R.layout.activity_daily_intake_list)
         binding.homeViewModel = homeViewModel
+
+        initRecyclerView()
+        setVisibleCheckbox()
+        setButton()
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        homeViewModel.isDeleteButtonClicked.value = false
+    }
+
+    private fun initRecyclerView(){
         homeViewModel.dailyIntake?.observe(this, Observer {
             if(it!=null) {
                 binding.dailyIntakeRecyclerView.apply {
@@ -26,13 +38,16 @@ class DailyIntakeListActivity : AppCompatActivity() {
                         LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
                     homeViewModel.isDeleteButtonClicked.observe(this@DailyIntakeListActivity,
                         Observer {isDeleteClicked ->
-                            adapter = DailyIntakeRecyclerViewAdapter(context, isDeleteClicked, homeViewModel, it) {
+                            adapter = DailyIntakeRecyclerViewAdapter(context, this@DailyIntakeListActivity, isDeleteClicked, it) {
 
                             }
                         })
                 }
             }
         })
+    }
+
+    private fun setVisibleCheckbox(){
         binding.deleteButton.setOnClickListener(homeViewModel.deleteButton)
         homeViewModel.isDeleteButtonClicked.observe(this, Observer {
             if(it){
@@ -43,8 +58,32 @@ class DailyIntakeListActivity : AppCompatActivity() {
         })
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-        homeViewModel.isDeleteButtonClicked.value = false
+    private fun setButton(){
+        homeViewModel.deleteIntakeList.observe(this, Observer {
+            val deleteList = it
+            var count = 0
+            for (i in deleteList){
+                count+=1
+            }
+            when(count){
+                0 -> {
+                    binding.setDeleteButton.setBackgroundResource(R.drawable.delete_button_not_active)
+                    binding.setDeleteButton.text = String.format("%d개의 내역 삭제하기",count)
+                    binding.setDeleteButton.isEnabled = false
+                }
+                else ->{
+                    binding.setDeleteButton.setBackgroundResource(R.drawable.delete_button_active)
+                    binding.setDeleteButton.text = String.format("%d개의 내역 삭제하기",count)
+                    binding.setDeleteButton.isEnabled = true
+                }
+            }
+            binding.setDeleteButton.setOnClickListener {
+                for (i in deleteList){
+                    homeViewModel.delete(i)
+                }
+                homeViewModel.isDeleteButtonClicked.value = false
+                homeViewModel.deleteIntakeList.value?.clear()
+            }
+        })
     }
 }

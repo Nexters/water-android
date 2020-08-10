@@ -55,6 +55,9 @@
             />
         <Button
             android:id="@+id/set_delete_button"
+            android:textSize="15sp"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
             android:layout_width="match_parent"
             android:layout_height="52dp"
             android:background="@drawable/delete_button_not_active"
