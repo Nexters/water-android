@@ -78,7 +78,7 @@ class DailyChartFragment : Fragment() {
             }
         })
 
-        setSytemText()
+        setSystemText()
     }
 
     private fun initSpinner() {
@@ -155,7 +155,7 @@ class DailyChartFragment : Fragment() {
         binding.dailyPiechart.invalidate()
     }
 
-    private fun setSytemText() {
+    private fun setSystemText() {
         dailyVm.maxDrink.observe(viewLifecycleOwner, Observer {
             if(!it.equals(-2)) {
                 val categoryName = resources.getStringArray(DrinkMapper.drinkName)[it]
