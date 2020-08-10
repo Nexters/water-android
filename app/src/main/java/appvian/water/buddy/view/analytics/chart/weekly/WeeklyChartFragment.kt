@@ -55,10 +55,11 @@ class WeeklyChartFragment : Fragment() {
         weeklyVm.weekObserve.observe(viewLifecycleOwner, Observer {
             if (it.isNotEmpty()) {
                 android.util.Log.d("weekly data", "${it.get(0).vals}")
-                setData(it)
+                setWeeklyData(it)
             }
         })
 
+        setWeeklyData(null)
         initSpinner()
     }
 
@@ -90,32 +91,53 @@ class WeeklyChartFragment : Fragment() {
         }
     }
 
-    private fun setData(values: List<BarEntry>) {
-
+    private fun setWeeklyData(values: List<BarEntry>?) {
         val day = resources.getStringArray(R.array.weekly)
-        val dataSet = BarDataSet(values, "Intake List")
-        dataSet.barSpacePercent = 70f
+        values?.let {
+            val dataSet = BarDataSet(it, "Intake List")
+            dataSet.barSpacePercent = 70f
+            dataSet.color = resources.getColor(R.color.blue_1, null)
+            dataSet.setDrawValues(false)
 
-        val data = BarData(day, dataSet)
-        dataSet.color = resources.getColor(R.color.blue_1, null)
-        dataSet.setDrawValues(false)
+            val data = BarData(day, dataSet)
+            drawWeeklyBarChart(data)
 
-        updateChart(data)
+            //update chart
+            binding.weeklyBarchartByWeek.invalidate()
+
+        } ?: run {
+            val emptyData = arrayListOf<BarEntry>()
+
+            val dataSet = BarDataSet(emptyData, "")
+            drawWeeklyBarChart(BarData(day, dataSet))
+        }
     }
 
-    private fun updateChart(data: BarData) {
+    private fun drawWeeklyBarChart(data: BarData) {
         binding.weeklyBarchartByWeek.axisLeft.setAxisMaxValue(3.0f)
 
         binding.weeklyBarchartByWeek.data = data
 
-        val limitLine = LimitLine(weeklyVm.targetValue, "")
+        val limitLine = LimitLine(
+            weeklyVm.targetValue,
+            getString(R.string.limit_line_target, weeklyVm.targetValue)
+        )
         limitLine.lineColor = resources.getColor(R.color.sub_red_1, null)
+        limitLine.enableDashedLine(10f, 10f, 0f)
+
         binding.weeklyBarchartByWeek.axisLeft.addLimitLine(limitLine)
 
         binding.weeklyBarchartByWeek.axisLeft.axisLineColor =
             resources.getColor(R.color.transparent, null)
         binding.weeklyBarchartByWeek.xAxis.axisLineColor =
             resources.getColor(R.color.transparent, null)
+
+        //text color & size
+        binding.weeklyBarchartByWeek.axisLeft.textSize = 12f
+        binding.weeklyBarchartByWeek.axisLeft.textColor =
+            resources.getColor(R.color.chart_label, null)
+        binding.weeklyBarchartByWeek.xAxis.textSize = 12f
+        binding.weeklyBarchartByWeek.xAxis.textColor = resources.getColor(R.color.chart_label, null)
 
         binding.weeklyBarchartByWeek.setDescription("")
         binding.weeklyBarchartByWeek.legend.isEnabled = false
@@ -127,10 +149,7 @@ class WeeklyChartFragment : Fragment() {
         binding.weeklyBarchartByWeek.xAxis.setDrawGridLines(false)
         binding.weeklyBarchartByWeek.axisLeft.setDrawGridLines(false)
 
-        binding.weeklyBarchartByWeek.xAxis.position = XAxis.XAxisPosition.BOTTOM
-
-        //update chart
-        binding.weeklyBarchartByWeek.invalidate()
+        binding.weeklyBarchartByWeek.xAxis.position = XAxis.XAxisPosition.BOTTOM_INSIDE
     }
 
     companion object {

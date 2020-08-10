@@ -32,4 +32,5 @@
     <string name="analytics_weekly_header2">주간 수분 섭취량</string>
     <string name="weekly_chart_y_format">%.1fL</string>
     <string name="weekly_picker_item">%d주</string>
+    <string name="limit_line_target">목표\n%.1fL</string>
 </resources>
