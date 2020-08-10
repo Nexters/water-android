@@ -3,8 +3,20 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+    <color name="settingTxtGray">#868e96</color>
+    <color name="settingCardBack">#f1f3f5</color>
+    <color name="settingTxtBlack">#030303</color>
+    <color name="btnBlueNormal">#547cff</color>
+    <color name="btnBlueInactive">#a9bdff</color>
+    <color name="white">#FFFFFF</color>
+    <color name="popupLine">#dee2e6</color>
+    <color name="popupBtn">#f1f3f5</color>
 
     <color name="transparent">#00000000</color>
-
     <color name="grey_7">#adb5bd</color>
+    <color name="grey_5">#dee2e6</color>
+    <color name="grey_6">#ced4da</color>
+    <color name="grey_1">#f8f9fa</color>
+    <color name="blue_1">#547cff</color>
+    <color name="grey_8">#868e96</color>
 </resources>

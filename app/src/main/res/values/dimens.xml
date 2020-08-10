@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!--
+Refer to App Widget Documentation for margin information
+http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
+    -->
     <dimen name="tab_text_title">20sp</dimen>
     <dimen name="common_spacing">10dp</dimen>
 
@@ -13,4 +18,6 @@
     <dimen name="daily_sys_target_size">15sp</dimen>
     <dimen name="daily_pie_chart">95dp</dimen>
     <dimen name="daily_chart_detail_spacing">11dp</dimen>
+    <dimen name="widget_margin">8dp</dimen>
+
 </resources>
