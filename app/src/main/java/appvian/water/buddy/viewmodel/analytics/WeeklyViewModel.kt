@@ -9,14 +9,19 @@ import com.github.mikephil.charting.data.BarEntry
 import java.util.*
 
 class WeeklyViewModel(val repository: HomeRepository) {
-    private val now = Calendar.getInstance()
+    private val now = TimeUtil.getCalendarInstance()
+    private val curYearWeek = now.get(Calendar.WEEK_OF_YEAR)
+
     var curWeek = now.get(Calendar.WEEK_OF_MONTH)
     val totalWeeks = IntArray(now.getActualMaximum(Calendar.WEEK_OF_MONTH)) { i -> i + 1 }
-
 
     private var weekDay: LiveData<List<Intake>>? = null
     val weekObserve: MediatorLiveData<List<BarEntry>> = MediatorLiveData()
     val targetValue: Float = 1.6f //Todo : sharedPreference에서 불러와야 함
+
+    private var weekTotal: LiveData<List<Intake>>? = null
+    val weekTotalObserve: MediatorLiveData<List<BarEntry>> = MediatorLiveData()
+    val monthWeek = Array<String>(4){ i -> "${(curYearWeek - 3) + i}"}
 
     fun getWeekIntakeData() {
         android.util.Log.d("weekly ", "curweek ${curWeek}")
@@ -51,6 +56,41 @@ class WeeklyViewModel(val repository: HomeRepository) {
     private fun initBarList(): ArrayList<BarEntry> = arrayListOf<BarEntry>().apply {
         for (j in 0..6) {
             add(BarEntry(0f, j))
+        }
+    }
+
+    fun getTotalWeekIntakeData() {
+        val endWeek = TimeUtil.getCalendarInstance()
+        endWeek.set(Calendar.WEEK_OF_YEAR, curYearWeek + 1)
+        endWeek.set(Calendar.DAY_OF_WEEK, 1)
+
+        val startWeek = TimeUtil.getCalendarInstance()
+        startWeek.set(Calendar.WEEK_OF_YEAR, curYearWeek - 3)
+
+        android.util.Log.d(
+            "weekly vm",
+            "${endWeek.get(Calendar.WEEK_OF_YEAR)}, ${endWeek.timeInMillis}, ${startWeek.get(
+                Calendar.WEEK_OF_YEAR
+            )}"
+        )
+
+        weekTotal = repository.getWeeklyByTotal(startWeek.timeInMillis, endWeek.timeInMillis)
+        weekTotal?.let {
+            weekTotalObserve.addSource(it, androidx.lifecycle.Observer { result ->
+                val weekTotalArrayData = arrayListOf<BarEntry>().apply {
+                    for (i in 0..3) add(BarEntry(0f, i))
+                }
+
+                val groupResult = result.groupBy { it.date + 1 }
+                    .mapValues { it.value.sumBy { it.amount } / 1000f }.entries
+
+                for(i in groupResult) {
+                    val index = i.key.toInt() - (curYearWeek - 3)
+                    weekTotalArrayData[index] = BarEntry(i.value, index)
+                }
+
+                weekTotalObserve.value = weekTotalArrayData
+            })
         }
     }
 }

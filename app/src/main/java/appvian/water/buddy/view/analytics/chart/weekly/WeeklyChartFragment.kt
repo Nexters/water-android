@@ -52,13 +52,21 @@ class WeeklyChartFragment : Fragment() {
 
     private fun initUi() {
         weeklyVm.getWeekIntakeData()
+        weeklyVm.getTotalWeekIntakeData()
+
         weeklyVm.weekObserve.observe(viewLifecycleOwner, Observer {
             if (it.isNotEmpty()) {
-                android.util.Log.d("weekly data", "${it.get(0).vals}")
                 setWeeklyData(it)
             }
         })
 
+        weeklyVm.weekTotalObserve.observe(viewLifecycleOwner, Observer {
+            if(it.isNotEmpty()) {
+                setWeeklyTotalData(it)
+            }
+        })
+
+        //초기 화면 셋팅
         setWeeklyData(null)
         initSpinner()
     }
@@ -101,9 +109,6 @@ class WeeklyChartFragment : Fragment() {
 
             val data = BarData(day, dataSet)
             drawWeeklyBarChart(data)
-
-            //update chart
-            binding.weeklyBarchartByWeek.invalidate()
 
         } ?: run {
             val emptyData = arrayListOf<BarEntry>()
@@ -153,6 +158,44 @@ class WeeklyChartFragment : Fragment() {
 
         //set y axis format
         binding.weeklyBarchartByWeek.axisLeft.valueFormatter = WeeklyValueFormatter()
+
+        //update chart
+        binding.weeklyBarchartByWeek.invalidate()
+    }
+
+    private fun setWeeklyTotalData(values: List<BarEntry>) {
+        val xLabels = weeklyVm.monthWeek
+
+        val dataSet = BarDataSet(values, "total weekly data")
+        dataSet.barSpacePercent = 40f
+        dataSet.valueTextSize = 15f
+
+        val data = BarData(xLabels, dataSet)
+
+        drawWeeklyTotalBarChart(data)
+    }
+
+    private fun drawWeeklyTotalBarChart(data: BarData) {
+        binding.weeklyBarchartByTotal.data = data
+
+        //remove grid
+        binding.weeklyBarchartByTotal.axisRight.isEnabled = false
+        binding.weeklyBarchartByTotal.axisLeft.isEnabled = false
+        binding.weeklyBarchartByTotal.xAxis.setDrawGridLines(false)
+
+        binding.weeklyBarchartByTotal.xAxis.position = XAxis.XAxisPosition.BOTTOM_INSIDE
+
+        binding.weeklyBarchartByTotal.axisLeft.axisLineColor =
+            resources.getColor(R.color.transparent, null)
+        binding.weeklyBarchartByTotal.xAxis.axisLineColor =
+            resources.getColor(R.color.transparent, null)
+
+        //remove legends & description
+        binding.weeklyBarchartByTotal.setDescription("")
+        binding.weeklyBarchartByTotal.legend.isEnabled = false
+
+        //update chart
+        binding.weeklyBarchartByTotal.invalidate()
     }
 
     companion object {

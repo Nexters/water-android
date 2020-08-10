@@ -9,14 +9,16 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             tools:context=".view.analytics.chart.weekly.WeeklyChartFragment">
 
             <TextView
+                android:id="@+id/header1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
@@ -34,16 +36,18 @@
                 android:background="@drawable/picker_background"
                 android:popupBackground="@color/blue_1"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/header1"
                 android:layout_marginTop="35dp"
-                android:layout_marginEnd="32dp"/>
+                android:layout_marginStart="8dp"/>
 
             <com.github.mikephil.charting.charts.BarChart
                 android:id="@+id/weekly_barchart_by_week"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginTop="22dp"
-                app:layout_constraintHeight_percent=".5"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                app:layout_constraintHeight_percent=".3"
                 app:layout_constraintTop_toBottomOf="@id/weekly_spinner"
                 app:layout_constraintStart_toStartOf="parent"/>
 
@@ -94,12 +98,15 @@
                 app:layout_constraintStart_toEndOf="@id/weekly_sys_text"
                 app:layout_constraintTop_toBottomOf="@id/weekly_barchart_by_week"/>
 
+
             <com.github.mikephil.charting.charts.BarChart
                 android:id="@+id/weekly_barchart_by_total"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginTop="22dp"
-                app:layout_constraintHeight_percent=".5"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                app:layout_constraintHeight_percent=".3"
                 app:layout_constraintTop_toBottomOf="@id/weekly_sys_text"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
