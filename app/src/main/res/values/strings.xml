@@ -34,4 +34,7 @@
     <string name="weekly_picker_item">%d주</string>
     <string name="weekly_month_week">%d월%d주</string>
     <string name="limit_line_target">목표\n%.1fL</string>
+    <string name="weekly_sys_none">수분을 섭취해 볼까요?</string>
+    <string name="weekly_sys_minus">저번 주보다 평균 수분 섭취량이\n%dml 줄었어요</string>
+    <string name="weekly_sys_plus">저번 주보다 평균 수분 섭취량이\n%dml 늘었어요</string>
 </resources>

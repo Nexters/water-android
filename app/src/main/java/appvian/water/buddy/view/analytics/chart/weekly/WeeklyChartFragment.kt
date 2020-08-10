@@ -1,6 +1,5 @@
 package appvian.water.buddy.view.analytics.chart.weekly
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -68,6 +67,18 @@ class WeeklyChartFragment : Fragment() {
             }
         })
 
+        weeklyVm.sysObserve.observe(viewLifecycleOwner, Observer {
+            if (it > 0) {
+                val msg = getString(R.string.weekly_sys_plus, Math.abs(it))
+                binding.weeklySysText.text = weeklyVm.strSapnBuilder(msg)
+            } else if (it < 0) {
+                val msg = getString(R.string.weekly_sys_minus, Math.abs(it))
+                binding.weeklySysText.text = weeklyVm.strSapnBuilder(msg)
+            } else {
+                binding.weeklySysText.text = getString(R.string.weekly_sys_none)
+            }
+        })
+
         initSpinner()
     }
 
@@ -105,10 +116,10 @@ class WeeklyChartFragment : Fragment() {
         val dataSet = BarDataSet(values, "Intake List")
         dataSet.barSpacePercent = 70f
         dataSet.colors = values.map { barEntry ->
-            if(barEntry.`val` >= weeklyVm.targetValue) resources.getColor(R.color.blue_1, null)
+            if (barEntry.`val` >= weeklyVm.targetValue) resources.getColor(R.color.blue_1, null)
             else resources.getColor(R.color.blue_3, null)
         }
-        android.util.Log.d("weekly chart fragment", "$values")
+
         dataSet.setDrawValues(false)
 
         val data = BarData(day, dataSet)
