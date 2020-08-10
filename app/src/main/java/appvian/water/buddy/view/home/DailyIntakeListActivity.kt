@@ -26,7 +26,7 @@ class DailyIntakeListActivity : AppCompatActivity() {
                         LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
                     homeViewModel.isDeleteButtonClicked.observe(this@DailyIntakeListActivity,
                         Observer {isDeleteClicked ->
-                            adapter = DailyIntakeRecyclerViewAdapter(context,isDeleteClicked, it) {
+                            adapter = DailyIntakeRecyclerViewAdapter(context, isDeleteClicked, homeViewModel, it) {
 
                             }
                         })

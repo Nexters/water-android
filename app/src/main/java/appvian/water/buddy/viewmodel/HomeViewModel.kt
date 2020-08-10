@@ -10,6 +10,7 @@ import androidx.lifecycle.MutableLiveData
 import appvian.water.buddy.model.data.Intake
 import appvian.water.buddy.model.repository.HomeRepository
 import java.util.*
+import kotlin.collections.ArrayList
 
 class HomeViewModel(application: Application) : AndroidViewModel(application) {
     private val repository = HomeRepository(application)
@@ -34,7 +35,11 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
         isDeleteButtonClicked.value = !isDeleteButtonClicked.value!!
     }
 
-    var deleteIntakeList: MutableLiveData<List<Intake>> = MutableLiveData()
+    var deleteIntakeList: MutableLiveData<MutableList<Intake>> = MutableLiveData()
+
+    init {
+        deleteIntakeList.value = ArrayList()
+    }
 
     private fun getDailyDrinkedAmount(): LiveData<Int>? {
         val dailyAmount = repository.getDailyAmount(getToday(), getTomorrow())
@@ -60,6 +65,16 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
     fun deleteAll(){
         repository.deleteAll()
+    }
+
+    fun addDeleteList(intake: Intake){
+        deleteIntakeList.value?.add(intake)
+        deleteIntakeList.value = deleteIntakeList.value
+    }
+
+    fun cancelDeleteList(intake: Intake){
+        deleteIntakeList.value?.remove(intake)
+        deleteIntakeList.value = deleteIntakeList.value
     }
 
     private fun getToday(): Long {
