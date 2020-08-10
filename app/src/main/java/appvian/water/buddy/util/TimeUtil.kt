@@ -15,4 +15,17 @@ object TimeUtil {
 
         return calInstance
     }
+
+    fun getYearWeekToMonthWeek(yearWeek:Int, year:Int?): List<Int> {
+        val calInstance = getCalendarInstance()
+
+        year?.let { calInstance.set(Calendar.YEAR, it) }
+        calInstance.set(Calendar.WEEK_OF_YEAR, yearWeek)
+        calInstance.set(Calendar.DAY_OF_WEEK, 7)
+
+        val month = calInstance.get(Calendar.MONTH) + 1
+        val monthWeek = calInstance.get(Calendar.WEEK_OF_MONTH)
+
+        return listOf(month, monthWeek)
+    }
 }

@@ -21,7 +21,7 @@ class WeeklyViewModel(val repository: HomeRepository) {
 
     private var weekTotal: LiveData<List<Intake>>? = null
     val weekTotalObserve: MediatorLiveData<List<BarEntry>> = MediatorLiveData()
-    val monthWeek = Array<String>(4){ i -> "${(curYearWeek - 3) + i}"}
+    val monthWeek = Array<List<Int>>(4){ i -> TimeUtil.getYearWeekToMonthWeek((curYearWeek - 3) + i, null) }
 
     fun getWeekIntakeData() {
         android.util.Log.d("weekly ", "curweek ${curWeek}")

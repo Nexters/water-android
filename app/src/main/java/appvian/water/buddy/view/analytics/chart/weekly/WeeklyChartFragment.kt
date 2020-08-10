@@ -164,7 +164,7 @@ class WeeklyChartFragment : Fragment() {
     }
 
     private fun setWeeklyTotalData(values: List<BarEntry>) {
-        val xLabels = weeklyVm.monthWeek
+        val xLabels = weeklyVm.monthWeek.map { getString(R.string.weekly_month_week, it[0], it[1]) }
 
         val dataSet = BarDataSet(values, "total weekly data")
         dataSet.barSpacePercent = 40f
