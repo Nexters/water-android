@@ -150,6 +150,9 @@ class WeeklyChartFragment : Fragment() {
         binding.weeklyBarchartByWeek.axisLeft.setDrawGridLines(false)
 
         binding.weeklyBarchartByWeek.xAxis.position = XAxis.XAxisPosition.BOTTOM_INSIDE
+
+        //set y axis format
+        binding.weeklyBarchartByWeek.axisLeft.valueFormatter = WeeklyValueFormatter()
     }
 
     companion object {
