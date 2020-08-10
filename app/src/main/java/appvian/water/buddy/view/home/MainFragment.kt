@@ -19,6 +19,7 @@ import android.util.DisplayMetrics
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import appvian.water.buddy.databinding.FragmentMainBinding
+import appvian.water.buddy.utilities.Code
 import appvian.water.buddy.view.SetIntakeModal
 import kotlinx.coroutines.*
 
@@ -195,7 +196,7 @@ class MainFragment : Fragment() {
 
     private fun setCharacter(percent: Float){
         binding.animationCharacter.setOnClickListener {
-            val bottomSheet = SetIntakeModal()
+            val bottomSheet = SetIntakeModal(Code.MAIN_FRAGMENT)
             val fragmentManager = childFragmentManager
             bottomSheet.show(fragmentManager,bottomSheet.tag)
         }
