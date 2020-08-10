@@ -18,6 +18,12 @@
     <string name="day_fri">Fri</string>
     <string name="day_sat">Sat</string>
 
+    <string name="home_text_1">희망차게\n물 한잔 원샷!</string>
+    <string name="home_text_2">시작이 반이다\n더욱 분발해 보아요!</string>
+    <string name="home_text_3">피부의 탱글탱글함은\n수분 보충에서부터!</string>
+    <string name="home_text_4">목표 달성까지 얼마\n남지 않았어요!</string>
+    <string name="home_text_5">잊지 않고 마셔줘서\n고마워요 찡긋 :)</string>
+
     <string name="analytics_header_title">%d월 수분섭취</string>
 
     <string name="analytics_header_daily">일별 수분 섭취량</string>
@@ -37,4 +43,5 @@
     <string name="weekly_sys_none">수분을 섭취해 볼까요?</string>
     <string name="weekly_sys_minus">저번 주보다 평균 수분 섭취량이\n%dml 줄었어요</string>
     <string name="weekly_sys_plus">저번 주보다 평균 수분 섭취량이\n%dml 늘었어요</string>
+    <string name="target_amount">%sml</string>
 </resources>

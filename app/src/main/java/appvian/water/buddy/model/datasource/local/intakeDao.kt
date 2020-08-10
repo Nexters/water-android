@@ -11,6 +11,12 @@ interface intakeDao {
     @Query("SELECT * FROM intake WHERE date BETWEEN :today AND :tomorrow  ORDER BY date ASC")
     fun getDaily(today: Long, tomorrow: Long): LiveData<List<Intake>>
 
+    @Query("SELECT SUM(amount) FROM intake WHERE date BETWEEN :today AND :tomorrow")
+    fun getDailyAmount(today: Long, tomorrow: Long): LiveData<Int>
+
+    @Query("SELECT ((SUM(amount))*100/:requiredAmount) FROM intake WHERE date BETWEEN :today AND :tomorrow")
+    fun getDailyPercent(today: Long, tomorrow: Long, requiredAmount: Int): LiveData<Float>
+
     @Query("SELECT date, category, SUM(amount) as amount FROM intake WHERE date BETWEEN :today AND :tomorrow group BY category ORDER BY date ASC")
     fun getDailyByGroup(today: Long, tomorrow: Long): LiveData<List<Intake>>
 
@@ -27,6 +33,9 @@ interface intakeDao {
 
     @Query("SELECT strftime('%W', date/1000, 'unixepoch') as date, amount, category FROM INTAKE where date between :startWeek and :endWeek order by date asc")
     fun getWeeklyByTotal(startWeek: Long, endWeek: Long): LiveData<List<Intake>>
+
+    @Query("DELETE FROM intake")
+    fun deleteAll()
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(intake: Intake)

@@ -25,6 +25,30 @@ class HomeRepository(context: Context) {
         return dailyIntake
     }
 
+    fun getDailyAmount(today: Long, tomorrow: Long): LiveData<Int>? {
+        var dailyAmount: LiveData<Int>? = null
+
+        dailyAmount = runBlocking (Dispatchers.IO){
+            withContext(Dispatchers.Default){
+                intakedao.getDailyAmount(today, tomorrow)
+            }
+        }
+
+        return  dailyAmount
+    }
+
+    fun getDailyPercent(today: Long, tomorrow: Long, requiredAmount: Int): LiveData<Float>?{
+        var dailyPercent: LiveData<Float>? = null
+
+        dailyPercent = runBlocking (Dispatchers.IO) {
+            withContext(Dispatchers.Default){
+                intakedao.getDailyPercent(today, tomorrow, requiredAmount)
+            }
+        }
+
+        return dailyPercent
+    }
+
     fun getDailyByGroup(today: Long, tomorrow: Long): LiveData<List<Intake>>? {
         var dailyIntake: LiveData<List<Intake>>? = null
 
@@ -103,6 +127,12 @@ class HomeRepository(context: Context) {
     fun delete(intake: Intake) {
         runBlocking(Dispatchers.IO) {
             intakedao.delete(intake)
+        }
+    }
+
+    fun deleteAll() {
+        runBlocking(Dispatchers.IO) {
+            intakedao.deleteAll()
         }
     }
 }

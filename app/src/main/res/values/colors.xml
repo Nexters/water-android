@@ -27,16 +27,16 @@
 
     <color name="grey_2">#f1f3f5</color>
     <color name="grey_8">#868e96</color>
-
-    <color name="grey_7">#adb5bd</color>
+    
+    <color name="grey_1">#f8f9fa</color>
     <color name="grey_5">#dee2e6</color>
     <color name="grey_6">#ced4da</color>
-    <color name="grey_1">#f8f9fa</color>
+    <color name="grey_7">#adb5bd</color>
+    <color name="grey_8">#868e96</color>
 
     <color name="blue_1">#547cff</color>
     <color name="blue_3">#dce5ff</color>
     
     <color name="sub_red_1">#f96b6b</color>
-
     <color name="chart_label">#868686</color>
 </resources>
