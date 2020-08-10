@@ -25,6 +25,9 @@ interface intakeDao {
     )
     fun getWeeklyByDay(firstDay: Long, endDay: Long): LiveData<List<Intake>>
 
+    @Query("SELECT strftime('%W', date/1000, 'unixepoch') as date, amount, category FROM INTAKE where date between :startWeek and :endWeek order by date asc")
+    fun getWeeklyByTotal(startWeek: Long, endWeek: Long): LiveData<List<Intake>>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(intake: Intake)
 

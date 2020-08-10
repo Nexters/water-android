@@ -66,6 +66,18 @@ class HomeRepository(context: Context) {
         return weeklyIntake
     }
 
+    fun getWeeklyByTotal(startWeekDay: Long, endWeekDay: Long) : LiveData<List<Intake>>? {
+        var weeklyTotal: LiveData<List<Intake>>? = null
+
+        weeklyTotal = runBlocking(Dispatchers.IO){
+            withContext(Dispatchers.Default) {
+                intakedao.getWeeklyByTotal(startWeekDay, endWeekDay)
+            }
+        }
+
+        return weeklyTotal
+    }
+
     fun getMonthly(today: Long, aMonthAgo: Long): LiveData<List<Intake>>? {
         var monthlyIntake: LiveData<List<Intake>>? = intakedao.getMonthly(today, aMonthAgo)
 
