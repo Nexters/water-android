@@ -1,5 +1,6 @@
 package appvian.water.buddy.view.analytics.chart.weekly
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,7 @@ import androidx.lifecycle.Observer
 import appvian.water.buddy.R
 import appvian.water.buddy.databinding.FragmentWeeklyChartBinding
 import appvian.water.buddy.model.repository.HomeRepository
+import appvian.water.buddy.util.DrinkMapper
 import appvian.water.buddy.viewmodel.analytics.WeeklyViewModel
 import com.github.mikephil.charting.components.LimitLine
 import com.github.mikephil.charting.components.XAxis
@@ -61,13 +63,11 @@ class WeeklyChartFragment : Fragment() {
         })
 
         weeklyVm.weekTotalObserve.observe(viewLifecycleOwner, Observer {
-            if(it.isNotEmpty()) {
+            if (it.isNotEmpty()) {
                 setWeeklyTotalData(it)
             }
         })
 
-        //초기 화면 셋팅
-        setWeeklyData(null)
         initSpinner()
     }
 
@@ -99,23 +99,21 @@ class WeeklyChartFragment : Fragment() {
         }
     }
 
-    private fun setWeeklyData(values: List<BarEntry>?) {
+    private fun setWeeklyData(values: List<BarEntry>) {
         val day = resources.getStringArray(R.array.weekly)
-        values?.let {
-            val dataSet = BarDataSet(it, "Intake List")
-            dataSet.barSpacePercent = 70f
-            dataSet.color = resources.getColor(R.color.blue_1, null)
-            dataSet.setDrawValues(false)
 
-            val data = BarData(day, dataSet)
-            drawWeeklyBarChart(data)
-
-        } ?: run {
-            val emptyData = arrayListOf<BarEntry>()
-
-            val dataSet = BarDataSet(emptyData, "")
-            drawWeeklyBarChart(BarData(day, dataSet))
+        val dataSet = BarDataSet(values, "Intake List")
+        dataSet.barSpacePercent = 70f
+        dataSet.colors = values.map { barEntry ->
+            if(barEntry.`val` >= weeklyVm.targetValue) resources.getColor(R.color.blue_1, null)
+            else resources.getColor(R.color.blue_3, null)
         }
+        android.util.Log.d("weekly chart fragment", "$values")
+        dataSet.setDrawValues(false)
+
+        val data = BarData(day, dataSet)
+        drawWeeklyBarChart(data)
+
     }
 
     private fun drawWeeklyBarChart(data: BarData) {
@@ -157,7 +155,7 @@ class WeeklyChartFragment : Fragment() {
         binding.weeklyBarchartByWeek.xAxis.position = XAxis.XAxisPosition.BOTTOM_INSIDE
 
         //set y axis format
-        binding.weeklyBarchartByWeek.axisLeft.valueFormatter = WeeklyValueFormatter()
+        binding.weeklyBarchartByWeek.axisLeft.valueFormatter = WeeklyValueFormatter
 
         //update chart
         binding.weeklyBarchartByWeek.invalidate()
@@ -167,8 +165,10 @@ class WeeklyChartFragment : Fragment() {
         val xLabels = weeklyVm.monthWeek.map { getString(R.string.weekly_month_week, it[0], it[1]) }
 
         val dataSet = BarDataSet(values, "total weekly data")
+        dataSet.colors = DrinkMapper.yearWeekDrinkPalette.map { resources.getColor(it, null) }
         dataSet.barSpacePercent = 40f
         dataSet.valueTextSize = 15f
+        dataSet.valueFormatter = WeeklyValueFormatter
 
         val data = BarData(xLabels, dataSet)
 
@@ -183,12 +183,20 @@ class WeeklyChartFragment : Fragment() {
         binding.weeklyBarchartByTotal.axisLeft.isEnabled = false
         binding.weeklyBarchartByTotal.xAxis.setDrawGridLines(false)
 
-        binding.weeklyBarchartByTotal.xAxis.position = XAxis.XAxisPosition.BOTTOM_INSIDE
+        //X Axis to bottom
+        binding.weeklyBarchartByTotal.xAxis.position = XAxis.XAxisPosition.BOTTOM
+        binding.weeklyBarchartByTotal.xAxis.yOffset = 0f
 
+        //line transparent
         binding.weeklyBarchartByTotal.axisLeft.axisLineColor =
             resources.getColor(R.color.transparent, null)
         binding.weeklyBarchartByTotal.xAxis.axisLineColor =
             resources.getColor(R.color.transparent, null)
+
+        //text size
+        binding.weeklyBarchartByTotal.xAxis.textSize = 14f
+        binding.weeklyBarchartByTotal.xAxis.textColor =
+            resources.getColor(R.color.chart_label, null)
 
         //remove legends & description
         binding.weeklyBarchartByTotal.setDescription("")
