@@ -7,6 +7,7 @@
         android:id="@+id/daily_picker_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingEnd="7dp"
         android:textSize="11sp"
         android:text="@string/daily_date"
         android:gravity="center"

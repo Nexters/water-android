@@ -15,4 +15,7 @@ object DrinkMapper {
         R.color.drink_7, R.color.drink_8, R.color.drink_9
     )
     val drinkName = R.array.drink_category
+
+    val yearWeekDrinkPalette =
+        listOf<Int>(R.color.blue_3, R.color.blue_3, R.color.blue_3, R.color.blue_1)
 }

@@ -17,8 +17,6 @@ interface intakeDao {
     @Query("SELECT ((SUM(amount))*100/:requiredAmount) FROM intake WHERE date BETWEEN :today AND :tomorrow")
     fun getDailyPercent(today: Long, tomorrow: Long, requiredAmount: Int): LiveData<Float>
 
-    @Query("SELECT * FROM intake WHERE date BETWEEN :today AND :tomorrow group BY category ORDER BY date ASC")
-
     @Query("SELECT date, category, SUM(amount) as amount FROM intake WHERE date BETWEEN :today AND :tomorrow group BY category ORDER BY date ASC")
     fun getDailyByGroup(today: Long, tomorrow: Long): LiveData<List<Intake>>
 
@@ -27,6 +25,14 @@ interface intakeDao {
 
     @Query("SELECT * FROM intake WHERE date BETWEEN :aMonthAgo AND :today ORDER BY date ASC")
     fun getMonthly(today: Long, aMonthAgo: Long): LiveData<List<Intake>>
+
+    @Query("SELECT amount, category, strftime('%w', date/1000, 'unixepoch') as date " +
+                "FROM (select * from intake where date between :firstDay And :endDay) "
+    )
+    fun getWeeklyByDay(firstDay: Long, endDay: Long): LiveData<List<Intake>>
+
+    @Query("SELECT strftime('%W', date/1000, 'unixepoch') as date, amount, category FROM INTAKE where date between :startWeek and :endWeek order by date asc")
+    fun getWeeklyByTotal(startWeek: Long, endWeek: Long): LiveData<List<Intake>>
 
     @Query("DELETE FROM intake")
     fun deleteAll()

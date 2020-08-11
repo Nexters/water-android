@@ -10,13 +10,13 @@ import java.util.*
 
 
 class DailyChartViewModel(private val repository: HomeRepository) {
-
     private val now = Calendar.getInstance()
     private var dailyIntake: LiveData<List<Intake>>? = null
     private val _maxDrink: MutableLiveData<Int> = MutableLiveData()
 
     val maxDrink:LiveData<Int> = _maxDrink
     val observeIntake: MediatorLiveData<List<Intake>> = MediatorLiveData()
+
     var todayDate = now[Calendar.DATE]
     val dayList = IntArray(now.getActualMaximum(Calendar.DAY_OF_MONTH)) { i -> i + 1}
 

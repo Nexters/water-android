@@ -75,7 +75,6 @@ class DailyChartFragment : Fragment() {
                 setNoneData()
             }
         })
-
         setSystemText()
     }
 
@@ -91,6 +90,7 @@ class DailyChartFragment : Fragment() {
             )
             binding.dailyDatePicker.adapter = arrayAdapter
             binding.dailyDatePicker.setSelection(dailyVm.todayDate - 1)
+
             binding.dailyDatePicker.onItemSelectedListener =
                 object : AdapterView.OnItemSelectedListener {
                     override fun onNothingSelected(parent: AdapterView<*>?) {}
