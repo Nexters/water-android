@@ -82,13 +82,8 @@ class DailyChartFragment : Fragment() {
     }
 
     private fun initSpinner() {
-        val cal = Calendar.getInstance()
-
         context?.let { context ->
-            val dayList = arrayListOf<String>()
-
-            for (i in 1..cal.getActualMaximum(Calendar.DAY_OF_MONTH))
-                dayList.add(String.format(getString(R.string.daily_date), i))
+            val dayList = dailyVm.dayList.map { getString(R.string.daily_date, it) }
 
             val arrayAdapter = ArrayAdapter<String>(
                 context,
