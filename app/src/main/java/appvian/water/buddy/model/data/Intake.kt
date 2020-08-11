@@ -15,5 +15,5 @@ data class Intake(
     @ColumnInfo(name = "amount")
     val amount: Int
 ) {
-    constructor() : this(0L,-1,0)
+    constructor() : this(0L,0,0)
 }
