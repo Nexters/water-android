@@ -22,8 +22,6 @@ class IntroFourthFragment : Fragment() {
     private lateinit var introViewModel: IntroViewModel
     lateinit var nametext : TextView
     lateinit var tagetamounttext : TextView
-    lateinit var cmtext : TextView
-
 
     companion object {
         fun newInstance() = IntroFourthFragment()
@@ -35,7 +33,7 @@ class IntroFourthFragment : Fragment() {
         val view = inflater.inflate(R.layout.intro_fourth_fragment, container, false)
         nametext = view.intro_fourth_name
         tagetamounttext = view.intro_fourth_Targetamount
-        cmtext = view.cmtext
+
         view.startbtn.setOnClickListener {
             startActivity(Intent(activity as IntroActivity, MainActivity::class.java))
         }
@@ -43,6 +41,7 @@ class IntroFourthFragment : Fragment() {
     }
 
 
+    @SuppressLint("SetTextI18n")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         introViewModel =
@@ -51,11 +50,9 @@ class IntroFourthFragment : Fragment() {
         introViewModel.nameliveText.observe(viewLifecycleOwner,
         Observer<Any> { o -> nametext.text = o!!.toString() })
 
-        introViewModel.kgliveText.observe(viewLifecycleOwner,
-            Observer<Any> { o -> tagetamounttext.text = o!!.toString() })
+        introViewModel.targetamountliveText.observe(viewLifecycleOwner,
+            Observer<Any> { o -> tagetamounttext.text = o!!.toString() + " L" })
 
-        introViewModel.heightliveText.observe(viewLifecycleOwner,
-            Observer<Any> { o -> cmtext.text = o!!.toString() })
 
     }
 

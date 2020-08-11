@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import appvian.water.buddy.R
@@ -23,6 +24,10 @@ class IntroThirdFragment: Fragment() {
     lateinit var edittextKg : EditText
     lateinit var edittextCm : EditText
 
+    var kgtext: String = ""
+    private var cmtext: String = ""
+    private var targetamount : Int = 0
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -32,7 +37,9 @@ class IntroThirdFragment: Fragment() {
         edittextCm = view.height_edittext
         view.nextbtn2.setOnClickListener {
             (activity as IntroActivity).replaceFragment(IntroFourthFragment.newInstance())
+            targetamount = (kgtext.toInt() + cmtext.toInt()) / 100
 
+            introViewModel.TargetAmountSetText(targetamount)
         }
         return view
     }
@@ -42,7 +49,7 @@ class IntroThirdFragment: Fragment() {
 
         edittextKg.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                introViewModel.kgSetText(s.toString())
+                kgtext = s.toString()
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -55,7 +62,7 @@ class IntroThirdFragment: Fragment() {
 
         edittextCm.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                introViewModel.heightSetText(s.toString())
+                cmtext = s.toString()
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
