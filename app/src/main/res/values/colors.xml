@@ -3,6 +3,8 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+    <color name="btnNormalBackgroundColor">#547cff</color>
+    <color name="White">#FFFFFF</color>
     <color name="settingTxtGray">#868e96</color>
     <color name="settingCardBack">#f1f3f5</color>
     <color name="settingTxtBlack">#030303</color>
@@ -23,7 +25,7 @@
     <color name="drink_7">#F17F7F</color>
     <color name="drink_8">#B6E944</color>
     <color name="drink_9">#C5C5C5</color>
-  
+
     <color name="grey_1">#f8f9fa</color>
     <color name="grey_2">#f1f3f5</color>
     <color name="grey_5">#dee2e6</color>
@@ -33,7 +35,7 @@
 
     <color name="blue_1">#547cff</color>
     <color name="blue_3">#dce5ff</color>
-    
+
     <color name="sub_red_1">#f96b6b</color>
     <color name="chart_label">#868686</color>
 </resources>

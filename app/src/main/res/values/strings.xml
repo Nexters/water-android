@@ -45,4 +45,25 @@
     <string name="weekly_sys_plus">저번 주보다 평균 수분 섭취량이\n%dml 늘었어요</string>
 
     <string name="target_amount">%sml</string>
+    <string name="intro_main_description">매일매일 \n필요한 수분으로 \n채워보세요.</string>
+    <string name="intro_second_description1">사용할 닉네임을\n알려주세요.</string>
+    <string name="intro_second_description2">닉네임은 언제든지 변경할 수 있어요.</string>
+    <string name="intro_second_inputhint">최대 7자 입력 </string>
+    <string name="intro_second_textcount">/6자 </string>
+    <string name="intro_third_description1">키와 몸무게\n알려주세요.</string>
+    <string name="intro_third_description2">하루 목표 섭취량을 계산 해드릴게요.</string>
+    <string name="intro_third_kghint"> kg 없이 입력 </string>
+    <string name="intro_third_kg"> 체중 (kg) </string>
+    <string name="intro_third_height"> 키 (cm) </string>
+    <string name="intro_third_heighthint"> cm 없이 입력 </string>
+    <string name="intro_fourth_welcome1">환영합니다!</string>
+    <string name="intro_fourth_welcome2">" 님의"</string>
+    <string name="intro_fourth_welcome3">하루 목표 수분 섭취량은</string>
+    <string name="intro_fourth_welcome4">" 입니다."</string>
+    <string name="intro_fourth_welcome5">캐릭터 워비와 함께\n목표량을 달성 보아요. </string>
+    <string name="intro_main_btn">시작하기</string>
+    <string name="intro_second_btn">다음 1/2</string>
+    <string name="intro_third_btn">다음 2/2</string>
+    <string name="intro_fourth_btn">확인</string>
+
 </resources>
