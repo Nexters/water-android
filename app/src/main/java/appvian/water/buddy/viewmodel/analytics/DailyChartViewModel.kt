@@ -20,18 +20,6 @@ class DailyChartViewModel(private val repository: HomeRepository) {
     var todayDate = now[Calendar.DATE]
     val dayList = IntArray(now.getActualMaximum(Calendar.DAY_OF_MONTH)) { i -> i + 1}
 
-
-    private fun getToday(): Calendar {
-        val now = Calendar.getInstance()
-        now.set(Calendar.AM_PM, Calendar.AM)
-        now.set(Calendar.HOUR, 0)
-        now.set(Calendar.MINUTE, 0)
-        now.set(Calendar.SECOND, 0)
-        now.set(Calendar.MILLISECOND, 0)
-
-        return now
-    }
-
     fun getDailyIntake() {
         val now = Calendar.getInstance()
         now.set(Calendar.DATE, todayDate)
@@ -49,10 +37,10 @@ class DailyChartViewModel(private val repository: HomeRepository) {
         tomorrow.set(Calendar.SECOND, 0)
         tomorrow.set(Calendar.MILLISECOND, 0)
 
-        getDailyIntake(now.timeInMillis, tomorrow.timeInMillis)
+        getDailyIntakeFromRepository(now.timeInMillis, tomorrow.timeInMillis)
     }
 
-    private fun getDailyIntake(today: Long, tomorrow: Long) {
+    private fun getDailyIntakeFromRepository(today: Long, tomorrow: Long) {
         android.util.Log.d("daily intake", "$today, $tomorrow")
         dailyIntake = repository.getDailyByGroup(today, tomorrow)
         android.util.Log.d("daily intake", "${dailyIntake?.value}")
