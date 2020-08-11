@@ -28,8 +28,10 @@
 
     <string name="analytics_header_daily">일별 수분 섭취량</string>
     <string name="daily_sys_none_water">마신 음료가\n없는 날이에요ㅜㅠ</string>
-    <string name="daily_sys_target"> %dml/ %dml </string>
+    <string name="daily_sys_max_drink">%s(을)를 가장\n많이 마셨어요</string>
     <string name="daily_none_water_1">마신 물이 없어요!</string>
     <string name="daily_none_water_2">하루 권장량을 꼭 마셔주세요!</string>
+    <string name="daily_item_percent">%.1f</string>
+    <string name="daily_date">%d일</string>
     <string name="target_amount">%sml</string>
 </resources>
