@@ -3,6 +3,7 @@ package appvian.water.buddy.viewmodel.analytics
 import android.graphics.Typeface
 import android.text.SpannableStringBuilder
 import android.text.Spanned
+import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
@@ -97,9 +98,9 @@ class WeeklyViewModel(val repository: HomeRepository) {
     }
 
 
-    fun strSapnBuilder(msg: String): SpannableStringBuilder {
+    fun strSapnBuilder(msg: String, color:Int): SpannableStringBuilder {
         val pattern = Pattern.compile("[0-9]+(ml)")
-        val style = StyleSpan(Typeface.BOLD)
+        val style = ForegroundColorSpan(color)
 
         val builder = SpannableStringBuilder(msg)
         val matchers = pattern.matcher(msg)

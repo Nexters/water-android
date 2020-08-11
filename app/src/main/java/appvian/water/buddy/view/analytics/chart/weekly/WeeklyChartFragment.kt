@@ -68,12 +68,13 @@ class WeeklyChartFragment : Fragment() {
         })
 
         weeklyVm.sysObserve.observe(viewLifecycleOwner, Observer {
+            val color = resources.getColor(R.color.blue_1, null)
             if (it > 0) {
                 val msg = getString(R.string.weekly_sys_plus, Math.abs(it))
-                binding.weeklySysText.text = weeklyVm.strSapnBuilder(msg)
+                binding.weeklySysText.text = weeklyVm.strSapnBuilder(msg, color)
             } else if (it < 0) {
                 val msg = getString(R.string.weekly_sys_minus, Math.abs(it))
-                binding.weeklySysText.text = weeklyVm.strSapnBuilder(msg)
+                binding.weeklySysText.text = weeklyVm.strSapnBuilder(msg, color)
             } else {
                 binding.weeklySysText.text = getString(R.string.weekly_sys_none)
             }
