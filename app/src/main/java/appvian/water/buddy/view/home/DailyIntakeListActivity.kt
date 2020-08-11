@@ -1,17 +1,19 @@
 package appvian.water.buddy.view.home
 
+import android.content.res.Resources
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.view.View
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import appvian.water.buddy.R
 import appvian.water.buddy.databinding.ActivityDailyIntakeListBinding
-import appvian.water.buddy.utilities.Code
-import appvian.water.buddy.view.SetIntakeModal
 import appvian.water.buddy.viewmodel.HomeViewModel
+import kotlinx.android.synthetic.main.delete_toast.view.*
 
 class DailyIntakeListActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDailyIntakeListBinding
@@ -99,6 +101,13 @@ class DailyIntakeListActivity : AppCompatActivity() {
                 }
                 homeViewModel.isDeleteButtonClicked.value = false
                 homeViewModel.deleteIntakeList.value?.clear()
+                Toast.makeText(this,String.format("%d개의 내역을 삭제하였습니다.",count),Toast.LENGTH_SHORT).apply {
+                    this.view = View.inflate(this@DailyIntakeListActivity,R.layout.delete_toast,findViewById(R.id.delete_toast))
+                    this.view.toast_text.text = String.format("%d개의 내역을 삭제하였습니다.",count)
+                    this.view.toast_text.width = Resources.getSystem().displayMetrics.widthPixels - 38 * (Resources.getSystem().displayMetrics.densityDpi) / DisplayMetrics.DENSITY_DEFAULT
+                    this.view.toast_text.height = 52 * (Resources.getSystem().displayMetrics.densityDpi) / DisplayMetrics.DENSITY_DEFAULT
+                    this.show()
+                }
             }
         })
     }
