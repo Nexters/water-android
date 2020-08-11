@@ -13,6 +13,7 @@ import appvian.water.buddy.databinding.FragmentAnalyticsBinding
 import appvian.water.buddy.view.analytics.calendar.CalendarFragment
 import appvian.water.buddy.view.analytics.chart.daily.DailyChartFragment
 import appvian.water.buddy.view.analytics.chart.weekly.WeeklyChartFragment
+
 import com.google.android.material.tabs.TabLayoutMediator
 import java.util.*
 

@@ -18,8 +18,6 @@ import appvian.water.buddy.viewmodel.analytics.DailyChartViewModel
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
-import java.util.*
-import kotlin.collections.ArrayList
 
 class DailyChartFragment : Fragment() {
 
@@ -52,7 +50,7 @@ class DailyChartFragment : Fragment() {
         super.onResume()
 
         dailyVm.getDailyIntake()
-        binding.dailyDatePicker.setSelection(dailyVm.todayDate)
+        binding.dailyDatePicker.setSelection(dailyVm.todayDate - 1)
     }
 
     private fun initUi() {
@@ -77,18 +75,12 @@ class DailyChartFragment : Fragment() {
                 setNoneData()
             }
         })
-
-        setSytemText()
+        setSystemText()
     }
 
     private fun initSpinner() {
-        val cal = Calendar.getInstance()
-
         context?.let { context ->
-            val dayList = arrayListOf<String>()
-
-            for (i in 1..cal.getActualMaximum(Calendar.DAY_OF_MONTH))
-                dayList.add(String.format(getString(R.string.daily_date), i))
+            val dayList = dailyVm.dayList.map { getString(R.string.daily_date, it) }
 
             val arrayAdapter = ArrayAdapter<String>(
                 context,
@@ -97,7 +89,8 @@ class DailyChartFragment : Fragment() {
                 dayList
             )
             binding.dailyDatePicker.adapter = arrayAdapter
-            binding.dailyDatePicker.setSelection(dailyVm.todayDate)
+            binding.dailyDatePicker.setSelection(dailyVm.todayDate - 1)
+
             binding.dailyDatePicker.onItemSelectedListener =
                 object : AdapterView.OnItemSelectedListener {
                     override fun onNothingSelected(parent: AdapterView<*>?) {}
@@ -108,8 +101,8 @@ class DailyChartFragment : Fragment() {
                         position: Int,
                         id: Long
                     ) {
-                        val day = dayList[position].split(" ")[0].toInt()
-                        dailyVm.getDailyIntake(day)
+                        dailyVm.todayDate = dailyVm.dayList[position]
+                        dailyVm.getDailyIntake()
                     }
 
                 }
@@ -155,9 +148,9 @@ class DailyChartFragment : Fragment() {
         binding.dailyPiechart.invalidate()
     }
 
-    private fun setSytemText() {
+    private fun setSystemText() {
         dailyVm.maxDrink.observe(viewLifecycleOwner, Observer {
-            if(!it.equals(-2)) {
+            if (!it.equals(-2)) {
                 val categoryName = resources.getStringArray(DrinkMapper.drinkName)[it]
                 binding.dailySysText.text =
                     String.format(getString(R.string.daily_sys_max_drink), categoryName)
