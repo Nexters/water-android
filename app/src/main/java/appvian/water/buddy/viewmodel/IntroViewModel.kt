@@ -17,20 +17,19 @@ class Factory(val application: Application) : ViewModelProvider.Factory {
 
     var nameliveText: MutableLiveData<String> = MutableLiveData()
     var kgliveText: MutableLiveData<String> = MutableLiveData()
+    var targetamountliveText: MutableLiveData<String> = MutableLiveData()
     var heightliveText: MutableLiveData<String> = MutableLiveData()
 
     fun getText(): LiveData<String?>? {
         return nameliveText
     }
 
+    fun TargetAmountSetText(text: Int?){
+        targetamountliveText.value = text.toString()
+    }
     fun nameSetText(text: String?) {
         nameliveText.value = text
     }
-    fun kgSetText(text: String?) {
-        kgliveText.value = text
-    }
-    fun heightSetText(text: String?) {
-        heightliveText.value = text
-    }
+
 
 }
