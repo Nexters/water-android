@@ -8,9 +8,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingEnd="7dp"
-        android:textSize="13sp"
+        android:textSize="11sp"
         android:text="@string/daily_date"
-        android:textColor="@color/white"
         android:gravity="center"
         />
 
