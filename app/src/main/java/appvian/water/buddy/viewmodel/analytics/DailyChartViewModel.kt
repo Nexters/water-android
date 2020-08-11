@@ -17,7 +17,7 @@ class DailyChartViewModel(private val repository: HomeRepository) {
 
     val maxDrink:LiveData<Int> = _maxDrink
     val observeIntake: MediatorLiveData<List<Intake>> = MediatorLiveData()
-    val todayDate = Calendar.getInstance()[Calendar.DATE] - 1
+    var todayDate = now[Calendar.DATE]
     val dayList = IntArray(now.getActualMaximum(Calendar.DAY_OF_MONTH)) { i -> i + 1}
 
 
@@ -33,22 +33,8 @@ class DailyChartViewModel(private val repository: HomeRepository) {
     }
 
     fun getDailyIntake() {
-        val now = getToday()
-
-        val tomorrow = Calendar.getInstance()
-        tomorrow.set(Calendar.DATE, now.get(Calendar.DATE) + 1)
-        tomorrow.set(Calendar.AM_PM, Calendar.AM)
-        tomorrow.set(Calendar.HOUR, 0)
-        tomorrow.set(Calendar.MINUTE, 0)
-        tomorrow.set(Calendar.SECOND, 0)
-        tomorrow.set(Calendar.MILLISECOND, 0)
-
-        getDailyIntake(now.timeInMillis, tomorrow.timeInMillis)
-    }
-
-    fun getDailyIntake(day: Int) {
         val now = Calendar.getInstance()
-        now.set(Calendar.DATE, day)
+        now.set(Calendar.DATE, todayDate)
         now.set(Calendar.AM_PM, Calendar.AM)
         now.set(Calendar.HOUR, 0)
         now.set(Calendar.MINUTE, 0)
@@ -56,7 +42,7 @@ class DailyChartViewModel(private val repository: HomeRepository) {
         now.set(Calendar.MILLISECOND, 0)
 
         val tomorrow = Calendar.getInstance()
-        tomorrow.set(Calendar.DATE, day + 1)
+        tomorrow.set(Calendar.DATE, todayDate + 1)
         tomorrow.set(Calendar.AM_PM, Calendar.AM)
         tomorrow.set(Calendar.HOUR, 0)
         tomorrow.set(Calendar.MINUTE, 0)
