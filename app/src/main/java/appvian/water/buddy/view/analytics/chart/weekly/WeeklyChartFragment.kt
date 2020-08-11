@@ -138,7 +138,8 @@ class WeeklyChartFragment : Fragment() {
             getString(R.string.limit_line_target, weeklyVm.targetValue)
         )
         limitLine.lineColor = resources.getColor(R.color.sub_red_1, null)
-        limitLine.enableDashedLine(10f, 10f, 0f)
+        limitLine.textColor = resources.getColor(R.color.sub_red_1, null)
+        limitLine.textSize = 15f
 
         binding.weeklyBarchartByWeek.axisLeft.addLimitLine(limitLine)
 
