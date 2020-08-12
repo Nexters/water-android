@@ -28,20 +28,20 @@ class HomeRepository(context: Context) {
     fun getDailyAmount(today: Long, tomorrow: Long): LiveData<Int>? {
         var dailyAmount: LiveData<Int>? = null
 
-        dailyAmount = runBlocking (Dispatchers.IO){
-            withContext(Dispatchers.Default){
+        dailyAmount = runBlocking(Dispatchers.IO) {
+            withContext(Dispatchers.Default) {
                 intakedao.getDailyAmount(today, tomorrow)
             }
         }
 
-        return  dailyAmount
+        return dailyAmount
     }
 
-    fun getDailyPercent(today: Long, tomorrow: Long, requiredAmount: Int): LiveData<Float>?{
+    fun getDailyPercent(today: Long, tomorrow: Long, requiredAmount: Int): LiveData<Float>? {
         var dailyPercent: LiveData<Float>? = null
 
-        dailyPercent = runBlocking (Dispatchers.IO) {
-            withContext(Dispatchers.Default){
+        dailyPercent = runBlocking(Dispatchers.IO) {
+            withContext(Dispatchers.Default) {
                 intakedao.getDailyPercent(today, tomorrow, requiredAmount)
             }
         }
@@ -90,10 +90,10 @@ class HomeRepository(context: Context) {
         return weeklyIntake
     }
 
-    fun getWeeklyByTotal(startWeekDay: Long, endWeekDay: Long) : LiveData<List<Intake>>? {
+    fun getWeeklyByTotal(startWeekDay: Long, endWeekDay: Long): LiveData<List<Intake>>? {
         var weeklyTotal: LiveData<List<Intake>>? = null
 
-        weeklyTotal = runBlocking(Dispatchers.IO){
+        weeklyTotal = runBlocking(Dispatchers.IO) {
             withContext(Dispatchers.Default) {
                 intakedao.getWeeklyByTotal(startWeekDay, endWeekDay)
             }
@@ -111,6 +111,18 @@ class HomeRepository(context: Context) {
                     today,
                     aMonthAgo
                 )
+            }
+        }
+
+        return monthlyIntake
+    }
+
+    fun getMonthlyByDay(startMonth: Long, endMonth: Long): LiveData<List<Intake>>? {
+        var monthlyIntake: LiveData<List<Intake>>? = null
+
+        monthlyIntake = runBlocking(Dispatchers.IO) {
+            withContext(Dispatchers.Default) {
+                intakedao.getMonthlyByDay(startMonth, endMonth)
             }
         }
 
