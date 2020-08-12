@@ -66,4 +66,12 @@
     <string name="intro_third_btn">다음 2/2</string>
     <string name="intro_fourth_btn">확인</string>
 
+    <string name="month_header">월별 수분 섭취량</string>
+    <string name="month_sys_text">%d일중 %d번 목표 수분 섭취 달성</string>
+    <string name="month_header_rank">음료 순위</string>
+    <string name="month_header_unit">잔당 200ml</string>
+    <string name="month_btn_load_more">전체보기</string>
+    <string name="month_rank_none">음료 순위가 없어요</string>
+    <string name="month_rank_none_sub">매일 권장 수분을 섭취하고 기록을 달성해보세요!</string>
+
 </resources>
