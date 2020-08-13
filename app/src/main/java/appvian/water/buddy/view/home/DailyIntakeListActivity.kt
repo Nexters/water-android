@@ -108,8 +108,8 @@ class DailyIntakeListActivity : AppCompatActivity() {
                     this.view = View.inflate(this@DailyIntakeListActivity,
                         R.layout.delete_toast,findViewById(R.id.delete_toast))
                     this.view.toast_text.text = String.format("%d개의 내역을 삭제하였습니다.",deleteCount)
-                    this.view.toast_text.width = Resources.getSystem().displayMetrics.widthPixels - 38 * (Resources.getSystem().displayMetrics.densityDpi) / DisplayMetrics.DENSITY_DEFAULT
-                    this.view.toast_text.height = 52 * (Resources.getSystem().displayMetrics.densityDpi) / DisplayMetrics.DENSITY_DEFAULT
+                    this.view.toast_text.width = binding.setDeleteButton.width
+                    this.view.toast_text.height = binding.setDeleteButton.height
                     this.show()
                 }
                 deleteCount = 0
