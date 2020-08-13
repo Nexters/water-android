@@ -4,7 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <import type="android.view.View"/>
+        <variable
+            name="vm"
+            type="appvian.water.buddy.viewmodel.analytics.MonthViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -123,6 +126,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="@dimen/daily_common_spacing"
+                    android:visibility="@{vm.monthlyRank.size() &lt; 1 ? View.INVISIBLE : View.VISIBLE}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/month_header_rank"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -139,6 +143,7 @@
                     android:textSize="13sp"
                     android:textColor="@color/grey_8"
                     android:background="@drawable/btn_load_more"
+                    android:visibility="@{vm.monthlyRank.size() &lt; 4 ? View.INVISIBLE : View.VISIBLE}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     style="?android:attr/borderlessButtonStyle"/>
@@ -147,6 +152,7 @@
                     android:id="@+id/month_none"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="@{vm.monthlyRank != null || vm.monthlyRank.size() &gt; 0 ? View.GONE : View.VISIBLE}"
                     app:layout_constraintTop_toBottomOf="@id/month_header_rank">
                     
                     <ImageView
