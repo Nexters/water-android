@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import appvian.water.buddy.R
 import appvian.water.buddy.model.data.Intake
+import appvian.water.buddy.util.DrinkMapper
 import appvian.water.buddy.viewmodel.HomeViewModel
 import kotlinx.android.synthetic.main.daily_intake_recyclerview_item.view.*
 import java.text.SimpleDateFormat
@@ -17,48 +18,11 @@ import java.text.SimpleDateFormat
 class DailyIntakeRecyclerViewAdapter (val context : Context, val activity: AppCompatActivity, val isDeleteClicked: Boolean, val intakeList : List<Intake>, val itemClick: (Intake) -> Unit) :
     RecyclerView.Adapter<DailyIntakeRecyclerViewAdapter.IntakeViewHolder>(){
     private var viewModel= ViewModelProvider(activity).get(HomeViewModel::class.java)
-    val categoryString = context.resources.getStringArray(R.array.category)
+    val categoryString = context.resources.getStringArray(R.array.drink_category)
     inner class IntakeViewHolder(itemView : View, itemClick: (Intake) -> Unit) : RecyclerView.ViewHolder(itemView) {
 
         fun bind (intake: Intake, position: Int, context: Context){
-            when(intake.category){
-                0 -> {
-                    val resourceId = context.resources.getIdentifier("icon_water", "drawable", context.packageName)
-                    itemView.icon.setImageResource(resourceId)
-                }
-                1 -> {
-                    val resourceId = context.resources.getIdentifier("icon_coffee", "drawable", context.packageName)
-                    itemView.icon.setImageResource(resourceId)
-                }
-                2 -> {
-                    val resourceId = context.resources.getIdentifier("icon_tea", "drawable", context.packageName)
-                    itemView.icon.setImageResource(resourceId)
-                }
-                3 -> {
-                    val resourceId = context.resources.getIdentifier("icon_milk", "drawable", context.packageName)
-                    itemView.icon.setImageResource(resourceId)
-                }
-                4 -> {
-                    val resourceId = context.resources.getIdentifier("icon_carbon", "drawable", context.packageName)
-                    itemView.icon.setImageResource(resourceId)
-                }
-                5 -> {
-                    val resourceId = context.resources.getIdentifier("icon_juice", "drawable", context.packageName)
-                    itemView.icon.setImageResource(resourceId)
-                }
-                6 -> {
-                    val resourceId = context.resources.getIdentifier("icon_alcohol", "drawable", context.packageName)
-                    itemView.icon.setImageResource(resourceId)
-                }
-                7 -> {
-                    val resourceId = context.resources.getIdentifier("icon_ion", "drawable", context.packageName)
-                    itemView.icon.setImageResource(resourceId)
-                }
-                8 -> {
-                    val resourceId = context.resources.getIdentifier("icon_etc", "drawable", context.packageName)
-                    itemView.icon.setImageResource(resourceId)
-                }
-            }
+            itemView.icon.setImageResource(DrinkMapper.drinkResources[intake.category])
             itemView.categoryText.text = categoryString[intake.category]
             itemView.amountText.text = String.format("%dml",intake.amount)
             itemView.am_pm_text.text = getAmORPm(intake.date)
