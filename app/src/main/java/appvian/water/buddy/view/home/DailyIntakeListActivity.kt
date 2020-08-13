@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.delete_toast.view.*
 class DailyIntakeListActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDailyIntakeListBinding
     private lateinit var homeViewModel: HomeViewModel
+    var deleteCount = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
@@ -27,6 +28,7 @@ class DailyIntakeListActivity : AppCompatActivity() {
         initRecyclerView()
         setVisibleCheckbox()
         setButton()
+        initToast()
     }
 
     override fun onBackPressed() {
@@ -95,20 +97,25 @@ class DailyIntakeListActivity : AppCompatActivity() {
                     binding.setDeleteButton.isEnabled = true
                 }
             }
-            binding.setDeleteButton.setOnClickListener {
-                for (i in deleteList){
-                    homeViewModel.delete(i)
-                }
-                homeViewModel.isDeleteButtonClicked.value = false
-                homeViewModel.deleteIntakeList.value?.clear()
-                Toast.makeText(this,String.format("%d개의 내역을 삭제하였습니다.",count),Toast.LENGTH_SHORT).apply {
-                    this.view = View.inflate(this@DailyIntakeListActivity,R.layout.delete_toast,findViewById(R.id.delete_toast))
-                    this.view.toast_text.text = String.format("%d개의 내역을 삭제하였습니다.",count)
+            deleteCount = count
+        })
+    }
+
+    private fun initToast(){
+        homeViewModel.showDeleteToast.observe(this, Observer {
+            if (it){
+                Toast.makeText(this,String.format("%d개의 내역을 삭제하였습니다.",deleteCount), Toast.LENGTH_SHORT).apply {
+                    this.view = View.inflate(this@DailyIntakeListActivity,
+                        R.layout.delete_toast,findViewById(R.id.delete_toast))
+                    this.view.toast_text.text = String.format("%d개의 내역을 삭제하였습니다.",deleteCount)
                     this.view.toast_text.width = Resources.getSystem().displayMetrics.widthPixels - 38 * (Resources.getSystem().displayMetrics.densityDpi) / DisplayMetrics.DENSITY_DEFAULT
                     this.view.toast_text.height = 52 * (Resources.getSystem().displayMetrics.densityDpi) / DisplayMetrics.DENSITY_DEFAULT
                     this.show()
                 }
+                deleteCount = 0
+                homeViewModel.showDeleteToast.value = false
             }
         })
+
     }
 }

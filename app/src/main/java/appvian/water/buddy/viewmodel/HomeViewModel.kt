@@ -4,11 +4,14 @@ import android.app.Application
 import android.content.res.Resources
 import android.util.DisplayMetrics
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import appvian.water.buddy.R
 import appvian.water.buddy.model.data.Intake
 import appvian.water.buddy.model.repository.HomeRepository
+import kotlinx.android.synthetic.main.delete_toast.view.*
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -28,7 +31,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     val startPercentTextY : Float = Resources.getSystem().displayMetrics.heightPixels.toFloat() - 370F * (Resources.getSystem().displayMetrics.densityDpi).toFloat() / DisplayMetrics.DENSITY_DEFAULT
     var currentPercentTextY = startPercentTextY
     var percent = getDailyPercent()
-
+    var showDeleteToast: MutableLiveData<Boolean> = MutableLiveData(false)
     var isDeleteButtonClicked: MutableLiveData<Boolean> = MutableLiveData(false)
 
     val deleteButton = View.OnClickListener {
@@ -104,5 +107,18 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
         calendar.set(Calendar.MILLISECOND,0)
         val tomorrow = calendar.time.time
         return tomorrow
+    }
+
+    val deleteListner = object : View.OnClickListener{
+        override fun onClick(v: View?) {
+            if (deleteIntakeList.value!=null) {
+                for (i in deleteIntakeList.value!!){
+                    delete(i)
+                }
+                isDeleteButtonClicked.value = false
+                deleteIntakeList.value!!.clear()
+            }
+            showDeleteToast.value = true
+        }
     }
 }

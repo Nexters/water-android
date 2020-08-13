@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
     <data>
         <variable
             name="homeViewModel"
@@ -69,6 +70,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             android:visibility="gone"
+            bind:deleteButtonClicked="@{homeViewModel.deleteListner}"
             />
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/no_water_layout"
