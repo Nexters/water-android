@@ -18,15 +18,57 @@
     <string name="day_fri">Fri</string>
     <string name="day_sat">Sat</string>
 
+    <string name="home_text_1">희망차게\n물 한잔 원샷!</string>
+    <string name="home_text_2">시작이 반이다\n더욱 분발해 보아요!</string>
+    <string name="home_text_3">피부의 탱글탱글함은\n수분 보충에서부터!</string>
+    <string name="home_text_4">목표 달성까지 얼마\n남지 않았어요!</string>
+    <string name="home_text_5">잊지 않고 마셔줘서\n고마워요 찡긋 :)</string>
+
     <string name="analytics_header_title">%d월 수분섭취</string>
 
     <string name="analytics_header_daily">일별 수분 섭취량</string>
     <string name="daily_sys_none_water">마신 음료가\n없는 날이에요ㅜㅠ</string>
-    <string name="daily_sys_target"> %dml/ %dml </string>
+    <string name="daily_sys_max_drink">%s(을)를 가장\n많이 마셨어요</string>
     <string name="daily_none_water_1">마신 물이 없어요!</string>
     <string name="daily_none_water_2">하루 권장량을 꼭 마셔주세요!</string>
+    <string name="daily_item_percent">%.1f</string>
+    <string name="daily_date">%d일</string>
+
+    <string name="analytics_weekly_header1">요일별 수분 섭취량</string>
+    <string name="analytics_weekly_header2">주간 수분 섭취량</string>
+    <string name="weekly_chart_y_format">%.1fL</string>
+    <string name="weekly_picker_item">%d주</string>
+    <string name="weekly_month_week">%d월%d주</string>
+    <string name="limit_line_target">목표\n%.1fL</string>
+    <string name="weekly_sys_none">수분을 섭취해 볼까요?</string>
+    <string name="weekly_sys_minus">저번 주보다 평균 수분 섭취량이\n%dml 줄었어요</string>
+    <string name="weekly_sys_plus">저번 주보다 평균 수분 섭취량이\n%dml 늘었어요</string>
+
     <string name="target_amount">%sml</string>
     <string name="nickname_change">닉네임 변경이 완료되었어요.</string>
     <string name="favorite_drink_add">자주 마시는 음료로 등록했어요.\n홈에서 음료를 빠르게 추가해보아요.</string>
     <string name="favorite_drink_full">자주 마시는 음료는\n최대 2개까지만 등록할 수 있어요</string>
+
+    <string name="intro_main_description">매일매일 \n필요한 수분으로 \n채워보세요.</string>
+    <string name="intro_second_description1">사용할 닉네임을\n알려주세요.</string>
+    <string name="intro_second_description2">닉네임은 언제든지 변경할 수 있어요.</string>
+    <string name="intro_second_inputhint">최대 7자 입력 </string>
+    <string name="intro_second_textcount">/6자 </string>
+    <string name="intro_third_description1">키와 몸무게\n알려주세요.</string>
+    <string name="intro_third_description2">하루 목표 섭취량을 계산 해드릴게요.</string>
+    <string name="intro_third_kghint"> kg 없이 입력 </string>
+    <string name="intro_third_kg"> 체중 (kg) </string>
+    <string name="intro_third_height"> 키 (cm) </string>
+    <string name="intro_third_heighthint"> cm 없이 입력 </string>
+    <string name="intro_fourth_welcome1">환영합니다!</string>
+    <string name="intro_fourth_welcome2">" 님의"</string>
+    <string name="intro_fourth_welcome3">하루 목표 수분 섭취량은</string>
+    <string name="intro_fourth_welcome4">" 입니다."</string>
+    <string name="intro_fourth_welcome5">캐릭터 워비와 함께\n목표량을 달성 보아요. </string>
+    <string name="intro_main_btn">시작하기</string>
+    <string name="intro_second_btn">다음 1/2</string>
+    <string name="intro_third_btn">다음 2/2</string>
+    <string name="intro_fourth_btn">확인</string>
+
+
 </resources>

@@ -16,7 +16,7 @@ class HomeRepository(context: Context) {
     fun getDaily(today: Long, tomorrow: Long): LiveData<List<Intake>>? {
         var dailyIntake: LiveData<List<Intake>>? = null
 
-        dailyIntake = runBlocking(Dispatchers.IO){
+        dailyIntake = runBlocking(Dispatchers.IO) {
             withContext(Dispatchers.Default) {
                 intakedao.getDaily(today, tomorrow)
             }
@@ -25,10 +25,34 @@ class HomeRepository(context: Context) {
         return dailyIntake
     }
 
+    fun getDailyAmount(today: Long, tomorrow: Long): LiveData<Int>? {
+        var dailyAmount: LiveData<Int>? = null
+
+        dailyAmount = runBlocking (Dispatchers.IO){
+            withContext(Dispatchers.Default){
+                intakedao.getDailyAmount(today, tomorrow)
+            }
+        }
+
+        return  dailyAmount
+    }
+
+    fun getDailyPercent(today: Long, tomorrow: Long, requiredAmount: Int): LiveData<Float>?{
+        var dailyPercent: LiveData<Float>? = null
+
+        dailyPercent = runBlocking (Dispatchers.IO) {
+            withContext(Dispatchers.Default){
+                intakedao.getDailyPercent(today, tomorrow, requiredAmount)
+            }
+        }
+
+        return dailyPercent
+    }
+
     fun getDailyByGroup(today: Long, tomorrow: Long): LiveData<List<Intake>>? {
         var dailyIntake: LiveData<List<Intake>>? = null
 
-        dailyIntake = runBlocking(Dispatchers.IO){
+        dailyIntake = runBlocking(Dispatchers.IO) {
             withContext(Dispatchers.Default) {
                 intakedao.getDailyByGroup(today, tomorrow)
             }
@@ -40,8 +64,8 @@ class HomeRepository(context: Context) {
     fun getWeekly(today: Long, aWeekAgo: Long): LiveData<List<Intake>>? {
         var weeklyIntake: LiveData<List<Intake>>? = null
 
-        GlobalScope.launch(Dispatchers.Default) {
-            weeklyIntake = withContext(Dispatchers.Default) {
+        weeklyIntake = runBlocking(Dispatchers.IO) {
+            withContext(Dispatchers.Default) {
                 intakedao.getWeekly(
                     today,
                     aWeekAgo
@@ -49,6 +73,33 @@ class HomeRepository(context: Context) {
             }
         }
         return weeklyIntake
+    }
+
+    fun getWeeklyByDay(firstDay: Long, lastDay: Long): LiveData<List<Intake>>? {
+        var weeklyIntake: LiveData<List<Intake>>? = null
+
+        weeklyIntake = runBlocking(Dispatchers.IO) {
+            withContext(Dispatchers.Default) {
+                intakedao.getWeeklyByDay(
+                    firstDay,
+                    lastDay
+                )
+            }
+        }
+
+        return weeklyIntake
+    }
+
+    fun getWeeklyByTotal(startWeekDay: Long, endWeekDay: Long) : LiveData<List<Intake>>? {
+        var weeklyTotal: LiveData<List<Intake>>? = null
+
+        weeklyTotal = runBlocking(Dispatchers.IO){
+            withContext(Dispatchers.Default) {
+                intakedao.getWeeklyByTotal(startWeekDay, endWeekDay)
+            }
+        }
+
+        return weeklyTotal
     }
 
     fun getMonthly(today: Long, aMonthAgo: Long): LiveData<List<Intake>>? {
@@ -76,6 +127,12 @@ class HomeRepository(context: Context) {
     fun delete(intake: Intake) {
         runBlocking(Dispatchers.IO) {
             intakedao.delete(intake)
+        }
+    }
+
+    fun deleteAll() {
+        runBlocking(Dispatchers.IO) {
+            intakedao.deleteAll()
         }
     }
 }

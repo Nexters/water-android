@@ -1,31 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".view.MainFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="homeViewModel"
+            type="appvian.water.buddy.viewmodel.HomeViewModel" />
+    </data>
+
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/animation_view1"
+            android:id="@+id/animation_water_full"
+            android:layout_width="wrap_content"
+            android:layout_height="1000dp"
+            android:scaleType="fitXY"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="water_full.json"
+            app:lottie_loop="true" />
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            app:lottie_fileName="5596-floatingswimming-duck.json" />
+            android:layout_marginEnd="-80dp"
+            >
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/animation_first_character"
+                android:layout_width="280dp"
+                android:layout_height="280dp"
+                app:lottie_autoPlay="true"
+                app:lottie_fileName="0-20/1/0-20-1.json"
+                app:lottie_imageAssetsFolder="0-20/1/images"
+                app:lottie_loop="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                />
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/animation_character"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginEnd="80dp"
+                app:lottie_autoPlay="true"
+                app:lottie_fileName="0-20/2/0-20-2.json"
+                app:lottie_imageAssetsFolder="0-20/2/images"
+                app:lottie_loop="true"
+                android:visibility="gone"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
         <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/animation_view2"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginLeft="250dp"
-            android:layout_marginTop="490dp"
+            android:id="@+id/animation_water_line"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             app:lottie_autoPlay="true"
-            app:lottie_fileName="spongebob.json"
+            app:lottie_fileName="water_line.json"
             app:lottie_loop="true"
             />
 
@@ -33,15 +66,75 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <TextView
-                android:id="@+id/textview"
+                android:id="@+id/nickname_text"
+                android:text="...님,"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="40dp"
+                android:textColor="#030303"
+                android:textSize="22sp"
+                android:lineHeight="29sp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="51dp"
+                />
+            <TextView
+                android:id="@+id/home_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#030303"
+                android:textSize="22sp"
+                android:lineHeight="29sp"
+                android:layout_marginTop="7sp"
+                app:layout_constraintTop_toBottomOf="@id/nickname_text"
+                app:layout_constraintLeft_toLeftOf="@id/nickname_text"
+                />
+            <Button
+                android:id="@+id/intake_list_button"
+                android:layout_width="122dp"
+                android:layout_height="29dp"
+                android:textSize="11sp"
+                android:textColor="#868686"
+                android:background="@drawable/intake_list_button_radius"
+                app:layout_constraintTop_toBottomOf="@id/home_text"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginTop="14dp"
+                android:layout_marginStart="32dp"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/percent_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="196dp"
+            >
+            <TextView
+                android:id="@+id/percent"
+                android:text="0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="65sp"
+                android:textColor="#0074ff"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
+                />
+            <TextView
+                android:text="%"
+                android:textSize="20sp"
+                android:textColor="#0074ff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@id/percent"
+                app:layout_constraintLeft_toRightOf="@id/percent"
+                android:layout_marginBottom="15dp"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+
     </FrameLayout>
 
-</FrameLayout>
+</layout>

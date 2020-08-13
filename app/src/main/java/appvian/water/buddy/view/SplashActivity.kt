@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import appvian.water.buddy.R
+import appvian.water.buddy.view.Intro.IntroActivity
 
 class SplashActivity : AppCompatActivity() {
 
@@ -13,7 +14,7 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
 
         Handler().postDelayed(Runnable {
-            startActivity(Intent(baseContext, MainActivity::class.java))
+            startActivity(Intent(baseContext, IntroActivity::class.java))
         }, 1500)
     }
 }

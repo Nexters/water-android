@@ -9,10 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.settings.AlarmSettingActivity"></activity>
-        <activity android:name=".view.settings.FavoriteDrinkSettingActivity" />
-        <activity android:name=".view.settings.ProfileEditActivity" />
-        <activity android:name=".view.settings.TargetAmountSettingActivity" />
+
+
         <receiver android:name=".widget.HomeWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -24,16 +22,14 @@
         </receiver>
 
         <activity android:name=".view.MainActivity" />
+        <activity android:name=".view.home.DailyIntakeListActivity"></activity>
+        <activity android:name=".view.Intro.IntroActivity"></activity>
         <activity android:name=".view.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".view.settings.PopupActivity"
-            android:theme="@style/popupTheme">
         </activity>
     </application>
 
