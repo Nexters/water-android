@@ -45,6 +45,10 @@
     <string name="weekly_sys_plus">저번 주보다 평균 수분 섭취량이\n%dml 늘었어요</string>
 
     <string name="target_amount">%sml</string>
+    <string name="nickname_change">닉네임 변경이 완료되었어요.</string>
+    <string name="favorite_drink_add">자주 마시는 음료로 등록했어요.\n홈에서 음료를 빠르게 추가해보아요.</string>
+    <string name="favorite_drink_full">자주 마시는 음료는\n최대 2개까지만 등록할 수 있어요</string>
+
     <string name="intro_main_description">매일매일 \n필요한 수분으로 \n채워보세요.</string>
     <string name="intro_second_description1">사용할 닉네임을\n알려주세요.</string>
     <string name="intro_second_description2">닉네임은 언제든지 변경할 수 있어요.</string>
@@ -65,5 +69,6 @@
     <string name="intro_second_btn">다음 1/2</string>
     <string name="intro_third_btn">다음 2/2</string>
     <string name="intro_fourth_btn">확인</string>
+
 
 </resources>
