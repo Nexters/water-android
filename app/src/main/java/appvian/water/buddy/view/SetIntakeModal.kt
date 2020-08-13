@@ -38,7 +38,7 @@ import kotlinx.coroutines.InternalCoroutinesApi
 import java.util.*
 
 
-class SetIntakeModal(var parent_context_code : Int) : BottomSheetDialogFragment() , TextWatcher{
+class SetIntakeModal(var parent_context_code : Int, var intake : Intake?) : BottomSheetDialogFragment() , TextWatcher{
     private lateinit var homeViewModel: HomeViewModel
     private lateinit var favoriteViewModel: FavoriteViewModel
     var categoryList = arrayListOf<Category>()
@@ -84,17 +84,27 @@ class SetIntakeModal(var parent_context_code : Int) : BottomSheetDialogFragment(
             favoriteViewModel = ViewModelProvider(this).get(FavoriteViewModel::class.java)
             if(parent_context_code == Code.FAVORITE_EDIT_1){
                 var stringTokenizer = StringTokenizer(favoriteViewModel.fav_1_livedata.value)
-                stringTokenizer.nextToken()
+                var category = stringTokenizer.nextToken()
                 var amount = stringTokenizer.nextToken()
                 v.edt_amount.setText(amount + "ml")
                 v.edt_amount.setSelection(amount.length)
+                (v.recyclerview.adapter as CategoryRecyclerViewAdapter).setCategory(category.toInt())
+                typeofDrink = category.toInt()
             }else if(parent_context_code == Code.FAVORITE_EDIT_2){
                 var stringTokenizer = StringTokenizer(favoriteViewModel.fav_2_livedata.value)
-                stringTokenizer.nextToken()
+                var category = stringTokenizer.nextToken()
                 var amount = stringTokenizer.nextToken()
                 v.edt_amount.setText(amount + "ml")
                 v.edt_amount.setSelection(amount.length)
+                (v.recyclerview.adapter as CategoryRecyclerViewAdapter).setCategory(category.toInt())
+                typeofDrink = category.toInt()
             }
+        }else if(parent_context_code == Code.HOME_FRAGMENT){
+            homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+            v.edt_amount.setText(intake!!.amount.toString() + "ml")
+            v.edt_amount.setSelection(intake!!.amount.toString().length)
+            (v.recyclerview.adapter as CategoryRecyclerViewAdapter).setCategory(intake!!.category)
+            typeofDrink = intake!!.category
         }
 
         v.setButton.setOnClickListener {
@@ -122,6 +132,11 @@ class SetIntakeModal(var parent_context_code : Int) : BottomSheetDialogFragment(
                 }
                 Code.FAVORITE_EDIT_2 -> {
                     favoriteViewModel.setFa2LiveData(typeofDrink, pickedNum)
+                }
+                Code.HOME_FRAGMENT -> {
+                    //오늘 마신 물 수정
+                    homeViewModel.modifyAmount(intake!!.date, pickedNum)
+                    homeViewModel.modifyCategory(intake!!.date, typeofDrink)
                 }
             }
 
@@ -218,8 +233,8 @@ class SetIntakeModal(var parent_context_code : Int) : BottomSheetDialogFragment(
         categoryList.add(Category(4,"탄산음료","icon_carbon"))
         categoryList.add(Category(5,"주스","icon_juice"))
         categoryList.add(Category(6,"주류","icon_alcohol"))
-        categoryList.add(Category(6,"이온음료","icon_ion"))
-        categoryList.add(Category(6,"기타","icon_etc"))
+        categoryList.add(Category(7,"이온음료","icon_ion"))
+        categoryList.add(Category(8,"기타","icon_etc"))
 
     }
 

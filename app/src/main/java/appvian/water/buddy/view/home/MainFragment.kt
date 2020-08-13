@@ -196,7 +196,7 @@ class MainFragment : Fragment() {
 
     private fun setCharacter(percent: Float){
         binding.animationCharacter.setOnClickListener {
-            val bottomSheet = SetIntakeModal(Code.MAIN_FRAGMENT)
+            val bottomSheet = SetIntakeModal(Code.MAIN_FRAGMENT, null)
             val fragmentManager = childFragmentManager
             bottomSheet.show(fragmentManager,bottomSheet.tag)
         }

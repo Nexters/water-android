@@ -14,7 +14,7 @@ import appvian.water.buddy.model.data.SharedPreferenceStringLiveData
 class SettingViewModel(application: Application) : AndroidViewModel(application) {
     //사용자 닉네임
     val name_pref = application.getSharedPreferences("name", Context.MODE_PRIVATE)
-    var nameLiveData: SharedPreferenceStringLiveData = SharedPreferenceStringLiveData(name_pref, "name", name_pref.getString("name", "nick name")!!)
+    var nameLiveData: SharedPreferenceStringLiveData = SharedPreferenceStringLiveData(name_pref, "name", name_pref.getString("name", "name")!!)
 
     //사용자 키
     val height_pref = application.getSharedPreferences("height", Context.MODE_PRIVATE)

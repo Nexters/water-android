@@ -12,6 +12,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import appvian.water.buddy.R
 import appvian.water.buddy.databinding.ActivityDailyIntakeListBinding
+import appvian.water.buddy.utilities.Code
+import appvian.water.buddy.view.SetIntakeModal
 import appvian.water.buddy.viewmodel.HomeViewModel
 import kotlinx.android.synthetic.main.delete_toast.view.*
 
@@ -24,7 +26,7 @@ class DailyIntakeListActivity : AppCompatActivity() {
         homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         binding = DataBindingUtil.setContentView(this@DailyIntakeListActivity, R.layout.activity_daily_intake_list)
         binding.homeViewModel = homeViewModel
-
+        
         initRecyclerView()
         setVisibleCheckbox()
         setButton()
@@ -53,7 +55,7 @@ class DailyIntakeListActivity : AppCompatActivity() {
                         Observer {isDeleteClicked ->
                             adapter = DailyIntakeRecyclerViewAdapter(context, this@DailyIntakeListActivity, isDeleteClicked, it) {
                                 intake ->
-                                val bottomSheet = ModifyIntakeModal(intake)
+                                val bottomSheet = SetIntakeModal(Code.HOME_FRAGMENT, intake)
                                 val fragmentManager = supportFragmentManager
                                 bottomSheet.show(fragmentManager,bottomSheet.tag)
                             }
