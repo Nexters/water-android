@@ -17,6 +17,7 @@ class MonthFragment : Fragment() {
     private lateinit var monthVm: MonthViewModel
     private lateinit var binding: FragmentMonthChartBinding
     private val rankAdapter = RankAdapter()
+    private val characterAdapter = CharacterAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,6 +50,7 @@ class MonthFragment : Fragment() {
         changeAppBarHeight()
 
         binding.monthRankList.adapter = rankAdapter
+        binding.monthIntakeCharacter.adapter = characterAdapter
 
         monthVm.monthlyRank.observe(viewLifecycleOwner, Observer {
             rankAdapter.setData(it)
