@@ -6,18 +6,29 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import appvian.water.buddy.R
 import appvian.water.buddy.databinding.ItemMonthIntakeBinding
-import appvian.water.buddy.model.data.CalendarData
+import appvian.water.buddy.model.data.Intake
+import appvian.water.buddy.util.DrinkMapper
 
 class RankAdapter : RecyclerView.Adapter<RankAdapter.RankViewHolder>() {
     private lateinit var binding: ItemMonthIntakeBinding
-    private val rankList = IntArray(10){ i -> i + 1}
+    private val rankList = ArrayList<Intake>()
 
     inner class RankViewHolder(private val binding: ItemMonthIntakeBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: Int) {
-            binding.monthRankNum.text = item.toString()
+        fun bind(position: Int) {
+            val item = rankList[position]
+            binding.pos = position + 1
+            binding.intake = item
+            binding.rankImg.setImageResource(DrinkMapper.drinkResources[item.category])
+            binding.rankName.text = binding.root.resources.getTextArray(DrinkMapper.drinkName)[item.category]
         }
+    }
+
+    fun setData(rankData: List<Intake>) {
+        rankList.clear()
+        rankList.addAll(rankData)
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RankViewHolder {
@@ -36,7 +47,7 @@ class RankAdapter : RecyclerView.Adapter<RankAdapter.RankViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: RankViewHolder, position: Int) {
-        holder.bind(rankList[position])
+        holder.bind(position)
     }
 
 }

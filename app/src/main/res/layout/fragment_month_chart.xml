@@ -124,7 +124,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/month_rank_list"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/daily_common_spacing"
                     android:visibility="@{vm.monthlyRank.size() &lt; 1 ? View.INVISIBLE : View.VISIBLE}"
                     app:layout_constraintStart_toStartOf="parent"
@@ -134,19 +134,20 @@
 
                 <Button
                     android:id="@+id/month_load_more"
+                    style="?android:attr/borderlessButtonStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/daily_common_spacing"
                     android:layout_marginEnd="@dimen/daily_common_spacing"
-                    android:layout_marginTop="219dp"
-                    android:text="@string/month_btn_load_more"
-                    android:textSize="13sp"
-                    android:textColor="@color/grey_8"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="24dp"
                     android:background="@drawable/btn_load_more"
+                    android:text="@string/month_btn_load_more"
+                    android:textColor="@color/grey_8"
+                    android:textSize="13sp"
                     android:visibility="@{vm.monthlyRank.size() &lt; 4 ? View.INVISIBLE : View.VISIBLE}"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    style="?android:attr/borderlessButtonStyle"/>
+                    app:layout_constraintTop_toBottomOf="@id/month_rank_list" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/month_none"

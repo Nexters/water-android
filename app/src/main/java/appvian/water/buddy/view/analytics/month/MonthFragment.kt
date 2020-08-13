@@ -48,7 +48,7 @@ class MonthFragment : Fragment() {
         binding.monthRankList.adapter = rankAdapter
 
         monthVm.monthlyRank.observe(viewLifecycleOwner, Observer {
-            android.util.Log.d("month fragment", "$it")
+            rankAdapter.setData(it)
         })
     }
 
