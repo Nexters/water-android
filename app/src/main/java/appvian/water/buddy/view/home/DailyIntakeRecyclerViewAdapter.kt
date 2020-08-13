@@ -2,7 +2,6 @@ package appvian.water.buddy.view.home
 
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,13 +12,12 @@ import appvian.water.buddy.R
 import appvian.water.buddy.model.data.Intake
 import appvian.water.buddy.viewmodel.HomeViewModel
 import kotlinx.android.synthetic.main.daily_intake_recyclerview_item.view.*
-import kotlinx.android.synthetic.main.modal_category_recyclerview_item.view.*
 import java.text.SimpleDateFormat
 
 class DailyIntakeRecyclerViewAdapter (val context : Context, val activity: AppCompatActivity, val isDeleteClicked: Boolean, val intakeList : List<Intake>, val itemClick: (Intake) -> Unit) :
     RecyclerView.Adapter<DailyIntakeRecyclerViewAdapter.IntakeViewHolder>(){
     private var viewModel= ViewModelProvider(activity).get(HomeViewModel::class.java)
-    val categoryString = arrayListOf<String>("물","커피","차","우유","탄산음료","주스","주류","이온음료","기타")
+    val categoryString = context.resources.getStringArray(R.array.category)
     inner class IntakeViewHolder(itemView : View, itemClick: (Intake) -> Unit) : RecyclerView.ViewHolder(itemView) {
 
         fun bind (intake: Intake, position: Int, context: Context){
