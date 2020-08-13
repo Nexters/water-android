@@ -83,17 +83,19 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <GridView
-                        android:id="@+id/month_intake_view"
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/month_intake_character"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="216dp"
                         android:layout_marginStart="40dp"
                         android:layout_marginEnd="40dp"
                         android:layout_marginBottom="53dp"
                         android:layout_marginTop="23dp"
+                        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                         app:spanCount="7"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/month_sys_tv"/>
+                        app:layout_constraintTop_toBottomOf="@id/month_sys_tv"
+                        tools:listitem="@layout/month_character_list"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
