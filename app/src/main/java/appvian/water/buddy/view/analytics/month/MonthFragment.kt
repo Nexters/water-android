@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -45,6 +46,8 @@ class MonthFragment : Fragment() {
     }
 
     private fun initUi() {
+        changeAppBarHeight()
+
         binding.monthRankList.adapter = rankAdapter
 
         monthVm.monthlyRank.observe(viewLifecycleOwner, Observer {
@@ -53,6 +56,12 @@ class MonthFragment : Fragment() {
         })
 
         setLoadMoreButton()
+    }
+
+    private fun changeAppBarHeight() {
+        val density = resources.displayMetrics.density
+        val height = resources.displayMetrics.heightPixels / density
+        binding.monthToolbar.layoutParams.height = Math.round(height * 0.97).toInt()
     }
 
     private fun setLoadMoreButton() {
