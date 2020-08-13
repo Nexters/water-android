@@ -3,29 +3,38 @@ package appvian.water.buddy.view
 import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
+import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
+import android.text.InputType
 import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
+import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import appvian.water.buddy.R
 import appvian.water.buddy.model.data.Category
 import appvian.water.buddy.model.data.Intake
 import appvian.water.buddy.utilities.Code
+import appvian.water.buddy.view.settings.PopupActivity
 import appvian.water.buddy.viewmodel.FavoriteViewModel
 import appvian.water.buddy.viewmodel.HomeViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import kotlinx.android.synthetic.main.activity_profile_edit.*
 import kotlinx.android.synthetic.main.bottom_sheet_modal.*
 import kotlinx.android.synthetic.main.bottom_sheet_modal.view.*
+import kotlinx.coroutines.InternalCoroutinesApi
 import java.util.*
 
 
@@ -46,6 +55,7 @@ class SetIntakeModal(var parent_context_code : Int) : BottomSheetDialogFragment(
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog = BottomSheetDialog(requireActivity(),theme)
 
+    @InternalCoroutinesApi
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -64,6 +74,7 @@ class SetIntakeModal(var parent_context_code : Int) : BottomSheetDialogFragment(
                 categoryList
             ) { category ->
                 typeofDrink = category.id
+                setBtnClickable()
             }
         }
         if(parent_context_code == Code.MAIN_FRAGMENT) {
@@ -74,11 +85,15 @@ class SetIntakeModal(var parent_context_code : Int) : BottomSheetDialogFragment(
             if(parent_context_code == Code.FAVORITE_EDIT_1){
                 var stringTokenizer = StringTokenizer(favoriteViewModel.fav_1_livedata.value)
                 stringTokenizer.nextToken()
-                v.edt_amount.setText(stringTokenizer.nextToken() + "ml")
+                var amount = stringTokenizer.nextToken()
+                v.edt_amount.setText(amount + "ml")
+                v.edt_amount.setSelection(amount.length)
             }else if(parent_context_code == Code.FAVORITE_EDIT_2){
                 var stringTokenizer = StringTokenizer(favoriteViewModel.fav_2_livedata.value)
                 stringTokenizer.nextToken()
-                v.edt_amount.setText(stringTokenizer.nextToken() + "ml")
+                var amount = stringTokenizer.nextToken()
+                v.edt_amount.setText(amount + "ml")
+                v.edt_amount.setSelection(amount.length)
             }
         }
 
@@ -97,6 +112,10 @@ class SetIntakeModal(var parent_context_code : Int) : BottomSheetDialogFragment(
                     }else{
                         favoriteViewModel.setFa2LiveData(typeofDrink, pickedNum)
                     }
+                    //popup 띄우기
+                    var intent = Intent(context, PopupActivity::class.java)
+                    intent.putExtra("Message", getString(R.string.favorite_drink_add))
+                    startActivity(intent)
                 }
                 Code.FAVORITE_EDIT_1 -> {
                     favoriteViewModel.setFav1LiveData(typeofDrink, pickedNum)
@@ -199,8 +218,8 @@ class SetIntakeModal(var parent_context_code : Int) : BottomSheetDialogFragment(
         categoryList.add(Category(4,"탄산음료","icon_carbon"))
         categoryList.add(Category(5,"주스","icon_juice"))
         categoryList.add(Category(6,"주류","icon_alcohol"))
-        categoryList.add(Category(7,"이온음료","icon_ion"))
-        categoryList.add(Category(8,"기타","icon_etc"))
+        categoryList.add(Category(6,"이온음료","icon_ion"))
+        categoryList.add(Category(6,"기타","icon_etc"))
 
     }
 

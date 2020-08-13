@@ -69,6 +69,7 @@ class ProfileEditActivity : AppCompatActivity(), TextWatcher {
         btn_save.setOnClickListener {
             settingviewModel.setNameLiveData(edt_profile_edt.text.toString())
             var intent = Intent(this@ProfileEditActivity, PopupActivity::class.java)
+            intent.putExtra("Message", getString(R.string.nickname_change))
             startActivityForResult(intent, CODE_POPUP)
         }
     }

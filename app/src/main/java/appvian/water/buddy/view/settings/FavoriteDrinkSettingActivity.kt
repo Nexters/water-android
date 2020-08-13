@@ -1,5 +1,6 @@
 package appvian.water.buddy.view.settings
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -29,7 +30,6 @@ class FavoriteDrinkSettingActivity : AppCompatActivity() {
         initUI()
     }
     private fun initUI(){
-        //data 가져와서 recycler view 연결
         viewModel.fav_1_livedata.observe(this, Observer {
             if(it.isBlank()){
                 binding.layoutFav1.visibility = View.GONE
@@ -136,7 +136,9 @@ class FavoriteDrinkSettingActivity : AppCompatActivity() {
                 openBottomSheet(Code.FAVORITE_DRINK_SETTING_ACTIVITY)
             }else{
                 //popup 띄우기
-
+                var intent = Intent(this@FavoriteDrinkSettingActivity, PopupActivity::class.java)
+                intent.putExtra("Message", getString(R.string.favorite_drink_full))
+                startActivity(intent)
             }
 
         }
