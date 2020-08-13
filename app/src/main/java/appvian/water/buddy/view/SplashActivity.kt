@@ -15,6 +15,7 @@ class SplashActivity : AppCompatActivity() {
 
         Handler().postDelayed(Runnable {
             startActivity(Intent(baseContext, IntroActivity::class.java))
+            finish()
         }, 1500)
     }
 }

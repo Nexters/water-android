@@ -1,6 +1,7 @@
 package appvian.water.buddy.view.Intro
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -24,6 +26,7 @@ class IntroSecondFragment: Fragment() {
     private lateinit var introViewModel: IntroViewModel
     lateinit var textcount:TextView
     lateinit var edittext:EditText
+    private lateinit var callback: OnBackPressedCallback
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,6 +44,21 @@ class IntroSecondFragment: Fragment() {
 
         }
         return view
+    }
+    //뒤로 가기 버튼 클릭 시 이전 프레그먼트로 이
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                (activity as IntroActivity).replaceFragment(IntroFragment.newInstance())
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        callback.remove()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
