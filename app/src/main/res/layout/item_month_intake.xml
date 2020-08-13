@@ -10,7 +10,6 @@
         <variable
             name="intake"
             type="appvian.water.buddy.model.data.Intake" />
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -56,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/daily_common_spacing"
             android:textSize="13sp"
-            android:text="@{String.format(@string/month_unit, (int)(intake.amount/200))}"
+            android:text="@{String.format(@string/month_unit, (int)(((float)intake.amount/200)))}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

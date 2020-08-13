@@ -12,6 +12,7 @@ import appvian.water.buddy.util.DrinkMapper
 class RankAdapter : RecyclerView.Adapter<RankAdapter.RankViewHolder>() {
     private lateinit var binding: ItemMonthIntakeBinding
     private val rankList = ArrayList<Intake>()
+    private val totalList = ArrayList<Intake>()
 
     inner class RankViewHolder(private val binding: ItemMonthIntakeBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -21,13 +22,24 @@ class RankAdapter : RecyclerView.Adapter<RankAdapter.RankViewHolder>() {
             binding.pos = position + 1
             binding.intake = item
             binding.rankImg.setImageResource(DrinkMapper.drinkResources[item.category])
-            binding.rankName.text = binding.root.resources.getTextArray(DrinkMapper.drinkName)[item.category]
+            binding.rankName.text =
+                binding.root.resources.getTextArray(DrinkMapper.drinkName)[item.category]
         }
     }
 
     fun setData(rankData: List<Intake>) {
+        totalList.clear()
+        totalList.addAll(rankData)
+
+        val subSize = if (rankData.size < 4) rankData.size else 3
         rankList.clear()
-        rankList.addAll(rankData)
+        rankList.addAll(totalList.subList(0, subSize))
+        notifyDataSetChanged()
+    }
+
+    fun setAllData() {
+        rankList.clear()
+        rankList.addAll(totalList)
         notifyDataSetChanged()
     }
 

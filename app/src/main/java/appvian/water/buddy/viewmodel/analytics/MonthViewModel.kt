@@ -1,6 +1,8 @@
 package appvian.water.buddy.viewmodel.analytics
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
 import appvian.water.buddy.model.data.Intake
 import appvian.water.buddy.model.repository.HomeRepository
 import appvian.water.buddy.util.TimeUtil
@@ -10,7 +12,10 @@ class MonthViewModel(private val repository: HomeRepository) {
     private val now = TimeUtil.getCalendarInstance()
 
     var curMonth = now.get(Calendar.MONTH)
-    var monthlyRank:MediatorLiveData<List<Intake>> = MediatorLiveData()
+    var monthlyRank: MediatorLiveData<List<Intake>> = MediatorLiveData()
+
+    private var _loadMoreActive: MutableLiveData<Boolean> = MutableLiveData()
+    val loadMoreActive = _loadMoreActive as LiveData<Boolean>
 
     fun getMonthlyIntake() {
         val startMonth = TimeUtil.getCalendarInstance()
@@ -26,10 +31,23 @@ class MonthViewModel(private val repository: HomeRepository) {
         data?.let { result ->
             monthlyRank.addSource(result, androidx.lifecycle.Observer {
                 android.util.Log.d("month fragment", "${it}")
-                val groupRank = it.groupBy { it.category }.mapValues { Intake(0, it.key, it.value.sumBy { it.amount }) }.values
+                val groupRank = it.groupBy { it.category }
+                    .mapValues { Intake(0, it.key, it.value.sumBy { it.amount }) }
+                    .values
+                    .toList()
+                    .sortedByDescending { it.amount }
 
-                monthlyRank.value = groupRank.toList().sortedByDescending { it.amount }
+                monthlyRank.value?.let {
+                    if (!it.equals(groupRank))
+                        monthlyRank.value = groupRank
+                } ?: run {
+                    monthlyRank.value = groupRank
+                }
             })
         }
+    }
+
+    fun activeLoadMore() {
+        _loadMoreActive.value = true
     }
 }

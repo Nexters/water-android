@@ -145,9 +145,10 @@
                     android:text="@string/month_btn_load_more"
                     android:textColor="@color/grey_8"
                     android:textSize="13sp"
-                    android:visibility="@{vm.monthlyRank.size() &lt; 4 ? View.INVISIBLE : View.VISIBLE}"
+                    android:visibility="@{ vm.loadMoreActive || vm.monthlyRank.size() &lt; 4 ? View.INVISIBLE : View.VISIBLE}"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/month_rank_list" />
+                    app:layout_constraintTop_toBottomOf="@id/month_rank_list"
+                    android:onClick="@{() -> vm.activeLoadMore()}"/>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/month_none"

@@ -49,7 +49,25 @@ class MonthFragment : Fragment() {
 
         monthVm.monthlyRank.observe(viewLifecycleOwner, Observer {
             rankAdapter.setData(it)
+            monthVm.loadMoreActive.value?.let { checkLoadAllData(it) }
         })
+
+        setLoadMoreButton()
+    }
+
+    private fun setLoadMoreButton() {
+        monthVm.loadMoreActive.observe(viewLifecycleOwner, Observer {
+            checkLoadAllData(it)
+        })
+    }
+
+    private fun checkLoadAllData(isLoadAll:Boolean){
+        if (isLoadAll) {
+            binding.monthLoadMore.visibility = View.GONE
+            rankAdapter.setAllData()
+        } else {
+            binding.monthLoadMore.visibility = View.VISIBLE
+        }
     }
 
     companion object {
