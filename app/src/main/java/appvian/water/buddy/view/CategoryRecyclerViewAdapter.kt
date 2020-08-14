@@ -9,46 +9,63 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import appvian.water.buddy.R
 import appvian.water.buddy.model.data.Category
-import kotlinx.android.synthetic.main.my_recyclerview_item.view.*
+import kotlinx.android.synthetic.main.modal_category_recyclerview_item.view.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 class CategoryRecyclerViewAdapter (val context : Context, val categoryList : ArrayList<Category>, val itemClick: (Category) -> Unit) :
-    RecyclerView.Adapter<CategoryRecyclerViewAdapter.CategoryViewHolder>(){
+    RecyclerView.Adapter<CategoryRecyclerViewAdapter.CategoryViewHolder>() {
 
     private var selectedPosition = -1
+    private var selected: Array<Boolean> = Array(categoryList.size, { i ->
+        if (i == 0) true
+        else false
+    })
 
-    inner class CategoryViewHolder(itemView : View, itemClick: (Category) -> Unit) : RecyclerView.ViewHolder(itemView) {
+    inner class CategoryViewHolder(itemView: View, itemClick: (Category) -> Unit) :
+        RecyclerView.ViewHolder(itemView) {
 
-        fun bind (category : Category, position: Int, context: Context){
-            if(category.icon != ""){
-                val resourceId = context.resources.getIdentifier(category.icon, "drawable", context.packageName)
+        fun bind(category: Category, position: Int, context: Context) {
+            val isSelected = selected[position]
+            if (isSelected) {
+                itemView.img_check.visibility = View.VISIBLE
+            } else {
+                itemView.img_check.visibility = View.INVISIBLE
+            }
+            if (category.icon != "") {
+                val resourceId =
+                    context.resources.getIdentifier(category.icon, "drawable", context.packageName)
                 itemView.categoryImg.setImageResource(resourceId)
-            } else{
+            } else {
                 itemView.categoryImg.setImageResource(R.mipmap.ic_launcher_round)
             }
             itemView.cname.text = category.name
             itemView.setOnClickListener {
                 itemClick(category)
-                selectedPosition=position
-                notifyDataSetChanged()
+                selectedPosition = position
+                setCategory(position)
             }
-            if(selectedPosition==position){
-                itemView.setBackgroundColor(Color.YELLOW)
-            } else{
-                itemView.setBackgroundColor(Color.WHITE)
-            }
+
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.my_recyclerview_item,parent,false)
-        return CategoryViewHolder(view,itemClick)
+        val view =
+            LayoutInflater.from(context).inflate(R.layout.modal_category_recyclerview_item, parent, false)
+        return CategoryViewHolder(view, itemClick)
     }
 
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
-        holder.bind(categoryList[position],position,context)
+        holder.bind(categoryList[position], position, context)
     }
 
     override fun getItemCount(): Int {
         return categoryList.size
+    }
+
+    fun setCategory(position: Int){
+        Arrays.fill(selected, false)
+        selected[position] = true
+        notifyDataSetChanged()
     }
 }

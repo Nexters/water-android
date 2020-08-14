@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/analytics_header"
+            android:layout_width="match_parent"
+            android:layout_height="96dp"
+            android:background="@color/grey_1"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/analytics_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/analytics_header_title"
+                android:textStyle="bold"
+                android:textSize="@dimen/tab_text_title"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:padding="@dimen/common_spacing"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/analytics_tab"
+                android:layout_width="216dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/analytics_title" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/analytics_pager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHeight_percent="1"
+            app:layout_constraintTop_toBottomOf="@id/analytics_header" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

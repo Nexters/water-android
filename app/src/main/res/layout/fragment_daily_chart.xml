@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="dailyVm"
+            type="appvian.water.buddy.viewmodel.analytics.DailyChartViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.analytics.chart.daily.DailyChartFragment">
+
+        <TextView
+            android:id="@+id/daily_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/analytics_header_daily"
+            android:textSize="@dimen/daily_header_size"
+            android:layout_marginStart="@dimen/daily_common_spacing"
+            android:layout_marginTop="@dimen/daily_common_spacing"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/daily_date_picker"
+            android:layout_width="62dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="@dimen/daily_common_spacing"
+            android:layout_marginEnd="31dp"
+            android:background="@drawable/picker_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/daily_piechart"
+            android:layout_width="@dimen/daily_pie_chart"
+            android:layout_height="@dimen/daily_pie_chart"
+            android:layout_marginTop="@dimen/daily_common_spacing"
+            android:layout_marginStart="@dimen/daily_common_spacing"
+            android:fillViewport="true"
+            app:layout_constraintTop_toBottomOf="@id/daily_header"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/daily_sys_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/daily_sys_none_water"
+            android:textSize="@dimen/daily_sys_size"
+            android:lineSpacingExtra="3sp"
+            android:layout_marginTop="@dimen/daily_common_spacing"
+            android:layout_marginStart="@dimen/daily_pie_sys_spacing"
+            app:layout_constraintStart_toEndOf="@id/daily_piechart"
+            app:layout_constraintTop_toBottomOf="@id/daily_header"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/daily_view_none"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent=".6"
+            app:layout_constraintTop_toBottomOf="@id/daily_chart_legend"
+            android:layout_marginTop="@dimen/daily_chart_detail_spacing"
+            android:fitsSystemWindows="true">
+
+            <ImageView
+                android:id="@+id/iv_no_water"
+                android:layout_width="49dp"
+                android:layout_height="44dp"
+                android:src="@mipmap/no_water_grey_icon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/daily_none_water_1"
+                android:layout_marginTop="2dp"
+                android:textSize="@dimen/daily_sys_target_size"
+                android:textColor="@color/grey_7"
+                app:layout_constraintTop_toBottomOf="@id/iv_no_water"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/daily_none_water_2"
+                android:layout_marginTop="24dp"
+                android:textSize="12sp"
+                android:textColor="@color/grey_7"
+                app:layout_constraintTop_toBottomOf="@id/iv_no_water"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/daily_chart_detail"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent=".6"
+            android:visibility="invisible"
+            app:layout_constraintTop_toBottomOf="@id/daily_chart_legend"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:layout_marginTop="@dimen/daily_common_spacing"
+            tools:listitem="@layout/item_daily_intake_list" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/daily_chart_legend"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent=".15"
+            android:layout_marginStart="@dimen/daily_pie_sys_spacing"
+            android:layout_marginTop="19dp"
+            android:layout_marginEnd="@dimen/daily_common_spacing"
+            tools:listitem="@layout/item_daily_legend"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2"
+            app:layout_constraintTop_toBottomOf="@id/daily_sys_text"
+            app:layout_constraintStart_toEndOf="@id/daily_piechart" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
