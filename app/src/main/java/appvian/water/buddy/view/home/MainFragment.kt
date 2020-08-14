@@ -203,32 +203,32 @@ class MainFragment : Fragment() {
         when(percent){
             in 0F..20F -> {
                 binding.animationCharacter.setPadding(0,0,0,0)
-                binding.animationCharacter.setAnimation("0-20/2/0-20-2.json")
-                binding.animationCharacter.imageAssetsFolder = "0-20/2/images"
+                binding.animationCharacter.setAnimation("0-25/2/0-20-2.json")
+                binding.animationCharacter.imageAssetsFolder = "0-25/2/images"
                 binding.animationCharacter.playAnimation()
             }
             in 20F..40F -> {
                 binding.animationCharacter.setPadding(0,0,0,0)
-                binding.animationCharacter.setAnimation("20-40/20-40.json")
-                binding.animationCharacter.imageAssetsFolder = "20-40/images"
+                binding.animationCharacter.setAnimation("0-25/2/0-25-2.json")
+                binding.animationCharacter.imageAssetsFolder = "0-25/2/images"
                 binding.animationCharacter.playAnimation()
             }
             in 40F..60F -> {
                 binding.animationCharacter.setPadding(0,0,0,0)
-                binding.animationCharacter.setAnimation("40-60/40-60.json")
-                binding.animationCharacter.imageAssetsFolder = "40-60/images"
+                binding.animationCharacter.setAnimation("25-50/25-50.json")
+                binding.animationCharacter.imageAssetsFolder = "25-50/images"
                 binding.animationCharacter.playAnimation()
             }
             in 60F..80F -> {
                 binding.animationCharacter.setPadding(60,60,60,60)
-                binding.animationCharacter.setAnimation("60-80/60-80.json")
-                binding.animationCharacter.imageAssetsFolder = "60-80/images"
+                binding.animationCharacter.setAnimation("50-75/50-75.json")
+                binding.animationCharacter.imageAssetsFolder = "50-75/images"
                 binding.animationCharacter.playAnimation()
             }
             else -> {
                 binding.animationCharacter.setPadding(0,0,0,0)
-                binding.animationCharacter.setAnimation("80-100/80-100.json")
-                binding.animationCharacter.imageAssetsFolder = "80-100/images"
+                binding.animationCharacter.setAnimation("75-100/75-100.json")
+                binding.animationCharacter.imageAssetsFolder = "75-100/images"
                 binding.animationCharacter.playAnimation()
             }
         }

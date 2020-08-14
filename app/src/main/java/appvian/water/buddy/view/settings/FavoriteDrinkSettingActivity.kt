@@ -10,12 +10,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import appvian.water.buddy.R
 import appvian.water.buddy.databinding.ActivityFavoriteDrinkSettingBinding
-import appvian.water.buddy.databinding.ActivityProfileEditBinding
-import appvian.water.buddy.model.data.Cup
 import appvian.water.buddy.utilities.Code
 import appvian.water.buddy.view.SetIntakeModal
 import appvian.water.buddy.viewmodel.FavoriteViewModel
-import appvian.water.buddy.viewmodel.SettingViewModel
 import java.util.*
 
 class FavoriteDrinkSettingActivity : AppCompatActivity() {
@@ -46,7 +43,7 @@ class FavoriteDrinkSettingActivity : AppCompatActivity() {
                         binding.imgCategory.setImageDrawable(resources.getDrawable(R.drawable.icon_coffee, null))
                         binding.txtCategory.text = "커피"
                     }
-                    "2" -> {
+                    "0-25/2" -> {
                         binding.imgCategory.setImageDrawable(resources.getDrawable(R.drawable.icon_tea, null))
                         binding.txtCategory.text = "차"
                     }
@@ -96,7 +93,7 @@ class FavoriteDrinkSettingActivity : AppCompatActivity() {
                         binding.imgCategory2.setImageDrawable(resources.getDrawable(R.drawable.icon_coffee, null))
                         binding.txtCategory2.text = "커피"
                     }
-                    "2" -> {
+                    "0-25/2" -> {
                         binding.imgCategory2.setImageDrawable(resources.getDrawable(R.drawable.icon_tea, null))
                         binding.txtCategory2.text = "차"
                     }
