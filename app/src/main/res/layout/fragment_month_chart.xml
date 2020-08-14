@@ -19,7 +19,7 @@
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/month_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="421dp"
+            android:layout_height="wrap_content"
             android:background="@color/blue_1"
             android:fitsSystemWindows="true">
 
@@ -86,7 +86,7 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/month_intake_character"
                         android:layout_width="match_parent"
-                        android:layout_height="216dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="40dp"
                         android:layout_marginEnd="40dp"
                         android:layout_marginBottom="53dp"
@@ -95,6 +95,7 @@
                         app:spanCount="7"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/month_sys_tv"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         tools:listitem="@layout/month_character_list"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -47,7 +46,6 @@ class MonthFragment : Fragment() {
     }
 
     private fun initUi() {
-        changeAppBarHeight()
 
         binding.monthRankList.adapter = rankAdapter
         binding.monthIntakeCharacter.adapter = characterAdapter
@@ -57,13 +55,15 @@ class MonthFragment : Fragment() {
             monthVm.loadMoreActive.value?.let { checkLoadAllData(it) }
         })
 
+        setCharacterInfo()
         setLoadMoreButton()
+        setIntakeDayText()
     }
 
-    private fun changeAppBarHeight() {
-        val density = resources.displayMetrics.density
-        val height = resources.displayMetrics.heightPixels / density
-        binding.monthToolbar.layoutParams.height = Math.round(height * 0.97).toInt()
+    private fun setCharacterInfo() {
+        monthVm.characterList.observe(viewLifecycleOwner, Observer {
+            characterAdapter.setData(it)
+        })
     }
 
     private fun setLoadMoreButton() {
@@ -72,7 +72,14 @@ class MonthFragment : Fragment() {
         })
     }
 
-    private fun checkLoadAllData(isLoadAll:Boolean){
+    private fun setIntakeDayText() {
+        monthVm.observeIntakeDays.observe(viewLifecycleOwner, Observer {
+            android.util.Log.d("Month frag", "update ${it}")
+            binding.monthSysTv.text = getString(R.string.month_sys_text, it.second, it.first)
+        })
+    }
+
+    private fun checkLoadAllData(isLoadAll: Boolean) {
         if (isLoadAll) {
             binding.monthLoadMore.visibility = View.GONE
             rankAdapter.setAllData()
