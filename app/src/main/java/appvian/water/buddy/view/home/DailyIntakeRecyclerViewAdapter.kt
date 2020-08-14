@@ -5,28 +5,43 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import appvian.water.buddy.R
 import appvian.water.buddy.model.data.Intake
+import appvian.water.buddy.util.DrinkMapper
+import appvian.water.buddy.viewmodel.HomeViewModel
 import kotlinx.android.synthetic.main.daily_intake_recyclerview_item.view.*
 import java.text.SimpleDateFormat
 
-class DailyIntakeRecyclerViewAdapter (val context : Context, val isDeleteClicked: Boolean, val intakeList : List<Intake>, val itemClick: (Intake) -> Unit) :
+class DailyIntakeRecyclerViewAdapter (val context : Context, val activity: AppCompatActivity, val isDeleteClicked: Boolean, val intakeList : List<Intake>, val itemClick: (Intake) -> Unit) :
     RecyclerView.Adapter<DailyIntakeRecyclerViewAdapter.IntakeViewHolder>(){
-
-    val categoryString = arrayListOf<String>("물","커피","차","우유","탄산음료","주스","주류","이온음료","기타")
+    private var viewModel= ViewModelProvider(activity).get(HomeViewModel::class.java)
+    val categoryString = context.resources.getStringArray(R.array.drink_category)
     inner class IntakeViewHolder(itemView : View, itemClick: (Intake) -> Unit) : RecyclerView.ViewHolder(itemView) {
 
         fun bind (intake: Intake, position: Int, context: Context){
-
+            itemView.icon.setImageResource(DrinkMapper.drinkResources[intake.category])
             itemView.categoryText.text = categoryString[intake.category]
             itemView.amountText.text = String.format("%dml",intake.amount)
             itemView.am_pm_text.text = getAmORPm(intake.date)
             itemView.time_text.text = getTime(intake.date)
+            itemView.delete_checkbox.setOnClickListener {
+                if(itemView.delete_checkbox.isChecked){
+                    viewModel.addDeleteList(intake)
+                } else{
+                    viewModel.cancelDeleteList(intake)
+                }
+            }
             if (isDeleteClicked){
                 itemView.delete_checkbox.visibility = View.VISIBLE
             } else{
                 itemView.delete_checkbox.visibility = View.GONE
+                viewModel.cancelDeleteList(intake)
+            }
+            itemView.setOnClickListener {
+                itemClick(intake)
             }
         }
     }

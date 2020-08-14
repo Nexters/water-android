@@ -6,5 +6,6 @@ class Code {
         const val FAVORITE_DRINK_SETTING_ACTIVITY = 1
         const val FAVORITE_EDIT_1 = 2
         const val FAVORITE_EDIT_2 = 3
+        const val HOME_FRAGMENT = 4
     }
 }

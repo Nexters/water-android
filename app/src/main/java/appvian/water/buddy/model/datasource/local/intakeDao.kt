@@ -29,6 +29,12 @@ interface intakeDao {
     @Query("SELECT strftime('%d', date/1000, 'unixepoch') as date, amount, category FROM INTAKE where date between :startMonth and :endMonth"    )
     fun getMonthlyByDay(startMonth:Long, endMonth:Long): LiveData<List<Intake>>
 
+    @Query("UPDATE intake SET category=:category WHERE date=:date")
+    fun modifyCategory(date: Long, category: Int)
+
+    @Query("UPDATE intake SET amount=:amount WHERE date=:date")
+    fun modifyAmount(date: Long, amount: Int)
+
     @Query("SELECT amount, category, strftime('%w', date/1000, 'unixepoch') as date " +
                 "FROM (select * from intake where date between :firstDay And :endDay) "
     )

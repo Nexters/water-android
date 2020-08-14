@@ -21,6 +21,8 @@ class PopupActivity : AppCompatActivity() {
         )
         setContentView(R.layout.popup_setting)
 
+        var message = intent.getStringExtra("Message")
+        txt_top.text = message
         btn_ok.setOnClickListener {
             onBackPressed()
         }

@@ -1,49 +1,38 @@
-package appvian.water.buddy.view
+package appvian.water.buddy.view.home
 
 import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
-import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
-import android.text.InputType
 import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
-import android.widget.EditText
 import android.widget.TextView
-import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import appvian.water.buddy.R
 import appvian.water.buddy.model.data.Category
 import appvian.water.buddy.model.data.Intake
-import appvian.water.buddy.utilities.Code
-import appvian.water.buddy.view.settings.PopupActivity
+import appvian.water.buddy.view.CategoryRecyclerViewAdapter
 import appvian.water.buddy.viewmodel.FavoriteViewModel
 import appvian.water.buddy.viewmodel.HomeViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kotlinx.android.synthetic.main.activity_profile_edit.*
 import kotlinx.android.synthetic.main.bottom_sheet_modal.*
 import kotlinx.android.synthetic.main.bottom_sheet_modal.view.*
-import kotlinx.coroutines.InternalCoroutinesApi
-import java.util.*
 
 
-class SetIntakeModal(var parent_context_code : Int, var intake : Intake?) : BottomSheetDialogFragment() , TextWatcher{
+class ModifyIntakeModal(val intake: Intake) : BottomSheetDialogFragment() , TextWatcher{
     private lateinit var homeViewModel: HomeViewModel
-    private lateinit var favoriteViewModel: FavoriteViewModel
     var categoryList = arrayListOf<Category>()
     //ontext changed 결과값
-    var result = ""
+    var result = intake.amount.toString()
     private var selected : Array<Boolean> = Array(3) { i -> false }
     private var selected_idx = 0
     private lateinit var selected_btns : Array<Button>
@@ -55,7 +44,6 @@ class SetIntakeModal(var parent_context_code : Int, var intake : Intake?) : Bott
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog = BottomSheetDialog(requireActivity(),theme)
 
-    @InternalCoroutinesApi
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -64,7 +52,7 @@ class SetIntakeModal(var parent_context_code : Int, var intake : Intake?) : Bott
 
         val v = inflater.inflate(R.layout.bottom_sheet_modal,container,false)
 
-        var typeofDrink = 0
+        var typeofDrink = intake.category
         setCategory()
         v.recyclerview.apply {
             setHasFixedSize(true)
@@ -74,75 +62,19 @@ class SetIntakeModal(var parent_context_code : Int, var intake : Intake?) : Bott
                 categoryList
             ) { category ->
                 typeofDrink = category.id
-                setBtnClickable()
             }
         }
-        if(parent_context_code == Code.MAIN_FRAGMENT) {
-            homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
-        }
-        else if(parent_context_code == Code.FAVORITE_DRINK_SETTING_ACTIVITY || parent_context_code == Code.FAVORITE_EDIT_1 || parent_context_code == Code.FAVORITE_EDIT_2){
-            favoriteViewModel = ViewModelProvider(this).get(FavoriteViewModel::class.java)
-            if(parent_context_code == Code.FAVORITE_EDIT_1){
-                var stringTokenizer = StringTokenizer(favoriteViewModel.fav_1_livedata.value)
-                var category = stringTokenizer.nextToken()
-                var amount = stringTokenizer.nextToken()
-                v.edt_amount.setText(amount + "ml")
-                v.edt_amount.setSelection(amount.length)
-                (v.recyclerview.adapter as CategoryRecyclerViewAdapter).setCategory(category.toInt())
-                typeofDrink = category.toInt()
-            }else if(parent_context_code == Code.FAVORITE_EDIT_2){
-                var stringTokenizer = StringTokenizer(favoriteViewModel.fav_2_livedata.value)
-                var category = stringTokenizer.nextToken()
-                var amount = stringTokenizer.nextToken()
-                v.edt_amount.setText(amount + "ml")
-                v.edt_amount.setSelection(amount.length)
-                (v.recyclerview.adapter as CategoryRecyclerViewAdapter).setCategory(category.toInt())
-                typeofDrink = category.toInt()
-            }
-        }else if(parent_context_code == Code.HOME_FRAGMENT){
-            homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
-            v.edt_amount.setText(intake!!.amount.toString() + "ml")
-            v.edt_amount.setSelection(intake!!.amount.toString().length)
-            (v.recyclerview.adapter as CategoryRecyclerViewAdapter).setCategory(intake!!.category)
-            typeofDrink = intake!!.category
-        }
-
+        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         v.setButton.setOnClickListener {
             val regex = Regex("[^0-9]")
             val pickedNum = edt_amount.text.toString().replace(regex,"").toInt()
-            when(parent_context_code){
-                Code.MAIN_FRAGMENT -> {
-                    val now = System.currentTimeMillis()
-                    val intake = Intake(now,typeofDrink,pickedNum)
-                    homeViewModel.insert(intake)
-                }
-                Code.FAVORITE_DRINK_SETTING_ACTIVITY -> {
-                    if(favoriteViewModel.fav_1_livedata.value == ""){
-                        favoriteViewModel.setFav1LiveData(typeofDrink, pickedNum)
-                    }else{
-                        favoriteViewModel.setFa2LiveData(typeofDrink, pickedNum)
-                    }
-                    //popup 띄우기
-                    var intent = Intent(context, PopupActivity::class.java)
-                    intent.putExtra("Message", getString(R.string.favorite_drink_add))
-                    startActivity(intent)
-                }
-                Code.FAVORITE_EDIT_1 -> {
-                    favoriteViewModel.setFav1LiveData(typeofDrink, pickedNum)
-                }
-                Code.FAVORITE_EDIT_2 -> {
-                    favoriteViewModel.setFa2LiveData(typeofDrink, pickedNum)
-                }
-                Code.HOME_FRAGMENT -> {
-                    //오늘 마신 물 수정
-                    homeViewModel.modifyAmount(intake!!.date, pickedNum)
-                    homeViewModel.modifyCategory(intake!!.date, typeofDrink)
-                }
-            }
+            homeViewModel.modifyCategory(intake.date,typeofDrink)
+            homeViewModel.modifyAmount(intake.date,pickedNum)
 
             onDestroyView()
             onDestroy()
         }
+        v.setButton.text = "수정하기"
 
         v.img_cancel.setOnClickListener{
             onDestroyView()

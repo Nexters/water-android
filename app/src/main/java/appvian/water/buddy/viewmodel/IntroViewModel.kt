@@ -16,15 +16,13 @@ class Factory(val application: Application) : ViewModelProvider.Factory {
 }
 
     var nameliveText: MutableLiveData<String> = MutableLiveData()
-    var kgliveText: MutableLiveData<String> = MutableLiveData()
     var targetamountliveText: MutableLiveData<String> = MutableLiveData()
-    var heightliveText: MutableLiveData<String> = MutableLiveData()
 
     fun getText(): LiveData<String?>? {
         return nameliveText
     }
 
-    fun TargetAmountSetText(text: Int?){
+    fun TargetAmountSetText(text: Float?){
         targetamountliveText.value = text.toString()
     }
     fun nameSetText(text: String?) {

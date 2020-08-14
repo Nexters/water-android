@@ -91,8 +91,8 @@
                 app:layout_constraintLeft_toLeftOf="parent" />
 
             <ImageView
-                android:layout_width="130dp"
-                android:layout_height="120dp"
+                android:layout_width="220dp"
+                android:layout_height="157dp"
                 android:src="@drawable/wabi"
                 android:layout_marginEnd="40dp"
                 android:layout_marginBottom="45dp"
