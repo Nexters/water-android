@@ -8,6 +8,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
@@ -23,12 +24,16 @@ class IntroThirdFragment: Fragment() {
         fun newInstance() = IntroThirdFragment()
     }
     private lateinit var introViewModel: IntroViewModel
+    private lateinit var callback: OnBackPressedCallback
     lateinit var edittextKg : EditText
     lateinit var edittextCm : EditText
-    private lateinit var callback: OnBackPressedCallback
+    lateinit var nextbtn : Button
     var kgtext: String = ""
     private var cmtext: String = ""
     private var targetamount :  Float = 0.0F
+    private var target_amount_change_flag_kg = false
+    private var target_amount_change_flag_cm = false
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,6 +42,8 @@ class IntroThirdFragment: Fragment() {
         val view = inflater.inflate(R.layout.intro_third_fragment, container, false)
         edittextKg = view.kg_edittext
         edittextCm = view.height_edittext
+        nextbtn = view.nextbtn2
+
         view.nextbtn2.setOnClickListener {
             (activity as IntroActivity).replaceFragment(IntroFourthFragment.newInstance())
             targetamount = ((kgtext.toInt() + cmtext.toInt()) / 100 ).toFloat()
@@ -75,6 +82,10 @@ class IntroThirdFragment: Fragment() {
 
             @SuppressLint("SetTextI18n")
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                val count: Int = edittextKg.text.toString().length
+
+                target_amount_change_flag_kg = count > 0
+                saveBtnClickable()
             }
         })
 
@@ -88,11 +99,26 @@ class IntroThirdFragment: Fragment() {
 
             @SuppressLint("SetTextI18n")
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                val count: Int = edittextCm.text.toString().length
+
+                target_amount_change_flag_cm = count > 0
+                saveBtnClickable()
             }
         })
 
 
     }
+    private fun saveBtnClickable() {
+        if (target_amount_change_flag_kg && target_amount_change_flag_cm) {
+            nextbtn.background = resources.getDrawable(R.drawable.setting_save_btn, null)
+            nextbtn.setTextColor(resources.getColor(R.color.white, null))
+            nextbtn.isEnabled = true
+        } else {
+            nextbtn.background = resources.getDrawable(R.drawable.setting_save_btn_inactive, null)
+            nextbtn.setTextColor(resources.getColor(R.color.grey_1, null))
+            nextbtn.isEnabled = false
+        }
 
+    }
 
 }

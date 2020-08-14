@@ -8,6 +8,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
@@ -27,6 +28,8 @@ class IntroSecondFragment: Fragment() {
     lateinit var textcount:TextView
     lateinit var edittext:EditText
     private lateinit var callback: OnBackPressedCallback
+    private var target_amount_change_flag = false
+    lateinit var nextbtn: Button
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,7 +39,7 @@ class IntroSecondFragment: Fragment() {
         val view = inflater.inflate(R.layout.intro_second_fragment, container, false)
         textcount = view.text_count
         edittext = view.name_edittext
-
+        nextbtn = view.nextbtn
         //introViewModel = ViewModelProvider(this).get(IntroViewModel::class.java)
 
         view.nextbtn.setOnClickListener {
@@ -77,11 +80,28 @@ class IntroSecondFragment: Fragment() {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 val count: Int = edittext.text.toString().length
                 textcount.text = count.toString() + getString(R.string.intro_second_textcount)
-
+                target_amount_change_flag = if(count > 0){
+                    saveBtnClickable()
+                    true
+                } else{
+                    saveBtnUnClickable()
+                    false
+                }
             }
         })
 
 
+    }
+
+    private fun saveBtnClickable() {
+        nextbtn.background = resources.getDrawable(R.drawable.setting_save_btn, null)
+        nextbtn.setTextColor(resources.getColor(R.color.white, null))
+        nextbtn.isEnabled = true
+    }
+    private fun saveBtnUnClickable() {
+        nextbtn.background = resources.getDrawable(R.drawable.setting_save_btn_inactive, null)
+        nextbtn.setTextColor(resources.getColor(R.color.grey_1, null))
+        nextbtn.isEnabled = false
     }
 
 }
