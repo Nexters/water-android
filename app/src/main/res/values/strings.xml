@@ -70,5 +70,7 @@
     <string name="intro_third_btn">다음 2/2</string>
     <string name="intro_fourth_btn">확인</string>
 
+    <string name="alarm_time">%s : %s</string>
+    <string name="alarm_interval_time">%s시간</string>
 
 </resources>
