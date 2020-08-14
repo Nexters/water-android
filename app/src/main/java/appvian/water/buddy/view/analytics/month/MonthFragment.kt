@@ -43,6 +43,7 @@ class MonthFragment : Fragment() {
 
     private fun loadData() {
         monthVm.getMonthlyIntake()
+        characterAdapter.maxDay = monthVm.curMaxDay
     }
 
     private fun initUi() {
