@@ -50,6 +50,7 @@ class MonthFragment : Fragment() {
 
         binding.monthRankList.adapter = rankAdapter
         binding.monthIntakeCharacter.adapter = characterAdapter
+        binding.monthIntakeCharacter.addItemDecoration(CharacterItemDecoration())
 
         monthVm.monthlyRank.observe(viewLifecycleOwner, Observer {
             rankAdapter.setData(it)
