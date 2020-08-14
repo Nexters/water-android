@@ -28,7 +28,7 @@ class IntroThirdFragment: Fragment() {
     private lateinit var callback: OnBackPressedCallback
     var kgtext: String = ""
     private var cmtext: String = ""
-    private var targetamount : Int = 0
+    private var targetamount :  Float = 0.0F
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,7 +39,7 @@ class IntroThirdFragment: Fragment() {
         edittextCm = view.height_edittext
         view.nextbtn2.setOnClickListener {
             (activity as IntroActivity).replaceFragment(IntroFourthFragment.newInstance())
-            targetamount = (kgtext.toInt() + cmtext.toInt()) / 100
+            targetamount = ((kgtext.toInt() + cmtext.toInt()) / 100 ).toFloat()
 
             introViewModel.TargetAmountSetText(targetamount)
         }

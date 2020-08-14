@@ -22,7 +22,7 @@ class Factory(val application: Application) : ViewModelProvider.Factory {
         return nameliveText
     }
 
-    fun TargetAmountSetText(text: Int?){
+    fun TargetAmountSetText(text: Float?){
         targetamountliveText.value = text.toString()
     }
     fun nameSetText(text: String?) {
