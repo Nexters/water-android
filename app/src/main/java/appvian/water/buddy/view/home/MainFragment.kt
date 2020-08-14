@@ -52,6 +52,21 @@ class MainFragment : Fragment() {
 
         homeViewModel.percent?.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             if(it!=null) {
+                setEmotion(it)
+                if(homeViewModel.currentPercent<it){
+                    GlobalScope.launch(Dispatchers.Main) {
+                        withContext(Dispatchers.Main){
+                            setEmotion(it)
+                        }
+                        delay(5000L)
+                        withContext(Dispatchers.Main){
+                            setCharacter(it)
+                            adjustAnimation(it)
+                        }
+                    }
+                } else{
+                    setCharacter(it)
+                }
                 if (isFirst) {
                     GlobalScope.launch(Dispatchers.Main) {
                         delay(1500L)
@@ -64,8 +79,8 @@ class MainFragment : Fragment() {
                     adjustAnimation(it)
                 }
                 changeText(it)
-                setCharacter(it)
             } else{
+                setEmotion(0F)
                 if(isFirst){
                     GlobalScope.launch(Dispatchers.Main) {
                         delay(1500L)
@@ -99,22 +114,26 @@ class MainFragment : Fragment() {
 
     private fun adjustAnimation(percent: Float){
         binding.percent.text = homeViewModel.currentPercent.toInt().toString()
-        val waterGoalY = homeViewModel.waterStartY - homeViewModel.waterStartY * percent / 100
-        var characterGoalY = homeViewModel.characterEndY * percent / 100
+        var waterGoalY = homeViewModel.waterStartY - homeViewModel.waterStartY * percent / 100
+        var characterGoalY: Float
         var goalPercentY = homeViewModel.startPercentTextY - homeViewModel.waterStartY * percent / 100
+        if (waterGoalY<0F){
+            waterGoalY=0F
+        }
         if (goalPercentY<0F){
             goalPercentY=0F
         }
+        if (percent>=0F&&percent<12F){
+            goalPercentY=Resources.getSystem().displayMetrics.heightPixels.toFloat() - 370F * (Resources.getSystem().displayMetrics.densityDpi).toFloat() / DisplayMetrics.DENSITY_DEFAULT
+            homeViewModel.currentPercentTextY = goalPercentY
+        }
         val waterTranslate = TranslateAnimation(0F, 0F, homeViewModel.waterCurrentY, waterGoalY)
         val newanim_percent_text = TranslateAnimation(0F,0F,homeViewModel.currentPercentTextY,goalPercentY)
-        if(percent>40F&&percent<=60F){
-            characterGoalY=-homeViewModel.waterStartY+waterGoalY+50F*(Resources.getSystem().displayMetrics.densityDpi).toFloat() / DisplayMetrics.DENSITY_DEFAULT
-        }
-        if(percent>60F&&percent<=80F){
-            characterGoalY=-homeViewModel.waterStartY+waterGoalY+120F*(Resources.getSystem().displayMetrics.densityDpi).toFloat() / DisplayMetrics.DENSITY_DEFAULT
-        }
-        if(percent>80F){
-            characterGoalY=-Resources.getSystem().displayMetrics.heightPixels.toFloat()/4
+        when(percent){
+            in 0F..25F -> characterGoalY = 0F
+            in 25F..50F -> characterGoalY=-homeViewModel.waterStartY+waterGoalY+150F*(Resources.getSystem().displayMetrics.densityDpi).toFloat() / DisplayMetrics.DENSITY_DEFAULT
+            in 50F..70F -> characterGoalY=-homeViewModel.waterStartY+waterGoalY+220F*(Resources.getSystem().displayMetrics.densityDpi).toFloat() / DisplayMetrics.DENSITY_DEFAULT
+            else -> characterGoalY=-Resources.getSystem().displayMetrics.heightPixels.toFloat()/4
         }
         val characterTranslate = TranslateAnimation(0F, 0F, homeViewModel.characterCurrentY, characterGoalY)
         characterTranslate.setAnimationListener(object : Animation.AnimationListener{
@@ -201,25 +220,19 @@ class MainFragment : Fragment() {
             bottomSheet.show(fragmentManager,bottomSheet.tag)
         }
         when(percent){
-            in 0F..20F -> {
-                binding.animationCharacter.setPadding(0,0,0,0)
-                binding.animationCharacter.setAnimation("0-25/2/0-20-2.json")
-                binding.animationCharacter.imageAssetsFolder = "0-25/2/images"
-                binding.animationCharacter.playAnimation()
-            }
-            in 20F..40F -> {
+            in 0F..25F -> {
                 binding.animationCharacter.setPadding(0,0,0,0)
                 binding.animationCharacter.setAnimation("0-25/2/0-25-2.json")
                 binding.animationCharacter.imageAssetsFolder = "0-25/2/images"
                 binding.animationCharacter.playAnimation()
             }
-            in 40F..60F -> {
+            in 25F..50F -> {
                 binding.animationCharacter.setPadding(0,0,0,0)
                 binding.animationCharacter.setAnimation("25-50/25-50.json")
                 binding.animationCharacter.imageAssetsFolder = "25-50/images"
                 binding.animationCharacter.playAnimation()
             }
-            in 60F..80F -> {
+            in 50F..70F -> {
                 binding.animationCharacter.setPadding(60,60,60,60)
                 binding.animationCharacter.setAnimation("50-75/50-75.json")
                 binding.animationCharacter.imageAssetsFolder = "50-75/images"
@@ -230,6 +243,37 @@ class MainFragment : Fragment() {
                 binding.animationCharacter.setAnimation("75-100/75-100.json")
                 binding.animationCharacter.imageAssetsFolder = "75-100/images"
                 binding.animationCharacter.playAnimation()
+            }
+        }
+    }
+
+    private fun setEmotion(percent: Float){
+        if(homeViewModel.currentPercent<percent){
+            when(percent){
+                in 0F..25F -> {
+                    binding.animationCharacter.setPadding(0,0,0,0)
+                    binding.animationCharacter.setAnimation("0-25-Emotion/0-25-Emotion.json")
+                    binding.animationCharacter.imageAssetsFolder = "0-25-Emotion/images"
+                    binding.animationCharacter.playAnimation()
+                }
+                in 25F..50F -> {
+                    binding.animationCharacter.setPadding(0,0,0,0)
+                    binding.animationCharacter.setAnimation("25-50-Emotion/25-50-Emotion.json")
+                    binding.animationCharacter.imageAssetsFolder = "25-50-Emotion/images"
+                    binding.animationCharacter.playAnimation()
+                }
+                in 50F..70F -> {
+                    binding.animationCharacter.setPadding(60,60,60,60)
+                    binding.animationCharacter.setAnimation("50-75-Emotion/50-75-Emotion.json")
+                    binding.animationCharacter.imageAssetsFolder = "50-75-Emotion/images"
+                    binding.animationCharacter.playAnimation()
+                }
+                else -> {
+                    binding.animationCharacter.setPadding(0,0,0,0)
+                    binding.animationCharacter.setAnimation("75-100-Emotion/75-100-Emotion.json")
+                    binding.animationCharacter.imageAssetsFolder = "75-100-Emotion/images"
+                    binding.animationCharacter.playAnimation()
+                }
             }
         }
     }
