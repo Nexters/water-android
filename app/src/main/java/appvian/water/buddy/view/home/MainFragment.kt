@@ -16,6 +16,7 @@ import appvian.water.buddy.R
 import appvian.water.buddy.viewmodel.HomeViewModel
 import kotlinx.android.synthetic.main.fragment_main.*
 import android.util.DisplayMetrics
+import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import appvian.water.buddy.databinding.FragmentMainBinding
@@ -132,7 +133,7 @@ class MainFragment : Fragment() {
         when(percent){
             in 0F..25F -> characterGoalY = 0F
             in 25F..50F -> characterGoalY=-homeViewModel.waterStartY+waterGoalY+150F*(Resources.getSystem().displayMetrics.densityDpi).toFloat() / DisplayMetrics.DENSITY_DEFAULT
-            in 50F..70F -> characterGoalY=-homeViewModel.waterStartY+waterGoalY+220F*(Resources.getSystem().displayMetrics.densityDpi).toFloat() / DisplayMetrics.DENSITY_DEFAULT
+            in 50F..70F -> characterGoalY=-homeViewModel.waterStartY+waterGoalY+190F*(Resources.getSystem().displayMetrics.densityDpi).toFloat() / DisplayMetrics.DENSITY_DEFAULT
             else -> characterGoalY=-Resources.getSystem().displayMetrics.heightPixels.toFloat()/4
         }
         val characterTranslate = TranslateAnimation(0F, 0F, homeViewModel.characterCurrentY, characterGoalY)
@@ -221,19 +222,19 @@ class MainFragment : Fragment() {
         }
         when(percent){
             in 0F..25F -> {
-                binding.animationCharacter.setPadding(0,0,0,0)
+                binding.animationCharacter.setPadding(40,40,40,40)
                 binding.animationCharacter.setAnimation("0-25/2/0-25-2.json")
                 binding.animationCharacter.imageAssetsFolder = "0-25/2/images"
                 binding.animationCharacter.playAnimation()
             }
             in 25F..50F -> {
-                binding.animationCharacter.setPadding(0,0,0,0)
+                binding.animationCharacter.setPadding(20,20,20,20)
                 binding.animationCharacter.setAnimation("25-50/25-50.json")
                 binding.animationCharacter.imageAssetsFolder = "25-50/images"
                 binding.animationCharacter.playAnimation()
             }
             in 50F..70F -> {
-                binding.animationCharacter.setPadding(60,60,60,60)
+                binding.animationCharacter.setPadding(20,20,20,20)
                 binding.animationCharacter.setAnimation("50-75/50-75.json")
                 binding.animationCharacter.imageAssetsFolder = "50-75/images"
                 binding.animationCharacter.playAnimation()
@@ -251,19 +252,19 @@ class MainFragment : Fragment() {
         if(homeViewModel.currentPercent<percent){
             when(percent){
                 in 0F..25F -> {
-                    binding.animationCharacter.setPadding(0,0,0,0)
+                    binding.animationCharacter.setPadding(20,20,20,20)
                     binding.animationCharacter.setAnimation("0-25-Emotion/0-25-Emotion.json")
                     binding.animationCharacter.imageAssetsFolder = "0-25-Emotion/images"
                     binding.animationCharacter.playAnimation()
                 }
                 in 25F..50F -> {
-                    binding.animationCharacter.setPadding(0,0,0,0)
+                    binding.animationCharacter.setPadding(20,20,20,20)
                     binding.animationCharacter.setAnimation("25-50-Emotion/25-50-Emotion.json")
                     binding.animationCharacter.imageAssetsFolder = "25-50-Emotion/images"
                     binding.animationCharacter.playAnimation()
                 }
                 in 50F..70F -> {
-                    binding.animationCharacter.setPadding(60,60,60,60)
+                    binding.animationCharacter.setPadding(20,20,20,20)
                     binding.animationCharacter.setAnimation("50-75-Emotion/50-75-Emotion.json")
                     binding.animationCharacter.imageAssetsFolder = "50-75-Emotion/images"
                     binding.animationCharacter.playAnimation()
