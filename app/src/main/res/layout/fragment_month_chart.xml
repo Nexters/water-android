@@ -93,6 +93,7 @@
                         android:layout_marginTop="23dp"
                         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                         app:spanCount="7"
+                        tools:itemCount="31"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/month_sys_tv"
                         app:layout_constraintBottom_toBottomOf="parent"
