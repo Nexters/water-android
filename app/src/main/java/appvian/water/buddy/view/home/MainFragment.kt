@@ -133,7 +133,7 @@ class MainFragment : Fragment() {
         val newanim_percent_text = TranslateAnimation(0F,0F,homeViewModel.currentPercentTextY,goalPercentY)
         when(percent){
             in 0F..25F -> characterGoalY = 0F
-            in 25F..50F -> characterGoalY=-homeViewModel.waterStartY+waterGoalY+150F*(Resources.getSystem().displayMetrics.densityDpi).toFloat() / DisplayMetrics.DENSITY_DEFAULT
+            in 25F..50F -> characterGoalY=-homeViewModel.waterStartY+waterGoalY+160F*(Resources.getSystem().displayMetrics.densityDpi).toFloat() / DisplayMetrics.DENSITY_DEFAULT
             in 50F..70F -> characterGoalY=-homeViewModel.waterStartY+waterGoalY+190F*(Resources.getSystem().displayMetrics.densityDpi).toFloat() / DisplayMetrics.DENSITY_DEFAULT
             else -> characterGoalY=-Resources.getSystem().displayMetrics.heightPixels.toFloat()/4
         }
