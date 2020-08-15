@@ -10,10 +10,10 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import appvian.water.buddy.R
 import appvian.water.buddy.databinding.FragmentAnalyticsBinding
-import appvian.water.buddy.view.analytics.month.MonthFragment
 import appvian.water.buddy.view.analytics.chart.daily.DailyChartFragment
 import appvian.water.buddy.view.analytics.chart.weekly.WeeklyChartFragment
-
+import appvian.water.buddy.view.analytics.month.MonthFragment
+import appvian.water.buddy.view.modal.MonthModal
 import com.google.android.material.tabs.TabLayoutMediator
 import java.util.*
 
@@ -21,6 +21,11 @@ private const val PAGE_NUM = 3
 
 class AnalyticsFragment : Fragment() {
     private lateinit var binding: FragmentAnalyticsBinding
+
+    private val monthPickerListener = View.OnClickListener {
+        val bottomSheetDialog = MonthModal()
+        bottomSheetDialog.show(childFragmentManager, "bottomSheet")
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,7 +47,11 @@ class AnalyticsFragment : Fragment() {
             tab.text = tabTitle[position]
         }.attach()
 
-        binding.analyticsTitle.text = getString(R.string.analytics_header_title, Calendar.getInstance().get(Calendar.MONTH) + 1)
+        binding.analyticsTitle.text = getString(
+            R.string.analytics_header_title,
+            Calendar.getInstance().get(Calendar.MONTH) + 1
+        )
+        binding.analyticsTitle.setOnClickListener(monthPickerListener)
     }
 
     companion object {
