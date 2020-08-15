@@ -23,6 +23,7 @@ import appvian.water.buddy.databinding.FragmentMainBinding
 import appvian.water.buddy.utilities.Code
 import appvian.water.buddy.view.SetIntakeModal
 import kotlinx.coroutines.*
+import kotlin.random.Random
 
 
 class MainFragment : Fragment() {
@@ -173,12 +174,33 @@ class MainFragment : Fragment() {
     }
 
     private fun changeText(percent: Float){
+        val random = Random
+        val num = random.nextInt(9)
         when(percent){
-            0F -> binding.homeText.text = getString(R.string.home_text_1)
-            in 0F..35F -> binding.homeText.text = getString(R.string.home_text_2)
-            in 35F..65F -> binding.homeText.text = getString(R.string.home_text_3)
-            in 65F..99.9999F -> binding.homeText.text = getString(R.string.home_text_4)
-            else -> binding.homeText.text = getString(R.string.home_text_5)
+            0F -> {
+                val string = resources.getStringArray(R.array.drink_0_txt)
+                binding.homeText.text = string[num]
+            }
+            in 0F..25F -> {
+                val string = resources.getStringArray(R.array.drink_0_25_txt)
+                binding.homeText.text = string[num]
+            }
+            in 25F..50F -> {
+                val string = resources.getStringArray(R.array.drink_25_50_txt)
+                binding.homeText.text = string[num]
+            }
+            in 50F..70F -> {
+                val string = resources.getStringArray(R.array.drink_50_75_txt)
+                binding.homeText.text = string[num]
+            }
+            in 70F..99.9999F -> {
+                val string = resources.getStringArray(R.array.drink_75_100_txt)
+                binding.homeText.text = string[num]
+            }
+            else -> {
+                val string = resources.getStringArray(R.array.drink_100_txt)
+                binding.homeText.text = string[num]
+            }
         }
         homeViewModel.dailyAmount?.observe(viewLifecycleOwner, Observer {
             if(it!=null) {
