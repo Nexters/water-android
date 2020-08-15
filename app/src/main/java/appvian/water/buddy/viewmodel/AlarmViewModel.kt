@@ -7,6 +7,7 @@ import androidx.room.SharedSQLiteStatement
 import appvian.water.buddy.model.data.SharedPreferenceBooleanLiveData
 import appvian.water.buddy.model.data.SharedPreferenceStringLiveData
 import java.lang.StringBuilder
+import java.util.*
 
 class AlarmViewModel (application: Application) : AndroidViewModel(application) {
     //알림 on/ off
@@ -41,6 +42,53 @@ class AlarmViewModel (application: Application) : AndroidViewModel(application) 
         editor.putString("end_time", value)
         editor.apply()
         end_time_LiveData = SharedPreferenceStringLiveData(end_time_pref, "end_time", value)
+    }
+    fun setIntervalTime(value : String){
+        val editor = interval_pref.edit()
+        editor.putString("interval_time", value)
+        editor.apply()
+        interval_LiveData = SharedPreferenceStringLiveData(interval_pref, "interval_time", value)
+    }
+
+    fun getIntervalMinutes() : Int {
+        //"30 분", "1 시간", "1 시간 30 분", "2 시간", "3 시간", "4 시간", "5 시간", "6 시간"
+        when(interval_LiveData.value){
+            "30 분" -> {
+                return 30
+            }
+            "1 시간" -> {
+                return 60
+            }
+            "1 시간 30 분" -> {
+                return 90
+            }
+            "2 시간" -> {
+                return 120
+            }
+            "3 시간" ->{
+                return 180
+            }
+            "4 시간" ->{
+                return 240
+            }
+            "5 시간" ->{
+                return 300
+            }
+            "6 시간" ->{
+                return 360
+            }
+        }
+        return 60
+    }
+    fun getStartHour() : Int {
+        var st = StringTokenizer(start_time_LiveData.value)
+        return st.nextToken().toInt()
+    }
+    fun getStartMinutes() : Int{
+        var st = StringTokenizer(start_time_LiveData.value)
+        st.nextToken()
+        st.nextToken()
+        return st.nextToken().toInt()
     }
 
 }

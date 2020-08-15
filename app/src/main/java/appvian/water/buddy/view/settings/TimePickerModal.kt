@@ -36,8 +36,9 @@ class TimePickerModal(var code : Int) : BottomSheetDialogFragment() {
         return v
     }
     private fun initUI(v : View){
-        v.timepicker.setOnTimeChangedListener { view, hourOfDay, minute ->
-
+        v.img_cancel.setOnClickListener{
+            onDestroyView()
+            onDestroy()
         }
         when(code){
             Code.START_TIME_EDIT -> {
@@ -74,7 +75,7 @@ class TimePickerModal(var code : Int) : BottomSheetDialogFragment() {
     private fun getTimeString(timepicker: TimePicker) : String{
         var timeFormat = SimpleDateFormat("HH : mm")
         var calendar = Calendar.getInstance()
-        calendar.set(Calendar.HOUR, timepicker.hour)
+        calendar.set(Calendar.HOUR_OF_DAY, timepicker.hour)
         calendar.set(Calendar.MINUTE, timepicker.minute)
         return timeFormat.format(calendar.time)
     }
