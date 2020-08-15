@@ -57,21 +57,18 @@ class DailyChartFragment : Fragment() {
         dailyVm.getDailyIntake()
         binding.dailyChartDetail.adapter = adapter
         binding.dailyChartLegend.adapter = legendAdapter
+        legendAdapter.addData(resources.getStringArray(DrinkMapper.drinkName))
 
         initSpinner()
 
         dailyVm.observeIntake.observe(viewLifecycleOwner, Observer {
-            legendAdapter.clearData()
-
             if (it.isNotEmpty()) {
                 binding.dailyChartDetail.visibility = View.VISIBLE
                 binding.dailyViewNone.visibility = View.INVISIBLE
-                binding.dailyChartLegend.visibility = View.VISIBLE
                 setDailyData(it)
             } else {
                 binding.dailyChartDetail.visibility = View.INVISIBLE
                 binding.dailyViewNone.visibility = View.VISIBLE
-                binding.dailyChartLegend.visibility = View.INVISIBLE
                 setNoneData()
             }
         })
@@ -128,8 +125,6 @@ class DailyChartFragment : Fragment() {
             pieValues.add(Entry(i.amount.toFloat(), j))
             legend.add(i.category.toString())
             colors.add(resources.getColor(DrinkMapper.drinkColor[i.category], null))
-
-            legendAdapter.addData(i.category)
         }
 
         val dataSet = PieDataSet(pieValues, "")

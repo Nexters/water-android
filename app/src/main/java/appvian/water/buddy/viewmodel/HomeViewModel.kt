@@ -11,24 +11,24 @@ import androidx.lifecycle.MutableLiveData
 import appvian.water.buddy.R
 import appvian.water.buddy.model.data.Intake
 import appvian.water.buddy.model.repository.HomeRepository
+import appvian.water.buddy.model.repository.SharedPrefsRepository
 import kotlinx.android.synthetic.main.delete_toast.view.*
 import java.util.*
 import kotlin.collections.ArrayList
 
 class HomeViewModel(application: Application) : AndroidViewModel(application) {
     private val repository = HomeRepository(application)
-
+    private val sharedPrefsRepository = SharedPrefsRepository(application)
     var dailyIntake: LiveData<List<Intake>>? = getDaily()
 
     var dailyAmount : LiveData<Int>? = getDailyDrinkedAmount()
-
-    val requiredAmount = 2000
-    val waterStartY = Resources.getSystem().displayMetrics.heightPixels.toFloat() - 100F * (Resources.getSystem().displayMetrics.densityDpi).toFloat() / DisplayMetrics.DENSITY_DEFAULT
+    var nickname = getName()
+    val requiredAmount = getTargetAmount()
+    val waterStartY = Resources.getSystem().displayMetrics.heightPixels.toFloat()
     var waterCurrentY = waterStartY
     var characterCurrentY = 0F
     var currentPercent = 0F
-    val characterEndY = -(Resources.getSystem().displayMetrics.heightPixels.toFloat() - 300F * (Resources.getSystem().displayMetrics.densityDpi).toFloat() / DisplayMetrics.DENSITY_DEFAULT)
-    val startPercentTextY : Float = Resources.getSystem().displayMetrics.heightPixels.toFloat() - 370F * (Resources.getSystem().displayMetrics.densityDpi).toFloat() / DisplayMetrics.DENSITY_DEFAULT
+    val startPercentTextY : Float = Resources.getSystem().displayMetrics.heightPixels.toFloat() - 270F * (Resources.getSystem().displayMetrics.densityDpi).toFloat() / DisplayMetrics.DENSITY_DEFAULT
     var currentPercentTextY = startPercentTextY
     var percent = getDailyPercent()
     var showDeleteToast: MutableLiveData<Boolean> = MutableLiveData(false)
@@ -42,6 +42,22 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
     init {
         deleteIntakeList.value = ArrayList()
+    }
+
+    private fun getTargetAmount() : Int{
+        var amount = 2000
+        sharedPrefsRepository.target_amount_int_live_data.observeForever {
+            amount=it
+        }
+        return amount
+    }
+
+    private fun getName(): String{
+        var name = ".."
+        sharedPrefsRepository.nameLiveData.observeForever {
+            name = it
+        }
+        return name
     }
 
     private fun getDailyDrinkedAmount(): LiveData<Int>? {

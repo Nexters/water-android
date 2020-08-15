@@ -3,6 +3,10 @@ package appvian.water.buddy.util
 import java.util.*
 
 object TimeUtil {
+    fun getCurrent() : Calendar = Calendar.getInstance()
+    var year = getCurrent().get(Calendar.YEAR)
+    var month = getCurrent().get(Calendar.MONTH) + 1
+    var day = getCurrent().get(Calendar.DATE)
 
     fun getCalendarInstance() : Calendar {
         val calInstance = Calendar.getInstance()

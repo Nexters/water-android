@@ -23,29 +23,30 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginEnd="-80dp"
+            android:layout_marginEnd="-90dp"
             >
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/animation_first_character"
                 android:layout_width="280dp"
                 android:layout_height="280dp"
                 app:lottie_autoPlay="true"
-                app:lottie_fileName="0-20/1/0-20-1.json"
-                app:lottie_imageAssetsFolder="0-20/1/images"
+                app:lottie_fileName="0-25/1/0-25-1.json"
+                app:lottie_imageAssetsFolder="0-25/1/images"
                 app:lottie_loop="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 />
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/animation_character"
-                android:layout_width="250dp"
-                android:layout_height="250dp"
+                android:layout_width="230dp"
+                android:layout_height="wrap_content"
+                android:scaleType="fitEnd"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                android:layout_marginEnd="80dp"
+                android:layout_marginEnd="90dp"
                 app:lottie_autoPlay="true"
-                app:lottie_fileName="0-20/2/0-20-2.json"
-                app:lottie_imageAssetsFolder="0-20/2/images"
+                app:lottie_fileName="0-25/2/0-25-2.json"
+                app:lottie_imageAssetsFolder="0-25/2/images"
                 app:lottie_loop="true"
                 android:visibility="gone"
                 />
@@ -67,7 +68,7 @@
             android:layout_height="match_parent">
             <TextView
                 android:id="@+id/nickname_text"
-                android:text="...님,"
+                android:text="@{String.format(@string/polite_name,homeViewModel.nickname)}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#030303"
