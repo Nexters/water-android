@@ -146,4 +146,19 @@ class SharedPrefsRepository(context: Context) {
         weightLiveData = SharedPreferenceIntLiveData(weight_pref, "weight", value)
     }
 
+    fun deleteFav1LiveData(){
+        val editor = fav_1_pref.edit()
+        editor.putString("favorite_1", "")
+        editor.apply()
+        fav_1_livedata = SharedPreferenceStringLiveData(fav_1_pref, "favorite_1", "")
+    }
+
+    fun deleteFav2LiveData(){
+        val editor = fav_2_pref.edit()
+        editor.putString("favorite_2", "")
+        editor.apply()
+        fav_2_livedata = SharedPreferenceStringLiveData(fav_2_pref, "favorite_2", "")
+    }
+
+
 }
