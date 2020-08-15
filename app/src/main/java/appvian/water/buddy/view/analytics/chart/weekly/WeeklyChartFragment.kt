@@ -94,16 +94,40 @@ class WeeklyChartFragment(val analyVm: AnalyticsViewModel) : Fragment() {
         })
 
         initSpinner()
+        observeByMonthOrDay()
+    }
+
+    fun observeByMonthOrDay() {
+        analyVm.curYear.observe(viewLifecycleOwner, Observer { setDataFromAnalyVm() })
+        analyVm.curMonth.observe(viewLifecycleOwner, Observer { setDataFromAnalyVm() })
+        analyVm.curDay.observe(viewLifecycleOwner, Observer { setDataFromAnalyVm() })
+    }
+
+    private fun setDataFromAnalyVm() {
+
+        weeklyVm.curWeek = TimeUtil.getWeekOfMonth(
+            analyVm.curYear.value ?: 1970,
+            analyVm.curMonth.value?.minus(1) ?: 1,
+            analyVm.curDay.value ?: 1
+        )
+
+        setWeeklySpinnertext()
+        weeklyVm.getWeekIntakeData()
     }
 
     private fun initSpinner() {
-        binding.weeklySpinner.text = getString(R.string.weekly_picker_item, weeklyVm.curWeek)
+        setWeeklySpinnertext()
+
         binding.weeklySpinner.setOnClickListener {
             CalendarModal(
                 analyVm.curYear.value ?: TimeUtil.year,
                 analyVm.curMonth.value ?: TimeUtil.month, calendarTotalListener
             ).show(childFragmentManager, "")
         }
+    }
+
+    private fun setWeeklySpinnertext() {
+        binding.weeklySpinner.text = getString(R.string.weekly_picker_item, weeklyVm.curWeek)
     }
 
     private fun setWeeklyData(values: List<BarEntry>) {
