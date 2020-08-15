@@ -4,8 +4,11 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.widget.ImageView
 import appvian.water.buddy.R
 import appvian.water.buddy.view.Intro.IntroActivity
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.GlideDrawableImageViewTarget
 
 class SplashActivity : AppCompatActivity() {
 
@@ -13,9 +16,19 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-        Handler().postDelayed(Runnable {
+        val splash : ImageView = findViewById(R.id.main_splash)
+        val gifImage = GlideDrawableImageViewTarget(splash)
+        Glide.with(this).load(R.drawable.main_splash).into(gifImage)
+
+        startLoading()
+    }
+
+    private fun startLoading() {
+        val handler = Handler()
+        handler.postDelayed(Runnable {
             startActivity(Intent(baseContext, IntroActivity::class.java))
             finish()
-        }, 1500)
+        }, 2000)
     }
+
 }

@@ -69,6 +69,9 @@
     <string name="intro_second_btn">다음 1/2</string>
     <string name="intro_third_btn">다음 2/2</string>
     <string name="intro_fourth_btn">확인</string>
+    <string name="intro_onboarding1">매일 마시는\n다양한 수분을\n기록해보세요.</string>
+    <string name="intro_onboarding2">지금까지 마신\n수분을 통계로\n확인할 수 있답니다.</string>
+    <string name="intro_onboarding3">캐릭터 워비와 함께\n하루 목표 수분 섭취량을\n달성해보아요.</string>
 
     <string name="month_header">월별 수분 섭취량</string>
     <string name="month_sys_text">%d일중 %d번 목표 수분 섭취 달성</string>

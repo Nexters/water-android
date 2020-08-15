@@ -20,23 +20,27 @@ import androidx.lifecycle.ViewModelProvider
 import appvian.water.buddy.R
 import appvian.water.buddy.databinding.ActivityProfileEditBinding
 import appvian.water.buddy.databinding.FragmentSettingBinding
+import appvian.water.buddy.util.DrinkMapper
+import appvian.water.buddy.utilities.ProfileImgMapper
 import appvian.water.buddy.viewmodel.SettingViewModel
 import kotlinx.android.synthetic.main.activity_profile_edit.*
+import java.util.*
 
 class ProfileEditActivity : AppCompatActivity(), TextWatcher {
     private lateinit var profileEditBinding: ActivityProfileEditBinding
     private lateinit var settingviewModel: SettingViewModel
     private val CODE_POPUP = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         profileEditBinding = DataBindingUtil.setContentView(this@ProfileEditActivity, R.layout.activity_profile_edit)
         settingviewModel = ViewModelProvider(this).get(SettingViewModel::class.java)
         profileEditBinding.viewModel = settingviewModel
-
         initUI()
     }
     private fun initUI(){
+
         edt_profile_edt.addTextChangedListener(this)
         edt_profile_edt.setOnFocusChangeListener { v, hasFocus ->
             if(hasFocus){
@@ -57,6 +61,9 @@ class ProfileEditActivity : AppCompatActivity(), TextWatcher {
             }else false
         })
         upKeyboard()
+        settingviewModel.profile_img_live_data.observe(this, Observer {
+            profileEditBinding.imgProfileEdt.setImageDrawable(resources.getDrawable(ProfileImgMapper.profile_imgs.get(it), null))
+        })
         settingviewModel.nameLiveData.observe(this, Observer {
 
         })
