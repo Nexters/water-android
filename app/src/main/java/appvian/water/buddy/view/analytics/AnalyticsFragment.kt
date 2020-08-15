@@ -17,13 +17,14 @@ import appvian.water.buddy.util.TimeUtil
 import appvian.water.buddy.view.analytics.chart.daily.DailyChartFragment
 import appvian.water.buddy.view.analytics.chart.weekly.WeeklyChartFragment
 import appvian.water.buddy.view.analytics.month.MonthFragment
-import appvian.water.buddy.view.modal.MonthCallbackListener
-import appvian.water.buddy.view.modal.MonthModal
+import appvian.water.buddy.view.modal.month.MonthCallbackListener
+import appvian.water.buddy.view.modal.month.MonthModal
 import com.google.android.material.tabs.TabLayoutMediator
 
 private const val PAGE_NUM = 3
 
-class AnalyticsFragment : Fragment(), MonthCallbackListener {
+class AnalyticsFragment : Fragment(),
+    MonthCallbackListener {
     private lateinit var binding: FragmentAnalyticsBinding
     private var curMonth = MutableLiveData<Int>()
 
@@ -32,7 +33,9 @@ class AnalyticsFragment : Fragment(), MonthCallbackListener {
     }
 
     private val monthPickerListener = View.OnClickListener {
-        val bottomSheetDialog = MonthModal(curMonth.value ?: TimeUtil.month, this)
+        val bottomSheetDialog = MonthModal(
+            curMonth.value ?: TimeUtil.month, this
+        )
         bottomSheetDialog.show(childFragmentManager, "bottomSheet")
     }
 
