@@ -15,7 +15,8 @@ import appvian.water.buddy.viewmodel.modal.CalendarViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class CalendarModal : BottomSheetDialogFragment(), CalendarDayListener {
+class CalendarModal(val calendarTotalListener: CalendarTotalListener) : BottomSheetDialogFragment(),
+    CalendarDayListener {
     private lateinit var binding: CalendarPickerBinding
     private var curYear = TimeUtil.year
     private var curMonth = TimeUtil.month
@@ -45,15 +46,13 @@ class CalendarModal : BottomSheetDialogFragment(), CalendarDayListener {
 
     private fun initUi() {
         binding.calPickerClose.setOnClickListener { dismiss() }
-        binding.calConfirmBtn.setOnClickListener { dismiss() }
-
-        setCalendarView()
-        observeData()
-    }
-
-    private fun setCalendarView() {
+        binding.calConfirmBtn.setOnClickListener {
+            calendarTotalListener.getCalendarTotal(curYear, curMonth, selectDay)
+            dismiss()
+        }
         binding.calView.adapter = calendarAdapter
 
+        observeData()
     }
 
     private fun observeData() {
@@ -78,9 +77,10 @@ class CalendarModal : BottomSheetDialogFragment(), CalendarDayListener {
     }
 
     override fun getCalendarDay(day: Int) {
-        if(day > 0 ) {
+        if (day > 0) {
             selectDay = day
-            binding.calConfirmBtn.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.blue_1, null))
+            binding.calConfirmBtn.backgroundTintList =
+                ColorStateList.valueOf(resources.getColor(R.color.blue_1, null))
         }
     }
 }
