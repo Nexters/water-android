@@ -65,12 +65,10 @@ class DailyChartFragment : Fragment() {
             if (it.isNotEmpty()) {
                 binding.dailyChartDetail.visibility = View.VISIBLE
                 binding.dailyViewNone.visibility = View.INVISIBLE
-                binding.dailyChartLegend.visibility = View.VISIBLE
                 setDailyData(it)
             } else {
                 binding.dailyChartDetail.visibility = View.INVISIBLE
                 binding.dailyViewNone.visibility = View.VISIBLE
-                binding.dailyChartLegend.visibility = View.INVISIBLE
                 setNoneData()
             }
         })
