@@ -20,10 +20,9 @@ class MainActivity : AppCompatActivity() {
 
         val binding: ActivityMainBinding =
             DataBindingUtil.setContentView(this@MainActivity, R.layout.activity_main)
-        binding.mainViewModel = MainViewModel(this)
         val viewModel = MainViewModel(this)
+        binding.mainViewModel = viewModel
         viewModel.showWhiteImage.observe(this, Observer {
-            Log.e("boolean",it.toString())
             if(it){
                 binding.bottomWhite.visibility = View.VISIBLE
             } else{

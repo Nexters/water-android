@@ -176,32 +176,16 @@ class MainFragment : Fragment() {
     private fun changeText(percent: Float){
         val random = Random
         val num = random.nextInt(9)
+        val string: Array<String>
         when(percent){
-            0F -> {
-                val string = resources.getStringArray(R.array.drink_0_txt)
-                binding.homeText.text = string[num]
-            }
-            in 0F..25F -> {
-                val string = resources.getStringArray(R.array.drink_0_25_txt)
-                binding.homeText.text = string[num]
-            }
-            in 25F..50F -> {
-                val string = resources.getStringArray(R.array.drink_25_50_txt)
-                binding.homeText.text = string[num]
-            }
-            in 50F..70F -> {
-                val string = resources.getStringArray(R.array.drink_50_75_txt)
-                binding.homeText.text = string[num]
-            }
-            in 70F..99.9999F -> {
-                val string = resources.getStringArray(R.array.drink_75_100_txt)
-                binding.homeText.text = string[num]
-            }
-            else -> {
-                val string = resources.getStringArray(R.array.drink_100_txt)
-                binding.homeText.text = string[num]
-            }
+            0F -> string = resources.getStringArray(R.array.drink_0_txt)
+            in 0F..25F ->  string = resources.getStringArray(R.array.drink_0_25_txt)
+            in 25F..50F ->  string = resources.getStringArray(R.array.drink_25_50_txt)
+            in 50F..70F -> string = resources.getStringArray(R.array.drink_50_75_txt)
+            in 70F..99.9999F -> string = resources.getStringArray(R.array.drink_75_100_txt)
+            else -> string = resources.getStringArray(R.array.drink_100_txt)
         }
+        binding.homeText.text = string[num]
         homeViewModel.dailyAmount?.observe(viewLifecycleOwner, Observer {
             if(it!=null) {
                 binding.intakeListButton.text = String.format(
