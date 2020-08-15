@@ -1,6 +1,8 @@
 package appvian.water.buddy.viewmodel
 
 import android.view.MenuItem
+import android.view.View
+import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.MutableLiveData
@@ -55,5 +57,12 @@ class MainViewModel(val activity: FragmentActivity) {
         activity.supportFragmentManager.beginTransaction()
             .replace(R.id.fragment, fragment)
             .commit();
+    }
+
+    val floatingListner = object : View.OnClickListener{
+        override fun onClick(v: View?) {
+            val popup = PopupMenu(activity.applicationContext,v)
+            popup.menuInflater.inflate(R.menu.popup_menu,popup.menu)
+        }
     }
 }

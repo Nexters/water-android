@@ -2,6 +2,7 @@ package appvian.water.buddy.binding
 
 import android.view.View
 import android.widget.Button
+import android.widget.ImageButton
 import androidx.databinding.BindingAdapter
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -13,5 +14,10 @@ fun setOnNavigationItemSelected(view: BottomNavigationView, listener:BottomNavig
 
 @BindingAdapter("bind:deleteButtonClicked")
 fun setOnDeleteButtonClicked(view: Button, listener: View.OnClickListener){
+    view.setOnClickListener(listener)
+}
+
+@BindingAdapter("bind:floatingButtonClicked")
+fun setOnFloatingButtonClicked(view: ImageButton, listener: View.OnClickListener){
     view.setOnClickListener(listener)
 }

@@ -40,11 +40,7 @@ class DailyIntakeListActivity : AppCompatActivity() {
 
     private fun initRecyclerView(){
         homeViewModel.dailyIntake?.observe(this, Observer {
-            var count = 0
-            for (i in it){
-                count+=1
-            }
-            if(count!=0) {
+            if(it.isNotEmpty()) {
                 binding.dailyIntakeRecyclerView.visibility = View.VISIBLE
                 binding.modifyExplainText.visibility = View.VISIBLE
                 binding.noWaterLayout.visibility = View.GONE
