@@ -43,7 +43,7 @@ class FavoriteDrinkSettingActivity : AppCompatActivity() {
                         binding.imgCategory.setImageDrawable(resources.getDrawable(R.drawable.icon_coffee, null))
                         binding.txtCategory.text = "커피"
                     }
-                    "0-25/2" -> {
+                    "2" -> {
                         binding.imgCategory.setImageDrawable(resources.getDrawable(R.drawable.icon_tea, null))
                         binding.txtCategory.text = "차"
                     }
@@ -93,7 +93,7 @@ class FavoriteDrinkSettingActivity : AppCompatActivity() {
                         binding.imgCategory2.setImageDrawable(resources.getDrawable(R.drawable.icon_coffee, null))
                         binding.txtCategory2.text = "커피"
                     }
-                    "0-25/2" -> {
+                    "2" -> {
                         binding.imgCategory2.setImageDrawable(resources.getDrawable(R.drawable.icon_tea, null))
                         binding.txtCategory2.text = "차"
                     }
