@@ -6,13 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import appvian.water.buddy.R
 import appvian.water.buddy.databinding.FragmentMonthChartBinding
 import appvian.water.buddy.model.repository.HomeRepository
 import appvian.water.buddy.viewmodel.analytics.MonthViewModel
 
-class MonthFragment : Fragment() {
+class MonthFragment(val monthLiveData:LiveData<Int>) : Fragment() {
     private lateinit var monthVm: MonthViewModel
     private lateinit var binding: FragmentMonthChartBinding
     private val rankAdapter = RankAdapter()
@@ -42,8 +43,11 @@ class MonthFragment : Fragment() {
     }
 
     private fun loadData() {
-        monthVm.getMonthlyIntake()
-        characterAdapter.maxDay = monthVm.curMaxDay
+        monthLiveData.observe(viewLifecycleOwner, Observer {
+            monthVm.setMonth(it - 1)
+            monthVm.getMonthlyIntake()
+            characterAdapter.maxDay = monthVm.curMaxDay
+        })
     }
 
     private fun initUi() {
@@ -92,6 +96,6 @@ class MonthFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance() = MonthFragment()
+        fun newInstance(monthLiveData: LiveData<Int>) = MonthFragment(monthLiveData)
     }
 }

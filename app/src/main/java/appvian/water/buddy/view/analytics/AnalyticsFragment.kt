@@ -7,23 +7,32 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import appvian.water.buddy.R
 import appvian.water.buddy.databinding.FragmentAnalyticsBinding
+import appvian.water.buddy.util.TimeUtil
 import appvian.water.buddy.view.analytics.chart.daily.DailyChartFragment
 import appvian.water.buddy.view.analytics.chart.weekly.WeeklyChartFragment
 import appvian.water.buddy.view.analytics.month.MonthFragment
+import appvian.water.buddy.view.modal.MonthCallbackListener
 import appvian.water.buddy.view.modal.MonthModal
 import com.google.android.material.tabs.TabLayoutMediator
-import java.util.*
 
 private const val PAGE_NUM = 3
 
-class AnalyticsFragment : Fragment() {
+class AnalyticsFragment : Fragment(), MonthCallbackListener {
     private lateinit var binding: FragmentAnalyticsBinding
+    private var curMonth = MutableLiveData<Int>()//TimeUtil.month
+
+    init {
+        curMonth.value = TimeUtil.month
+    }
 
     private val monthPickerListener = View.OnClickListener {
-        val bottomSheetDialog = MonthModal()
+        val bottomSheetDialog = MonthModal(curMonth.value ?: TimeUtil.month, this)
         bottomSheetDialog.show(childFragmentManager, "bottomSheet")
     }
 
@@ -47,10 +56,12 @@ class AnalyticsFragment : Fragment() {
             tab.text = tabTitle[position]
         }.attach()
 
-        binding.analyticsTitle.text = getString(
-            R.string.analytics_header_title,
-            Calendar.getInstance().get(Calendar.MONTH) + 1
-        )
+        curMonth.observe(viewLifecycleOwner, Observer {
+            binding.analyticsTitle.text = getString(
+                R.string.analytics_header_title,
+                it
+            )
+        })
         binding.analyticsTitle.setOnClickListener(monthPickerListener)
     }
 
@@ -62,7 +73,7 @@ class AnalyticsFragment : Fragment() {
     private inner class ScreenSlidePagerAdapter(fa: FragmentActivity) :
         FragmentStateAdapter(fa) {
         private val fragmentList = arrayOf(
-            MonthFragment.newInstance(),
+            MonthFragment.newInstance(curMonth as LiveData<Int>),
             WeeklyChartFragment.newInstance(),
             DailyChartFragment.newInstance()
         )
@@ -71,5 +82,9 @@ class AnalyticsFragment : Fragment() {
 
         override fun createFragment(position: Int): Fragment = fragmentList[position]
 
+    }
+
+    override fun setMonth(month: Int) {
+        curMonth.value = month
     }
 }

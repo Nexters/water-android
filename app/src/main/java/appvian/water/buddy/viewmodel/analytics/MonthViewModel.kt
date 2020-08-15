@@ -28,6 +28,14 @@ class MonthViewModel(private val repository: HomeRepository) {
         _observeIntakeDays.value = Pair(0, curMaxDay)
     }
 
+    fun setMonth(month: Int) {
+        curMonth = month
+        now.set(Calendar.MONTH, curMonth)
+
+        curMaxDay = now.getActualMaximum(Calendar.DAY_OF_MONTH)
+        android.util.Log.d("month vm", "$curMonth, $curMaxDay")
+    }
+
     fun getMonthlyIntake() {
         val startMonth = TimeUtil.getCalendarInstance()
         startMonth.set(Calendar.MONTH, curMonth)
@@ -78,8 +86,9 @@ class MonthViewModel(private val repository: HomeRepository) {
         characterList.value?.let { characterData ->
             if (!characterData.equals(filterCharacter)) {
                 characterList.value = filterCharacter as? Map<Int, Intake>
-                _observeIntakeDays.value = Pair(filterCharacter.size, curMaxDay)
             }
+            _observeIntakeDays.value = Pair(filterCharacter.size, curMaxDay)
+
         } ?: run {
             characterList.value = filterCharacter as? Map<Int, Intake>
             _observeIntakeDays.value = Pair(filterCharacter.size, curMaxDay)
