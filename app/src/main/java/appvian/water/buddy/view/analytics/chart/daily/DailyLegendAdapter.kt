@@ -9,24 +9,20 @@ import appvian.water.buddy.databinding.ItemDailyLegendBinding
 import appvian.water.buddy.util.DrinkMapper
 
 class DailyLegendAdapter : RecyclerView.Adapter<DailyLegendAdapter.LegendVh>() {
-    private val legends = ArrayList<Int>()
+    private val legends = ArrayList<String>()
 
     inner class LegendVh(val binding: ItemDailyLegendBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bindLegends(item: Int) {
-            binding.dailyLegendImg.setBackgroundColor(binding.root.context.getColor(DrinkMapper.drinkColor[item]))
-            binding.dailyLegendTxt.text = binding.root.resources.getStringArray(DrinkMapper.drinkName)[item]
+        fun bindLegends(position: Int, item: String) {
+            binding.dailyLegendImg.setBackgroundColor(binding.root.context.getColor(DrinkMapper.drinkColor[position]))
+            binding.dailyLegendTxt.text = item
         }
-
     }
 
-    fun addData(item: Int){
-        legends.add(item)
-        notifyDataSetChanged()
-    }
-
-    fun clearData(){
+    fun addData(items: Array<String>){
         legends.clear()
+        legends.addAll(items)
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LegendVh {
@@ -45,6 +41,6 @@ class DailyLegendAdapter : RecyclerView.Adapter<DailyLegendAdapter.LegendVh>() {
     }
 
     override fun onBindViewHolder(holder: LegendVh, position: Int) {
-        holder.bindLegends(legends[position])
+        holder.bindLegends(position, legends[position])
     }
 }
