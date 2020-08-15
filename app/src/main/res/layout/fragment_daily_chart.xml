@@ -44,7 +44,8 @@
             android:layout_marginStart="@dimen/daily_common_spacing"
             android:fillViewport="true"
             app:layout_constraintTop_toBottomOf="@id/daily_header"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/daily_view_none"/>
 
         <TextView
             android:id="@+id/daily_sys_text"
