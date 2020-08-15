@@ -11,6 +11,7 @@
         android:id="@+id/cal_day_view"
         android:layout_width="38dp"
         android:layout_height="38dp"
+        android:layout_marginStart="10dp"
         android:layout_marginBottom="3dp">
 
         <TextView

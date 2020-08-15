@@ -1,6 +1,7 @@
 package appvian.water.buddy.view.modal.calendar
 
 import android.app.Dialog
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,12 +15,13 @@ import appvian.water.buddy.viewmodel.modal.CalendarViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class CalendarModal : BottomSheetDialogFragment() {
+class CalendarModal : BottomSheetDialogFragment(), CalendarDayListener {
     private lateinit var binding: CalendarPickerBinding
     private var curYear = TimeUtil.year
     private var curMonth = TimeUtil.month
+    private var selectDay = -1
 
-    private val calendarAdapter = CalendarAdapter()
+    private val calendarAdapter = CalendarAdapter(this)
     private val calendarVm =
         CalendarViewModel()
 
@@ -73,5 +75,12 @@ class CalendarModal : BottomSheetDialogFragment() {
 
     private fun setCalYearMonthText() {
         binding.calYearMonth.text = getString(R.string.calendar_year_month, curYear, curMonth)
+    }
+
+    override fun getCalendarDay(day: Int) {
+        if(day > 0 ) {
+            selectDay = day
+            binding.calConfirmBtn.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.blue_1, null))
+        }
     }
 }
