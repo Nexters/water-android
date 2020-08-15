@@ -6,48 +6,34 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.room.SharedSQLiteStatement
 import appvian.water.buddy.model.data.SharedPreferenceBooleanLiveData
 import appvian.water.buddy.model.data.SharedPreferenceStringLiveData
+import appvian.water.buddy.model.repository.SharedPrefsRepository
 import java.lang.StringBuilder
 import java.util.*
 
 class AlarmViewModel (application: Application) : AndroidViewModel(application) {
+    private val repository = SharedPrefsRepository(application)
     //알림 on/ off
-    val alarm_flag_pref = application.getSharedPreferences("alarm_flag", Context.MODE_PRIVATE)
-    var alarm_flag_LiveData : SharedPreferenceBooleanLiveData = SharedPreferenceBooleanLiveData(alarm_flag_pref, "alarm_flag", alarm_flag_pref.getBoolean("alarm_flag", false))
+    var alarm_flag_LiveData = repository.alarm_flag_LiveData
     //시작 시간
-    val start_time_pref = application.getSharedPreferences("start_time", Context.MODE_PRIVATE)
-    var start_time_LiveData = SharedPreferenceStringLiveData(start_time_pref, "start_time", start_time_pref.getString("start_time", "00 : 00")!!)
+    var start_time_LiveData = repository.start_time_LiveData
     //종료 시간
-    val end_time_pref = application.getSharedPreferences("end_time", Context.MODE_PRIVATE)
-    var end_time_LiveData = SharedPreferenceStringLiveData(end_time_pref, "end_time", end_time_pref.getString("end_time", "00 : 00")!!)
+    var end_time_LiveData = repository.end_time_LiveData
     //간격
-    val interval_pref = application.getSharedPreferences("interval_time", Context.MODE_PRIVATE)
-    var interval_LiveData = SharedPreferenceStringLiveData(interval_pref, "interval_time", interval_pref.getString("interval_time", "0시간")!!)
+    var interval_LiveData = repository.interval_LiveData
 
     fun setAlarmFlag(flag : Boolean){
-        val editor = alarm_flag_pref.edit()
-        editor.putBoolean("alarm_flag", flag)
-        editor.apply()
-        alarm_flag_LiveData = SharedPreferenceBooleanLiveData(alarm_flag_pref, "alarm_flag", flag)
+        repository.setAlarmFlag(flag)
     }
 
     fun setStartTime(value : String){
-        val editor = start_time_pref.edit()
-        editor.putString("start_time", value)
-        editor.apply()
-        start_time_LiveData = SharedPreferenceStringLiveData(start_time_pref, "start_time", value)
+        repository.setStartTime(value)
     }
 
     fun setEndTime(value : String){
-        val editor = end_time_pref.edit()
-        editor.putString("end_time", value)
-        editor.apply()
-        end_time_LiveData = SharedPreferenceStringLiveData(end_time_pref, "end_time", value)
+        repository.setEndTime(value)
     }
     fun setIntervalTime(value : String){
-        val editor = interval_pref.edit()
-        editor.putString("interval_time", value)
-        editor.apply()
-        interval_LiveData = SharedPreferenceStringLiveData(interval_pref, "interval_time", value)
+        repository.setIntervalTime(value)
     }
 
     fun getIntervalMinutes() : Int {

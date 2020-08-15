@@ -12,8 +12,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import appvian.water.buddy.R
 import appvian.water.buddy.databinding.FragmentSettingBinding
+import appvian.water.buddy.utilities.ProfileImgMapper
 import appvian.water.buddy.viewmodel.SettingViewModel
 import kotlinx.android.synthetic.main.fragment_setting.*
+import java.util.*
 
 class SettingFragment : Fragment() {
     private lateinit var fragmentSettingBinding: FragmentSettingBinding
@@ -27,7 +29,13 @@ class SettingFragment : Fragment() {
         settingviewModel = ViewModelProvider(this).get(SettingViewModel::class.java)
         fragmentSettingBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_setting, container, false)
 
-
+        if(settingviewModel.profile_img_live_data.value == -1){
+            var random = Random(System.currentTimeMillis())
+            settingviewModel.setProfileImgLiveData(random.nextInt(ProfileImgMapper.profile_imgs.size))
+        }
+        settingviewModel.profile_img_live_data.observe(viewLifecycleOwner, Observer {
+            fragmentSettingBinding.imgSettingProfile.setImageDrawable(resources.getDrawable(ProfileImgMapper.profile_imgs.get(it), null))
+        })
         //참고 https://www.thetopsites.net/article/51790868.shtml
         settingviewModel.nameLiveData.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             fragmentSettingBinding.txtSettingName.text = it
