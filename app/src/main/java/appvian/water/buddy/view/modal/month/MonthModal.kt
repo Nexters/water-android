@@ -1,4 +1,4 @@
-package appvian.water.buddy.view.modal
+package appvian.water.buddy.view.modal.month
 
 import android.app.Dialog
 import android.os.Bundle
