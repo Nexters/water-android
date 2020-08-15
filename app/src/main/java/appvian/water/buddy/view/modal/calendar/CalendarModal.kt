@@ -15,16 +15,14 @@ import appvian.water.buddy.viewmodel.modal.CalendarViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class CalendarModal(val calendarTotalListener: CalendarTotalListener) : BottomSheetDialogFragment(),
+class CalendarModal(private var curYear:Int, var curMonth:Int, val calendarTotalListener: CalendarTotalListener) : BottomSheetDialogFragment(),
     CalendarDayListener {
     private lateinit var binding: CalendarPickerBinding
-    private var curYear = TimeUtil.year
-    private var curMonth = TimeUtil.month
     private var selectDay = -1
 
     private val calendarAdapter = CalendarAdapter(this)
     private val calendarVm =
-        CalendarViewModel()
+        CalendarViewModel(curYear, curMonth)
 
     override fun getTheme(): Int = R.style.RoundBottomSheetDialog
 

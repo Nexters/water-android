@@ -19,6 +19,7 @@ import appvian.water.buddy.view.analytics.chart.weekly.WeeklyChartFragment
 import appvian.water.buddy.view.analytics.month.MonthFragment
 import appvian.water.buddy.view.modal.month.MonthCallbackListener
 import appvian.water.buddy.view.modal.month.MonthModal
+import appvian.water.buddy.viewmodel.analytics.AnalyticsViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 
 private const val PAGE_NUM = 3
@@ -26,15 +27,11 @@ private const val PAGE_NUM = 3
 class AnalyticsFragment : Fragment(),
     MonthCallbackListener {
     private lateinit var binding: FragmentAnalyticsBinding
-    private var curMonth = MutableLiveData<Int>()
-
-    init {
-        curMonth.value = TimeUtil.month
-    }
+    private val analyVm: AnalyticsViewModel = AnalyticsViewModel()
 
     private val monthPickerListener = View.OnClickListener {
         val bottomSheetDialog = MonthModal(
-            curMonth.value ?: TimeUtil.month, this
+            analyVm.curMonth.value ?: TimeUtil.month, this
         )
         bottomSheetDialog.show(childFragmentManager, "bottomSheet")
     }
@@ -59,7 +56,7 @@ class AnalyticsFragment : Fragment(),
             tab.text = tabTitle[position]
         }.attach()
 
-        curMonth.observe(viewLifecycleOwner, Observer {
+        analyVm.curMonth.observe(viewLifecycleOwner, Observer {
             binding.analyticsTitle.text = getString(
                 R.string.analytics_header_title,
                 it
@@ -78,9 +75,9 @@ class AnalyticsFragment : Fragment(),
     private inner class ScreenSlidePagerAdapter(fa: FragmentActivity) :
         FragmentStateAdapter(fa) {
         private val fragmentList = arrayOf(
-            MonthFragment.newInstance(curMonth as LiveData<Int>),
-            WeeklyChartFragment.newInstance(),
-            DailyChartFragment.newInstance()
+            MonthFragment.newInstance(analyVm),
+            WeeklyChartFragment.newInstance(analyVm),
+            DailyChartFragment.newInstance(analyVm)
         )
 
         override fun getItemCount(): Int = PAGE_NUM
@@ -90,6 +87,6 @@ class AnalyticsFragment : Fragment(),
     }
 
     override fun setMonth(month: Int) {
-        curMonth.value = month
+        analyVm.setMonth(month)
     }
 }
