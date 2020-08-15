@@ -25,7 +25,7 @@ private const val PAGE_NUM = 3
 
 class AnalyticsFragment : Fragment(), MonthCallbackListener {
     private lateinit var binding: FragmentAnalyticsBinding
-    private var curMonth = MutableLiveData<Int>()//TimeUtil.month
+    private var curMonth = MutableLiveData<Int>()
 
     init {
         curMonth.value = TimeUtil.month
@@ -62,7 +62,9 @@ class AnalyticsFragment : Fragment(), MonthCallbackListener {
                 it
             )
         })
+
         binding.analyticsTitle.setOnClickListener(monthPickerListener)
+        binding.analyticsMonthPicker.setOnClickListener(monthPickerListener)
     }
 
     companion object {
