@@ -20,4 +20,10 @@ class FavoriteViewModel(application: Application) : AndroidViewModel(application
     fun setFa2LiveData(category : Int, amount : Int){
         repository.setFa2LiveData(category, amount)
     }
+    fun deleteFav1LiveData(){
+        repository.deleteFav1LiveData()
+    }
+    fun deleteFav2LiveData(){
+        repository.deleteFav2LiveData()
+    }
 }
