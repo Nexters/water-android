@@ -1,5 +1,7 @@
 package appvian.water.buddy.view.modal.calendar
 
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -20,16 +22,19 @@ class CalendarAdapter(val calendarDayListener: CalendarDayListener) : RecyclerVi
                 binding.calDayTv.text = item.toString()
 
                 if(checkedPos != -1) {
-                    if (checkedPos == adapterPosition)
+                    if (checkedPos == adapterPosition) {
                         binding.calDayView.background =
                             binding.root.resources.getDrawable(R.drawable.circle, null)
-                    else
+                        binding.calDayTv.setTextColor(Color.WHITE)
+                    } else {
                         binding.calDayView.setBackgroundColor(
                             binding.root.resources.getColor(
                                 R.color.transparent,
                                 null
                             )
                         )
+                        binding.calDayTv.setTextColor(Color.BLACK)
+                    }
                 }
 
                 binding.calDayView.setOnClickListener {
