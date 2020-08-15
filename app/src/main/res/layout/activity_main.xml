@@ -23,15 +23,33 @@
                     android:layout_weight="0.8"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toTopOf="@id/main_navigation" />
+                <ImageView
+                    android:id="@+id/bottom_white"
+                    android:layout_width="match_parent"
+                    android:layout_height="75dp"
+                    android:background="#ffffff"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="75dp"
+                    android:background="@drawable/navigation_bar_background"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
 
                 <com.google.android.material.bottomnavigation.BottomNavigationView
                     android:id="@+id/main_navigation"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
+                    android:layout_width="270dp"
+                    android:layout_height="75dp"
                     android:layout_gravity="bottom"
+                    android:background="@android:color/transparent"
+                    app:elevation="0dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:menu="@menu/main_menu"
-                    app:backgroundTint="#ABABAB"
+                    app:labelVisibilityMode="labeled"
+                    app:itemIconTint="@drawable/menu_selector_color"
+                    app:itemTextColor="@drawable/menu_selector_color"
                     bind:navigationItemSelected="@{mainViewModel.menuListener}"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
