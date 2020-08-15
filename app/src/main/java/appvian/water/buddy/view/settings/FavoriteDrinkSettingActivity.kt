@@ -149,7 +149,7 @@ class FavoriteDrinkSettingActivity : AppCompatActivity() {
         }
     }
     private fun openBottomSheet(code : Int){
-        val bottomSheet = SetIntakeModal(code)
+        val bottomSheet = SetIntakeModal(code, null)
         val fragmentManager = supportFragmentManager
         bottomSheet.show(fragmentManager, bottomSheet.tag)
     }
