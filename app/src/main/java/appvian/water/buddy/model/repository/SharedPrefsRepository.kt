@@ -53,6 +53,10 @@ class SharedPrefsRepository(context: Context) {
     val interval_pref = context.getSharedPreferences("interval_time", Context.MODE_PRIVATE)
     var interval_LiveData = SharedPreferenceStringLiveData(interval_pref, "interval_time", interval_pref.getString("interval_time", "0시간")!!)
 
+    //프로필 이미지 index
+    val profile_img_pref = context.getSharedPreferences("profile_img", Context.MODE_PRIVATE)
+    var profile_img_LiveData = SharedPreferenceIntLiveData(profile_img_pref, "profile_img", profile_img_pref.getInt("profile_img", -1))
+
     fun setAlarmFlag(flag : Boolean){
         val editor = alarm_flag_pref.edit()
         editor.putBoolean("alarm_flag", flag)
@@ -144,6 +148,12 @@ class SharedPrefsRepository(context: Context) {
         editor.putInt("weight", value)
         editor.apply()
         weightLiveData = SharedPreferenceIntLiveData(weight_pref, "weight", value)
+    }
+    fun setProfileImgLiveData(value : Int){
+        val editor = profile_img_pref.edit()
+        editor.putInt("profile_img", value)
+        editor.apply()
+        profile_img_LiveData = SharedPreferenceIntLiveData(profile_img_pref, "profile_img", value)
     }
 
 }

@@ -48,6 +48,7 @@ class TargetAmountSettingActivity : AppCompatActivity() {
 
         })
         settingViewModel.is_auto_settiing_live_data.observe(this, Observer {
+            bindig.checkbox.isChecked = it
         })
 
         txt_target_amount.setOnClickListener{
