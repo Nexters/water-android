@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -14,12 +12,14 @@ import appvian.water.buddy.databinding.FragmentDailyChartBinding
 import appvian.water.buddy.model.data.Intake
 import appvian.water.buddy.model.repository.HomeRepository
 import appvian.water.buddy.util.DrinkMapper
+import appvian.water.buddy.view.modal.calendar.CalendarModal
+import appvian.water.buddy.view.modal.calendar.CalendarTotalListener
 import appvian.water.buddy.viewmodel.analytics.DailyChartViewModel
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 
-class DailyChartFragment : Fragment() {
+class DailyChartFragment : Fragment(), CalendarTotalListener {
 
     private lateinit var binding: FragmentDailyChartBinding
     private lateinit var dailyVm: DailyChartViewModel
@@ -50,7 +50,6 @@ class DailyChartFragment : Fragment() {
         super.onResume()
 
         dailyVm.getDailyIntake()
-        binding.dailyDatePicker.setSelection(dailyVm.todayDate - 1)
     }
 
     private fun initUi() {
@@ -76,33 +75,9 @@ class DailyChartFragment : Fragment() {
     }
 
     private fun initSpinner() {
-        context?.let { context ->
-            val dayList = dailyVm.dayList.map { getString(R.string.daily_date, it) }
-
-            val arrayAdapter = ArrayAdapter<String>(
-                context,
-                R.layout.daily_date_picker,
-                R.id.daily_picker_text,
-                dayList
-            )
-            binding.dailyDatePicker.adapter = arrayAdapter
-            binding.dailyDatePicker.setSelection(dailyVm.todayDate - 1)
-
-            binding.dailyDatePicker.onItemSelectedListener =
-                object : AdapterView.OnItemSelectedListener {
-                    override fun onNothingSelected(parent: AdapterView<*>?) {}
-
-                    override fun onItemSelected(
-                        parent: AdapterView<*>?,
-                        view: View?,
-                        position: Int,
-                        id: Long
-                    ) {
-                        dailyVm.todayDate = dailyVm.dayList[position]
-                        dailyVm.getDailyIntake()
-                    }
-
-                }
+        binding.dailyDatePicker.text = getString(R.string.daily_date, dailyVm.curDay)
+        binding.dailyDatePicker.setOnClickListener {
+            CalendarModal(this).show(childFragmentManager, "")
         }
     }
 
@@ -160,5 +135,14 @@ class DailyChartFragment : Fragment() {
         @JvmStatic
         fun newInstance() =
             DailyChartFragment()
+    }
+
+    override fun getCalendarTotal(year: Int, month: Int, day: Int) {
+        dailyVm.curYear = year
+        dailyVm.curMonth = month - 1
+        dailyVm.curDay = day
+
+        binding.dailyDatePicker.text = getString(R.string.daily_date, dailyVm.curDay)
+        dailyVm.getDailyIntake()
     }
 }

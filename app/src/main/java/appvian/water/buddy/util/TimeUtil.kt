@@ -32,4 +32,11 @@ object TimeUtil {
 
         return listOf(month, monthWeek)
     }
+
+    fun getWeekOfMonth(year:Int, month:Int, day: Int) : Int {
+        val calInstance = getCalendarInstance()
+        calInstance.set(year, month - 1, day)
+
+        return  calInstance.get(Calendar.WEEK_OF_MONTH)
+    }
 }

@@ -29,15 +29,18 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="35dp"/>
 
-            <androidx.appcompat.widget.AppCompatSpinner
+            <TextView
                 android:id="@+id/weekly_spinner"
                 android:layout_width="54dp"
                 android:layout_height="27dp"
                 android:background="@drawable/picker_background"
+                android:textSize="11sp"
+                android:gravity="center"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="35dp"
-                android:layout_marginEnd="@dimen/daily_common_spacing"/>
+                android:layout_marginEnd="@dimen/daily_common_spacing"
+                tools:text="1주"/>
 
             <com.github.mikephil.charting.charts.BarChart
                 android:id="@+id/weekly_barchart_by_week"
