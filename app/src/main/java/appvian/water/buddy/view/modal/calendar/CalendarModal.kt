@@ -47,7 +47,8 @@ class CalendarModal(val calendarTotalListener: CalendarTotalListener) : BottomSh
     private fun initUi() {
         binding.calPickerClose.setOnClickListener { dismiss() }
         binding.calConfirmBtn.setOnClickListener {
-            calendarTotalListener.getCalendarTotal(curYear, curMonth, selectDay)
+            if(selectDay != -1)
+                calendarTotalListener.getCalendarTotal(curYear, curMonth, selectDay)
             dismiss()
         }
         binding.calView.adapter = calendarAdapter
