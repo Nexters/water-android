@@ -2,14 +2,15 @@ package appvian.water.buddy.view.Intro
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
-import appvian.water.buddy.R
+import androidx.fragment.app.Fragment
+import androidx.viewpager.widget.ViewPager
+import appvian.water.buddy.R.drawable
 import appvian.water.buddy.R.layout.intro_fragment
-import appvian.water.buddy.viewmodel.IntroViewModel
+import appvian.water.buddy.view.CircleIndicator
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.intro_fragment.view.*
 
@@ -20,12 +21,51 @@ class IntroFragment : Fragment() {
     }
     private lateinit var callback: OnBackPressedCallback
     var mBackWait:Long = 0
+    lateinit var viewpager : ViewPager
+    lateinit var circleindicator: CircleIndicator
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(intro_fragment, container, false)
+        val listImage: ArrayList<Int> = ArrayList()
+
+        listImage.add(drawable.onboarding_1)
+        listImage.add(drawable.onboarding_2)
+        listImage.add(drawable.onboarding_3)
+
+        viewpager = view.viewPager
+        circleindicator = view.circleindicator
+        val pageAdapter = IntroViewpagerAdapter(childFragmentManager)
+        viewpager.adapter = pageAdapter
+
+        for(i in listImage) {
+            val imageFragment = onBoardingFragment()
+            val bundle by lazy { Bundle() }
+            bundle.putInt("imgRes", i)
+            imageFragment.arguments = bundle
+            pageAdapter.addItem(imageFragment)
+        }
+        pageAdapter.notifyDataSetChanged()
+
+        viewpager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
+            override fun onPageScrollStateChanged(p0: Int) {
+
+            }
+
+            override fun onPageScrolled(p0: Int, p1: Float, p2: Int) {
+
+            }
+
+            override fun onPageSelected(p0: Int) {
+                circleindicator.selectDot(p0)
+            }
+
+        })
+
+        //init indicator
+        circleindicator.createDotPanel(3, drawable.indicator_dot_off, drawable.indicator_dot_on, 0)
 
         view.confirmbtn.setOnClickListener{
             (activity as IntroActivity).replaceFragment(IntroSecondFragment.newInstance())
@@ -33,6 +73,13 @@ class IntroFragment : Fragment() {
         return view
 
     }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+    }
+
+
     //뒤로 가기 버튼 클릭 시 앱 종
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -53,5 +100,6 @@ class IntroFragment : Fragment() {
         super.onDetach()
         callback.remove()
     }
+
 
 }
