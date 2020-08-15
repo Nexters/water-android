@@ -55,7 +55,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     private fun getName(): String{
         var name = ".."
         sharedPrefsRepository.nameLiveData.observeForever {
-            name = it+"님"
+            name = String.format("%s님",it)
         }
         return name
     }
