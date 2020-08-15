@@ -13,6 +13,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class MonthModal(curMonth: Int, val monthCallbackListener: MonthCallbackListener) : BottomSheetDialogFragment() {
     private lateinit var binding: MonthPickerBinding
+    private val monthArray = IntArray(12){ i -> i + 1}
     var curVal = curMonth
 
     override fun getTheme(): Int = R.style.RoundBottomSheetDialog
@@ -51,7 +52,10 @@ class MonthModal(curMonth: Int, val monthCallbackListener: MonthCallbackListener
         binding.monthPickerSelect.maxValue = 12
         binding.monthPickerSelect.wrapSelectorWheel = false
         binding.monthPickerSelect.value = curVal
-        binding.monthPickerSelect.setFormatter { resources.getString(R.string.month, it) }
+        binding.monthPickerSelect.displayedValues = monthArray.map {
+            resources.getString(R.string.month, it)
+        }.toTypedArray() as Array<String>
+
         binding.monthPickerSelect.setOnValueChangedListener { picker, oldVal, newVal ->
             curVal = newVal
         }
