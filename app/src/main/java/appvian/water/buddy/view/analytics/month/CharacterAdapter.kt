@@ -1,6 +1,7 @@
 package appvian.water.buddy.view.analytics.month
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -17,23 +18,22 @@ class CharacterAdapter : RecyclerView.Adapter<CharacterAdapter.CharacterVh>() {
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(position: Int) {
-            characterList[position]?.let { setCharacter(it) }
+            characterList[position]?.let {
+                setCharacter(it)
+            }
         }
 
         private fun setCharacter(item: Intake) {
+            android.util.Log.d("character", "data $item")
             binding.monthWabiCharacter.setImageResource(CharacterMapper.characterIdList[item.category])
         }
     }
 
     fun setData(data: Map<Int, Intake>) {
+        android.util.Log.d("character", "data $data")
         characterList.clear()
         characterList.putAll(data)
-
         notifyDataSetChanged()
-    }
-
-    fun getCharacterDataSize(): Int {
-        return characterList.size
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterVh {
@@ -51,6 +51,7 @@ class CharacterAdapter : RecyclerView.Adapter<CharacterAdapter.CharacterVh>() {
     }
 
     override fun onBindViewHolder(holder: CharacterVh, position: Int) {
+        holder.setIsRecyclable(false)
         holder.bind(position)
     }
 }
