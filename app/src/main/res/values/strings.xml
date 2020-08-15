@@ -81,5 +81,7 @@
 
     <string name="alarm_time">%s : %s</string>
     <string name="alarm_interval_time">%s시간</string>
+    
+    <string name="polite_name">%s님</string>
 
 </resources>
