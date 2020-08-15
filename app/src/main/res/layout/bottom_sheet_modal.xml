@@ -19,7 +19,6 @@
         />
     <ImageView
         android:id="@+id/img_cancel"
-        android:text="취소"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:src="@drawable/icon_x"
