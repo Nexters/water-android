@@ -10,7 +10,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import appvian.water.buddy.R
 import appvian.water.buddy.databinding.FragmentAnalyticsBinding
-import appvian.water.buddy.view.analytics.calendar.CalendarFragment
+import appvian.water.buddy.view.analytics.month.MonthFragment
 import appvian.water.buddy.view.analytics.chart.daily.DailyChartFragment
 import appvian.water.buddy.view.analytics.chart.weekly.WeeklyChartFragment
 
@@ -53,7 +53,7 @@ class AnalyticsFragment : Fragment() {
     private inner class ScreenSlidePagerAdapter(fa: FragmentActivity) :
         FragmentStateAdapter(fa) {
         private val fragmentList = arrayOf(
-            CalendarFragment.newInstance(),
+            MonthFragment.newInstance(),
             WeeklyChartFragment.newInstance(),
             DailyChartFragment.newInstance()
         )
