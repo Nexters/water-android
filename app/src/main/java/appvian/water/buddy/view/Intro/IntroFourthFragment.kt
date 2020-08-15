@@ -48,7 +48,7 @@ class IntroFourthFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         introViewModel =
-            ViewModelProvider(activity!!).get<IntroViewModel>(IntroViewModel::class.java)
+            ViewModelProvider(requireActivity()).get<IntroViewModel>(IntroViewModel::class.java)
 
         introViewModel.nameliveText.observe(viewLifecycleOwner,
         Observer<Any> { o -> nametext.text = o!!.toString() })

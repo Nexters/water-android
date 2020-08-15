@@ -43,6 +43,7 @@ class IntroSecondFragment: Fragment() {
         //introViewModel = ViewModelProvider(this).get(IntroViewModel::class.java)
 
         view.nextbtn.setOnClickListener {
+            introViewModel.setNameLiveData(edittext.text.toString())
             (activity as IntroActivity).replaceFragment(IntroThirdFragment.newInstance())
 
         }
@@ -66,7 +67,7 @@ class IntroSecondFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        introViewModel = ViewModelProvider(activity!!).get(IntroViewModel::class.java)
+        introViewModel = ViewModelProvider(requireActivity()).get(IntroViewModel::class.java)
 
         edittext.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {

@@ -28,9 +28,10 @@ class IntroThirdFragment: Fragment() {
     lateinit var edittextKg : EditText
     lateinit var edittextCm : EditText
     lateinit var nextbtn : Button
-    var kgtext: String = ""
+    private var kgtext: String = ""
     private var cmtext: String = ""
-    private var targetamount :  Float = 0.0F
+    private var targetamountFloat :  Float = 0.0F
+    private var targetamountInt : Int = 0
     private var target_amount_change_flag_kg = false
     private var target_amount_change_flag_cm = false
 
@@ -46,9 +47,14 @@ class IntroThirdFragment: Fragment() {
 
         view.nextbtn2.setOnClickListener {
             (activity as IntroActivity).replaceFragment(IntroFourthFragment.newInstance())
-            targetamount = ((kgtext.toInt() + cmtext.toInt()) / 100 ).toFloat()
+            targetamountFloat = ((kgtext.toFloat() + cmtext.toFloat()) / 100 ).toFloat()
+            targetamountInt = ((kgtext.toInt() + cmtext.toInt()) * 10 )
+            introViewModel.setHeightLiveData(edittextCm.text.toString().toInt())
+            introViewModel.setWeightLiveData(edittextKg.text.toString().toInt())
+            introViewModel.TargetAmountSetText(targetamountFloat)
+            introViewModel.setTargetAmountFloatLiveData(targetamountFloat)
+            introViewModel.setTargetAmountIntLiveData(targetamountInt)
 
-            introViewModel.TargetAmountSetText(targetamount)
         }
         return view
     }
@@ -70,7 +76,7 @@ class IntroThirdFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        introViewModel = ViewModelProvider(activity!!).get(IntroViewModel::class.java)
+        introViewModel = ViewModelProvider(requireActivity()).get(IntroViewModel::class.java)
 
         edittextKg.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
