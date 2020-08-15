@@ -23,12 +23,11 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     var dailyAmount : LiveData<Int>? = getDailyDrinkedAmount()
 
     val requiredAmount = 2000
-    val waterStartY = Resources.getSystem().displayMetrics.heightPixels.toFloat() - 100F * (Resources.getSystem().displayMetrics.densityDpi).toFloat() / DisplayMetrics.DENSITY_DEFAULT
+    val waterStartY = Resources.getSystem().displayMetrics.heightPixels.toFloat()
     var waterCurrentY = waterStartY
     var characterCurrentY = 0F
     var currentPercent = 0F
-    val characterEndY = -(Resources.getSystem().displayMetrics.heightPixels.toFloat() - 300F * (Resources.getSystem().displayMetrics.densityDpi).toFloat() / DisplayMetrics.DENSITY_DEFAULT)
-    val startPercentTextY : Float = Resources.getSystem().displayMetrics.heightPixels.toFloat() - 370F * (Resources.getSystem().displayMetrics.densityDpi).toFloat() / DisplayMetrics.DENSITY_DEFAULT
+    val startPercentTextY : Float = Resources.getSystem().displayMetrics.heightPixels.toFloat() - 270F * (Resources.getSystem().displayMetrics.densityDpi).toFloat() / DisplayMetrics.DENSITY_DEFAULT
     var currentPercentTextY = startPercentTextY
     var percent = getDailyPercent()
     var showDeleteToast: MutableLiveData<Boolean> = MutableLiveData(false)
