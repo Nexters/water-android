@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import appvian.water.buddy.util.TimeUtil
 import java.util.*
 
-class CalendarViewModel {
+class CalendarViewModel(val curYear:Int, val curMonth: Int) {
 
     private val mCal = TimeUtil.getCalendarInstance()
     val year: MutableLiveData<Int> = MutableLiveData()
@@ -13,8 +13,8 @@ class CalendarViewModel {
     val dateList: MutableLiveData<List<Int?>> = MutableLiveData()
 
     init {
-        year.value = mCal.get(Calendar.YEAR)
-        month.value = mCal.get(Calendar.MONTH) + 1
+        year.value = curYear
+        month.value = curMonth
     }
 
     val prevMonth = View.OnClickListener {

@@ -28,7 +28,6 @@ class AnalyticsFragment : Fragment(),
     MonthCallbackListener {
     private lateinit var binding: FragmentAnalyticsBinding
     private val analyVm: AnalyticsViewModel = AnalyticsViewModel()
-    private var curMonth = MutableLiveData<Int>()
 
     private val monthPickerListener = View.OnClickListener {
         val bottomSheetDialog = MonthModal(
@@ -78,7 +77,7 @@ class AnalyticsFragment : Fragment(),
         private val fragmentList = arrayOf(
             MonthFragment.newInstance(analyVm),
             WeeklyChartFragment.newInstance(analyVm),
-            DailyChartFragment.newInstance()
+            DailyChartFragment.newInstance(analyVm)
         )
 
         override fun getItemCount(): Int = PAGE_NUM

@@ -12,14 +12,16 @@ import appvian.water.buddy.databinding.FragmentDailyChartBinding
 import appvian.water.buddy.model.data.Intake
 import appvian.water.buddy.model.repository.HomeRepository
 import appvian.water.buddy.util.DrinkMapper
+import appvian.water.buddy.util.TimeUtil
 import appvian.water.buddy.view.modal.calendar.CalendarModal
 import appvian.water.buddy.view.modal.calendar.CalendarTotalListener
+import appvian.water.buddy.viewmodel.analytics.AnalyticsViewModel
 import appvian.water.buddy.viewmodel.analytics.DailyChartViewModel
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 
-class DailyChartFragment : Fragment(), CalendarTotalListener {
+class DailyChartFragment(val analyVm: AnalyticsViewModel) : Fragment(), CalendarTotalListener {
 
     private lateinit var binding: FragmentDailyChartBinding
     private lateinit var dailyVm: DailyChartViewModel
@@ -74,13 +76,44 @@ class DailyChartFragment : Fragment(), CalendarTotalListener {
                 setNoneData()
             }
         })
+
         setSystemText()
+        observeByMonthOrWeek()
+    }
+
+    private fun observeByMonthOrWeek() {
+        analyVm.curYear.observe(viewLifecycleOwner, Observer {
+            setDataFromAnalyVm()
+        })
+
+        analyVm.curMonth.observe(viewLifecycleOwner, Observer {
+            setDataFromAnalyVm()
+        })
+
+        analyVm.curDay.observe(viewLifecycleOwner, Observer {
+            setDataFromAnalyVm()
+        })
+    }
+
+    private fun setDataFromAnalyVm() {
+        dailyVm.curYear = analyVm.curYear.value ?: 1
+        dailyVm.curMonth = analyVm.curMonth.value ?: 1
+        dailyVm.curDay = analyVm.curDay.value ?: 1
+
+        dailyVm.getDailyIntake()
     }
 
     private fun initSpinner() {
         binding.dailyDatePicker.text = getString(R.string.daily_date, dailyVm.curDay)
         binding.dailyDatePicker.setOnClickListener {
-            CalendarModal(this).show(childFragmentManager, "")
+            CalendarModal(
+                analyVm.curYear.value ?: TimeUtil.year,
+                analyVm.curMonth.value ?: TimeUtil.month,
+                this
+            ).show(
+                childFragmentManager,
+                ""
+            )
         }
     }
 
@@ -138,11 +171,13 @@ class DailyChartFragment : Fragment(), CalendarTotalListener {
     companion object {
 
         @JvmStatic
-        fun newInstance() =
-            DailyChartFragment()
+        fun newInstance(analyVm: AnalyticsViewModel) =
+            DailyChartFragment(analyVm)
     }
 
     override fun getCalendarTotal(year: Int, month: Int, day: Int) {
+        analyVm.setYear(year, month, day)
+
         dailyVm.curYear = year
         dailyVm.curMonth = month - 1
         dailyVm.curDay = day

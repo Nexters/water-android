@@ -99,7 +99,10 @@ class WeeklyChartFragment(val analyVm: AnalyticsViewModel) : Fragment() {
     private fun initSpinner() {
         binding.weeklySpinner.text = getString(R.string.weekly_picker_item, weeklyVm.curWeek)
         binding.weeklySpinner.setOnClickListener {
-            CalendarModal(calendarTotalListener).show(childFragmentManager, "")
+            CalendarModal(
+                analyVm.curYear.value ?: TimeUtil.year,
+                analyVm.curMonth.value ?: TimeUtil.month, calendarTotalListener
+            ).show(childFragmentManager, "")
         }
     }
 
