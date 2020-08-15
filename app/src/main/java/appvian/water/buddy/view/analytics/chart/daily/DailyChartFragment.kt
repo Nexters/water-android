@@ -97,14 +97,15 @@ class DailyChartFragment(val analyVm: AnalyticsViewModel) : Fragment(), Calendar
 
     private fun setDataFromAnalyVm() {
         dailyVm.curYear = analyVm.curYear.value ?: 1
-        dailyVm.curMonth = analyVm.curMonth.value ?: 1
+        dailyVm.curMonth = analyVm.curMonth.value?.minus(1) ?: 1
         dailyVm.curDay = analyVm.curDay.value ?: 1
 
+        setSpinnertext()
         dailyVm.getDailyIntake()
     }
 
     private fun initSpinner() {
-        binding.dailyDatePicker.text = getString(R.string.daily_date, dailyVm.curDay)
+        setSpinnertext()
         binding.dailyDatePicker.setOnClickListener {
             CalendarModal(
                 analyVm.curYear.value ?: TimeUtil.year,
@@ -115,6 +116,10 @@ class DailyChartFragment(val analyVm: AnalyticsViewModel) : Fragment(), Calendar
                 ""
             )
         }
+    }
+
+    private fun setSpinnertext() {
+        binding.dailyDatePicker.text = getString(R.string.daily_date, dailyVm.curDay)
     }
 
     private fun setNoneData() {
