@@ -52,7 +52,7 @@
     <string name="intro_main_description">매일매일 \n필요한 수분으로 \n채워보세요.</string>
     <string name="intro_second_description1">사용할 닉네임을\n알려주세요.</string>
     <string name="intro_second_description2">닉네임은 언제든지 변경할 수 있어요.</string>
-    <string name="intro_second_inputhint">최대 7자 입력 </string>
+    <string name="intro_second_inputhint">최대 6자 입력 </string>
     <string name="intro_second_textcount">/6자 </string>
     <string name="intro_third_description1">키와 몸무게\n알려주세요.</string>
     <string name="intro_third_description2">하루 목표 섭취량을 계산 해드릴게요.</string>
