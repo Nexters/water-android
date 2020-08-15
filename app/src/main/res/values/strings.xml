@@ -79,4 +79,7 @@
     <string name="month_rank_none_sub">매일 권장 수분을 섭취하고 기록을 달성해보세요!</string>
     <string name="month_unit">%d잔</string>
 
+    <string name="alarm_time">%s : %s</string>
+    <string name="alarm_interval_time">%s시간</string>
+
 </resources>
