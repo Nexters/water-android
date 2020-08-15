@@ -77,7 +77,7 @@ class AnalyticsFragment : Fragment(),
         FragmentStateAdapter(fa) {
         private val fragmentList = arrayOf(
             MonthFragment.newInstance(analyVm),
-            WeeklyChartFragment.newInstance(),
+            WeeklyChartFragment.newInstance(analyVm),
             DailyChartFragment.newInstance()
         )
 

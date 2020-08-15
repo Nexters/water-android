@@ -14,6 +14,7 @@ import appvian.water.buddy.util.DrinkMapper
 import appvian.water.buddy.util.TimeUtil
 import appvian.water.buddy.view.modal.calendar.CalendarModal
 import appvian.water.buddy.view.modal.calendar.CalendarTotalListener
+import appvian.water.buddy.viewmodel.analytics.AnalyticsViewModel
 import appvian.water.buddy.viewmodel.analytics.WeeklyViewModel
 import com.github.mikephil.charting.components.LimitLine
 import com.github.mikephil.charting.components.XAxis
@@ -21,13 +22,14 @@ import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 
-class WeeklyChartFragment : Fragment() {
+class WeeklyChartFragment(val analyVm: AnalyticsViewModel) : Fragment() {
     private lateinit var binding: FragmentWeeklyChartBinding
     private lateinit var weeklyVm: WeeklyViewModel
 
     private val calendarTotalListener: CalendarTotalListener = object : CalendarTotalListener {
         override fun getCalendarTotal(year: Int, month: Int, day: Int) {
             val weekOfMonth = TimeUtil.getWeekOfMonth(year, month, day)
+            analyVm.setYear(year, month, day)
 
             weeklyVm.curWeek = weekOfMonth
             binding.weeklySpinner.text = getString(R.string.weekly_picker_item, weeklyVm.curWeek)
@@ -212,7 +214,7 @@ class WeeklyChartFragment : Fragment() {
     companion object {
 
         @JvmStatic
-        fun newInstance() =
-            WeeklyChartFragment()
+        fun newInstance(analyVm: AnalyticsViewModel) =
+            WeeklyChartFragment(analyVm)
     }
 }
