@@ -1,56 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="10dp">
+    android:layout_height="wrap_content">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
         android:textAlignment="center"
         android:layout_weight="1"
-        android:text="@string/day_sun" />
+        android:text="@string/day_sun"
+        android:textSize="13sp"
+        android:textColor="@color/red_1"
+        android:gravity="center"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="17dp"/>
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
         android:textAlignment="center"
         android:layout_weight="1"
-        android:text="@string/day_mon" />
+        android:text="@string/day_mon"
+        android:textSize="13sp"
+        android:gravity="center"
+        android:layout_marginEnd="10dp"/>
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
         android:textAlignment="center"
         android:layout_weight="1"
-        android:text="@string/day_tue" />
+        android:text="@string/day_tue"
+        android:textSize="13sp"
+        android:gravity="center"
+        android:layout_marginEnd="10dp"/>
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
         android:textAlignment="center"
         android:layout_weight="1"
-        android:text="@string/day_wed" />
+        android:text="@string/day_wed"
+        android:textSize="13sp"
+        android:gravity="center"
+        android:layout_marginEnd="10dp"/>
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
         android:textAlignment="center"
         android:layout_weight="1"
-        android:text="@string/day_thu" />
+        android:text="@string/day_thu"
+        android:textSize="13sp"
+        android:gravity="center"
+        android:layout_marginEnd="10dp"/>
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
         android:textAlignment="center"
         android:layout_weight="1"
-        android:text="@string/day_fri" />
+        android:text="@string/day_fri"
+        android:textSize="13sp"
+        android:gravity="center"
+        android:layout_marginEnd="10dp"/>
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
         android:textAlignment="center"
         android:layout_weight="1"
-        android:text="@string/day_sat" />
+        android:text="@string/day_sat"
+        android:textSize="13sp"
+        android:gravity="center"
+        android:textColor="@color/blue_4"
+        android:layout_marginEnd="17dp"/>
 
 </LinearLayout>

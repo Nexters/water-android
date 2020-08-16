@@ -17,6 +17,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         />
+    <TextView
+        android:id="@+id/txt_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/txt_top"
+        app:layout_constraintStart_toStartOf="@id/txt_top"
+        android:text="종류"
+        android:textSize="13sp"
+        android:textColor="@color/settingTxtBlack"
+        android:layout_marginTop="24dp"
+        />
     <ImageView
         android:id="@+id/img_cancel"
         android:layout_width="25dp"
@@ -33,9 +44,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="34dp"
-        android:layout_marginTop="30dp"
-        app:layout_constraintTop_toBottomOf="@id/txt_top"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/txt_category"
         />
+
+    <TextView
+        android:id="@+id/txt_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/recyclerview"
+        app:layout_constraintStart_toStartOf="@id/recyclerview"
+        android:text="섭취량"
+        android:textSize="13sp"
+        android:layout_marginTop="20dp"/>
 
     <EditText
         android:id="@+id/edt_amount"
@@ -48,8 +69,8 @@
         android:gravity="center"
         android:textColor="@color/settingTxtBlack"
         android:textSize="23sp"
-        app:layout_constraintTop_toBottomOf="@id/recyclerview"
-        android:layout_marginTop="25dp"
+        app:layout_constraintTop_toBottomOf="@id/layout_choice_btn"
+        android:layout_marginTop="15dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         />
@@ -58,10 +79,10 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/edt_amount"
-        app:layout_constraintStart_toStartOf="@id/edt_amount"
-        app:layout_constraintEnd_toEndOf="@id/edt_amount"
-        android:layout_marginTop="15dp"
+        app:layout_constraintTop_toBottomOf="@id/txt_amount"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="10dp"
         >
         <Button
             android:id="@+id/btn_papercup"
@@ -109,7 +130,7 @@
         android:enabled="false"
         android:textSize="15sp"
         android:textColor="@color/grey_1"
-        android:layout_marginTop="32dp"
-        app:layout_constraintTop_toBottomOf="@id/layout_choice_btn"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/edt_amount"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

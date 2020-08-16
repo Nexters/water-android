@@ -36,6 +36,9 @@ class SettingViewModel(application: Application) : AndroidViewModel(application)
     //자동 목표량 설정인지 아닌지
     var is_auto_settiing_live_data = repository.is_auto_settiing_live_data
 
+    //프로필 이미지 index
+    var profile_img_live_data = repository.profile_img_LiveData
+
     init {
         name_cnt.value = nameLiveData.value!!.length
     }
@@ -60,6 +63,9 @@ class SettingViewModel(application: Application) : AndroidViewModel(application)
     }
     fun setWeightLiveData(value : Int){
         repository.setWeightLiveData(value)
+    }
+    fun setProfileImgLiveData(value: Int){
+        repository.setProfileImgLiveData(value)
     }
 
 }

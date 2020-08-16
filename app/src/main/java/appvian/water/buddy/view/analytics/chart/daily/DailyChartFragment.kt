@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -14,12 +12,16 @@ import appvian.water.buddy.databinding.FragmentDailyChartBinding
 import appvian.water.buddy.model.data.Intake
 import appvian.water.buddy.model.repository.HomeRepository
 import appvian.water.buddy.util.DrinkMapper
+import appvian.water.buddy.util.TimeUtil
+import appvian.water.buddy.view.modal.calendar.CalendarModal
+import appvian.water.buddy.view.modal.calendar.CalendarTotalListener
+import appvian.water.buddy.viewmodel.analytics.AnalyticsViewModel
 import appvian.water.buddy.viewmodel.analytics.DailyChartViewModel
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 
-class DailyChartFragment : Fragment() {
+class DailyChartFragment(val analyVm: AnalyticsViewModel) : Fragment(), CalendarTotalListener {
 
     private lateinit var binding: FragmentDailyChartBinding
     private lateinit var dailyVm: DailyChartViewModel
@@ -50,7 +52,6 @@ class DailyChartFragment : Fragment() {
         super.onResume()
 
         dailyVm.getDailyIntake()
-        binding.dailyDatePicker.setSelection(dailyVm.todayDate - 1)
     }
 
     private fun initUi() {
@@ -72,38 +73,50 @@ class DailyChartFragment : Fragment() {
                 setNoneData()
             }
         })
+
         setSystemText()
+        observeByMonthOrWeek()
+    }
+
+    private fun observeByMonthOrWeek() {
+        analyVm.curYear.observe(viewLifecycleOwner, Observer {
+            setDataFromAnalyVm()
+        })
+
+        analyVm.curMonth.observe(viewLifecycleOwner, Observer {
+            setDataFromAnalyVm()
+        })
+
+        analyVm.curDay.observe(viewLifecycleOwner, Observer {
+            setDataFromAnalyVm()
+        })
+    }
+
+    private fun setDataFromAnalyVm() {
+        dailyVm.curYear = analyVm.curYear.value ?: 1
+        dailyVm.curMonth = analyVm.curMonth.value?.minus(1) ?: 1
+        dailyVm.curDay = analyVm.curDay.value ?: 1
+
+        setSpinnertext()
+        dailyVm.getDailyIntake()
     }
 
     private fun initSpinner() {
-        context?.let { context ->
-            val dayList = dailyVm.dayList.map { getString(R.string.daily_date, it) }
-
-            val arrayAdapter = ArrayAdapter<String>(
-                context,
-                R.layout.daily_date_picker,
-                R.id.daily_picker_text,
-                dayList
+        setSpinnertext()
+        binding.dailyDatePicker.setOnClickListener {
+            CalendarModal(
+                analyVm.curYear.value ?: TimeUtil.year,
+                analyVm.curMonth.value ?: TimeUtil.month,
+                this
+            ).show(
+                childFragmentManager,
+                ""
             )
-            binding.dailyDatePicker.adapter = arrayAdapter
-            binding.dailyDatePicker.setSelection(dailyVm.todayDate - 1)
-
-            binding.dailyDatePicker.onItemSelectedListener =
-                object : AdapterView.OnItemSelectedListener {
-                    override fun onNothingSelected(parent: AdapterView<*>?) {}
-
-                    override fun onItemSelected(
-                        parent: AdapterView<*>?,
-                        view: View?,
-                        position: Int,
-                        id: Long
-                    ) {
-                        dailyVm.todayDate = dailyVm.dayList[position]
-                        dailyVm.getDailyIntake()
-                    }
-
-                }
         }
+    }
+
+    private fun setSpinnertext() {
+        binding.dailyDatePicker.text = getString(R.string.daily_date, dailyVm.curDay)
     }
 
     private fun setNoneData() {
@@ -158,7 +171,18 @@ class DailyChartFragment : Fragment() {
     companion object {
 
         @JvmStatic
-        fun newInstance() =
-            DailyChartFragment()
+        fun newInstance(analyVm: AnalyticsViewModel) =
+            DailyChartFragment(analyVm)
+    }
+
+    override fun getCalendarTotal(year: Int, month: Int, day: Int) {
+        analyVm.setYear(year, month, day)
+
+        dailyVm.curYear = year
+        dailyVm.curMonth = month - 1
+        dailyVm.curDay = day
+
+        binding.dailyDatePicker.text = getString(R.string.daily_date, dailyVm.curDay)
+        dailyVm.getDailyIntake()
     }
 }

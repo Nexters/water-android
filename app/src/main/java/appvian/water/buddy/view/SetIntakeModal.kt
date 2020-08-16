@@ -48,7 +48,7 @@ class SetIntakeModal(var parent_context_code : Int, var intake : Intake?) : Bott
     private var selected_idx = 0
     private lateinit var selected_btns : Array<Button>
 
-    private val PAPER_CUP = "120"
+    private val PAPER_CUP = "200"
     private val TALL_CUP = "350"
     private val TUMBLER_CUP = "600"
     override fun getTheme(): Int = R.style.RoundBottomSheetDialog

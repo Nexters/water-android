@@ -6,6 +6,7 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import appvian.water.buddy.model.data.Intake
 import appvian.water.buddy.model.repository.HomeRepository
+import appvian.water.buddy.util.TimeUtil
 import java.util.*
 
 
@@ -17,25 +18,20 @@ class DailyChartViewModel(private val repository: HomeRepository) {
     val maxDrink:LiveData<Int> = _maxDrink
     val observeIntake: MediatorLiveData<List<Intake>> = MediatorLiveData()
 
-    var todayDate = now[Calendar.DATE]
-    val dayList = IntArray(now.getActualMaximum(Calendar.DAY_OF_MONTH)) { i -> i + 1}
+    var curYear = TimeUtil.year
+    var curMonth = TimeUtil.month
+    var curDay = TimeUtil.day
 
     fun getDailyIntake() {
-        val now = Calendar.getInstance()
-        now.set(Calendar.DATE, todayDate)
-        now.set(Calendar.AM_PM, Calendar.AM)
-        now.set(Calendar.HOUR, 0)
-        now.set(Calendar.MINUTE, 0)
-        now.set(Calendar.SECOND, 0)
-        now.set(Calendar.MILLISECOND, 0)
+        val now = TimeUtil.getCalendarInstance()
+        now.set(Calendar.DATE, curDay)
+        now.set(Calendar.MONTH, curMonth)
+        now.set(Calendar.YEAR, curYear)
 
-        val tomorrow = Calendar.getInstance()
-        tomorrow.set(Calendar.DATE, todayDate + 1)
-        tomorrow.set(Calendar.AM_PM, Calendar.AM)
-        tomorrow.set(Calendar.HOUR, 0)
-        tomorrow.set(Calendar.MINUTE, 0)
-        tomorrow.set(Calendar.SECOND, 0)
-        tomorrow.set(Calendar.MILLISECOND, 0)
+        val tomorrow = TimeUtil.getCalendarInstance()
+        tomorrow.set(Calendar.DATE, curDay + 1)
+        tomorrow.set(Calendar.MONTH, curMonth)
+        tomorrow.set(Calendar.YEAR, curYear)
 
         getDailyIntakeFromRepository(now.timeInMillis, tomorrow.timeInMillis)
     }

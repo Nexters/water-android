@@ -1,20 +1,20 @@
-package appvian.water.buddy.viewmodel
+package appvian.water.buddy.viewmodel.modal
 
 import android.view.View
 import androidx.lifecycle.MutableLiveData
-import appvian.water.buddy.model.data.CalendarData
+import appvian.water.buddy.util.TimeUtil
 import java.util.*
 
-class CalendarViewModel {
+class CalendarViewModel(val curYear:Int, val curMonth: Int) {
 
-    private val mCal = Calendar.getInstance()
+    private val mCal = TimeUtil.getCalendarInstance()
     val year: MutableLiveData<Int> = MutableLiveData()
     val month: MutableLiveData<Int> = MutableLiveData()
-    val dateList: MutableLiveData<List<CalendarData>> = MutableLiveData()
+    val dateList: MutableLiveData<List<Int?>> = MutableLiveData()
 
     init {
-        year.value = mCal.get(Calendar.YEAR)
-        month.value = mCal.get(Calendar.MONTH) + 1
+        year.value = curYear
+        month.value = curMonth
     }
 
     val prevMonth = View.OnClickListener {
@@ -42,7 +42,7 @@ class CalendarViewModel {
     }
 
     fun setCalendar() {
-        val dates = ArrayList<CalendarData>()
+        val dates = ArrayList<Int?>()
 
         mCal.set(year.value!!, month.value!! - 1, 1)
 
@@ -51,25 +51,15 @@ class CalendarViewModel {
         //달력 공백 추가
         if (dayOfWeek != -1) {
             while (dayOfWeek - 1 > 0) {
-                dates.add(
-                    CalendarData(
-                        "",
-                        null
-                    )
-                )
+                dates.add(null)
                 dayOfWeek -= 1
             }
         }
 
         for (i in 1..mCal.getActualMaximum(Calendar.DAY_OF_MONTH)) {
-            dates.add(
-                CalendarData(
-                    i.toString(),
-                    null
-                )
-            )
+            dates.add(i)
         }
 
-        dateList.postValue(dates)
+        dateList.value = dates
     }
 }

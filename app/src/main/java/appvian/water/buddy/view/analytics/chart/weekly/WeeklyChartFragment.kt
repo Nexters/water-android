@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -13,6 +11,10 @@ import appvian.water.buddy.R
 import appvian.water.buddy.databinding.FragmentWeeklyChartBinding
 import appvian.water.buddy.model.repository.HomeRepository
 import appvian.water.buddy.util.DrinkMapper
+import appvian.water.buddy.util.TimeUtil
+import appvian.water.buddy.view.modal.calendar.CalendarModal
+import appvian.water.buddy.view.modal.calendar.CalendarTotalListener
+import appvian.water.buddy.viewmodel.analytics.AnalyticsViewModel
 import appvian.water.buddy.viewmodel.analytics.WeeklyViewModel
 import com.github.mikephil.charting.components.LimitLine
 import com.github.mikephil.charting.components.XAxis
@@ -20,9 +22,20 @@ import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 
-class WeeklyChartFragment : Fragment() {
+class WeeklyChartFragment(val analyVm: AnalyticsViewModel) : Fragment() {
     private lateinit var binding: FragmentWeeklyChartBinding
     private lateinit var weeklyVm: WeeklyViewModel
+
+    private val calendarTotalListener: CalendarTotalListener = object : CalendarTotalListener {
+        override fun getCalendarTotal(year: Int, month: Int, day: Int) {
+            val weekOfMonth = TimeUtil.getWeekOfMonth(year, month, day)
+            analyVm.setYear(year, month, day)
+
+            weeklyVm.curWeek = weekOfMonth
+            binding.weeklySpinner.text = getString(R.string.weekly_picker_item, weeklyVm.curWeek)
+            weeklyVm.getWeekIntakeData()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,34 +94,40 @@ class WeeklyChartFragment : Fragment() {
         })
 
         initSpinner()
+        observeByMonthOrDay()
+    }
+
+    fun observeByMonthOrDay() {
+        analyVm.curYear.observe(viewLifecycleOwner, Observer { setDataFromAnalyVm() })
+        analyVm.curMonth.observe(viewLifecycleOwner, Observer { setDataFromAnalyVm() })
+        analyVm.curDay.observe(viewLifecycleOwner, Observer { setDataFromAnalyVm() })
+    }
+
+    private fun setDataFromAnalyVm() {
+
+        weeklyVm.curWeek = TimeUtil.getWeekOfMonth(
+            analyVm.curYear.value ?: 1970,
+            analyVm.curMonth.value?.minus(1) ?: 1,
+            analyVm.curDay.value ?: 1
+        )
+
+        setWeeklySpinnertext()
+        weeklyVm.getWeekIntakeData()
     }
 
     private fun initSpinner() {
-        context?.let {
-            val spinnerAdapter = ArrayAdapter<String>(
-                it,
-                R.layout.daily_date_picker,
-                R.id.daily_picker_text,
-                weeklyVm.totalWeeks.map { getString(R.string.weekly_picker_item, it) })
+        setWeeklySpinnertext()
 
-            binding.weeklySpinner.adapter = spinnerAdapter
-            binding.weeklySpinner.setSelection(weeklyVm.curWeek - 1)
-            binding.weeklySpinner.onItemSelectedListener =
-                object : AdapterView.OnItemSelectedListener {
-                    override fun onNothingSelected(parent: AdapterView<*>?) {}
-
-                    override fun onItemSelected(
-                        parent: AdapterView<*>?,
-                        view: View?,
-                        position: Int,
-                        id: Long
-                    ) {
-                        weeklyVm.curWeek = weeklyVm.totalWeeks[position]
-                        weeklyVm.getWeekIntakeData()
-                    }
-
-                }
+        binding.weeklySpinner.setOnClickListener {
+            CalendarModal(
+                analyVm.curYear.value ?: TimeUtil.year,
+                analyVm.curMonth.value ?: TimeUtil.month, calendarTotalListener
+            ).show(childFragmentManager, "")
         }
+    }
+
+    private fun setWeeklySpinnertext() {
+        binding.weeklySpinner.text = getString(R.string.weekly_picker_item, weeklyVm.curWeek)
     }
 
     private fun setWeeklyData(values: List<BarEntry>) {
@@ -222,7 +241,7 @@ class WeeklyChartFragment : Fragment() {
     companion object {
 
         @JvmStatic
-        fun newInstance() =
-            WeeklyChartFragment()
+        fun newInstance(analyVm: AnalyticsViewModel) =
+            WeeklyChartFragment(analyVm)
     }
 }

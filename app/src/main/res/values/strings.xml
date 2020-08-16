@@ -1,22 +1,22 @@
 <resources>
     <string name="app_name">WaterBuddy</string>
 
-    <string name="main_menu_home">Home</string>
-    <string name="main_menu_analytics">Analytics</string>
-    <string name="main_menu_mypage">My Page</string>
+    <string name="main_menu_home">홈</string>
+    <string name="main_menu_analytics">통계</string>
+    <string name="main_menu_mypage">설정</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="targetAmountStrFormat" formatted="false">%skg ・ %scm | %sL</string>
     <string name="edtLenCntFormat" formatted="false">%d&#47;6</string>
     <string name="appwidget_text">100ml / 1L </string>
     <string name="add_widget">Add widget</string>
-    <string name="day_sun">Sun</string>
-    <string name="day_mon">Mon</string>
-    <string name="day_tue">Tue</string>
-    <string name="day_wed">Wed</string>
-    <string name="day_thu">Thu</string>
-    <string name="day_fri">Fri</string>
-    <string name="day_sat">Sat</string>
+    <string name="day_sun">일</string>
+    <string name="day_mon">월</string>
+    <string name="day_tue">화</string>
+    <string name="day_wed">수</string>
+    <string name="day_thu">목</string>
+    <string name="day_fri">금</string>
+    <string name="day_sat">토</string>
 
     <string name="home_text_1">희망차게\n물 한잔 원샷!</string>
     <string name="home_text_2">시작이 반이다\n더욱 분발해 보아요!</string>
@@ -90,5 +90,8 @@
     <string name="polite_name">%s님</string>
 
     <string name="confrim">선택</string>
+
+    <string name="calendar_header">날짜 선택하기</string>
+    <string name="calendar_year_month">%d년 %d월</string>
 
 </resources>
