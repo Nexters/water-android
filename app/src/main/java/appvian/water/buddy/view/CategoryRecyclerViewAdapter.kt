@@ -3,12 +3,15 @@ package appvian.water.buddy.view
 
 import android.content.Context
 import android.graphics.Color
+import android.graphics.ColorFilter
+import android.graphics.PorterDuff
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import appvian.water.buddy.R
 import appvian.water.buddy.model.data.Category
+import kotlinx.android.synthetic.main.activity_favorite_drink_setting.view.*
 import kotlinx.android.synthetic.main.modal_category_recyclerview_item.view.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -29,8 +32,10 @@ class CategoryRecyclerViewAdapter (val context : Context, val categoryList : Arr
             val isSelected = selected[position]
             if (isSelected) {
                 itemView.img_check.visibility = View.VISIBLE
+                itemView.categoryImg.setColorFilter(Color.parseColor("#33030303"))
             } else {
                 itemView.img_check.visibility = View.INVISIBLE
+                itemView.categoryImg.colorFilter = null
             }
             if (category.icon != "") {
                 val resourceId =
@@ -44,6 +49,7 @@ class CategoryRecyclerViewAdapter (val context : Context, val categoryList : Arr
                 itemClick(category)
                 selectedPosition = position
                 setCategory(position)
+
             }
 
         }
