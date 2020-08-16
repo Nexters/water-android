@@ -82,14 +82,14 @@
             android:id="@+id/edt_weight"
             android:layout_width="290dp"
             android:layout_height="wrap_content"
-            android:text="@{Integer.toString(viewModel.weightLiveData)}"
             android:textSize="18sp"
+            android:maxLength="3"
             android:textColor="@color/settingTxtBlack"
             android:theme="@style/EdtSettingTheme"
             android:inputType="number"
             app:layout_constraintTop_toBottomOf="@id/txt_weight"
             app:layout_constraintStart_toStartOf="@id/txt_weight"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="9dp"
             />
         <TextView
             android:id="@+id/txt_height"
@@ -107,13 +107,13 @@
             android:layout_width="290dp"
             android:layout_height="wrap_content"
             android:textSize="18sp"
+            android:maxLength="3"
             android:textColor="@color/settingTxtBlack"
-            android:text="@{Integer.toString(viewModel.heightLiveData)}"
             android:theme="@style/EdtSettingTheme"
             android:inputType="number"
             app:layout_constraintTop_toBottomOf="@id/txt_height"
             app:layout_constraintStart_toStartOf="@id/txt_height"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="9dp"
             />
 
         <CheckBox
@@ -125,7 +125,7 @@
             android:layout_height="33dp"
             app:layout_constraintTop_toBottomOf="@id/edt_height"
             app:layout_constraintStart_toStartOf="@id/txt_weight"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="4dp"
             />
         <TextView
             android:id="@+id/txt_check"
