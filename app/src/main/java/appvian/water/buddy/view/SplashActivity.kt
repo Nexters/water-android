@@ -34,12 +34,13 @@ class SplashActivity : AppCompatActivity() {
         val handler = Handler()
         handler.postDelayed(Runnable {
             if(introViewModel.confirm_inform()){
-                startActivity(Intent(baseContext, MainActivity::class.java))
+                startActivity(Intent(baseContext, IntroActivity::class.java))
                 startActivity(intent)
             }
             else{
-                startActivity(Intent(baseContext, IntroActivity::class.java))
+                startActivity(Intent(baseContext, MainActivity::class.java))
                 startActivity(intent)
+
             }
 
             finish()
