@@ -11,19 +11,20 @@ import java.util.*
 class SharedPrefsRepository(context: Context) {
     //사용자 닉네임
     val name_pref = context.getSharedPreferences("name", Context.MODE_PRIVATE)
-    var nameLiveData: SharedPreferenceStringLiveData = SharedPreferenceStringLiveData(name_pref, "name", name_pref.getString("name", "name")!!)
+    var nameLiveData: SharedPreferenceStringLiveData = SharedPreferenceStringLiveData(name_pref, "name",  "")
 
     //사용자 키
     val height_pref = context.getSharedPreferences("height", Context.MODE_PRIVATE)
-    var heightLiveData = SharedPreferenceIntLiveData(height_pref, "height", 160)
+    var heightLiveData = SharedPreferenceIntLiveData(height_pref, "height",0)
     //사용자 몸무게
     val weight_pref = context.getSharedPreferences("weight", Context.MODE_PRIVATE)
-    var weightLiveData = SharedPreferenceIntLiveData(weight_pref, "weight", 50)
+    var weightLiveData = SharedPreferenceIntLiveData(weight_pref, "weight", 0)
     //사용자 목표량  L / ml
     val target_amounts_pref = context.getSharedPreferences("target_amounts", Context.MODE_PRIVATE)
-    var targetAmountLiveData = SharedPreferenceFloatLiveData(target_amounts_pref, "target_amounts", 2f)
+    var targetAmountLiveData = SharedPreferenceFloatLiveData(target_amounts_pref, "target_amounts", 0f)
+
     val target_amounts_int_pref = context.getSharedPreferences("target_amounts_ml", Context.MODE_PRIVATE)
-    var target_amount_int_live_data = SharedPreferenceIntLiveData(target_amounts_int_pref, "target_amounts_ml", 2000)
+    var target_amount_int_live_data = SharedPreferenceIntLiveData(target_amounts_int_pref, "target_amounts_ml", 0)
 
     //목표량 설정 화면을 보았는 지
     var is_new_pref = context.getSharedPreferences("is_new_flag", Context.MODE_PRIVATE)

@@ -27,7 +27,7 @@ class Factory(val application: Application) : ViewModelProvider.Factory {
     var target_amount_int_live_data = repository.target_amount_int_live_data
 
     fun confirm_inform(): Boolean {
-        return nameLiveData != null && heightLiveData != null && weightLiveData != null && targetAmountLiveData != null
+        return nameLiveData.value.toString() == ""
     }
 
     var nameliveText: MutableLiveData<String> = MutableLiveData()
