@@ -94,4 +94,6 @@
     <string name="calendar_header">날짜 선택하기</string>
     <string name="calendar_year_month">%d년 %d월</string>
 
+    <string name="fab_favorite">%s %dml</string>
+
 </resources>

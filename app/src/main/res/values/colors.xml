@@ -58,7 +58,7 @@
     <color name="grey_9">#495057</color>
     <color name="grey_10">#343a40</color>
     <color name="grey_11">#212529</color>
-
+    <color name="grey_back">#d1202020</color>
     <color name="chart_label">#868686</color>
 
     <color name="mark_color">#87A3FF</color>
