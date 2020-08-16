@@ -42,10 +42,8 @@ class TargetAmountSettingActivity : AppCompatActivity() {
         settingViewModel.target_amount_int_live_data.observe(this, Observer {
         })
         settingViewModel.heightLiveData.observe(this, Observer {
-
         })
         settingViewModel.weightLiveData.observe(this, Observer {
-
         })
         settingViewModel.is_auto_settiing_live_data.observe(this, Observer {
             bindig.checkbox.isChecked = it
@@ -60,7 +58,10 @@ class TargetAmountSettingActivity : AppCompatActivity() {
         txt_target_amount.addTextChangedListener(TxtTargetWatcher(getString(R.string.target_amount,settingViewModel.target_amount_int_live_data.value.toString())))
         edt_height.addTextChangedListener(EdtHeightWatcher(settingViewModel.heightLiveData.value.toString()))
         edt_weight.addTextChangedListener(EdtWeightWatcher(settingViewModel.weightLiveData.value.toString()))
-
+        edt_height.setText(settingViewModel.heightLiveData.value.toString())
+        edt_height.setSelection(settingViewModel.heightLiveData.value.toString().length)
+        edt_weight.setText(settingViewModel.weightLiveData.value.toString())
+        edt_weight.setSelection(settingViewModel.weightLiveData.value.toString().length)
         checkbox.setOnCheckedChangeListener { buttonView, isChecked ->
             if(isChecked){
                 //목표량 자동 계산
@@ -79,6 +80,7 @@ class TargetAmountSettingActivity : AppCompatActivity() {
             finish()
         }
     }
+
     inner class TxtTargetWatcher(var initText : String) : TextWatcher{
         override fun afterTextChanged(s: Editable?) {
             //변경되었다면 저장버튼 활성화
@@ -122,6 +124,7 @@ class TargetAmountSettingActivity : AppCompatActivity() {
         }
 
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
         }
 
     }
