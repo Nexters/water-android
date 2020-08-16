@@ -70,13 +70,13 @@ class MainFragment : Fragment() {
                     setCharacter(it)
                 }
                 if (isFirst) {
+                    isFirst = false
                     GlobalScope.launch(Dispatchers.Main) {
                         delay(1500L)
                         withContext(Dispatchers.Main) {
                             adjustAnimation(it)
                         }
                     }
-                    isFirst = false
                 } else{
                     adjustAnimation(it)
                 }
