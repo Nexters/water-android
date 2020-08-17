@@ -105,6 +105,7 @@ class SetIntakeModal(var parent_context_code : Int, var intake : Intake?) : Bott
             v.txt_top.text = getString(R.string.modify_modal)
             v.edt_amount.setText(intake!!.amount.toString() + "ml")
             v.edt_amount.setSelection(intake!!.amount.toString().length)
+            v.setButton.text = "수정하기"
             (v.recyclerview.adapter as CategoryRecyclerViewAdapter).setCategory(intake!!.category)
             typeofDrink = intake!!.category
         }
@@ -151,6 +152,14 @@ class SetIntakeModal(var parent_context_code : Int, var intake : Intake?) : Bott
                     //오늘 마신 물 수정
                     homeViewModel.modifyAmount(intake!!.date, pickedNum)
                     homeViewModel.modifyCategory(intake!!.date, typeofDrink)
+                    Snackbar.make(requireActivity().findViewById(android.R.id.content),getString(R.string.modify_toast_text, resources.getStringArray(
+                        DrinkMapper.drinkName)[typeofDrink], pickedNum), Snackbar.LENGTH_SHORT).apply{
+                        this.setBackgroundTint(getColor(context,R.color.black))
+                        this.view.minimumHeight = 150
+                        this.view.foregroundGravity = Gravity.CENTER
+                        this.setTextColor(getColor(context,R.color.White))
+                        this.show()
+                    }
                 }
             }
 

@@ -82,7 +82,12 @@ class MainFragment : Fragment() {
                         }
                     }
                 } else{
-                    adjustAnimation(it)
+                    GlobalScope.launch(Dispatchers.Main) {
+                        delay(100L)
+                        withContext(Dispatchers.Main) {
+                            adjustAnimation(it)
+                        }
+                    }
                 }
                 changeText(it)
             } else{
@@ -96,7 +101,12 @@ class MainFragment : Fragment() {
                         }
                     }
                 } else{
-                    adjustAnimation(0F)
+                    GlobalScope.launch(Dispatchers.Main) {
+                        delay(100L)
+                        withContext(Dispatchers.Main) {
+                            adjustAnimation(0F)
+                        }
+                    }
                 }
                 changeText(0F)
                 setCharacter(0F)
