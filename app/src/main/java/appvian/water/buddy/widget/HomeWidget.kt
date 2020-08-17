@@ -41,16 +41,17 @@ class HomeWidget : AppWidgetProvider() {
         appWidgetManager: AppWidgetManager,
         appWidgetId: Int
     ) {
+
         val widgetText = context.getString(R.string.appwidget_text)
         // Construct the RemoteViews object
         val views = RemoteViews(context.packageName, R.layout.home_widget)
-        views.setTextViewText(R.id.appwidget_text, widgetText)
+        /*views.setTextViewText(R.id.appwidget_text, widgetText)
 
         val intent = Intent(Intent.ACTION_MAIN)
         intent.addCategory(Intent.CATEGORY_LAUNCHER)
         intent.component = ComponentName(context, MainActivity::class.java)
         val pending = PendingIntent.getActivity(context, 0, intent, 0)
-        views.setOnClickPendingIntent(R.id.appwidget_text, pending)
+        views.setOnClickPendingIntent(R.id.appwidget_text, pending)*/
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views)
     }
