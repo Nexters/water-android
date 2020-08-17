@@ -7,111 +7,131 @@
 
     </data>
 
-    <ScrollView
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/weekly_first"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:context=".view.analytics.chart.weekly.WeeklyChartFragment">
-
-            <TextView
-                android:id="@+id/header1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:lineSpacingExtra="8sp"
-                android:text="@string/analytics_weekly_header1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="35dp"/>
-
-            <TextView
-                android:id="@+id/weekly_spinner"
-                android:layout_width="54dp"
-                android:layout_height="27dp"
-                android:background="@drawable/picker_background"
-                android:textSize="11sp"
-                android:gravity="center"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="35dp"
-                android:layout_marginEnd="@dimen/daily_common_spacing"
-                tools:text="1주"/>
-
-            <com.github.mikephil.charting.charts.BarChart
-                android:id="@+id/weekly_barchart_by_week"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:elevation="0dp">
+            <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginTop="22dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginEnd="32dp"
-                app:layout_constraintHeight_percent=".3"
-                app:layout_constraintTop_toBottomOf="@id/weekly_spinner"
-                app:layout_constraintStart_toStartOf="parent"/>
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="35dp"
-                android:layout_marginStart="32dp"
-                android:text="@string/analytics_weekly_header2"
-                android:textSize="18sp"
-                android:lineSpacingExtra="8sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/weekly_barchart_by_week"/>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/header1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:lineSpacingExtra="8sp"
+                        android:text="@string/analytics_weekly_header1"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginTop="35dp"/>
 
-            <TextView
-                android:id="@+id/weekly_sys_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toEndOf="@id/front_mark"
-                app:layout_constraintEnd_toStartOf="@id/back_mark"
-                app:layout_constraintTop_toBottomOf="@id/weekly_barchart_by_week"
-                android:layout_marginTop="98dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:text="저번 주보다 평균 수분 섭취량이\n800ml 줄었어요"
-                android:textSize="14sp"
-                android:textAlignment="center"/>
+                    <TextView
+                        android:id="@+id/weekly_spinner"
+                        android:layout_width="54dp"
+                        android:layout_height="27dp"
+                        android:background="@drawable/picker_background"
+                        android:textSize="11sp"
+                        android:gravity="center"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginTop="35dp"
+                        android:layout_marginEnd="@dimen/daily_common_spacing"
+                        tools:text="1주"/>
 
-            <ImageView
-                android:id="@+id/front_mark"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_quotation_mark_front"
-                android:layout_marginTop="98dp"
-                android:layout_marginStart="48dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/weekly_barchart_by_week"
-                app:layout_constraintEnd_toStartOf="@id/weekly_sys_text"/>
+                    <com.github.mikephil.charting.charts.BarChart
+                        android:id="@+id/weekly_barchart_by_week"
+                        android:layout_width="match_parent"
+                        android:layout_height="212dp"
+                        android:layout_marginTop="22dp"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginEnd="32dp"
+                        app:layout_constraintTop_toBottomOf="@id/weekly_spinner"
+                        app:layout_constraintStart_toStartOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <ImageView
-                android:id="@+id/back_mark"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_quotation_mark_back"
-                android:layout_marginTop="98dp"
-                android:layout_marginEnd="48dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/weekly_sys_text"
-                app:layout_constraintTop_toBottomOf="@id/weekly_barchart_by_week"/>
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
 
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-            <com.github.mikephil.charting.charts.BarChart
-                android:id="@+id/weekly_barchart_by_total"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginTop="22dp"
-                android:layout_marginStart="40dp"
-                android:layout_marginEnd="40dp"
-                app:layout_constraintHeight_percent=".3"
-                app:layout_constraintTop_toBottomOf="@id/weekly_sys_text"/>
+                android:layout_height="match_parent">
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="35dp"
+                    android:layout_marginStart="32dp"
+                    android:text="@string/analytics_weekly_header2"
+                    android:textSize="18sp"
+                    android:lineSpacingExtra="8sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
 
-    </ScrollView>
+                <TextView
+                    android:id="@+id/weekly_sys_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@id/front_mark"
+                    app:layout_constraintEnd_toStartOf="@id/back_mark"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="98dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="저번 주보다 평균 수분 섭취량이\n800ml 줄었어요"
+                    android:textSize="14sp"
+                    android:textAlignment="center"/>
+
+                <ImageView
+                    android:id="@+id/front_mark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_quotation_mark_front"
+                    android:layout_marginTop="98dp"
+                    android:layout_marginStart="48dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/weekly_sys_text"/>
+
+                <ImageView
+                    android:id="@+id/back_mark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_quotation_mark_back"
+                    android:layout_marginTop="98dp"
+                    android:layout_marginEnd="48dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/weekly_sys_text"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+
+                <com.github.mikephil.charting.charts.BarChart
+                    android:id="@+id/weekly_barchart_by_total"
+                    android:layout_width="match_parent"
+                    android:layout_height="212dp"
+                    android:layout_marginTop="22dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginEnd="40dp"
+                    app:layout_constraintTop_toBottomOf="@id/weekly_sys_text"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
