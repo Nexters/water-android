@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import appvian.water.buddy.R
 import appvian.water.buddy.databinding.FragmentMonthChartBinding
 import appvian.water.buddy.model.repository.HomeRepository
+import appvian.water.buddy.model.repository.SharedPrefsRepository
 import appvian.water.buddy.viewmodel.analytics.AnalyticsViewModel
 import appvian.water.buddy.viewmodel.analytics.MonthViewModel
 
@@ -28,7 +29,7 @@ class MonthFragment(val analyVm: AnalyticsViewModel) : Fragment() {
         binding.lifecycleOwner = this
 
         activity?.let {
-            monthVm = MonthViewModel(HomeRepository(it))
+            monthVm = MonthViewModel(SharedPrefsRepository(requireContext()), HomeRepository(it))
             binding.vm = monthVm
         }
         loadData()

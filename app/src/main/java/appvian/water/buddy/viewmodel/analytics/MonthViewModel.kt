@@ -5,10 +5,11 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import appvian.water.buddy.model.data.Intake
 import appvian.water.buddy.model.repository.HomeRepository
+import appvian.water.buddy.model.repository.SharedPrefsRepository
 import appvian.water.buddy.util.TimeUtil
 import java.util.*
 
-class MonthViewModel(private val repository: HomeRepository) {
+class MonthViewModel(val sharedPrefsRepository: SharedPrefsRepository, private val repository: HomeRepository) {
     private val now = TimeUtil.getCalendarInstance()
 
     var curMonth = now.get(Calendar.MONTH)
@@ -22,7 +23,7 @@ class MonthViewModel(private val repository: HomeRepository) {
     val loadMoreActive = _loadMoreActive as LiveData<Boolean>
     val observeIntakeDays = _observeIntakeDays as LiveData<Pair<Int, Int>>
 
-    private val targetValue = 1600
+    private val targetValue = sharedPrefsRepository.target_amount_int_live_data
 
     init {
         _observeIntakeDays.value = Pair(0, curMaxDay)
@@ -72,14 +73,12 @@ class MonthViewModel(private val repository: HomeRepository) {
 
     private fun setCharacterData(it: List<Intake>) {
         val groupCharacter = it.groupBy { it.date.toInt() }
-            .mapValues { mapList ->
-                mapList.value.maxBy { it.amount }?.let { maxValue ->
-                    Intake(mapList.key.toLong(), maxValue.category, maxValue.amount)
-                }
-            }
+            .mapValues { Intake(it.key.toLong(), it.key%9, it.value.sumBy { it.amount }) }
+
 
         val filterCharacter = groupCharacter.filterValues { values ->
-            (values as Intake).amount >= targetValue
+            android.util.Log.d("month frag", "filter intake ${targetValue.value}, ${(values as Intake).date},${(values as Intake).amount}")
+            values.amount >= targetValue.value?: targetValue.defValue
         }
 
         android.util.Log.d("month frag", "filter ${filterCharacter}, ${filterCharacter.size}")
