@@ -16,7 +16,6 @@ import appvian.water.buddy.R
 import appvian.water.buddy.viewmodel.HomeViewModel
 import kotlinx.android.synthetic.main.fragment_main.*
 import android.util.DisplayMetrics
-import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import appvian.water.buddy.databinding.FragmentMainBinding
@@ -84,13 +83,13 @@ class MainFragment : Fragment() {
             } else{
                 setEmotion(0F)
                 if(isFirst){
+                    isFirst = false
                     GlobalScope.launch(Dispatchers.Main) {
                         delay(1500L)
                         withContext(Dispatchers.Main) {
                             adjustAnimation(0F)
                         }
                     }
-                    isFirst = false
                 } else{
                     adjustAnimation(0F)
                 }

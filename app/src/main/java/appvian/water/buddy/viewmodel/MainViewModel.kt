@@ -1,5 +1,6 @@
 package appvian.water.buddy.viewmodel
 
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.PopupMenu
@@ -25,6 +26,8 @@ class MainViewModel(val activity: FragmentActivity) {
     val showWhiteImage : MutableLiveData<Boolean> = MutableLiveData(false)
     var fav_1_liveData = sharedPreRepo.fav_1_livedata
     var fav_2_liveData = sharedPreRepo.fav_2_livedata
+    var showInsertToast: MutableLiveData<Boolean> = MutableLiveData(false)
+    var latestIntake: Intake = Intake(0,0,0)
 
     val menuListener = object : BottomNavigationView.OnNavigationItemSelectedListener {
         override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -66,8 +69,10 @@ class MainViewModel(val activity: FragmentActivity) {
             .commit();
     }
     fun insert(intake: Intake) {
+        latestIntake = intake
+        showInsertToast.value = true
         homeRepository.insert(intake)
+        Log.e("value",showInsertToast.value.toString())
     }
-
 
 }

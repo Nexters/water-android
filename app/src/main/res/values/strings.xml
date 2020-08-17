@@ -18,12 +18,6 @@
     <string name="day_fri">금</string>
     <string name="day_sat">토</string>
 
-    <string name="home_text_1">희망차게\n물 한잔 원샷!</string>
-    <string name="home_text_2">시작이 반이다\n더욱 분발해 보아요!</string>
-    <string name="home_text_3">피부의 탱글탱글함은\n수분 보충에서부터!</string>
-    <string name="home_text_4">목표 달성까지 얼마\n남지 않았어요!</string>
-    <string name="home_text_5">잊지 않고 마셔줘서\n고마워요 찡긋 :)</string>
-
     <string name="analytics_header_title">%d월 수분섭취</string>
 
     <string name="analytics_header_daily">일별 수분 섭취량</string>
@@ -96,4 +90,7 @@
 
     <string name="fab_favorite">%s %dml</string>
 
+    <string name="modify_modal">음료 정보 수정</string>
+    <string name="add_fav_modal">자주 마시는 음료</string>
+    <string name="insert_toast_text">%s %dml를 추가했어요.</string>
 </resources>
