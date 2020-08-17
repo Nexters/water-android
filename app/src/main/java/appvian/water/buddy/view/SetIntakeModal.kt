@@ -112,8 +112,7 @@ class SetIntakeModal(var parent_context_code : Int, var intake : Intake?) : Bott
             val pickedNum = edt_amount.text.toString().replace(regex,"").toInt()
             when(parent_context_code){
                 Code.MAIN_FRAGMENT -> {
-                    val now = System.currentTimeMillis()
-                    val intake = Intake(now,typeofDrink,pickedNum)
+                    val intake = Intake(System.currentTimeMillis(), typeofDrink, pickedNum)
                     homeViewModel.insert(intake)
                 }
                 Code.FAVORITE_DRINK_SETTING_ACTIVITY -> {

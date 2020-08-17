@@ -1,30 +1,31 @@
 package appvian.water.buddy.viewmodel.analytics
 
-import android.graphics.Typeface
 import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
-import android.text.style.StyleSpan
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import appvian.water.buddy.model.data.Intake
 import appvian.water.buddy.model.repository.HomeRepository
+import appvian.water.buddy.model.repository.SharedPrefsRepository
 import appvian.water.buddy.util.TimeUtil
 import com.github.mikephil.charting.data.BarEntry
 import java.util.*
 import java.util.regex.Pattern
 
-class WeeklyViewModel(val repository: HomeRepository) {
+class WeeklyViewModel(
+    private val sharedPrefsRepository: SharedPrefsRepository,
+    val repository: HomeRepository
+) {
     private val now = TimeUtil.getCalendarInstance()
     private val curYearWeek = now.get(Calendar.WEEK_OF_YEAR)
 
     var curWeek = now.get(Calendar.WEEK_OF_MONTH)
-    val totalWeeks = IntArray(now.getActualMaximum(Calendar.WEEK_OF_MONTH)) { i -> i + 1 }
 
     private var weekDay: LiveData<List<Intake>>? = null
     val weekObserve: MediatorLiveData<List<BarEntry>> = MediatorLiveData()
-    val targetValue: Float = 1.6f //Todo : sharedPreference에서 불러와야 함
+    val targetValue = sharedPrefsRepository.targetAmountLiveData
 
     private var weekTotal: LiveData<List<Intake>>? = null
     val weekTotalObserve: MediatorLiveData<List<BarEntry>> = MediatorLiveData()
@@ -91,14 +92,14 @@ class WeeklyViewModel(val repository: HomeRepository) {
 
                 sysObserve.value =
                     if (weekTotalArrayData.filter { it.`val`.equals(0f) }
-                        .count() == 4) 0
+                            .count() == 4) 0
                     else ((weekTotalArrayData.get(3).`val` - weekTotalArrayData.get(2).`val`) * 1000).toInt()
             })
         }
     }
 
 
-    fun strSapnBuilder(msg: String, color:Int): SpannableStringBuilder {
+    fun strSapnBuilder(msg: String, color: Int): SpannableStringBuilder {
         val pattern = Pattern.compile("[0-9]+(ml)")
         val style = ForegroundColorSpan(color)
 
