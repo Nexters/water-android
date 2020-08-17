@@ -1,4 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_back"
     android:layout_width="226dp"
     android:layout_height="98dp"
     android:background="@drawable/widget_back"

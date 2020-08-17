@@ -7,13 +7,32 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.widget.RemoteViews
+import androidx.room.Room
 import appvian.water.buddy.R
+import appvian.water.buddy.model.datasource.local.WaterBuddyDb
 import appvian.water.buddy.view.MainActivity
+import java.util.*
 
 /**
  * Implementation of App Widget functionality.
  */
 class HomeWidget : AppWidgetProvider() {
+    override fun onReceive(context: Context?, intent: Intent?) {
+        val action = intent!!.action
+        val appWidgetManager = AppWidgetManager.getInstance(context)
+        val testWidget = ComponentName(
+            context!!.packageName,
+            HomeWidget::class.java.name
+        )
+
+        val widgetIds = appWidgetManager.getAppWidgetIds(testWidget)
+
+        if (action == AppWidgetManager.ACTION_APPWIDGET_UPDATE) {
+            if (widgetIds != null && widgetIds.size > 0) {
+                onUpdate(context, AppWidgetManager.getInstance(context), widgetIds)
+            }
+        }
+    }
     override fun onUpdate(
         context: Context,
         appWidgetManager: AppWidgetManager,
@@ -42,17 +61,66 @@ class HomeWidget : AppWidgetProvider() {
         appWidgetId: Int
     ) {
 
-        val widgetText = context.getString(R.string.appwidget_text)
         // Construct the RemoteViews object
         val views = RemoteViews(context.packageName, R.layout.home_widget)
-        /*views.setTextViewText(R.id.appwidget_text, widgetText)
+
+        val target_amounts_int_pref = context.getSharedPreferences("target_amounts_ml", Context.MODE_PRIVATE)
+        val target_amounts_pref = context.getSharedPreferences("target_amounts", Context.MODE_PRIVATE)
+
+        val target_amount = target_amounts_int_pref.getInt("target_amounts_ml",0)
+
+        val db: WaterBuddyDb =
+            Room.databaseBuilder<WaterBuddyDb>(context, WaterBuddyDb::class.java, "intake").build()
+        val today = getToday()
+        val tomorrow = getTomorrow()
+        var dailyPercent = 0f
+        var dailyAmount = 0
+        val t = Thread(Runnable { kotlin.run {
+            dailyPercent = db.intakeDao().getDailyPercentFloat(today, tomorrow, target_amount)
+            dailyAmount = db.intakeDao().getDailyAmountInt(today, tomorrow)
+        } })
+        t.start()
+        t.join()
+
+        views.setTextViewText(R.id.txt_percent_val, dailyPercent.toString())
+
+        views.setTextViewText(
+                R.id.txt_intake_amount,
+        String.format("%.1fL", dailyAmount.toDouble() / 1000)
+        )
+
+        views.setTextViewText(R.id.txt_target_amount, String.format("%.1fL",target_amounts_pref.getFloat("target_amounts", 0f)))
+
+
 
         val intent = Intent(Intent.ACTION_MAIN)
         intent.addCategory(Intent.CATEGORY_LAUNCHER)
         intent.component = ComponentName(context, MainActivity::class.java)
         val pending = PendingIntent.getActivity(context, 0, intent, 0)
-        views.setOnClickPendingIntent(R.id.appwidget_text, pending)*/
-        // Instruct the widget manager to update the widget
+        views.setOnClickPendingIntent(R.id.layout_back, pending)
+
+
         appWidgetManager.updateAppWidget(appWidgetId, views)
+    }
+
+    private fun getToday(): Long {
+        val calendar = Calendar.getInstance()
+        calendar.set(Calendar.HOUR_OF_DAY,0)
+        calendar.set(Calendar.MINUTE,0)
+        calendar.set(Calendar.SECOND,0)
+        calendar.set(Calendar.MILLISECOND,0)
+        val today = calendar.time.time
+        return today
+    }
+
+    private fun getTomorrow(): Long {
+        val calendar = Calendar.getInstance()
+        calendar.add(Calendar.DATE, 1)
+        calendar.set(Calendar.HOUR_OF_DAY,0)
+        calendar.set(Calendar.MINUTE,0)
+        calendar.set(Calendar.SECOND,0)
+        calendar.set(Calendar.MILLISECOND,0)
+        val tomorrow = calendar.time.time
+        return tomorrow
     }
 }
