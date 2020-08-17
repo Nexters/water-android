@@ -279,18 +279,16 @@ class SetIntakeModal(var parent_context_code : Int, var intake : Intake?) : Bott
     }
     //키보드 올리기
     private fun upKeyboard(){
+        Log.d("TAG", "up keyboard")
         var imm = (requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
-        imm.showSoftInput(edt_amount, InputMethodManager.SHOW_FORCED)
+        imm.showSoftInput(edt_amount, InputMethodManager.HIDE_IMPLICIT_ONLY)
 
     }
     //키보드 숨기기
     private fun hideKeyBoard(){
+        Log.d("TAG","hide key board")
         var imm = (requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
         imm.hideSoftInputFromWindow(edt_amount.windowToken, 0)
     }
 
-    override fun onDestroyView() {
-        hideKeyBoard()
-        super.onDestroyView()
-    }
 }
