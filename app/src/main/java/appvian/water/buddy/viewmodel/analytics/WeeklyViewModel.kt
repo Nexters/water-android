@@ -15,9 +15,9 @@ import java.util.regex.Pattern
 
 class WeeklyViewModel(val repository: HomeRepository) {
     private val now = TimeUtil.getCalendarInstance()
-    var curYear = now.get(Calendar.YEAR)
-    var curMonth = now.get(Calendar.MONTH)
-    var curDay = now.get(Calendar.DATE)
+    var curYear = TimeUtil.year
+    var curMonth = TimeUtil.month
+    var curDay = TimeUtil.day
 
     private var weekDay: LiveData<List<Intake>>? = null
     val weekObserve: MediatorLiveData<List<BarEntry>> = MediatorLiveData()
@@ -36,16 +36,27 @@ class WeeklyViewModel(val repository: HomeRepository) {
     val sysObserve: MutableLiveData<Int> = MutableLiveData()
 
     fun getWeekIntakeData() {
-        val firstDate = TimeUtil.getCalendarInstance()
-        firstDate.set(curYear, curMonth, curDay)
+        android.util.Log.d(
+            "weekly vm",
+            "getWeekIntakeData curWeek ${curYear}, ${curMonth}, ${curDay}"
+        )
+        val firstDate = GregorianCalendar(curYear, curMonth, curDay, 0, 0, 0)
+        firstDate.timeZone = TimeZone.getDefault()
+        firstDate.add(Calendar.WEEK_OF_MONTH, -1)
+        firstDate.add(Calendar.WEEK_OF_MONTH, 1)
         firstDate.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY)
 
-        val lastDate = TimeUtil.getCalendarInstance()
-        lastDate.set(curYear, curMonth, curDay)
+        val lastDate = GregorianCalendar(curYear, curMonth, curDay, 0, 0, 0)
+        lastDate.timeZone = TimeZone.getDefault()
         lastDate.add(Calendar.WEEK_OF_MONTH, 1)
         lastDate.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY)
 
         weekDay = repository.getWeeklyByDay(firstDate.timeInMillis, lastDate.timeInMillis)
+
+        android.util.Log.d(
+            "weekly vm",
+            "getWeekIntakeData curWeek ${firstDate.time}, ${lastDate.time}"
+        )
 
         weekDay?.let { wr ->
             weekObserve.addSource(wr, androidx.lifecycle.Observer { values ->
@@ -70,13 +81,11 @@ class WeeklyViewModel(val repository: HomeRepository) {
     }
 
     fun getTotalWeekIntakeData() {
-        val endWeek = TimeUtil.getCalendarInstance()
-        endWeek.set(curYear, curMonth, curDay)
+        val endWeek = GregorianCalendar(curYear, curMonth, curDay, 0, 0, 0)
         endWeek.add(Calendar.WEEK_OF_YEAR, 1)
         endWeek.set(Calendar.DAY_OF_WEEK, 1)
 
-        val startWeek = TimeUtil.getCalendarInstance()
-        startWeek.set(curYear, curMonth, curDay)
+        val startWeek = GregorianCalendar(curYear, curMonth, curDay, 0, 0, 0)
         startWeek.set(Calendar.DAY_OF_WEEK, 1)
         startWeek.add(Calendar.WEEK_OF_YEAR, -3)
 
