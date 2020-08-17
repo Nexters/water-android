@@ -39,6 +39,8 @@ class IntroFourthFragment : Fragment() {
 
         view.startbtn.setOnClickListener {
             startActivity(Intent(activity as IntroActivity, MainActivity::class.java))
+            startActivity(Intent(activity as IntroActivity, TutorialActivity::class.java))
+            onDestroy()
         }
         return view
     }
