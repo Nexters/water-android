@@ -43,7 +43,12 @@ class MainFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
         binding.homeViewModel = homeViewModel
 
-        setFirstCharacter()
+        if (isFirst){
+            setFirstCharacter()
+        } else{
+            binding.animationFirstCharacter.visibility = View.GONE
+            binding.animationCharacter.visibility = View.VISIBLE
+        }
         setFirstWater()
         binding.intakeListButton.setOnClickListener {
             val intent = Intent(activity,
