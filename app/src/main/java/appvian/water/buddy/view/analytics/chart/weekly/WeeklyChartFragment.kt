@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import appvian.water.buddy.R
 import appvian.water.buddy.databinding.FragmentWeeklyChartBinding
 import appvian.water.buddy.model.repository.HomeRepository
+import appvian.water.buddy.model.repository.SharedPrefsRepository
 import appvian.water.buddy.util.DrinkMapper
 import appvian.water.buddy.util.TimeUtil
 import appvian.water.buddy.view.modal.calendar.CalendarModal
@@ -45,7 +46,7 @@ class WeeklyChartFragment(val analyVm: AnalyticsViewModel) : Fragment() {
         binding.lifecycleOwner = this
 
         activity?.let {
-            weeklyVm = WeeklyViewModel(HomeRepository(it))
+            weeklyVm = WeeklyViewModel(SharedPrefsRepository(requireContext()),HomeRepository(it))
         }
 
         initUi()
@@ -128,13 +129,15 @@ class WeeklyChartFragment(val analyVm: AnalyticsViewModel) : Fragment() {
         val day = resources.getStringArray(R.array.weekly)
 
         val dataSet = BarDataSet(values, "Intake List")
-        dataSet.barSpacePercent = 70f
-        dataSet.colors = values.map { barEntry ->
-            if (barEntry.`val` >= weeklyVm.targetValue) resources.getColor(R.color.blue_1, null)
-            else resources.getColor(R.color.blue_3, null)
-        }
-
-        dataSet.setDrawValues(false)
+        weeklyVm.targetValue.observe(viewLifecycleOwner, Observer {
+            dataSet.barSpacePercent = 70f
+            dataSet.colors = values.map { barEntry ->
+                if (barEntry.`val` >= it) resources.getColor(R.color.blue_1, null)
+                else resources.getColor(R.color.blue_3, null)
+            }
+            dataSet.setDrawValues(false)
+            binding.weeklyBarchartByWeek.invalidate()
+        })
 
         val data = BarData(day, dataSet)
         drawWeeklyBarChart(data)
@@ -146,15 +149,17 @@ class WeeklyChartFragment(val analyVm: AnalyticsViewModel) : Fragment() {
 
         binding.weeklyBarchartByWeek.data = data
 
-        val limitLine = LimitLine(
-            weeklyVm.targetValue,
-            getString(R.string.limit_line_target, weeklyVm.targetValue)
-        )
-        limitLine.lineColor = resources.getColor(R.color.sub_red_1, null)
-        limitLine.textColor = resources.getColor(R.color.sub_red_1, null)
-        limitLine.textSize = 15f
+        weeklyVm.targetValue.observe(viewLifecycleOwner, Observer {
+            val limitLine = LimitLine(
+                weeklyVm.targetValue.value?: 0f,
+                getString(R.string.limit_line_target, it)
+            )
+            limitLine.lineColor = resources.getColor(R.color.sub_red_1, null)
+            limitLine.textColor = resources.getColor(R.color.sub_red_1, null)
+            limitLine.textSize = 15f
 
-        binding.weeklyBarchartByWeek.axisLeft.addLimitLine(limitLine)
+            binding.weeklyBarchartByWeek.axisLeft.addLimitLine(limitLine)
+        })
 
         binding.weeklyBarchartByWeek.axisLeft.axisLineColor =
             resources.getColor(R.color.transparent, null)

@@ -8,12 +8,16 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import appvian.water.buddy.model.data.Intake
 import appvian.water.buddy.model.repository.HomeRepository
+import appvian.water.buddy.model.repository.SharedPrefsRepository
 import appvian.water.buddy.util.TimeUtil
 import com.github.mikephil.charting.data.BarEntry
 import java.util.*
 import java.util.regex.Pattern
 
-class WeeklyViewModel(val repository: HomeRepository) {
+class WeeklyViewModel(
+    private val sharedPrefsRepository: SharedPrefsRepository,
+    val repository: HomeRepository
+) {
     private val now = TimeUtil.getCalendarInstance()
     var curYear = TimeUtil.year
     var curMonth = TimeUtil.month
@@ -21,7 +25,7 @@ class WeeklyViewModel(val repository: HomeRepository) {
 
     private var weekDay: LiveData<List<Intake>>? = null
     val weekObserve: MediatorLiveData<List<BarEntry>> = MediatorLiveData()
-    val targetValue: Float = 1.6f //Todo : sharedPreference에서 불러와야 함
+    val targetValue = sharedPrefsRepository.targetAmountLiveData
 
     private var weekTotal: LiveData<List<Intake>>? = null
     val weekTotalObserve: MediatorLiveData<List<BarEntry>> = MediatorLiveData()
@@ -131,7 +135,9 @@ class WeeklyViewModel(val repository: HomeRepository) {
     }
 
 
+
     fun strSpanBuilder(msg: String, color: Int): SpannableStringBuilder {
+
         val pattern = Pattern.compile("[0-9]+(ml)")
         val style = ForegroundColorSpan(color)
 
