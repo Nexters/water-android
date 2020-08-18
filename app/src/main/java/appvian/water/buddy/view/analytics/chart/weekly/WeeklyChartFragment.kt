@@ -29,12 +29,7 @@ class WeeklyChartFragment(val analyVm: AnalyticsViewModel) : Fragment() {
 
     private val calendarTotalListener: CalendarTotalListener = object : CalendarTotalListener {
         override fun getCalendarTotal(year: Int, month: Int, day: Int) {
-            val weekOfMonth = TimeUtil.getWeekOfMonth(year, month, day)
             analyVm.setYear(year, month, day)
-
-            weeklyVm.curWeek = weekOfMonth
-            binding.weeklySpinner.text = getString(R.string.weekly_picker_item, weeklyVm.curWeek)
-            weeklyVm.getWeekIntakeData()
         }
     }
 
@@ -85,10 +80,10 @@ class WeeklyChartFragment(val analyVm: AnalyticsViewModel) : Fragment() {
             val color = resources.getColor(R.color.blue_1, null)
             if (it > 0) {
                 val msg = getString(R.string.weekly_sys_plus, Math.abs(it))
-                binding.weeklySysText.text = weeklyVm.strSapnBuilder(msg, color)
+                binding.weeklySysText.text = weeklyVm.strSpanBuilder(msg, color)
             } else if (it < 0) {
                 val msg = getString(R.string.weekly_sys_minus, Math.abs(it))
-                binding.weeklySysText.text = weeklyVm.strSapnBuilder(msg, color)
+                binding.weeklySysText.text = weeklyVm.strSpanBuilder(msg, color)
             } else {
                 binding.weeklySysText.text = getString(R.string.weekly_sys_none)
             }
@@ -105,15 +100,14 @@ class WeeklyChartFragment(val analyVm: AnalyticsViewModel) : Fragment() {
     }
 
     private fun setDataFromAnalyVm() {
+        weeklyVm.curYear = analyVm.curYear.value ?: 1970
+        weeklyVm.curMonth = analyVm.curMonth.value?.minus(1) ?: 1
+        weeklyVm.curDay = analyVm.curDay.value ?: 1
 
-        weeklyVm.curWeek = TimeUtil.getWeekOfMonth(
-            analyVm.curYear.value ?: 1970,
-            analyVm.curMonth.value?.minus(1) ?: 1,
-            analyVm.curDay.value ?: 1
-        )
 
         setWeeklySpinnertext()
         weeklyVm.getWeekIntakeData()
+        weeklyVm.getTotalWeekIntakeData()
     }
 
     private fun initSpinner() {
@@ -128,7 +122,7 @@ class WeeklyChartFragment(val analyVm: AnalyticsViewModel) : Fragment() {
     }
 
     private fun setWeeklySpinnertext() {
-        binding.weeklySpinner.text = getString(R.string.weekly_picker_item, weeklyVm.curWeek)
+        binding.weeklySpinner.text = getString(R.string.weekly_picker_item, TimeUtil.getWeekOfMonth(weeklyVm.curYear, weeklyVm.curMonth, weeklyVm.curDay))
     }
 
     private fun setWeeklyData(values: List<BarEntry>) {

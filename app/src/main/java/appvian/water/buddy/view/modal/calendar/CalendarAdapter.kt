@@ -1,6 +1,5 @@
 package appvian.water.buddy.view.modal.calendar
 
-import android.content.res.ColorStateList
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,12 +7,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import appvian.water.buddy.R
 import appvian.water.buddy.databinding.WbCalendarItemBinding
-import appvian.water.buddy.util.TimeUtil
 
-class CalendarAdapter(val calendarDayListener: CalendarDayListener) : RecyclerView.Adapter<CalendarAdapter.CalendarVh>() {
+class CalendarAdapter(val calendarDayListener: CalendarDayListener) :
+    RecyclerView.Adapter<CalendarAdapter.CalendarVh>() {
     private var dayList = arrayListOf<Int?>()
     private lateinit var binding: WbCalendarItemBinding
-    private val curDay = TimeUtil.day
+
     var checkedPos = -1
 
     inner class CalendarVh(binding: WbCalendarItemBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -21,7 +20,7 @@ class CalendarAdapter(val calendarDayListener: CalendarDayListener) : RecyclerVi
             item?.let {
                 binding.calDayTv.text = item.toString()
 
-                if(checkedPos != -1) {
+                if (checkedPos != -1) {
                     if (checkedPos == adapterPosition) {
                         binding.calDayView.background =
                             binding.root.resources.getDrawable(R.drawable.circle, null)
@@ -38,8 +37,7 @@ class CalendarAdapter(val calendarDayListener: CalendarDayListener) : RecyclerVi
                 }
 
                 binding.calDayView.setOnClickListener {
-                    binding.calDayView.background = binding.root.resources.getDrawable(R.drawable.circle, null)
-                    if(checkedPos != adapterPosition) {
+                    if (checkedPos != adapterPosition) {
                         checkedPos = adapterPosition
                         notifyDataSetChanged()
 
