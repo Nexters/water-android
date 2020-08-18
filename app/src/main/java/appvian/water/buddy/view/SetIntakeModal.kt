@@ -1,37 +1,36 @@
 package appvian.water.buddy.view
 
+import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
-import android.text.InputType
 import android.text.TextWatcher
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.view.WindowManager
+import android.view.*
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
-import android.widget.EditText
 import android.widget.TextView
-import androidx.fragment.app.DialogFragment
+import androidx.core.content.ContextCompat.getColor
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import appvian.water.buddy.R
 import appvian.water.buddy.model.data.Category
 import appvian.water.buddy.model.data.Intake
+import appvian.water.buddy.util.DrinkMapper
 import appvian.water.buddy.utilities.Code
+import appvian.water.buddy.view.home.DailyIntakeListActivity
 import appvian.water.buddy.view.settings.PopupActivity
 import appvian.water.buddy.viewmodel.FavoriteViewModel
 import appvian.water.buddy.viewmodel.HomeViewModel
+import appvian.water.buddy.viewmodel.MainViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kotlinx.android.synthetic.main.activity_profile_edit.*
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.bottom_sheet_modal.*
 import kotlinx.android.synthetic.main.bottom_sheet_modal.view.*
 import kotlinx.coroutines.InternalCoroutinesApi
@@ -83,6 +82,7 @@ class SetIntakeModal(var parent_context_code : Int, var intake : Intake?) : Bott
         else if(parent_context_code == Code.FAVORITE_DRINK_SETTING_ACTIVITY || parent_context_code == Code.FAVORITE_EDIT_1 || parent_context_code == Code.FAVORITE_EDIT_2){
             favoriteViewModel = ViewModelProvider(this).get(FavoriteViewModel::class.java)
             if(parent_context_code == Code.FAVORITE_EDIT_1){
+                v.txt_top.text = getText(R.string.add_fav_modal)
                 var stringTokenizer = StringTokenizer(favoriteViewModel.fav_1_livedata.value)
                 var category = stringTokenizer.nextToken()
                 var amount = stringTokenizer.nextToken()
@@ -91,6 +91,7 @@ class SetIntakeModal(var parent_context_code : Int, var intake : Intake?) : Bott
                 (v.recyclerview.adapter as CategoryRecyclerViewAdapter).setCategory(category.toInt())
                 typeofDrink = category.toInt()
             }else if(parent_context_code == Code.FAVORITE_EDIT_2){
+                v.txt_top.text = getText(R.string.add_fav_modal)
                 var stringTokenizer = StringTokenizer(favoriteViewModel.fav_2_livedata.value)
                 var category = stringTokenizer.nextToken()
                 var amount = stringTokenizer.nextToken()
@@ -101,8 +102,10 @@ class SetIntakeModal(var parent_context_code : Int, var intake : Intake?) : Bott
             }
         }else if(parent_context_code == Code.HOME_FRAGMENT){
             homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+            v.txt_top.text = getString(R.string.modify_modal)
             v.edt_amount.setText(intake!!.amount.toString() + "ml")
             v.edt_amount.setSelection(intake!!.amount.toString().length)
+            v.setButton.text = "수정하기"
             (v.recyclerview.adapter as CategoryRecyclerViewAdapter).setCategory(intake!!.category)
             typeofDrink = intake!!.category
         }
@@ -114,6 +117,19 @@ class SetIntakeModal(var parent_context_code : Int, var intake : Intake?) : Bott
                 Code.MAIN_FRAGMENT -> {
                     val intake = Intake(System.currentTimeMillis(), typeofDrink, pickedNum)
                     homeViewModel.insert(intake)
+                    Snackbar.make(requireActivity().findViewById(android.R.id.content),getString(R.string.insert_toast_text, resources.getStringArray(
+                        DrinkMapper.drinkName)[intake.category], intake.amount), Snackbar.LENGTH_SHORT).apply{
+                        this.setBackgroundTint(getColor(context,R.color.black))
+                        this.setAction("항목보기",View.OnClickListener {
+                            val intent = Intent(context, DailyIntakeListActivity::class.java)
+                            startActivity(intent)
+                        })
+                        this.view.minimumHeight = 150
+                        this.view.foregroundGravity = Gravity.CENTER
+                        this.setTextColor(getColor(context,R.color.White))
+                        this.setActionTextColor(getColor(context,R.color.White))
+                        this.show()
+                    }
                 }
                 Code.FAVORITE_DRINK_SETTING_ACTIVITY -> {
                     if(favoriteViewModel.fav_1_livedata.value == ""){
@@ -136,6 +152,14 @@ class SetIntakeModal(var parent_context_code : Int, var intake : Intake?) : Bott
                     //오늘 마신 물 수정
                     homeViewModel.modifyAmount(intake!!.date, pickedNum)
                     homeViewModel.modifyCategory(intake!!.date, typeofDrink)
+                    Snackbar.make(requireActivity().findViewById(android.R.id.content),getString(R.string.modify_toast_text, resources.getStringArray(
+                        DrinkMapper.drinkName)[typeofDrink], pickedNum), Snackbar.LENGTH_SHORT).apply{
+                        this.setBackgroundTint(getColor(context,R.color.black))
+                        this.view.minimumHeight = 150
+                        this.view.foregroundGravity = Gravity.CENTER
+                        this.setTextColor(getColor(context,R.color.White))
+                        this.show()
+                    }
                 }
             }
 

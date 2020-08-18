@@ -1,11 +1,9 @@
 package appvian.water.buddy.view.home
 
-import android.content.res.Resources
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.DisplayMetrics
+import android.view.Gravity
 import android.view.View
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -15,7 +13,8 @@ import appvian.water.buddy.databinding.ActivityDailyIntakeListBinding
 import appvian.water.buddy.utilities.Code
 import appvian.water.buddy.view.SetIntakeModal
 import appvian.water.buddy.viewmodel.HomeViewModel
-import kotlinx.android.synthetic.main.delete_toast.view.*
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.activity_daily_intake_list.*
 
 class DailyIntakeListActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDailyIntakeListBinding
@@ -102,12 +101,11 @@ class DailyIntakeListActivity : AppCompatActivity() {
     private fun initToast(){
         homeViewModel.showDeleteToast.observe(this, Observer {
             if (it){
-                Toast.makeText(this,String.format("%d개의 내역을 삭제하였습니다.",deleteCount), Toast.LENGTH_SHORT).apply {
-                    this.view = View.inflate(this@DailyIntakeListActivity,
-                        R.layout.delete_toast,findViewById(R.id.delete_toast))
-                    this.view.toast_text.text = String.format("%d개의 내역을 삭제하였습니다.",deleteCount)
-                    this.view.toast_text.width = binding.setDeleteButton.width
-                    this.view.toast_text.height = binding.setDeleteButton.height
+                Snackbar.make(daily_intake_layout,getString(R.string.delete_toast_text,deleteCount),Snackbar.LENGTH_SHORT).apply {
+                    this.setBackgroundTint(getColor(R.color.black))
+                    this.view.minimumHeight = 150
+                    this.view.foregroundGravity = Gravity.CENTER
+                    this.setTextColor(getColor(R.color.White))
                     this.show()
                 }
                 deleteCount = 0
