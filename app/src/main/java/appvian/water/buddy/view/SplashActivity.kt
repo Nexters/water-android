@@ -10,7 +10,7 @@ import appvian.water.buddy.R
 import appvian.water.buddy.view.Intro.IntroActivity
 import appvian.water.buddy.viewmodel.IntroViewModel
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.GlideDrawableImageViewTarget
+
 
 class SplashActivity : AppCompatActivity() {
     private lateinit var introViewModel: IntroViewModel
@@ -23,8 +23,7 @@ class SplashActivity : AppCompatActivity() {
             ViewModelProvider(this).get<IntroViewModel>(IntroViewModel::class.java)
 
         val splash : ImageView = findViewById(R.id.main_splash)
-        val gifImage = GlideDrawableImageViewTarget(splash)
-        Glide.with(this).load(R.drawable.main_splash).into(gifImage)
+        Glide.with(this).load(R.drawable.main_splash).into(splash)
 
 
         startLoading()

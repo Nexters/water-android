@@ -75,7 +75,7 @@ dependencies {
     //mpchart
     implementation "com.github.PhilJay:MPAndroidChart:$mpchart_version"
     releaseImplementation 'com.idescout.sql:sqlscout-server-noop:4.1'
-    implementation 'com.github.bumptech.glide:glide:3.7.0'
+    implementation 'com.github.bumptech.glide:glide:4.10.0'
 
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
 }
