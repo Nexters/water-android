@@ -12,8 +12,8 @@ class TutorialActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tutorial)
         val listImage: ArrayList<Int> = ArrayList()
-        listImage.add(R.drawable.tutorial_1)
-        listImage.add(R.drawable.tutorial_2)
+        listImage.add(R.mipmap.tutorial_1)
+        listImage.add(R.mipmap.tutorial_2)
 
         viewPager = tutorial_viewPager
         val pageAdapter = TutorialViewPagerAdapter(supportFragmentManager)

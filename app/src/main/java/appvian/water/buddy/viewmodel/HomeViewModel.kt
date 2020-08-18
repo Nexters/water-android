@@ -12,7 +12,6 @@ import appvian.water.buddy.R
 import appvian.water.buddy.model.data.Intake
 import appvian.water.buddy.model.repository.HomeRepository
 import appvian.water.buddy.model.repository.SharedPrefsRepository
-import kotlinx.android.synthetic.main.delete_toast.view.*
 import java.util.*
 import kotlin.collections.ArrayList
 
