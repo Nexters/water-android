@@ -25,6 +25,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="46dp"
+            android:fontFamily="@font/spoqa_han_sans_bold"
             />
         <ImageView
             android:id="@+id/img_trash"
@@ -190,6 +191,7 @@
                 android:layout_marginTop="15dp"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="30dp"
+                android:fontFamily="@font/spoqa_han_sans_regular"
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -206,6 +208,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="24dp"
+            android:fontFamily="@font/spoqa_han_sans_bold"
             />
 
 

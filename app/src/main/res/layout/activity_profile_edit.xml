@@ -54,7 +54,8 @@
             android:maxLength="6"
             android:text="@{viewModel.nameLiveData}"
             android:selection="@{viewModel.nameLiveData.length()}"
-            android:layout_marginTop="35dp">
+            android:layout_marginTop="35dp"
+            android:fontFamily="@font/spoqa_han_sans_bold">
             <requestFocus/>
         </EditText>
         <TextView
@@ -67,6 +68,7 @@
             app:layout_constraintBottom_toBottomOf="@id/edt_profile_edt"
             app:layout_constraintTop_toTopOf="@id/edt_profile_edt"
             android:text="@{@string/edtLenCntFormat(viewModel.name_cnt)}"
+            android:fontFamily="@font/spoqa_han_sans_regular"
             />
         <Button
             android:id="@+id/btn_save"
@@ -79,6 +81,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="24dp"
+            android:fontFamily="@font/spoqa_han_sans_bold"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

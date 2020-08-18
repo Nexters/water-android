@@ -11,6 +11,7 @@
         android:textSize="11sp"
         android:text="@string/daily_date"
         android:gravity="center"
+        android:fontFamily="@font/spoqa_han_sans_regular"
         />
 
 </LinearLayout>

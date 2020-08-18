@@ -4,15 +4,12 @@ import android.app.Application
 import android.content.res.Resources
 import android.util.DisplayMetrics
 import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import appvian.water.buddy.R
 import appvian.water.buddy.model.data.Intake
 import appvian.water.buddy.model.repository.HomeRepository
 import appvian.water.buddy.model.repository.SharedPrefsRepository
-import kotlinx.android.synthetic.main.delete_toast.view.*
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -28,7 +25,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     var waterCurrentY = waterStartY
     var characterCurrentY = 0F
     var currentPercent = 0F
-    val startPercentTextY : Float = Resources.getSystem().displayMetrics.heightPixels.toFloat() - 270F * (Resources.getSystem().displayMetrics.densityDpi).toFloat() / DisplayMetrics.DENSITY_DEFAULT
+    val startPercentTextY : Float = Resources.getSystem().displayMetrics.heightPixels.toFloat() - 400F * (Resources.getSystem().displayMetrics.densityDpi).toFloat() / DisplayMetrics.DENSITY_DEFAULT
     var currentPercentTextY = startPercentTextY
     var percent = getDailyPercent()
     var showDeleteToast: MutableLiveData<Boolean> = MutableLiveData(false)

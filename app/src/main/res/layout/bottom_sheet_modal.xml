@@ -20,6 +20,7 @@
         android:layout_marginTop="27dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:fontFamily="@font/spoqa_han_sans_bold"
         />
     <TextView
         android:id="@+id/txt_category"
@@ -31,6 +32,7 @@
         android:textSize="13sp"
         android:textColor="@color/settingTxtBlack"
         android:layout_marginTop="24dp"
+        android:fontFamily="@font/spoqa_han_sans_regular"
         />
     <ImageView
         android:id="@+id/img_cancel"
@@ -60,7 +62,8 @@
         app:layout_constraintStart_toStartOf="@id/recyclerview"
         android:text="섭취량"
         android:textSize="13sp"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/spoqa_han_sans_regular"/>
 
     <EditText
         android:id="@+id/edt_amount"
@@ -77,6 +80,7 @@
         android:layout_marginTop="15dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:fontFamily="@font/spoqa_han_sans_bold"
         />
     <LinearLayout
         android:id="@+id/layout_choice_btn"
@@ -98,6 +102,7 @@
             android:textSize="10sp"
             android:stateListAnimator="@null"
             android:textColor="@color/grey_7"
+            android:fontFamily="@font/spoqa_han_sans_regular"
             />
         <Button
             android:id="@+id/btn_takeout_tall"
@@ -109,6 +114,7 @@
             android:textSize="10sp"
             android:stateListAnimator="@null"
             android:textColor="@color/grey_7"
+            android:fontFamily="@font/spoqa_han_sans_regular"
             />
         <Button
             android:id="@+id/btn_tumbler"
@@ -120,6 +126,7 @@
             android:textSize="10sp"
             android:stateListAnimator="@null"
             android:textColor="@color/grey_7"
+            android:fontFamily="@font/spoqa_han_sans_regular"
             />
 
 
@@ -136,5 +143,6 @@
         android:textColor="@color/grey_1"
         android:layout_marginTop="8dp"
         app:layout_constraintTop_toBottomOf="@id/edt_amount"
+        android:fontFamily="@font/spoqa_han_sans_bold"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>
