@@ -5,9 +5,10 @@ import androidx.lifecycle.LiveData
 import appvian.water.buddy.model.data.Intake
 import appvian.water.buddy.model.datasource.local.WaterBuddyDb
 import appvian.water.buddy.model.datasource.local.intakeDao
+import appvian.water.buddy.utilities.WidgetUpdater
 import kotlinx.coroutines.*
 
-class HomeRepository(context: Context) {
+class HomeRepository(val context: Context) {
 
     private val waterBuddyDb = WaterBuddyDb.getInstance(context)
 
@@ -133,12 +134,14 @@ class HomeRepository(context: Context) {
         runBlocking(Dispatchers.IO) {
             intakedao.modifyCategory(date, category)
         }
+        WidgetUpdater.update(context)
     }
 
     fun modifyAmount(date: Long, amount: Int){
         runBlocking(Dispatchers.IO) {
             intakedao.modifyAmount(date, amount)
         }
+        WidgetUpdater.update(context)
     }
 
     fun insert(intake: Intake) {
@@ -146,17 +149,20 @@ class HomeRepository(context: Context) {
         runBlocking(Dispatchers.IO) {
             intakedao.insert(intake)
         }
+        WidgetUpdater.update(context)
     }
 
     fun delete(intake: Intake) {
         runBlocking(Dispatchers.IO) {
             intakedao.delete(intake)
         }
+        WidgetUpdater.update(context)
     }
 
     fun deleteAll() {
         runBlocking(Dispatchers.IO) {
             intakedao.deleteAll()
         }
+        WidgetUpdater.update(context)
     }
 }

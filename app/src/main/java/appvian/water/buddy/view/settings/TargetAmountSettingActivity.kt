@@ -1,5 +1,6 @@
 package appvian.water.buddy.view.settings
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -11,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import appvian.water.buddy.R
 import appvian.water.buddy.databinding.ActivityTargetAmountSettingBinding
+import appvian.water.buddy.utilities.WidgetUpdater
 import appvian.water.buddy.viewmodel.SettingViewModel
 import kotlinx.android.synthetic.main.activity_target_amount_setting.*
 import java.lang.Exception

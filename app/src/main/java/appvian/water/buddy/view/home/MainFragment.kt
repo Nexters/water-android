@@ -16,7 +16,6 @@ import appvian.water.buddy.R
 import appvian.water.buddy.viewmodel.HomeViewModel
 import kotlinx.android.synthetic.main.fragment_main.*
 import android.util.DisplayMetrics
-import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import appvian.water.buddy.databinding.FragmentMainBinding
@@ -44,7 +43,12 @@ class MainFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
         binding.homeViewModel = homeViewModel
 
-        setFirstCharacter()
+        if (isFirst){
+            setFirstCharacter()
+        } else{
+            binding.animationFirstCharacter.visibility = View.GONE
+            binding.animationCharacter.visibility = View.VISIBLE
+        }
         setFirstWater()
         binding.intakeListButton.setOnClickListener {
             val intent = Intent(activity,
@@ -78,21 +82,31 @@ class MainFragment : Fragment() {
                         }
                     }
                 } else{
-                    adjustAnimation(it)
+                    GlobalScope.launch(Dispatchers.Main) {
+                        delay(100L)
+                        withContext(Dispatchers.Main) {
+                            adjustAnimation(it)
+                        }
+                    }
                 }
                 changeText(it)
             } else{
                 setEmotion(0F)
                 if(isFirst){
+                    isFirst = false
                     GlobalScope.launch(Dispatchers.Main) {
                         delay(1500L)
                         withContext(Dispatchers.Main) {
                             adjustAnimation(0F)
                         }
                     }
-                    isFirst = false
                 } else{
-                    adjustAnimation(0F)
+                    GlobalScope.launch(Dispatchers.Main) {
+                        delay(100L)
+                        withContext(Dispatchers.Main) {
+                            adjustAnimation(0F)
+                        }
+                    }
                 }
                 changeText(0F)
                 setCharacter(0F)

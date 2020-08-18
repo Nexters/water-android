@@ -1,22 +1,25 @@
 package appvian.water.buddy.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import appvian.water.buddy.R
 import appvian.water.buddy.databinding.ActivityMainBinding
 import appvian.water.buddy.model.data.Intake
 import appvian.water.buddy.util.DrinkMapper
 import appvian.water.buddy.utilities.CategoryMapper
 import appvian.water.buddy.utilities.Code
-import appvian.water.buddy.viewmodel.HomeViewModel
+import appvian.water.buddy.view.home.DailyIntakeListActivity
 import appvian.water.buddy.viewmodel.MainViewModel
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -27,12 +30,12 @@ class MainActivity : AppCompatActivity() {
     private var isFav1 = false
     private var isFav2 = false
     private lateinit var binding: ActivityMainBinding
+    private lateinit var viewModel: MainViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding =
             DataBindingUtil.setContentView(this@MainActivity, R.layout.activity_main)
-        val viewModel = MainViewModel(this)
+        viewModel = MainViewModel(this)
         binding.mainViewModel = viewModel
         viewModel.showWhiteImage.observe(this, Observer {
             if(it){
@@ -63,17 +66,17 @@ class MainActivity : AppCompatActivity() {
         }
         binding.fabFav1.setOnClickListener{
             //바로 등록
-            var st = StringTokenizer(binding.txtFav1.text.toString())
-            var category_num = CategoryMapper.getCategoryNum(st.nextToken())
-            var tmp = st.nextToken()
+            val st = StringTokenizer(binding.txtFav1.text.toString())
+            val category_num = CategoryMapper.getCategoryNum(st.nextToken())
+            val tmp = st.nextToken()
             viewModel.insert(Intake(System.currentTimeMillis(), category_num, tmp.substring(0, tmp.length-2).toInt()))
             fabAnim()
         }
         binding.fabFav2.setOnClickListener{
             //바로 등록
-            var st = StringTokenizer(binding.txtFav2.text.toString())
-            var category_num = CategoryMapper.getCategoryNum(st.nextToken())
-            var tmp = st.nextToken()
+            val st = StringTokenizer(binding.txtFav2.text.toString())
+            val category_num = CategoryMapper.getCategoryNum(st.nextToken())
+            val tmp = st.nextToken()
             viewModel.insert(Intake(System.currentTimeMillis(), category_num, tmp.substring(0, tmp.length-2).toInt()))
             fabAnim()
         }
@@ -84,10 +87,10 @@ class MainActivity : AppCompatActivity() {
                 binding.txtFav1.text = ""
             }else{
                 isFav1 = true
-                var st = StringTokenizer(it)
-                var category_num = st.nextToken().toInt()
-                var amount = st.nextToken().toInt()
-                var category_name = CategoryMapper.getCategoryName(category_num)
+                val st = StringTokenizer(it)
+                val category_num = st.nextToken().toInt()
+                val amount = st.nextToken().toInt()
+                val category_name = CategoryMapper.getCategoryName(category_num)
 
                 binding.fabFav1.setImageDrawable(resources.getDrawable(DrinkMapper.drinkResources.get(category_num),null))
                 binding.txtFav1.text = getString(R.string.fab_favorite, category_name, amount)
@@ -100,15 +103,15 @@ class MainActivity : AppCompatActivity() {
                 binding.txtFav2.text = ""
             }else{
                 isFav2 = true
-                var st = StringTokenizer(it)
-                var category_num = st.nextToken().toInt()
-                var amount = st.nextToken().toInt()
-                var category_name = CategoryMapper.getCategoryName(category_num)
+                val st = StringTokenizer(it)
+                val category_num = st.nextToken().toInt()
+                val amount = st.nextToken().toInt()
+                val category_name = CategoryMapper.getCategoryName(category_num)
                 binding.fabFav2.setImageDrawable(resources.getDrawable(DrinkMapper.drinkResources.get(category_num),null))
                 binding.txtFav2.text = getString(R.string.fab_favorite, category_name, amount)
             }
         })
-
+        initToast()
     }
     private fun fabAnim(){
         if(isFabOpen){
@@ -142,4 +145,26 @@ class MainActivity : AppCompatActivity() {
         bottomSheet.show(fragmentManager,bottomSheet.tag)
     }
 
+    private fun initToast(){
+        viewModel.showInsertToast.observeForever( Observer {
+            Log.e("value2",it.toString())
+            if (it){
+                val intake = viewModel.latestIntake
+                Snackbar.make(fragment,getString(R.string.insert_toast_text, resources.getStringArray(DrinkMapper.drinkName)[intake.category], intake.amount),Snackbar.LENGTH_SHORT).apply{
+                    this.setBackgroundTint(getColor(R.color.black))
+                    this.setAction("항목보기",View.OnClickListener {
+                        val intent = Intent(this@MainActivity,DailyIntakeListActivity::class.java)
+                        startActivity(intent)
+                    })
+                    this.view.minimumHeight = 150
+                    this.view.foregroundGravity = Gravity.CENTER
+                    this.setTextColor(getColor(R.color.White))
+                    this.setActionTextColor(getColor(R.color.White))
+                    this.show()
+                }
+                viewModel.showInsertToast.value = false
+            }
+        })
+
+    }
 }
