@@ -10,6 +10,7 @@ import appvian.water.buddy.model.data.SharedPreferenceIntLiveData
 
 import appvian.water.buddy.model.data.SharedPreferenceStringLiveData
 import appvian.water.buddy.model.repository.SharedPrefsRepository
+import appvian.water.buddy.utilities.WidgetUpdater
 
 
 class SettingViewModel(application: Application) : AndroidViewModel(application) {

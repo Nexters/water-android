@@ -5,10 +5,11 @@ import appvian.water.buddy.model.data.SharedPreferenceBooleanLiveData
 import appvian.water.buddy.model.data.SharedPreferenceFloatLiveData
 import appvian.water.buddy.model.data.SharedPreferenceIntLiveData
 import appvian.water.buddy.model.data.SharedPreferenceStringLiveData
+import appvian.water.buddy.utilities.WidgetUpdater
 import java.lang.StringBuilder
 import java.util.*
 
-class SharedPrefsRepository(context: Context) {
+class SharedPrefsRepository(val context: Context) {
     //사용자 닉네임
     val name_pref = context.getSharedPreferences("name", Context.MODE_PRIVATE)
     var nameLiveData: SharedPreferenceStringLiveData = SharedPreferenceStringLiveData(name_pref, "name",  "")
@@ -125,6 +126,7 @@ class SharedPrefsRepository(context: Context) {
         editor.putInt("target_amounts_ml", value)
         editor.apply()
         target_amount_int_live_data = SharedPreferenceIntLiveData(target_amounts_int_pref, "target_amounts_ml", value)
+        WidgetUpdater.update(context)
     }
     fun setTargetAmountFloatLiveData(value : Float){
         val editor = target_amounts_pref.edit()
