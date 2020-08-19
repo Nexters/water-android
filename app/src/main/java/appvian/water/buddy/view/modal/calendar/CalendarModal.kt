@@ -10,12 +10,15 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import appvian.water.buddy.R
 import appvian.water.buddy.databinding.CalendarPickerBinding
-import appvian.water.buddy.util.TimeUtil
 import appvian.water.buddy.viewmodel.modal.CalendarViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class CalendarModal(private var curYear:Int, var curMonth:Int, val calendarTotalListener: CalendarTotalListener) : BottomSheetDialogFragment(),
+class CalendarModal(
+    private var curYear: Int,
+    var curMonth: Int,
+    val calendarTotalListener: CalendarTotalListener
+) : BottomSheetDialogFragment(),
     CalendarDayListener {
     private lateinit var binding: CalendarPickerBinding
     private var selectDay = -1
@@ -45,11 +48,12 @@ class CalendarModal(private var curYear:Int, var curMonth:Int, val calendarTotal
     private fun initUi() {
         binding.calPickerClose.setOnClickListener { dismiss() }
         binding.calConfirmBtn.setOnClickListener {
-            if(selectDay != -1)
+            if (selectDay != -1)
                 calendarTotalListener.getCalendarTotal(curYear, curMonth, selectDay)
             dismiss()
         }
         binding.calView.adapter = calendarAdapter
+        binding.calView.addItemDecoration(CalendarItemDecoration())
 
         observeData()
     }
