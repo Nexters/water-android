@@ -71,7 +71,8 @@ class AlarmReceiver : BroadcastReceiver() {
             val endMinutes = getMinutes(end_time_pref.getString("end_time","00 : 00")!!)
             val currHour = getCurrentHours()
             val currMinutes = getCurrentMinutes()
-            Log.d("TAG", "start : " + startHour + " : " + startMinutes + "end : " + endHour + " : " + endMinutes)
+            Log.d("TAG", "start : " + startHour + " : " + startMinutes + " end : " + endHour + " : " + endMinutes)
+            Log.d("TAG","curr : " + currHour + " : " + currMinutes)
             if(startHour <= endHour) {
                 if (currHour in startHour..endHour) {
                     if (startHour == currHour) {
@@ -106,6 +107,9 @@ class AlarmReceiver : BroadcastReceiver() {
                             notificationManager.notify(1234, builder.build())
                             Log.d("TAG", "알림 울림 : " + currHour + " : " + currMinutes)
                         }
+                    }else{
+                        notificationManager.notify(1234, builder.build())
+                        Log.d("TAG", "알림 울림 : " + currHour + " : " + currMinutes)
                     }
                 }
             }
