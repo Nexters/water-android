@@ -58,6 +58,8 @@
                 android:hint="@string/intro_third_kghint"
                 app:layout_constraintTop_toBottomOf="@+id/intro_kg_text"
                 app:layout_constraintLeft_toLeftOf="parent"
+                android:backgroundTint="@color/grey_9"
+                android:inputType="number"
                 />
             <TextView
                 android:id="@+id/intro_cm_text"
@@ -82,6 +84,8 @@
                 android:hint="@string/intro_third_heighthint"
                 app:layout_constraintTop_toBottomOf="@+id/intro_cm_text"
                 app:layout_constraintLeft_toLeftOf="parent"
+                android:backgroundTint="@color/grey_9"
+                android:inputType="number"
                 />
 
             <Button
