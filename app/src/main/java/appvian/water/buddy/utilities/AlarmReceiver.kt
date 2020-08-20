@@ -72,20 +72,41 @@ class AlarmReceiver : BroadcastReceiver() {
             val currHour = getCurrentHours()
             val currMinutes = getCurrentMinutes()
             Log.d("TAG", "start : " + startHour + " : " + startMinutes + "end : " + endHour + " : " + endMinutes)
-            if(startHour <= currHour && currHour <= endHour){
-                if(startHour == currHour){
-                    if(startMinutes <= currMinutes){
+            if(startHour <= endHour) {
+                if (currHour in startHour..endHour) {
+                    if (startHour == currHour) {
+                        if (startMinutes <= currMinutes) {
+                            notificationManager.notify(1234, builder.build())
+                            Log.d("TAG", "알림 울림 : " + currHour + " : " + currMinutes)
+                        }
+                    } else if (endHour == currHour) {
+                        if (currMinutes <= endMinutes) {
+                            notificationManager.notify(1234, builder.build())
+                            Log.d("TAG", "알림 울림 : " + currHour + " : " + currMinutes)
+                        }
+                    } else {
                         notificationManager.notify(1234, builder.build())
-                        Log.d("TAG","알림 울림 : " + currHour + " : " + currMinutes)
+                        Log.d("TAG", "알림 울림 : " + currHour + " : " + currMinutes)
                     }
-                }else if(endHour == currHour){
-                    if(currMinutes <= endMinutes){
+                }
+            }else{
+                if(currHour in startHour..23){
+                    if(startHour == currHour){
+                        if(startMinutes <= currMinutes){
+                            notificationManager.notify(1234, builder.build())
+                            Log.d("TAG", "알림 울림 : " + currHour + " : " + currMinutes)
+                        }
+                    }else{
                         notificationManager.notify(1234, builder.build())
-                        Log.d("TAG","알림 울림 : " + currHour + " : " + currMinutes)
+                        Log.d("TAG", "알림 울림 : " + currHour + " : " + currMinutes)
                     }
-                }else{
-                    notificationManager.notify(1234, builder.build())
-                    Log.d("TAG","알림 울림 : " + currHour + " : " + currMinutes)
+                }else if(currHour in 0.. endHour){
+                    if(endHour == currHour){
+                        if (currMinutes <= endMinutes){
+                            notificationManager.notify(1234, builder.build())
+                            Log.d("TAG", "알림 울림 : " + currHour + " : " + currMinutes)
+                        }
+                    }
                 }
             }
         }
