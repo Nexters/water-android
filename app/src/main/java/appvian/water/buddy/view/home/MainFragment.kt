@@ -83,7 +83,7 @@ class MainFragment : Fragment() {
                     }
                 } else{
                     GlobalScope.launch(Dispatchers.Main) {
-                        delay(100L)
+                        delay(200L)
                         withContext(Dispatchers.Main) {
                             adjustAnimation(it)
                         }
@@ -102,7 +102,7 @@ class MainFragment : Fragment() {
                     }
                 } else{
                     GlobalScope.launch(Dispatchers.Main) {
-                        delay(100L)
+                        delay(200L)
                         withContext(Dispatchers.Main) {
                             adjustAnimation(0F)
                         }
