@@ -13,7 +13,8 @@
         android:textColor="@color/red_1"
         android:gravity="center"
         android:layout_marginEnd="10dp"
-        android:layout_marginStart="17dp"/>
+        android:layout_marginStart="17dp"
+        android:fontFamily="@font/spoqa_han_sans_regular"/>
 
     <TextView
         android:layout_width="38dp"
@@ -23,7 +24,8 @@
         android:text="@string/day_mon"
         android:textSize="13sp"
         android:gravity="center"
-        android:layout_marginEnd="10dp"/>
+        android:layout_marginEnd="10dp"
+        android:fontFamily="@font/spoqa_han_sans_regular"/>
 
     <TextView
         android:layout_width="38dp"
@@ -33,7 +35,8 @@
         android:text="@string/day_tue"
         android:textSize="13sp"
         android:gravity="center"
-        android:layout_marginEnd="10dp"/>
+        android:layout_marginEnd="10dp"
+        android:fontFamily="@font/spoqa_han_sans_regular"/>
 
     <TextView
         android:layout_width="38dp"
@@ -43,7 +46,8 @@
         android:text="@string/day_wed"
         android:textSize="13sp"
         android:gravity="center"
-        android:layout_marginEnd="10dp"/>
+        android:layout_marginEnd="10dp"
+        android:fontFamily="@font/spoqa_han_sans_regular"/>
 
     <TextView
         android:layout_width="38dp"
@@ -53,7 +57,8 @@
         android:text="@string/day_thu"
         android:textSize="13sp"
         android:gravity="center"
-        android:layout_marginEnd="10dp"/>
+        android:layout_marginEnd="10dp"
+        android:fontFamily="@font/spoqa_han_sans_regular"/>
 
     <TextView
         android:layout_width="38dp"
@@ -63,7 +68,8 @@
         android:text="@string/day_fri"
         android:textSize="13sp"
         android:gravity="center"
-        android:layout_marginEnd="10dp"/>
+        android:layout_marginEnd="10dp"
+        android:fontFamily="@font/spoqa_han_sans_regular"/>
 
     <TextView
         android:layout_width="38dp"
@@ -74,6 +80,7 @@
         android:textSize="13sp"
         android:gravity="center"
         android:textColor="@color/blue_4"
-        android:layout_marginEnd="17dp"/>
+        android:layout_marginEnd="17dp"
+        android:fontFamily="@font/spoqa_han_sans_regular"/>
 
 </LinearLayout>

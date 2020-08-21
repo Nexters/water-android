@@ -46,6 +46,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
+                    android:fontFamily="@font/spoqa_han_sans_bold"
                     />
             </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
