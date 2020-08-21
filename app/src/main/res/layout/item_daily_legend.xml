@@ -28,7 +28,8 @@
             android:layout_marginStart="7dp"
             android:lineSpacingExtra="5sp"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/daily_legend_img" />
+            app:layout_constraintStart_toEndOf="@id/daily_legend_img"
+            android:fontFamily="@font/spoqa_han_sans_regular"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

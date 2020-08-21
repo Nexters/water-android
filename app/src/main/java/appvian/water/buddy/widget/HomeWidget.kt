@@ -73,10 +73,10 @@ class HomeWidget : AppWidgetProvider() {
             Room.databaseBuilder<WaterBuddyDb>(context, WaterBuddyDb::class.java, "intake").build()
         val today = getToday()
         val tomorrow = getTomorrow()
-        var dailyPercent = 0f
+        var dailyPercent = 0
         var dailyAmount = 0
         val t = Thread(Runnable { kotlin.run {
-            dailyPercent = db.intakeDao().getDailyPercentFloat(today, tomorrow, target_amount)
+            dailyPercent = db.intakeDao().getDailyPercentFloat(today, tomorrow, target_amount).toInt()
             dailyAmount = db.intakeDao().getDailyAmountInt(today, tomorrow)
         } })
         t.start()
