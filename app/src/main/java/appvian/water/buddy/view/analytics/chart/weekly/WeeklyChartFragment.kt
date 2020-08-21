@@ -150,6 +150,9 @@ class WeeklyChartFragment(val analyVm: AnalyticsViewModel) : Fragment() {
         binding.weeklyBarchartByWeek.data = data
 
         weeklyVm.targetValue.observe(viewLifecycleOwner, Observer {
+            //clear limit line
+            binding.weeklyBarchartByWeek.axisLeft.limitLines.clear()
+
             val limitLine = LimitLine(
                 weeklyVm.targetValue.value?: 0f,
                 getString(R.string.limit_line_target, it)
