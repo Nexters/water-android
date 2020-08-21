@@ -28,7 +28,8 @@
                 android:layout_marginTop="16dp"
                 android:padding="@dimen/common_spacing"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent"
+                android:fontFamily="@font/spoqa_han_sans_bold"/>
 
             <ImageView
                 android:id="@+id/analytics_month_picker"
@@ -45,7 +46,9 @@
                 android:layout_height="35dp"
                 android:layout_marginStart="16dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/analytics_title" />
+                app:layout_constraintTop_toBottomOf="@id/analytics_title"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:fontFamily="@font/spoqa_han_sans_bold"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

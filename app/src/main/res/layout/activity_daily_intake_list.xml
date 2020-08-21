@@ -23,17 +23,19 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
+            android:fontFamily="@font/spoqa_han_sans_bold"
             />
         <ImageButton
             android:id="@+id/deleteButton"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:scaleType="fitXY"
             android:background="@android:color/transparent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginTop="46dp"
+            android:layout_marginTop="36dp"
             android:layout_marginRight="25dp"
-            android:src="@drawable/delete_icon"
+            android:src="@drawable/trash_icon"
             />
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/daily_intake_RecyclerView"
@@ -56,6 +58,7 @@
             android:textColor="#868e96"
             app:layout_constraintTop_toBottomOf="@id/daily_intake_RecyclerView"
             app:layout_constraintLeft_toLeftOf="@id/daily_intake_RecyclerView"
+            android:fontFamily="@font/spoqa_han_sans_regular"
             />
         <Button
             android:id="@+id/set_delete_button"
@@ -73,6 +76,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             android:visibility="gone"
             bind:deleteButtonClicked="@{homeViewModel.deleteListner}"
+            android:fontFamily="@font/spoqa_han_sans_bold"
             />
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/no_water_layout"
@@ -86,7 +90,7 @@
                 android:id="@+id/no_water_icon"
                 android:layout_width="58dp"
                 android:layout_height="58dp"
-                android:src="@drawable/no_water_grey_icon"
+                android:src="@mipmap/no_water_grey_icon"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -102,6 +106,7 @@
                 app:layout_constraintTop_toBottomOf="@id/no_water_icon"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
+                android:fontFamily="@font/spoqa_han_sans_bold"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -113,6 +118,7 @@
                 app:layout_constraintTop_toBottomOf="@id/no_water_text1"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
+                android:fontFamily="@font/spoqa_han_sans_regular"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
