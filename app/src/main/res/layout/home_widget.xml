@@ -12,7 +12,8 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="16dp"
         android:textColor="@color/settingTxtBlack"
-        android:textSize="12sp"/>
+        android:textSize="12sp"
+        android:fontFamily="@font/spoqa_han_sans_regular"/>
 
     <TextView
         android:id="@+id/txt_percent_val"
@@ -25,6 +26,7 @@
         android:textSize="40sp"
         android:layout_marginBottom="10dp"
         android:textColor="@color/blue_1"
+        android:fontFamily="@font/spoqa_han_sans_light"
         />
 
     <TextView
@@ -36,6 +38,7 @@
         android:layout_marginBottom="7sp"
         android:textSize="15sp"
         android:textColor="@color/blue_1"
+        android:fontFamily="@font/spoqa_han_sans_regular"
         />
 
     
@@ -50,6 +53,7 @@
         android:layout_alignParentBottom="true"
         android:text="목표량"
         android:layout_marginBottom="16dp"
+        android:fontFamily="@font/spoqa_han_sans_regular"
         />
     <TextView
         android:id="@+id/txt_target_amount"
@@ -60,6 +64,7 @@
         android:textColor="@color/grey_10"
         android:layout_alignStart="@id/txt_target"
         android:layout_above="@id/txt_target"
+        android:fontFamily="@font/spoqa_han_sans_regular"
         />
 
     <TextView
@@ -72,6 +77,7 @@
         android:textSize="15sp"
         android:layout_alignTop="@id/txt_target_amount"
         android:textColor="@color/grey_6"
+        android:fontFamily="@font/spoqa_han_sans_regular"
         />
     
     <TextView
@@ -83,6 +89,7 @@
         android:layout_marginEnd="7dp"
         android:textColor="@color/grey_10"
         android:layout_alignTop="@id/txt_target_amount"
+        android:fontFamily="@font/spoqa_han_sans_regular"
         />
     <TextView
         android:layout_width="wrap_content"
@@ -92,6 +99,7 @@
         android:textSize="10sp"
         android:layout_alignTop="@id/txt_target"
         android:layout_alignStart="@id/txt_intake_amount"
+        android:fontFamily="@font/spoqa_han_sans_regular"
         />
 
 

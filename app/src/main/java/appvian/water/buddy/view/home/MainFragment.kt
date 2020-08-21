@@ -132,7 +132,7 @@ class MainFragment : Fragment() {
         binding.percent.text = homeViewModel.currentPercent.toInt().toString()
         var waterGoalY = homeViewModel.waterStartY - homeViewModel.waterStartY * percent / 100
         var characterGoalY: Float
-        var goalPercentY = homeViewModel.startPercentTextY - homeViewModel.waterStartY * percent / 100
+        var goalPercentY = homeViewModel.startPercentTextY - homeViewModel.waterStartY * percent / 100 + 100F * (Resources.getSystem().displayMetrics.densityDpi).toFloat() / DisplayMetrics.DENSITY_DEFAULT
         if (waterGoalY<0F){
             waterGoalY=0F
         }
@@ -140,7 +140,7 @@ class MainFragment : Fragment() {
             goalPercentY=0F
         }
         if (percent>=0F&&percent<12F){
-            goalPercentY=Resources.getSystem().displayMetrics.heightPixels.toFloat() - 370F * (Resources.getSystem().displayMetrics.densityDpi).toFloat() / DisplayMetrics.DENSITY_DEFAULT
+            goalPercentY = homeViewModel.startPercentTextY
             homeViewModel.currentPercentTextY = goalPercentY
         }
         val waterTranslate = TranslateAnimation(0F, 0F, homeViewModel.waterCurrentY, waterGoalY)

@@ -26,6 +26,7 @@
                 android:layout_marginTop="33dp"
                 android:layout_marginBottom="33dp"
                 android:textSize="13sp"
+                android:fontFamily="@font/spoqa_han_sans_regular"
                 />
             <View
                 android:id="@+id/line"
@@ -42,6 +43,7 @@
                 android:text="확인"
                 android:textSize="13sp"
                 app:layout_constraintBottom_toBottomOf="parent"
+                android:fontFamily="@font/spoqa_han_sans_regular"
                 />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

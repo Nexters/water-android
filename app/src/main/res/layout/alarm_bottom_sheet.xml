@@ -14,6 +14,7 @@
         android:textColor="@color/settingTxtBlack"
         android:layout_marginTop="27dp"
         android:layout_marginStart="34dp"
+        android:fontFamily="@font/spoqa_han_sans_bold"
         />
     <ImageView
         android:id="@+id/img_cancel"
@@ -34,7 +35,8 @@
         app:layout_constraintTop_toBottomOf="@id/txt_top"
         android:layout_marginTop="30dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        android:fontFamily="@font/spoqa_han_sans_bold"/>
     
     <Button
         android:id="@+id/btn_save"
@@ -50,6 +52,7 @@
         android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@id/timepicker"
         android:layout_marginTop="30dp"
+        android:fontFamily="@font/spoqa_han_sans_bold"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

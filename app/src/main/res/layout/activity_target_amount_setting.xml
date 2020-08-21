@@ -22,6 +22,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="46dp"
+            android:fontFamily="@font/spoqa_han_sans_bold"
             />
         <TextView
             android:id="@+id/txt_top_2"
@@ -34,6 +35,7 @@
             app:layout_constraintEnd_toEndOf="@id/txt_top"
             android:textColor="@color/grey_8"
             android:textSize="13sp"
+            android:fontFamily="@font/spoqa_han_sans_regular"
             />
         <TextView
             android:id="@+id/txt_target_amount"
@@ -45,6 +47,7 @@
             app:layout_constraintTop_toBottomOf="@id/txt_top_2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            android:fontFamily="@font/spoqa_han_sans_bold"
             />
         <RelativeLayout
             android:id="@+id/layout_bubble"
@@ -64,6 +67,7 @@
                 android:textSize="9sp"
                 android:layout_centerInParent="true"
                 android:textColor="@color/white"
+                android:fontFamily="@font/spoqa_han_sans_regular"
                 />
         </RelativeLayout>
         <TextView
@@ -77,6 +81,7 @@
             app:layout_constraintTop_toBottomOf="@id/txt_target_amount"
             android:layout_marginTop="72dp"
             android:layout_marginStart="35dp"
+            android:fontFamily="@font/spoqa_han_sans_regular"
             />
         <EditText
             android:id="@+id/edt_weight"
@@ -90,6 +95,7 @@
             app:layout_constraintTop_toBottomOf="@id/txt_weight"
             app:layout_constraintStart_toStartOf="@id/txt_weight"
             android:layout_marginTop="9dp"
+            android:fontFamily="@font/spoqa_han_sans_bold"
             />
         <TextView
             android:id="@+id/txt_height"
@@ -101,6 +107,7 @@
             app:layout_constraintTop_toBottomOf="@id/edt_weight"
             app:layout_constraintStart_toStartOf="@id/txt_weight"
             android:layout_marginTop="30dp"
+            android:fontFamily="@font/spoqa_han_sans_regular"
             />
         <EditText
             android:id="@+id/edt_height"
@@ -114,6 +121,7 @@
             app:layout_constraintTop_toBottomOf="@id/txt_height"
             app:layout_constraintStart_toStartOf="@id/txt_height"
             android:layout_marginTop="9dp"
+            android:fontFamily="@font/spoqa_han_sans_bold"
             />
 
         <CheckBox
@@ -138,6 +146,7 @@
             app:layout_constraintTop_toTopOf="@id/checkbox"
             app:layout_constraintBottom_toBottomOf="@id/checkbox"
             android:layout_marginStart="8dp"
+            android:fontFamily="@font/spoqa_han_sans_regular"
             />
         
         <Button
@@ -152,6 +161,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="24dp"
+            android:fontFamily="@font/spoqa_han_sans_bold"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

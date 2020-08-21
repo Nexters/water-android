@@ -38,6 +38,7 @@
             app:layout_constraintEnd_toEndOf="@id/img_setting_profile"
             app:layout_constraintTop_toBottomOf="@id/img_setting_profile"
             android:layout_marginTop="14dp"
+            android:fontFamily="@font/spoqa_han_sans_bold"
             />
         <ImageView
             android:id="@+id/img_setting_edit_profile"
@@ -71,6 +72,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginStart="16dp"
+                android:fontFamily="@font/spoqa_han_sans_regular"
                 />
 
             <TextView
@@ -84,6 +86,7 @@
                 app:layout_constraintTop_toTopOf="@id/txt_setting_target_amount_title"
                 app:layout_constraintBottom_toBottomOf="@id/txt_setting_target_amount_title"
                 android:layout_marginEnd="5dp"
+                android:fontFamily="@font/spoqa_han_sans_regular"
                 />
             <ImageView
                 android:id="@+id/img_setting_arrow"
@@ -118,6 +121,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginStart="16dp"
+                android:fontFamily="@font/spoqa_han_sans_regular"
                 />
             <ImageView
                 android:layout_width="18dp"
@@ -152,6 +156,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginStart="16dp"
+                android:fontFamily="@font/spoqa_han_sans_regular"
                 />
             <ImageView
                 android:layout_width="18dp"
