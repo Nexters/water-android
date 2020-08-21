@@ -49,6 +49,7 @@
                 android:hint="@string/intro_second_inputhint"
                 app:layout_constraintTop_toBottomOf="@+id/intro_second_description"
                 app:layout_constraintLeft_toLeftOf="parent"
+                android:backgroundTint="@color/grey_9"
                 android:fontFamily="@font/spoqa_han_sans_bold"
                 />
 
