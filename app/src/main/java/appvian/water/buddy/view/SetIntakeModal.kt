@@ -249,15 +249,15 @@ class SetIntakeModal(var parent_context_code : Int, var intake : Intake?) : Bott
     }
 
     private fun setCategory(){
-        categoryList.add(Category(0,"물","icon_water"))
-        categoryList.add(Category(1,"커피","icon_coffee"))
-        categoryList.add(Category(2,"차","icon_tea"))
-        categoryList.add(Category(3,"우유","icon_milk"))
-        categoryList.add(Category(4,"탄산음료","icon_carbon"))
-        categoryList.add(Category(5,"주스","icon_juice"))
-        categoryList.add(Category(6,"주류","icon_alcohol"))
-        categoryList.add(Category(7,"이온음료","icon_ion"))
-        categoryList.add(Category(8,"기타","icon_etc"))
+        categoryList.add(Category(0,"물",DrinkMapper.drinkResources[0].toString()))
+        categoryList.add(Category(1,"커피",DrinkMapper.drinkResources[1].toString()))
+        categoryList.add(Category(2,"차",DrinkMapper.drinkResources[2].toString()))
+        categoryList.add(Category(3,"우유",DrinkMapper.drinkResources[3].toString()))
+        categoryList.add(Category(4,"탄산음료",DrinkMapper.drinkResources[4].toString()))
+        categoryList.add(Category(5,"주스",DrinkMapper.drinkResources[5].toString()))
+        categoryList.add(Category(6,"주류",DrinkMapper.drinkResources[6].toString()))
+        categoryList.add(Category(7,"이온음료",DrinkMapper.drinkResources[7].toString()))
+        categoryList.add(Category(8,"기타",DrinkMapper.drinkResources[8].toString()))
 
     }
 

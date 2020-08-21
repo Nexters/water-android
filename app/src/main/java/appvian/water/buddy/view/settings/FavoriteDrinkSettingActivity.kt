@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import appvian.water.buddy.R
 import appvian.water.buddy.databinding.ActivityFavoriteDrinkSettingBinding
+import appvian.water.buddy.util.DrinkMapper
 import appvian.water.buddy.utilities.Code
 import appvian.water.buddy.view.SetIntakeModal
 import appvian.water.buddy.viewmodel.FavoriteViewModel
@@ -37,46 +38,11 @@ class FavoriteDrinkSettingActivity : AppCompatActivity() {
                 setTrashVisibility()
             }else{
                 binding.layoutFav1.visibility = View.VISIBLE
-                var strTokenizer = StringTokenizer(it)
-                when(strTokenizer.nextToken()){
-                    "0" -> {
-                        binding.imgCategory.setImageDrawable(resources.getDrawable(R.drawable.icon_water, null))
-                        binding.txtCategory.text = "물"
-                    }
-                    "1" -> {
-                        binding.imgCategory.setImageDrawable(resources.getDrawable(R.drawable.icon_coffee, null))
-                        binding.txtCategory.text = "커피"
-                    }
-                    "2" -> {
-                        binding.imgCategory.setImageDrawable(resources.getDrawable(R.drawable.icon_tea, null))
-                        binding.txtCategory.text = "차"
-                    }
-                    "3" -> {
-                        binding.imgCategory.setImageDrawable(resources.getDrawable(R.drawable.icon_milk, null))
-                        binding.txtCategory.text = "우유"
-                    }
-                    "4" -> {
-                        binding.imgCategory.setImageDrawable(resources.getDrawable(R.drawable.icon_carbon, null))
-                        binding.txtCategory.text = "탄산음료"
-                    }
-                    "5" -> {
-                        binding.imgCategory.setImageDrawable(resources.getDrawable(R.drawable.icon_juice, null))
-                        binding.txtCategory.text = "주스"
-                    }
-                    "6" -> {
-                        binding.imgCategory.setImageDrawable(resources.getDrawable(R.drawable.icon_alcohol, null))
-                        binding.txtCategory.text = "주류"
-                    }
-                    "7" -> {
-                        binding.imgCategory.setImageDrawable(resources.getDrawable(R.drawable.icon_ion, null))
-                        binding.txtCategory.text = "이온음료"
-                    }
-                    "8" -> {
-                        binding.imgCategory.setImageDrawable(resources.getDrawable(R.drawable.icon_etc, null))
-                        binding.txtCategory.text = "기타"
-                    }
-
-                }
+                val strTokenizer = StringTokenizer(it)
+                val category = strTokenizer.nextToken()
+                val categoryInt = Integer.parseInt(category)
+                binding.imgCategory.setImageDrawable(resources.getDrawable(DrinkMapper.drinkResources[categoryInt], null))
+                binding.txtCategory.text = resources.getStringArray(DrinkMapper.drinkName)[categoryInt]
                 binding.txtAmount.text = strTokenizer.nextToken() + "ml"
                 setTrashVisibility()
             }
@@ -90,45 +56,10 @@ class FavoriteDrinkSettingActivity : AppCompatActivity() {
                 Log.d("TAG", "fav 2 : " + it)
                 binding.layoutFav2.visibility = View.VISIBLE
                 var strTokenizer = StringTokenizer(it)
-                when(strTokenizer.nextToken()){
-                    "0" -> {
-                        binding.imgCategory2.setImageDrawable(resources.getDrawable(R.drawable.icon_water, null))
-                        binding.txtCategory2.text = "물"
-                    }
-                    "1" -> {
-                        binding.imgCategory2.setImageDrawable(resources.getDrawable(R.drawable.icon_coffee, null))
-                        binding.txtCategory2.text = "커피"
-                    }
-                    "2" -> {
-                        binding.imgCategory2.setImageDrawable(resources.getDrawable(R.drawable.icon_tea, null))
-                        binding.txtCategory2.text = "차"
-                    }
-                    "3" -> {
-                        binding.imgCategory2.setImageDrawable(resources.getDrawable(R.drawable.icon_milk, null))
-                        binding.txtCategory2.text = "우유"
-                    }
-                    "4" -> {
-                        binding.imgCategory2.setImageDrawable(resources.getDrawable(R.drawable.icon_carbon, null))
-                        binding.txtCategory2.text = "탄산음료"
-                    }
-                    "5" -> {
-                        binding.imgCategory2.setImageDrawable(resources.getDrawable(R.drawable.icon_juice, null))
-                        binding.txtCategory2.text = "주스"
-                    }
-                    "6" -> {
-                        binding.imgCategory2.setImageDrawable(resources.getDrawable(R.drawable.icon_alcohol, null))
-                        binding.txtCategory2.text = "주류"
-                    }
-                    "7" -> {
-                        binding.imgCategory2.setImageDrawable(resources.getDrawable(R.drawable.icon_ion, null))
-                        binding.txtCategory2.text = "이온음료"
-                    }
-                    "8" -> {
-                        binding.imgCategory2.setImageDrawable(resources.getDrawable(R.drawable.icon_etc, null))
-                        binding.txtCategory2.text = "기타"
-                    }
-
-                }
+                val category = strTokenizer.nextToken()
+                val categoryInt = Integer.parseInt(category)
+                binding.imgCategory2.setImageDrawable(resources.getDrawable(DrinkMapper.drinkResources[categoryInt], null))
+                binding.txtCategory2.text = resources.getStringArray(DrinkMapper.drinkName)[categoryInt]
                 binding.txtAmount2.text = strTokenizer.nextToken() + "ml"
                 setTrashVisibility()
             }
