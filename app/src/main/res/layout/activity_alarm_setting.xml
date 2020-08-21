@@ -23,6 +23,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="46dp"
+            android:fontFamily="@font/spoqa_han_sans_bold"
             />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -42,6 +43,7 @@
                 android:textColor="@color/settingTxtBlack"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                android:fontFamily="@font/spoqa_han_sans_regular"
                 />
             <Switch
                 android:id="@+id/switch_alarm"
@@ -80,6 +82,7 @@
                 android:textColor="@color/settingTxtBlack"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                android:fontFamily="@font/spoqa_han_sans_regular"
                 />
             <TextView
                 android:id="@+id/txt_start_time"
@@ -88,6 +91,7 @@
                 android:text="@{viewModel.start_time_LiveData}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                android:fontFamily="@font/spoqa_han_sans_bold"
                 />
 
             <View
@@ -117,6 +121,7 @@
                 android:textColor="@color/settingTxtBlack"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                android:fontFamily="@font/spoqa_han_sans_regular"
                 />
             <TextView
                 android:id="@+id/txt_end_time"
@@ -125,6 +130,7 @@
                 android:text="@{viewModel.end_time_LiveData}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                android:fontFamily="@font/spoqa_han_sans_bold"
                 />
 
             <View
@@ -154,6 +160,7 @@
                 android:textColor="@color/settingTxtBlack"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                android:fontFamily="@font/spoqa_han_sans_regular"
                 />
             <TextView
                 android:id="@+id/txt_interval_time"
@@ -162,6 +169,8 @@
                 android:text="@{viewModel.interval_LiveData}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                android:fontFamily="@font/spoqa_han_sans_bold"
+
                 />
 
             <View
@@ -183,6 +192,7 @@
             android:textSize="13sp"
             android:textColor="@color/grey_8"
             android:layout_marginTop="14dp"
+            android:fontFamily="@font/spoqa_han_sans_regular"
             />
 
 

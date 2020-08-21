@@ -24,7 +24,8 @@
             android:layout_marginStart="@dimen/daily_common_spacing"
             android:layout_marginTop="@dimen/daily_common_spacing"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"
+            android:fontFamily="@font/spoqa_han_sans_bold"/>
 
         <TextView
             android:id="@+id/daily_date_picker"
@@ -38,7 +39,8 @@
             android:background="@drawable/picker_background"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="15일"/>
+            tools:text="15일"
+            android:fontFamily="@font/spoqa_han_sans_regular"/>
 
         <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/daily_piechart"
@@ -61,7 +63,8 @@
             android:layout_marginTop="@dimen/daily_common_spacing"
             android:layout_marginStart="@dimen/daily_pie_sys_spacing"
             app:layout_constraintStart_toEndOf="@id/daily_piechart"
-            app:layout_constraintTop_toBottomOf="@id/daily_header"/>
+            app:layout_constraintTop_toBottomOf="@id/daily_header"
+            android:fontFamily="@font/spoqa_han_sans_bold"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/daily_view_none"
@@ -91,7 +94,8 @@
                 android:textColor="@color/grey_7"
                 app:layout_constraintTop_toBottomOf="@id/iv_no_water"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                android:fontFamily="@font/spoqa_han_sans_bold"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -102,7 +106,8 @@
                 android:textColor="@color/grey_7"
                 app:layout_constraintTop_toBottomOf="@id/iv_no_water"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                android:fontFamily="@font/spoqa_han_sans_regular"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

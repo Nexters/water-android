@@ -36,7 +36,8 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         android:layout_marginStart="32dp"
-                        android:layout_marginTop="35dp"/>
+                        android:layout_marginTop="35dp"
+                        android:fontFamily="@font/spoqa_han_sans_bold"/>
 
                     <TextView
                         android:id="@+id/weekly_spinner"
@@ -49,7 +50,8 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         android:layout_marginTop="35dp"
                         android:layout_marginEnd="@dimen/daily_common_spacing"
-                        tools:text="1주"/>
+                        tools:text="1주"
+                        android:fontFamily="@font/spoqa_han_sans_regular"/>
 
                     <com.github.mikephil.charting.charts.BarChart
                         android:id="@+id/weekly_barchart_by_week"
@@ -83,7 +85,8 @@
                     android:textSize="18sp"
                     android:lineSpacingExtra="8sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:fontFamily="@font/spoqa_han_sans_bold"/>
 
                 <TextView
                     android:id="@+id/weekly_sys_text"
@@ -97,7 +100,8 @@
                     android:layout_marginEnd="16dp"
                     android:text="저번 주보다 평균 수분 섭취량이\n800ml 줄었어요"
                     android:textSize="14sp"
-                    android:textAlignment="center"/>
+                    android:textAlignment="center"
+                    android:fontFamily="@font/spoqa_han_sans_bold"/>
 
                 <ImageView
                     android:id="@+id/front_mark"
