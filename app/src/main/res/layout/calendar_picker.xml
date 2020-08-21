@@ -24,7 +24,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:fontFamily="@font/spoqa_han_sans_bold"/>
-        
+
         <ImageView
             android:id="@+id/cal_picker_close"
             android:layout_width="25dp"
@@ -34,7 +34,7 @@
             android:src="@drawable/icon_x"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
-        
+
         <ImageView
             android:id="@+id/cal_prev"
             android:layout_width="40dp"
