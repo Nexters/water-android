@@ -74,12 +74,7 @@ class DeviceBootReceiver : BroadcastReceiver() {
             bTime += interval;
         }
         // setRepeating() lets you specify a precise custom interval--in this case,
-        alarmMgr?.setRepeating(
-            AlarmManager.RTC_WAKEUP,
-            bTime,
-            1000 * 60 * getIntervalMinutes().toLong(),
-            alarmIntent
-        )
+        alarmMgr.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, bTime, alarmIntent)
     }
     fun getIntervalMinutes() : Int {
         //"30 분", "1 시간", "1 시간 30 분", "2 시간", "3 시간", "4 시간", "5 시간", "6 시간"
