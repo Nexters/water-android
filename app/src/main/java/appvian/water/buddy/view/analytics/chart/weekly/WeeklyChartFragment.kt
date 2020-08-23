@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -46,7 +47,7 @@ class WeeklyChartFragment(val analyVm: AnalyticsViewModel) : Fragment() {
         binding.lifecycleOwner = this
 
         activity?.let {
-            weeklyVm = WeeklyViewModel(SharedPrefsRepository(requireContext()),HomeRepository(it))
+            weeklyVm = WeeklyViewModel(SharedPrefsRepository(requireContext()), HomeRepository(it))
         }
 
         initUi()
@@ -122,7 +123,10 @@ class WeeklyChartFragment(val analyVm: AnalyticsViewModel) : Fragment() {
     }
 
     private fun setWeeklySpinnertext() {
-        binding.weeklySpinner.text = getString(R.string.weekly_picker_item, TimeUtil.getWeekOfMonth(weeklyVm.curYear, weeklyVm.curMonth, weeklyVm.curDay))
+        binding.weeklySpinner.text = getString(
+            R.string.weekly_picker_item,
+            TimeUtil.getWeekOfMonth(weeklyVm.curYear, weeklyVm.curMonth, weeklyVm.curDay)
+        )
     }
 
     private fun setWeeklyData(values: List<BarEntry>) {
@@ -154,12 +158,14 @@ class WeeklyChartFragment(val analyVm: AnalyticsViewModel) : Fragment() {
             binding.weeklyBarchartByWeek.axisLeft.limitLines.clear()
 
             val limitLine = LimitLine(
-                weeklyVm.targetValue.value?: 0f,
+                weeklyVm.targetValue.value ?: 0f,
                 getString(R.string.weekly_chart_y_format, it)
             )
             limitLine.lineColor = resources.getColor(R.color.sub_red_1, null)
             limitLine.textColor = resources.getColor(R.color.sub_red_1, null)
             limitLine.textSize = 15f
+            limitLine.typeface =
+                ResourcesCompat.getFont(requireContext(), R.font.spoqa_han_sans_bold)
 
             binding.weeklyBarchartByWeek.axisLeft.addLimitLine(limitLine)
         })
@@ -175,6 +181,8 @@ class WeeklyChartFragment(val analyVm: AnalyticsViewModel) : Fragment() {
             resources.getColor(R.color.chart_label, null)
         binding.weeklyBarchartByWeek.xAxis.textSize = 12f
         binding.weeklyBarchartByWeek.xAxis.textColor = resources.getColor(R.color.chart_label, null)
+        binding.weeklyBarchartByWeek.xAxis.typeface =
+            ResourcesCompat.getFont(requireContext(), R.font.spoqa_han_sans_regular)
 
         binding.weeklyBarchartByWeek.setDescription("")
         binding.weeklyBarchartByWeek.legend.isEnabled = false
@@ -203,6 +211,8 @@ class WeeklyChartFragment(val analyVm: AnalyticsViewModel) : Fragment() {
         dataSet.barSpacePercent = 40f
         dataSet.valueTextSize = 15f
         dataSet.valueFormatter = WeeklyValueFormatter
+        dataSet.valueTypeface =
+            ResourcesCompat.getFont(requireContext(), R.font.spoqa_han_sans_bold)
 
         val data = BarData(xLabels, dataSet)
 
@@ -228,9 +238,11 @@ class WeeklyChartFragment(val analyVm: AnalyticsViewModel) : Fragment() {
             resources.getColor(R.color.transparent, null)
 
         //text size
-        binding.weeklyBarchartByTotal.xAxis.textSize = 14f
+        binding.weeklyBarchartByTotal.xAxis.textSize = 12f
         binding.weeklyBarchartByTotal.xAxis.textColor =
             resources.getColor(R.color.chart_label, null)
+        binding.weeklyBarchartByTotal.xAxis.typeface =
+            ResourcesCompat.getFont(requireContext(), R.font.spoqa_han_sans_regular)
 
         //remove legends & description
         binding.weeklyBarchartByTotal.setDescription("")
