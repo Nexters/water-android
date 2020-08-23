@@ -26,8 +26,8 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_collapseMode="parallax">
+                    android:layout_height="match_parent"
+                    app:layout_collapseMode="none">
 
                     <TextView
                         android:id="@+id/daily_header"
@@ -107,17 +107,18 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:paddingTop="35dp">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/daily_chart_detail"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    tools:listitem="@layout/item_daily_intake_list" />
+                    tools:listitem="@layout/item_daily_intake_list"
+                    android:paddingBottom="40dp"/>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/daily_view_none"
