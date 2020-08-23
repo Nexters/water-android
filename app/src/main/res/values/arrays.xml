@@ -109,4 +109,10 @@
         <item>오늘 하루도 수고했어요!\n내일 봐요!</item>
         <item>내일도 워비\n놀아주러 올거죠?</item>
     </string-array>
+    <string-array name="alarm_txt">
+        <item>물 마실 시간이에요! 건강한 물 한 잔 쭈욱 들이켜봐요!</item>
+        <item>물 마실 시간이야! 건강한 물 한 잔 마셔보자!</item>
+        <item>수분섭취할 시간이에요. 워비와 함께 치얼스!</item>
+        <item>지금 물 한 잔 마시면 워비가 행복할 것 같은데 한 잔 고?</item>
+    </string-array>
 </resources>
