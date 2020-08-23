@@ -155,7 +155,7 @@ class WeeklyChartFragment(val analyVm: AnalyticsViewModel) : Fragment() {
 
             val limitLine = LimitLine(
                 weeklyVm.targetValue.value?: 0f,
-                getString(R.string.limit_line_target, it)
+                getString(R.string.weekly_chart_y_format, it)
             )
             limitLine.lineColor = resources.getColor(R.color.sub_red_1, null)
             limitLine.textColor = resources.getColor(R.color.sub_red_1, null)

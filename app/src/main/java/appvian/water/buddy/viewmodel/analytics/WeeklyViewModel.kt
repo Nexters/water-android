@@ -64,7 +64,7 @@ class WeeklyViewModel(
 
         weekDay?.let { wr ->
             weekObserve.addSource(wr, androidx.lifecycle.Observer { values ->
-                val barList = initBarList(7)
+                val barList = initBarList(8)
 
                 val groupValue = values.groupBy { it.date }
                     .mapValues { Intake(it.key, 0, it.value.sumBy { it.amount }) }.values
