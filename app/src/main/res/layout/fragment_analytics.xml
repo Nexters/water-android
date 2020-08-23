@@ -8,14 +8,12 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/grey_1">
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/analytics_header"
             android:layout_width="match_parent"
-            android:layout_height="96dp"
-            android:layout_marginBottom="8dp"
+            android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/analytics_pager">
 
@@ -47,13 +45,17 @@
                 android:id="@+id/analytics_tab"
                 android:layout_width="216dp"
                 android:layout_height="35dp"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/analytics_title"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:tabSelectedTextColor="@color/black"
                 app:tabTextAppearance="@style/TabText"
                 app:tabTextColor="@color/grey_7"
-                app:tabSelectedTextColor="@color/black"/>
+                app:tabIndicatorColor="@color/blue_1"
+                app:tabIndicatorFullWidth="false"
+                app:tabPaddingStart="24dp"
+                app:tabPaddingEnd="24dp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
