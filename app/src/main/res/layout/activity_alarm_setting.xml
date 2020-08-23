@@ -75,6 +75,7 @@
             android:layout_marginTop="40dp"
             >
             <TextView
+                android:id="@+id/txt_start"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="시작 시간"
@@ -82,6 +83,9 @@
                 android:textColor="@color/settingTxtBlack"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:fontFamily="@font/spoqa_han_sans_regular"
                 />
             <TextView
@@ -90,7 +94,9 @@
                 android:layout_height="wrap_content"
                 android:text="@{viewModel.start_time_LiveData}"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toTopOf="@id/txt_start"
+                app:layout_constraintBottom_toBottomOf="@id/txt_start"
+                android:textColor="@color/settingTxtBlack"
                 android:fontFamily="@font/spoqa_han_sans_bold"
                 />
 
@@ -111,9 +117,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/layout_start_time"
-            android:layout_marginTop="40dp"
             >
             <TextView
+                android:id="@+id/txt_end"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="종료 시간"
@@ -121,6 +127,9 @@
                 android:textColor="@color/settingTxtBlack"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:fontFamily="@font/spoqa_han_sans_regular"
                 />
             <TextView
@@ -129,7 +138,9 @@
                 android:layout_height="wrap_content"
                 android:text="@{viewModel.end_time_LiveData}"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toTopOf="@id/txt_end"
+                app:layout_constraintBottom_toBottomOf="@id/txt_end"
+                android:textColor="@color/settingTxtBlack"
                 android:fontFamily="@font/spoqa_han_sans_bold"
                 />
 
@@ -150,9 +161,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/layout_end_time"
-            android:layout_marginTop="40dp"
             >
             <TextView
+                android:id="@+id/txt_interval"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="간격"
@@ -160,6 +171,9 @@
                 android:textColor="@color/settingTxtBlack"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:fontFamily="@font/spoqa_han_sans_regular"
                 />
             <TextView
@@ -168,7 +182,9 @@
                 android:layout_height="wrap_content"
                 android:text="@{viewModel.interval_LiveData}"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toTopOf="@id/txt_interval"
+                app:layout_constraintBottom_toBottomOf="@id/txt_interval"
+                android:textColor="@color/settingTxtBlack"
                 android:fontFamily="@font/spoqa_han_sans_bold"
 
                 />

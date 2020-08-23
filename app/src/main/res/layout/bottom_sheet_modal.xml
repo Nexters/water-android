@@ -76,6 +76,7 @@
         android:gravity="center"
         android:textColor="@color/settingTxtBlack"
         android:textSize="23sp"
+        android:maxLength="7"
         app:layout_constraintTop_toBottomOf="@id/layout_choice_btn"
         android:layout_marginTop="15dp"
         app:layout_constraintStart_toStartOf="parent"
