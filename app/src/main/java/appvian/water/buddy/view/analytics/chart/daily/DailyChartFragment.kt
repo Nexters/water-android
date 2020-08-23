@@ -57,6 +57,7 @@ class DailyChartFragment(val analyVm: AnalyticsViewModel) : Fragment(), Calendar
     private fun initUi() {
         dailyVm.getDailyIntake()
         binding.dailyChartDetail.adapter = adapter
+        binding.dailyChartDetail.isNestedScrollingEnabled = false
         binding.dailyChartLegend.adapter = legendAdapter
         legendAdapter.addData(resources.getStringArray(DrinkMapper.drinkName))
 
@@ -148,6 +149,7 @@ class DailyChartFragment(val analyVm: AnalyticsViewModel) : Fragment(), Calendar
     }
 
     private fun updateChart(data: PieData) {
+        binding.dailyPiechart.setExtraOffsets(-10f, 0f, -10f, 0f)
         binding.dailyPiechart.setUsePercentValues(true)
         binding.dailyPiechart.data = data
         binding.dailyPiechart.legend.isEnabled = false
