@@ -84,12 +84,11 @@
                     />
                 <ImageView
                     android:id="@+id/img_edit"
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:src="@drawable/arrow_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/gray_arrow_40"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/img_category"
                     />
                 <CheckBox
                     android:id="@+id/checkbox_1"
@@ -152,12 +151,11 @@
                     />
                 <ImageView
                     android:id="@+id/img_edit_2"
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:src="@drawable/arrow_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/gray_arrow_40"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/img_category_2"
                     />
                 <CheckBox
                     android:id="@+id/checkbox_2"
