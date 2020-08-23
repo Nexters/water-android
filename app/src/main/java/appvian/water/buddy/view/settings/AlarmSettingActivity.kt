@@ -98,8 +98,9 @@ class AlarmSettingActivity : AppCompatActivity() {
         Log.d("TAG", "curr hour : " + getCurrentHours() + "curr minutes : " + getCurrentMinutes())
         var hour_alarm = viewModel.getStartHour()
         var minutes_alarm = viewModel.getStartMinutes()
-        var hour_curr = getCurrentHours()
-        var minutes_curr = getCurrentMinutes()
+        val hour_curr = getCurrentHours()
+        val minutes_curr = getCurrentMinutes()
+        val intervalTime = viewModel.getIntervalMinutes()
         var isNextDay = false
         while (true){
             Log.d("TAG", "while ")
@@ -109,18 +110,18 @@ class AlarmSettingActivity : AppCompatActivity() {
                 if(minutes_alarm > minutes_curr){
                     break
                 }else{
-                    hour_alarm += viewModel.getIntervalMinutes()/60
-                    minutes_alarm += viewModel.getIntervalMinutes()%60
+                    hour_alarm += intervalTime / 60
+                    minutes_alarm += intervalTime % 60
                     if(minutes_alarm >= 60){
                         hour_alarm += minutes_alarm/60
                         minutes_alarm %= 60
                     }
                 }
             }else{
-                hour_alarm += viewModel.getIntervalMinutes()/60
-                minutes_alarm += viewModel.getIntervalMinutes()%60
+                hour_alarm += intervalTime / 60
+                minutes_alarm += intervalTime % 60
                 if(minutes_alarm >= 60){
-                    hour_alarm += minutes_alarm/60
+                    hour_alarm += minutes_alarm / 60
                     minutes_alarm %= 60
                 }
             }
@@ -132,12 +133,13 @@ class AlarmSettingActivity : AppCompatActivity() {
         }
 
         Log.d("TAG",hour_alarm.toString() + " : " + minutes_alarm)
-        Log.d("TAG","알림 간격 : " + viewModel.getIntervalMinutes().toLong())
+        Log.d("TAG","알림 간격 : " + intervalTime.toLong())
         // Set the alarm
         val calendar: Calendar = Calendar.getInstance().apply {
             set(Calendar.HOUR_OF_DAY, hour_alarm)
             set(Calendar.MINUTE, minutes_alarm)
             set(Calendar.SECOND, 0)
+            set(Calendar.MILLISECOND, 0)
         }
         var bTime = calendar.timeInMillis
         var interval = 1000 * 60 * 60 * 24
@@ -148,12 +150,8 @@ class AlarmSettingActivity : AppCompatActivity() {
         var sf = SimpleDateFormat("yyyy년 MM월 dd일 hh시 mm분 ss초")
         Log.d("TAG", sf.format(bTime))
         // setRepeating() lets you specify a precise custom interval--in this case,
-        alarmMgr?.setRepeating(
-            AlarmManager.RTC_WAKEUP,
-            bTime,
-            1000 * 60 * viewModel.getIntervalMinutes().toLong(),
-            alarmIntent
-        )
+        alarmMgr?.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, bTime, alarmIntent)
+
     }
     private fun cancelAlarm(){
         val alarmManager =
