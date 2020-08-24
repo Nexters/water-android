@@ -28,8 +28,11 @@ class AnalyticsFragment : Fragment(),
     private val analyVm: AnalyticsViewModel = AnalyticsViewModel()
 
     private val monthPickerListener = View.OnClickListener {
+        val now = Calendar.getInstance()
         val bottomSheetDialog = MonthModal(
-            analyVm.curMonth.value ?: Calendar.getInstance().get(Calendar.MONTH) + 1, this
+            analyVm.curYear.value ?: now[Calendar.YEAR],
+            analyVm.curMonth.value ?: now[Calendar.MONTH] + 1,
+            this
         )
         bottomSheetDialog.show(childFragmentManager, "bottomSheet")
     }
