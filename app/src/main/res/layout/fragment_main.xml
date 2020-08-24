@@ -68,28 +68,16 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <TextView
-                android:id="@+id/nickname_text"
-                android:text="@{String.format(@string/polite_name,homeViewModel.nickname)}"
+                android:id="@+id/home_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:lineSpacingExtra="3dp"
                 android:textColor="#030303"
                 android:textSize="22sp"
-                android:lineHeight="29sp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 android:layout_marginStart="35dp"
                 android:layout_marginTop="51dp"
-                android:fontFamily="@font/spoqa_han_sans_light"
-                />
-            <TextView
-                android:id="@+id/home_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#030303"
-                android:textSize="22sp"
-                android:lineHeight="29sp"
-                app:layout_constraintTop_toBottomOf="@id/nickname_text"
-                app:layout_constraintLeft_toLeftOf="@id/nickname_text"
                 android:fontFamily="@font/spoqa_han_sans_light"
                 />
             <Button
