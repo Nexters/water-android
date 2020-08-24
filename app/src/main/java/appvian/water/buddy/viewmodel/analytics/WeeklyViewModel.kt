@@ -19,9 +19,9 @@ class WeeklyViewModel(
     val repository: HomeRepository
 ) {
     private val now = TimeUtil.getCalendarInstance()
-    var curYear = TimeUtil.year
-    var curMonth = TimeUtil.month
-    var curDay = TimeUtil.day
+    var curYear = now[Calendar.YEAR]
+    var curMonth = now[Calendar.MONTH] + 1
+    var curDay = now[Calendar.DATE]
 
     private var weekDay: LiveData<List<Intake>>? = null
     val weekObserve: MediatorLiveData<List<BarEntry>> = MediatorLiveData()
@@ -70,7 +70,7 @@ class WeeklyViewModel(
                     .mapValues { Intake(it.key, 0, it.value.sumBy { it.amount }) }.values
 
                 for (i in groupValue) {
-                    val index = if(i.date.toInt() == 0) 6 else i.date.toInt().minus(1)
+                    val index = if (i.date.toInt() == 0) 6 else i.date.toInt().minus(1)
                     barList[index] = BarEntry(i.amount / 1000f, index)
                 }
                 weekObserve.value = barList
@@ -133,7 +133,6 @@ class WeeklyViewModel(
             monthWeek[i] = TimeUtil.getYearWeekToMonthWeek(startWeek + i, curYear)
         }
     }
-
 
 
     fun strSpanBuilder(msg: String, color: Int): SpannableStringBuilder {

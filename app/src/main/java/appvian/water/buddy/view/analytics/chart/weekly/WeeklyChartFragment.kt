@@ -23,6 +23,7 @@ import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
+import java.util.*
 
 class WeeklyChartFragment(val analyVm: AnalyticsViewModel) : Fragment() {
     private lateinit var binding: FragmentWeeklyChartBinding
@@ -115,9 +116,10 @@ class WeeklyChartFragment(val analyVm: AnalyticsViewModel) : Fragment() {
         setWeeklySpinnertext()
 
         binding.weeklySpinner.setOnClickListener {
+            val now = Calendar.getInstance()
             CalendarModal(
-                analyVm.curYear.value ?: TimeUtil.year,
-                analyVm.curMonth.value ?: TimeUtil.month, calendarTotalListener
+                analyVm.curYear.value ?: now[Calendar.YEAR],
+                analyVm.curMonth.value ?: now[Calendar.MONTH] + 1, calendarTotalListener
             ).show(childFragmentManager, "")
         }
     }
