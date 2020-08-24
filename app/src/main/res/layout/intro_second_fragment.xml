@@ -39,16 +39,19 @@
                 />
             <EditText
                 android:id="@+id/name_edittext"
-                android:layout_width="290dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="70dp"
+                android:layout_marginEnd="35dp"
                 android:layout_marginStart="35dp"
                 android:maxLength="6"
+                android:inputType="text"
                 android:privateImeOptions="defaultInputmode=korean"
                 android:textSize="18sp"
                 android:hint="@string/intro_second_inputhint"
                 app:layout_constraintTop_toBottomOf="@+id/intro_second_description"
                 app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
                 android:backgroundTint="@color/grey_9"
                 android:fontFamily="@font/spoqa_han_sans_bold"
                 />
