@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!--
 Refer to App Widget Documentation for margin information
@@ -7,7 +7,7 @@ http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
     -->
     <dimen name="tab_text_title">20sp</dimen>
     <dimen name="common_spacing">10dp</dimen>
-
+    
     <dimen name="daily_common_spacing">35dp</dimen>
     <dimen name="daily_pie_header_spacing">53dp</dimen>
     <dimen name="daily_pie_sys_spacing">55dp</dimen>
@@ -19,5 +19,8 @@ http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
     <dimen name="daily_pie_chart">120dp</dimen>
     <dimen name="daily_chart_detail_spacing">11dp</dimen>
     <dimen name="widget_margin">8dp</dimen>
+
+    <dimen name="design_bottom_navigation_text_size" tools:override="true" tools:ignore="PrivateResource">9.5sp</dimen>
+    <dimen name="design_bottom_navigation_active_text_size" tools:override="true">9.5sp</dimen>
 
 </resources>
