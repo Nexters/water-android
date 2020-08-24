@@ -12,7 +12,6 @@ import appvian.water.buddy.databinding.FragmentDailyChartBinding
 import appvian.water.buddy.model.data.Intake
 import appvian.water.buddy.model.repository.HomeRepository
 import appvian.water.buddy.util.DrinkMapper
-import appvian.water.buddy.util.TimeUtil
 import appvian.water.buddy.view.modal.calendar.CalendarModal
 import appvian.water.buddy.view.modal.calendar.CalendarTotalListener
 import appvian.water.buddy.viewmodel.analytics.AnalyticsViewModel
@@ -20,6 +19,8 @@ import appvian.water.buddy.viewmodel.analytics.DailyChartViewModel
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
+import java.util.*
+import kotlin.collections.ArrayList
 
 class DailyChartFragment(val analyVm: AnalyticsViewModel) : Fragment(), CalendarTotalListener {
 
@@ -57,6 +58,7 @@ class DailyChartFragment(val analyVm: AnalyticsViewModel) : Fragment(), Calendar
     private fun initUi() {
         dailyVm.getDailyIntake()
         binding.dailyChartDetail.adapter = adapter
+        binding.dailyChartDetail.isNestedScrollingEnabled = false
         binding.dailyChartLegend.adapter = legendAdapter
         legendAdapter.addData(resources.getStringArray(DrinkMapper.drinkName))
 
@@ -104,9 +106,10 @@ class DailyChartFragment(val analyVm: AnalyticsViewModel) : Fragment(), Calendar
     private fun initSpinner() {
         setSpinnertext()
         binding.dailyDatePicker.setOnClickListener {
+            val now = Calendar.getInstance()
             CalendarModal(
-                analyVm.curYear.value ?: TimeUtil.year,
-                analyVm.curMonth.value ?: TimeUtil.month,
+                analyVm.curYear.value ?: now[Calendar.YEAR],
+                analyVm.curMonth.value ?: now[Calendar.MONTH] + 1,
                 this
             ).show(
                 childFragmentManager,
@@ -148,6 +151,7 @@ class DailyChartFragment(val analyVm: AnalyticsViewModel) : Fragment(), Calendar
     }
 
     private fun updateChart(data: PieData) {
+        binding.dailyPiechart.setExtraOffsets(-10f, 0f, -10f, 0f)
         binding.dailyPiechart.setUsePercentValues(true)
         binding.dailyPiechart.data = data
         binding.dailyPiechart.legend.isEnabled = false
