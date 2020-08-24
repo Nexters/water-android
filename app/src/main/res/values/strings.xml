@@ -58,7 +58,8 @@
     <string name="intro_fourth_welcome2">" 님의"</string>
     <string name="intro_fourth_welcome3">하루 목표 수분 섭취량은</string>
     <string name="intro_fourth_welcome4">" 입니다."</string>
-    <string name="intro_fourth_welcome5">캐릭터 워비와 함께\n목표량을 달성 보아요. </string>
+    <string name="intro_fourth_welcome5">캐릭터 워비와 함께 </string>
+    <string name="intro_fourth_welcome6">목표량을 달성 보아요. </string>
     <string name="intro_main_btn">시작하기</string>
     <string name="intro_second_btn">다음 1/2</string>
     <string name="intro_third_btn">다음 2/2</string>
