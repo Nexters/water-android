@@ -6,7 +6,7 @@
     <string name="main_menu_mypage">설정</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="targetAmountStrFormat" formatted="false">%skg ・ %scm | %sL</string>
+    <string name="targetAmountStrFormat" formatted="false">%skg ・ %scm &#160;| &#160;%sL</string>
     <string name="edtLenCntFormat" formatted="false">%d&#47;6</string>
     <string name="appwidget_text">100ml / 1L </string>
     <string name="add_widget">Add widget</string>
