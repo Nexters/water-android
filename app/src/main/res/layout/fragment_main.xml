@@ -84,7 +84,7 @@
                 />
             <Button
                 android:id="@+id/intake_list_button"
-                android:layout_width="132dp"
+                android:layout_width="138dp"
                 android:layout_height="29dp"
                 android:textSize="11sp"
                 android:textColor="#868686"
