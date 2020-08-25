@@ -19,9 +19,9 @@ class WeeklyViewModel(
     val repository: HomeRepository
 ) {
     private val now = TimeUtil.getCalendarInstance()
-    var curYear = TimeUtil.year
-    var curMonth = TimeUtil.month
-    var curDay = TimeUtil.day
+    var curYear = now[Calendar.YEAR]
+    var curMonth = now[Calendar.MONTH] + 1
+    var curDay = now[Calendar.DATE]
 
     private var weekDay: LiveData<List<Intake>>? = null
     val weekObserve: MediatorLiveData<List<BarEntry>> = MediatorLiveData()
@@ -48,12 +48,12 @@ class WeeklyViewModel(
         firstDate.timeZone = TimeZone.getDefault()
         firstDate.add(Calendar.WEEK_OF_MONTH, -1)
         firstDate.add(Calendar.WEEK_OF_MONTH, 1)
-        firstDate.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY)
+        firstDate.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY)
 
         val lastDate = GregorianCalendar(curYear, curMonth, curDay, 0, 0, 0)
         lastDate.timeZone = TimeZone.getDefault()
         lastDate.add(Calendar.WEEK_OF_MONTH, 1)
-        lastDate.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY)
+        lastDate.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY)
 
         weekDay = repository.getWeeklyByDay(firstDate.timeInMillis, lastDate.timeInMillis)
 
@@ -64,13 +64,13 @@ class WeeklyViewModel(
 
         weekDay?.let { wr ->
             weekObserve.addSource(wr, androidx.lifecycle.Observer { values ->
-                val barList = initBarList(7)
+                val barList = initBarList(8)
 
                 val groupValue = values.groupBy { it.date }
                     .mapValues { Intake(it.key, 0, it.value.sumBy { it.amount }) }.values
 
                 for (i in groupValue) {
-                    val index = i.date.toInt()
+                    val index = if (i.date.toInt() == 0) 6 else i.date.toInt().minus(1)
                     barList[index] = BarEntry(i.amount / 1000f, index)
                 }
                 weekObserve.value = barList
@@ -87,10 +87,10 @@ class WeeklyViewModel(
     fun getTotalWeekIntakeData() {
         val endWeek = GregorianCalendar(curYear, curMonth, curDay, 0, 0, 0)
         endWeek.add(Calendar.WEEK_OF_YEAR, 1)
-        endWeek.set(Calendar.DAY_OF_WEEK, 1)
+        endWeek.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY)
 
         val startWeek = GregorianCalendar(curYear, curMonth, curDay, 0, 0, 0)
-        startWeek.set(Calendar.DAY_OF_WEEK, 1)
+        startWeek.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY)
         startWeek.add(Calendar.WEEK_OF_YEAR, -3)
 
         android.util.Log.d(
@@ -133,7 +133,6 @@ class WeeklyViewModel(
             monthWeek[i] = TimeUtil.getYearWeekToMonthWeek(startWeek + i, curYear)
         }
     }
-
 
 
     fun strSpanBuilder(msg: String, color: Int): SpannableStringBuilder {

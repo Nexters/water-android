@@ -83,7 +83,7 @@ class MainFragment : Fragment() {
                     }
                 } else{
                     GlobalScope.launch(Dispatchers.Main) {
-                        delay(100L)
+                        delay(200L)
                         withContext(Dispatchers.Main) {
                             adjustAnimation(it)
                         }
@@ -102,7 +102,7 @@ class MainFragment : Fragment() {
                     }
                 } else{
                     GlobalScope.launch(Dispatchers.Main) {
-                        delay(100L)
+                        delay(200L)
                         withContext(Dispatchers.Main) {
                             adjustAnimation(0F)
                         }
@@ -199,7 +199,7 @@ class MainFragment : Fragment() {
             in 70F..99.9999F -> string = resources.getStringArray(R.array.drink_75_100_txt)
             else -> string = resources.getStringArray(R.array.drink_100_txt)
         }
-        binding.homeText.text = string[num]
+        binding.homeText.text = resources.getString(R.string.polite_name,homeViewModel.nickname)+string[num]
         homeViewModel.dailyAmount?.observe(viewLifecycleOwner, Observer {
             if(it!=null) {
                 binding.intakeListButton.text = String.format(

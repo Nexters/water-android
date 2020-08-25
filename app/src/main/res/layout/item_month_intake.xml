@@ -28,7 +28,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             tools:text="1"
-            android:fontFamily="@font/spoqa_han_sans_bold"/>
+            android:fontFamily="@font/spoqa_han_sans_bold"
+            android:textColor="@color/black"/>
         
         <ImageView
             android:id="@+id/rank_img"
@@ -49,7 +50,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/rank_img"
             tools:text="커피"
-            android:fontFamily="@font/spoqa_han_sans_regular"/>
+            android:fontFamily="@font/spoqa_han_sans_regular"
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/rank_cup_unit"
@@ -62,7 +64,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="250잔"
-            android:fontFamily="@font/spoqa_han_sans_bold"/>
+            android:fontFamily="@font/spoqa_han_sans_bold"
+            android:textColor="@color/black"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -85,7 +88,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/rank_cup_unit"
             tools:text="50L"
-            android:fontFamily="@font/spoqa_han_sans_regular"/>
+            android:fontFamily="@font/spoqa_han_sans_regular"
+            android:textColor="@color/black"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

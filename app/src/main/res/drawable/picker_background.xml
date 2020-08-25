@@ -9,7 +9,7 @@
 
     <item
         android:gravity="right"
-        android:right="6dp"
+        android:right="4dp"
         android:top="5dp"
         android:left="10dp"
         android:bottom="5dp">
