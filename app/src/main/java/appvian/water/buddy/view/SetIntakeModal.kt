@@ -232,6 +232,8 @@ class SetIntakeModal(var parent_context_code : Int, var intake : Intake?) : Bott
                     edt_amount.setText(result)
                     edt_amount.setSelection(result.length - 2)
                     setBtnClickable()
+                    edt_amount.isClickable = false
+                    edt_amount.isFocusable = false
                 }else{
                     selected[idx] = false
                     selected_btns[idx].background = resources.getDrawable(R.drawable.btn_bottom_sheet, null)
@@ -241,6 +243,8 @@ class SetIntakeModal(var parent_context_code : Int, var intake : Intake?) : Bott
             }
         }else{
             edt_amount.text.clear()
+            edt_amount.isFocusableInTouchMode = true
+            edt_amount.isFocusable= true
             setBtnUnClickable()
             selected[button_pos] = false
             selected_btns[button_pos].background = resources.getDrawable(R.drawable.btn_bottom_sheet, null)
