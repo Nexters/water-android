@@ -87,13 +87,14 @@
                 android:textSize="11sp"
                 android:textColor="#868686"
                 android:drawableEnd="@drawable/main_arrow_icon"
-                android:paddingEnd="7dp"
+                android:paddingEnd="13dp"
                 android:background="@drawable/intake_list_button_radius"
                 app:layout_constraintTop_toBottomOf="@id/home_text"
                 app:layout_constraintLeft_toLeftOf="parent"
                 android:layout_marginTop="14dp"
                 android:layout_marginStart="32dp"
                 android:fontFamily="@font/spoqa_han_sans_regular"
+                android:stateListAnimator="@null"
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
