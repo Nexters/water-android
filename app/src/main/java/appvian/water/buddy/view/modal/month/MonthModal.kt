@@ -11,7 +11,7 @@ import appvian.water.buddy.databinding.MonthPickerBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class MonthModal(curMonth: Int, val monthCallbackListener: MonthCallbackListener) : BottomSheetDialogFragment() {
+class MonthModal(val curYear:Int, curMonth: Int, val monthCallbackListener: MonthCallbackListener) : BottomSheetDialogFragment() {
     private lateinit var binding: MonthPickerBinding
     private val monthArray = IntArray(12){ i -> i + 1}
     var curVal = curMonth
@@ -53,7 +53,7 @@ class MonthModal(curMonth: Int, val monthCallbackListener: MonthCallbackListener
         binding.monthPickerSelect.wrapSelectorWheel = false
         binding.monthPickerSelect.value = curVal
         binding.monthPickerSelect.displayedValues = monthArray.map {
-            resources.getString(R.string.month, it)
+            resources.getString(R.string.month_select, curYear, it)
         }.toTypedArray() as Array<String>
 
         binding.monthPickerSelect.setOnValueChangedListener { picker, oldVal, newVal ->

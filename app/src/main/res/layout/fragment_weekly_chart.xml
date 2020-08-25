@@ -25,7 +25,9 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:fitsSystemWindows="true"
+                    app:layout_collapseMode="none">
                     <TextView
                         android:id="@+id/header1"
                         android:layout_width="wrap_content"
@@ -43,15 +45,15 @@
                         android:id="@+id/weekly_spinner"
                         android:layout_width="54dp"
                         android:layout_height="27dp"
-                        android:background="@drawable/picker_background"
-                        android:textSize="11sp"
-                        android:gravity="center"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
                         android:layout_marginTop="35dp"
                         android:layout_marginEnd="@dimen/daily_common_spacing"
-                        tools:text="1주"
-                        android:fontFamily="@font/spoqa_han_sans_regular"/>
+                        android:background="@drawable/picker_background"
+                        android:fontFamily="@font/spoqa_han_sans_regular"
+                        android:gravity="center"
+                        android:textSize="11sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="1주" />
 
                     <com.github.mikephil.charting.charts.BarChart
                         android:id="@+id/weekly_barchart_by_week"
@@ -69,12 +71,12 @@
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:layout_width="wrap_content"
