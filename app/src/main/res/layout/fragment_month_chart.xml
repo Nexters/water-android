@@ -124,6 +124,7 @@
                     android:layout_marginTop="@dimen/daily_common_spacing"
                     android:lineSpacingExtra="26sp"
                     android:text="@string/month_header_rank"
+                    android:textColor="@color/black"
                     android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
