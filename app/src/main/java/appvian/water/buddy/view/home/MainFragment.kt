@@ -199,7 +199,7 @@ class MainFragment : Fragment() {
             in 70F..99.9999F -> string = resources.getStringArray(R.array.drink_75_100_txt)
             else -> string = resources.getStringArray(R.array.drink_100_txt)
         }
-        binding.homeText.text = string[num]
+        binding.homeText.text = resources.getString(R.string.polite_name,homeViewModel.nickname)+string[num]
         homeViewModel.dailyAmount?.observe(viewLifecycleOwner, Observer {
             if(it!=null) {
                 binding.intakeListButton.text = String.format(
