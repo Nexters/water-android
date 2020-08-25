@@ -15,6 +15,7 @@ import appvian.water.buddy.view.home.MainFragment
 import appvian.water.buddy.view.settings.SettingFragment
 import appvian.water.buddy.view.analytics.AnalyticsFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.coroutines.*
 
 class MainViewModel(val activity: FragmentActivity) {
 
@@ -28,6 +29,8 @@ class MainViewModel(val activity: FragmentActivity) {
     var fav_2_liveData = sharedPreRepo.fav_2_livedata
     var showInsertToast: MutableLiveData<Boolean> = MutableLiveData(false)
     var latestIntake: Intake = Intake(0,0,0)
+
+    private val intakeWaitList: MutableLiveData<ArrayList<Intake>> = MutableLiveData(ArrayList())
 
     val menuListener = object : BottomNavigationView.OnNavigationItemSelectedListener {
         override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -68,11 +71,38 @@ class MainViewModel(val activity: FragmentActivity) {
             .replace(R.id.fragment, fragment)
             .commit();
     }
-    fun insert(intake: Intake) {
-        latestIntake = intake
-        showInsertToast.value = true
+    private fun insert(intake: Intake) {
         homeRepository.insert(intake)
-        Log.e("value",showInsertToast.value.toString())
     }
 
+    fun addIntake(intake: Intake){
+        latestIntake = intake
+        showInsertToast.value = true
+        intakeWaitList.value!!.add(intake)
+        intakeWaitList.observeForever {
+            if (it.isNotEmpty()){
+                when(it.size){
+                    1 -> {
+                        GlobalScope.launch(Dispatchers.Main) {
+                            delay(2500)
+                            withContext(Dispatchers.Main){
+                                insert(it[0])
+                                it.removeAt(0)
+                            }
+                        }
+                    }
+
+                    else -> {
+                        GlobalScope.launch(Dispatchers.Main) {
+                            delay(6500)
+                            withContext(Dispatchers.Main){
+                                insert(it[0])
+                                it.removeAt(0)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

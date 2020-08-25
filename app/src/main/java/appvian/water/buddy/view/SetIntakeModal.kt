@@ -39,6 +39,7 @@ import java.util.*
 
 class SetIntakeModal(var parent_context_code : Int, var intake : Intake?) : BottomSheetDialogFragment() , TextWatcher{
     private lateinit var homeViewModel: HomeViewModel
+    private lateinit var mainViewModel: MainViewModel
     private lateinit var favoriteViewModel: FavoriteViewModel
     var categoryList = arrayListOf<Category>()
     //ontext changed 결과값
@@ -77,7 +78,7 @@ class SetIntakeModal(var parent_context_code : Int, var intake : Intake?) : Bott
             }
         }
         if(parent_context_code == Code.MAIN_FRAGMENT) {
-            homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+            mainViewModel = MainViewModel(this.requireActivity())
         }
         else if(parent_context_code == Code.FAVORITE_DRINK_SETTING_ACTIVITY || parent_context_code == Code.FAVORITE_EDIT_1 || parent_context_code == Code.FAVORITE_EDIT_2){
             favoriteViewModel = ViewModelProvider(this).get(FavoriteViewModel::class.java)
@@ -116,7 +117,7 @@ class SetIntakeModal(var parent_context_code : Int, var intake : Intake?) : Bott
             when(parent_context_code){
                 Code.MAIN_FRAGMENT -> {
                     val intake = Intake(System.currentTimeMillis(), typeofDrink, pickedNum)
-                    homeViewModel.insert(intake)
+                    mainViewModel.addIntake(intake)
                     Snackbar.make(requireActivity().findViewById(android.R.id.content),getString(R.string.insert_toast_text, resources.getStringArray(
                         DrinkMapper.drinkName)[intake.category], intake.amount), Snackbar.LENGTH_SHORT).apply{
                         this.setBackgroundTint(getColor(context,R.color.black))

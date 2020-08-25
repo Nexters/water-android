@@ -10,6 +10,7 @@ import androidx.lifecycle.MutableLiveData
 import appvian.water.buddy.model.data.Intake
 import appvian.water.buddy.model.repository.HomeRepository
 import appvian.water.buddy.model.repository.SharedPrefsRepository
+import kotlinx.coroutines.*
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -71,16 +72,9 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
         val dailyPercent = repository.getDailyPercent(getToday(),getTomorrow(),requiredAmount)
         return dailyPercent
     }
-    fun insert(intake: Intake) {
-        repository.insert(intake)
-    }
 
     fun delete(intake: Intake) {
         repository.delete(intake)
-    }
-
-    fun deleteAll(){
-        repository.deleteAll()
     }
 
     fun modifyCategory(date: Long, category: Int){

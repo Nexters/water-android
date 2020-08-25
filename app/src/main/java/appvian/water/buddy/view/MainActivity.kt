@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity() {
             val st = StringTokenizer(binding.txtFav1.text.toString())
             val category_num = CategoryMapper.getCategoryNum(st.nextToken())
             val tmp = st.nextToken()
-            viewModel.insert(Intake(System.currentTimeMillis(), category_num, tmp.substring(0, tmp.length-2).toInt()))
+            viewModel.addIntake(Intake(System.currentTimeMillis(), category_num, tmp.substring(0, tmp.length-2).toInt()))
             fabAnim()
         }
         binding.fabFav2.setOnClickListener{
@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity() {
             val st = StringTokenizer(binding.txtFav2.text.toString())
             val category_num = CategoryMapper.getCategoryNum(st.nextToken())
             val tmp = st.nextToken()
-            viewModel.insert(Intake(System.currentTimeMillis(), category_num, tmp.substring(0, tmp.length-2).toInt()))
+            viewModel.addIntake(Intake(System.currentTimeMillis(), category_num, tmp.substring(0, tmp.length-2).toInt()))
             fabAnim()
         }
         viewModel.fav_1_liveData.observe(this, Observer {
@@ -147,7 +147,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun initToast(){
         viewModel.showInsertToast.observeForever( Observer {
-            Log.e("value2",it.toString())
             if (it){
                 val intake = viewModel.latestIntake
                 Snackbar.make(fragment,getString(R.string.insert_toast_text, resources.getStringArray(DrinkMapper.drinkName)[intake.category], intake.amount),Snackbar.LENGTH_SHORT).apply{

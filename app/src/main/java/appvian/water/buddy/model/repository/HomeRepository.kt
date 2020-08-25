@@ -62,20 +62,6 @@ class HomeRepository(val context: Context) {
         return dailyIntake
     }
 
-    fun getWeekly(today: Long, aWeekAgo: Long): LiveData<List<Intake>>? {
-        var weeklyIntake: LiveData<List<Intake>>? = null
-
-        weeklyIntake = runBlocking(Dispatchers.IO) {
-            withContext(Dispatchers.Default) {
-                intakedao.getWeekly(
-                    today,
-                    aWeekAgo
-                )
-            }
-        }
-        return weeklyIntake
-    }
-
     fun getWeeklyByDay(firstDay: Long, lastDay: Long): LiveData<List<Intake>>? {
         var weeklyIntake: LiveData<List<Intake>>? = null
 
@@ -101,21 +87,6 @@ class HomeRepository(val context: Context) {
         }
 
         return weeklyTotal
-    }
-
-    fun getMonthly(today: Long, aMonthAgo: Long): LiveData<List<Intake>>? {
-        var monthlyIntake: LiveData<List<Intake>>? = intakedao.getMonthly(today, aMonthAgo)
-
-        GlobalScope.launch(Dispatchers.Default) {
-            monthlyIntake = withContext(Dispatchers.Default) {
-                intakedao.getMonthly(
-                    today,
-                    aMonthAgo
-                )
-            }
-        }
-
-        return monthlyIntake
     }
 
     fun getMonthlyByDay(startMonth: Long, endMonth: Long): LiveData<List<Intake>>? {
@@ -159,10 +130,4 @@ class HomeRepository(val context: Context) {
         WidgetUpdater.update(context)
     }
 
-    fun deleteAll() {
-        runBlocking(Dispatchers.IO) {
-            intakedao.deleteAll()
-        }
-        WidgetUpdater.update(context)
-    }
 }
