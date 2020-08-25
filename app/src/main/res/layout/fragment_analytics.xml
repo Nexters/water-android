@@ -44,7 +44,7 @@
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/analytics_tab"
-                android:layout_width="216dp"
+                android:layout_width="wrap_content"
                 android:layout_height="35dp"
                 android:layout_marginStart="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
