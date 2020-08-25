@@ -125,6 +125,9 @@ class FavoriteDrinkSettingActivity : AppCompatActivity() {
                 setAddBtnActive()
             }
         }
+        binding.imgBack.setOnClickListener{
+            onBackPressed()
+        }
     }
     private fun openBottomSheet(code : Int){
         val bottomSheet = SetIntakeModal(code, null)
