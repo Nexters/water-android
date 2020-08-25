@@ -3,12 +3,7 @@ package appvian.water.buddy.util
 import java.util.*
 
 object TimeUtil {
-    fun getCurrent() : Calendar = Calendar.getInstance()
-    var year = getCurrent().get(Calendar.YEAR)
-    var month = getCurrent().get(Calendar.MONTH) + 1
-    var day = getCurrent().get(Calendar.DATE)
-
-    fun getCalendarInstance() : Calendar {
+    fun getCalendarInstance(): Calendar {
         val calInstance = Calendar.getInstance()
 
         calInstance.set(Calendar.AM_PM, Calendar.AM)
@@ -20,7 +15,7 @@ object TimeUtil {
         return calInstance
     }
 
-    fun getYearWeekToMonthWeek(yearWeek:Int, year:Int?): List<Int> {
+    fun getYearWeekToMonthWeek(yearWeek: Int, year: Int?): List<Int> {
         val calInstance = getCalendarInstance()
 
         year?.let { calInstance.set(Calendar.YEAR, it) }
@@ -33,10 +28,10 @@ object TimeUtil {
         return listOf(month, monthWeek)
     }
 
-    fun getWeekOfMonth(year:Int, month:Int, day: Int) : Int {
+    fun getWeekOfMonth(year: Int, month: Int, day: Int): Int {
         val calInstance = getCalendarInstance()
         calInstance.set(year, month, day)
 
-        return  calInstance.get(Calendar.WEEK_OF_MONTH)
+        return calInstance.get(Calendar.WEEK_OF_MONTH)
     }
 }

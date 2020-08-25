@@ -11,6 +11,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".view.settings.TargetAmountSettingActivity">
+        <ImageView
+            android:id="@+id/img_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/txt_top"
+            app:layout_constraintBottom_toBottomOf="@id/txt_top"
+            android:src="@drawable/arrow_left"
+            android:layout_marginStart="15dp"
+            />
         <TextView
             android:id="@+id/txt_top"
             android:layout_width="wrap_content"
@@ -85,7 +95,7 @@
             />
         <EditText
             android:id="@+id/edt_weight"
-            android:layout_width="290dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="18sp"
             android:maxLength="3"
@@ -93,8 +103,10 @@
             android:theme="@style/EdtSettingTheme"
             android:inputType="number"
             app:layout_constraintTop_toBottomOf="@id/txt_weight"
-            app:layout_constraintStart_toStartOf="@id/txt_weight"
-            android:layout_marginTop="9dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
             android:fontFamily="@font/spoqa_han_sans_bold"
             />
         <TextView
@@ -111,7 +123,7 @@
             />
         <EditText
             android:id="@+id/edt_height"
-            android:layout_width="290dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="18sp"
             android:maxLength="3"
@@ -119,8 +131,10 @@
             android:theme="@style/EdtSettingTheme"
             android:inputType="number"
             app:layout_constraintTop_toBottomOf="@id/txt_height"
-            app:layout_constraintStart_toStartOf="@id/txt_height"
-            android:layout_marginTop="9dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
             android:fontFamily="@font/spoqa_han_sans_bold"
             />
 

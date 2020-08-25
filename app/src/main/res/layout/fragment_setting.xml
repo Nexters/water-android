@@ -20,7 +20,6 @@
             android:id="@+id/img_setting_profile"
             android:layout_width="76dp"
             android:layout_height="76dp"
-            android:src="@drawable/ic_launcher_foreground"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -85,18 +84,16 @@
                 app:layout_constraintEnd_toStartOf="@id/img_setting_arrow"
                 app:layout_constraintTop_toTopOf="@id/txt_setting_target_amount_title"
                 app:layout_constraintBottom_toBottomOf="@id/txt_setting_target_amount_title"
-                android:layout_marginEnd="5dp"
                 android:fontFamily="@font/spoqa_han_sans_regular"
                 />
             <ImageView
                 android:id="@+id/img_setting_arrow"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:src="@drawable/arrow_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/gray_arrow_40"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/txt_setting_target_amount_title"
                 app:layout_constraintBottom_toBottomOf="@id/txt_setting_target_amount_title"
-                android:layout_marginEnd="9dp"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -124,13 +121,12 @@
                 android:fontFamily="@font/spoqa_han_sans_regular"
                 />
             <ImageView
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:src="@drawable/arrow_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/gray_arrow_40"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/txt_setting_favorite_title"
                 app:layout_constraintBottom_toBottomOf="@id/txt_setting_favorite_title"
-                android:layout_marginEnd="9dp"
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -159,13 +155,12 @@
                 android:fontFamily="@font/spoqa_han_sans_regular"
                 />
             <ImageView
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:src="@drawable/arrow_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/gray_arrow_40"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/txt_setting_alarm_title"
                 app:layout_constraintBottom_toBottomOf="@id/txt_setting_alarm_title"
-                android:layout_marginEnd="9dp"
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

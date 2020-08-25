@@ -32,7 +32,7 @@
         android:textSize="13sp"
         android:textColor="@color/settingTxtBlack"
         android:layout_marginTop="24dp"
-        android:fontFamily="@font/spoqa_han_sans_regular"
+        android:fontFamily="@font/spoqa_han_sans_bold"
         />
     <ImageView
         android:id="@+id/img_cancel"
@@ -62,8 +62,9 @@
         app:layout_constraintStart_toStartOf="@id/recyclerview"
         android:text="섭취량"
         android:textSize="13sp"
+        android:textColor="@color/settingTxtBlack"
         android:layout_marginTop="20dp"
-        android:fontFamily="@font/spoqa_han_sans_regular"/>
+        android:fontFamily="@font/spoqa_han_sans_bold"/>
 
     <EditText
         android:id="@+id/edt_amount"
@@ -76,6 +77,7 @@
         android:gravity="center"
         android:textColor="@color/settingTxtBlack"
         android:textSize="23sp"
+        android:maxLength="7"
         app:layout_constraintTop_toBottomOf="@id/layout_choice_btn"
         android:layout_marginTop="15dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -84,7 +86,7 @@
         />
     <LinearLayout
         android:id="@+id/layout_choice_btn"
-        android:layout_width="300dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@id/txt_amount"

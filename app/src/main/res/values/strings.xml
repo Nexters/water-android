@@ -6,7 +6,7 @@
     <string name="main_menu_mypage">설정</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="targetAmountStrFormat" formatted="false">%skg ・ %scm | %sL</string>
+    <string name="targetAmountStrFormat" formatted="false">%skg ・ %scm &#160;| &#160;%sL</string>
     <string name="edtLenCntFormat" formatted="false">%d&#47;6</string>
     <string name="appwidget_text">100ml / 1L </string>
     <string name="add_widget">Add widget</string>
@@ -58,7 +58,8 @@
     <string name="intro_fourth_welcome2">" 님의"</string>
     <string name="intro_fourth_welcome3">하루 목표 수분 섭취량은</string>
     <string name="intro_fourth_welcome4">" 입니다."</string>
-    <string name="intro_fourth_welcome5">캐릭터 워비와 함께\n목표량을 달성 보아요. </string>
+    <string name="intro_fourth_welcome5">캐릭터 워비와 함께 </string>
+    <string name="intro_fourth_welcome6">목표량을 달성 보아요. </string>
     <string name="intro_main_btn">시작하기</string>
     <string name="intro_second_btn">다음 1/2</string>
     <string name="intro_third_btn">다음 2/2</string>
@@ -76,12 +77,12 @@
     <string name="month_rank_none_sub">매일 권장 수분을 섭취하고 기록을 달성해보세요!</string>
     <string name="month_unit">%d잔</string>
     <string name="month_bottom_header">월 선택하기</string>
-    <string name="month">%d월</string>
+    <string name="month_select">%d년 %d월</string>
 
     <string name="alarm_time">%s : %s</string>
     <string name="alarm_interval_time">%s시간</string>
 
-    <string name="polite_name">%s님</string>
+    <string name="polite_name">%s님\n</string>
 
     <string name="confrim">선택</string>
 
@@ -92,7 +93,7 @@
 
     <string name="modify_modal">음료 정보 수정</string>
     <string name="add_fav_modal">자주 마시는 음료</string>
-    <string name="insert_toast_text">%s %dml를 추가했습니다..</string>
+    <string name="insert_toast_text">%s %dml를 추가했습니다.</string>
     <string name="delete_toast_text">%d개의 내역을 삭제하였습니다.</string>
     <string name="modify_toast_text">%s %dml로 수정하였습니다.</string>
 </resources>
