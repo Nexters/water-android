@@ -93,7 +93,7 @@
 
     <string name="modify_modal">음료 정보 수정</string>
     <string name="add_fav_modal">자주 마시는 음료</string>
-    <string name="insert_toast_text">%s %dml를 추가했습니다..</string>
+    <string name="insert_toast_text">%s %dml를 추가했습니다.</string>
     <string name="delete_toast_text">%d개의 내역을 삭제하였습니다.</string>
     <string name="modify_toast_text">%s %dml로 수정하였습니다.</string>
 </resources>
