@@ -55,4 +55,9 @@
         <item name="android:textSize">13sp</item>
     </style>
 
+    <style name="CommonBoldStyle" parent="Widget.AppCompat.TextView">
+        <item name="android:fontFamily">@font/spoqa_han_sans_bold</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
 </resources>
