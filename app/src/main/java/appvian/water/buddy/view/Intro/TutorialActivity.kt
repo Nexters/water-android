@@ -11,21 +11,13 @@ class TutorialActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tutorial)
-        val listImage: ArrayList<Int> = ArrayList()
-        listImage.add(R.mipmap.tutorial_1)
-        listImage.add(R.mipmap.tutorial_2)
 
         viewPager = tutorial_viewPager
         val pageAdapter = TutorialViewPagerAdapter(supportFragmentManager)
         viewPager.adapter = pageAdapter
 
-        for(i in listImage) {
-            val imageFragment = onBoardingTutorial()
-            val bundle by lazy { Bundle() }
-            bundle.putInt("imgRes", i)
-            imageFragment.arguments = bundle
-            pageAdapter.addItem(imageFragment)
-        }
+        pageAdapter.addItem(TutorialFragment1())
+        pageAdapter.addItem(TutorialFragment2())
         pageAdapter.notifyDataSetChanged()
 
         tutorial_close_button.setOnClickListener {

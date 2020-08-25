@@ -96,4 +96,12 @@
     <string name="insert_toast_text">%s %dml를 추가했습니다.</string>
     <string name="delete_toast_text">%d개의 내역을 삭제하였습니다.</string>
     <string name="modify_toast_text">%s %dml로 수정하였습니다.</string>
+
+    <string name="step1">step 1.</string>
+    <string name="step2">step 2.</string>
+    <string name="tutorial_explain_1">하단의 추가 버튼을 눌러\n마신 음료를 등록해보세요!</string>
+    <string name="tutorial_explain_2">하단의 설정에서 자주 마시는 음료를\n등록하고, 홈에서 빠르게 추가해보세요.</string>
+    <string name="tutorial_add_intake">음료 추가하기</string>
+    <string name="tutorial_add_directly">직접 추가하기</string>
+    <string name="tutorial_water">물 250ml</string>
 </resources>
