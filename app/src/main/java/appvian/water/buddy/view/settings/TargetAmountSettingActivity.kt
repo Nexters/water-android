@@ -81,6 +81,9 @@ class TargetAmountSettingActivity : AppCompatActivity() {
             settingViewModel.setHeightLiveData(edt_height.text.toString().toInt())
             finish()
         }
+        bindig.imgBack.setOnClickListener{
+            onBackPressed()
+        }
     }
 
     inner class TxtTargetWatcher(var initText : String) : TextWatcher{

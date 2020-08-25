@@ -15,12 +15,12 @@ class DailyChartViewModel(private val repository: HomeRepository) {
     private var dailyIntake: LiveData<List<Intake>>? = null
     private val _maxDrink: MutableLiveData<Int> = MutableLiveData()
 
-    val maxDrink:LiveData<Int> = _maxDrink
+    val maxDrink: LiveData<Int> = _maxDrink
     val observeIntake: MediatorLiveData<List<Intake>> = MediatorLiveData()
 
-    var curYear = TimeUtil.year
-    var curMonth = TimeUtil.month
-    var curDay = TimeUtil.day
+    var curYear = now[Calendar.YEAR]
+    var curMonth = now[Calendar.MONTH] + 1
+    var curDay = now[Calendar.DATE]
 
     fun getDailyIntake() {
         val now = TimeUtil.getCalendarInstance()
@@ -45,13 +45,13 @@ class DailyChartViewModel(private val repository: HomeRepository) {
             observeIntake.addSource(it, androidx.lifecycle.Observer { values ->
                 observeIntake.value = values
 
-                if(values.isNotEmpty())
+                if (values.isNotEmpty())
                     _maxDrink.value = values.maxBy { it.amount }?.category
                 else
                     _maxDrink.value = -2
             })
         } ?: {
             _maxDrink.value = -2
-        } ()
+        }()
     }
 }

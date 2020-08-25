@@ -7,13 +7,10 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import appvian.water.buddy.R
 import appvian.water.buddy.databinding.FragmentAnalyticsBinding
-import appvian.water.buddy.util.TimeUtil
 import appvian.water.buddy.view.analytics.chart.daily.DailyChartFragment
 import appvian.water.buddy.view.analytics.chart.weekly.WeeklyChartFragment
 import appvian.water.buddy.view.analytics.month.MonthFragment
@@ -21,6 +18,7 @@ import appvian.water.buddy.view.modal.month.MonthCallbackListener
 import appvian.water.buddy.view.modal.month.MonthModal
 import appvian.water.buddy.viewmodel.analytics.AnalyticsViewModel
 import com.google.android.material.tabs.TabLayoutMediator
+import java.util.*
 
 private const val PAGE_NUM = 3
 
@@ -30,8 +28,11 @@ class AnalyticsFragment : Fragment(),
     private val analyVm: AnalyticsViewModel = AnalyticsViewModel()
 
     private val monthPickerListener = View.OnClickListener {
+        val now = Calendar.getInstance()
         val bottomSheetDialog = MonthModal(
-            analyVm.curMonth.value ?: TimeUtil.month, this
+            analyVm.curYear.value ?: now[Calendar.YEAR],
+            analyVm.curMonth.value ?: now[Calendar.MONTH] + 1,
+            this
         )
         bottomSheetDialog.show(childFragmentManager, "bottomSheet")
     }

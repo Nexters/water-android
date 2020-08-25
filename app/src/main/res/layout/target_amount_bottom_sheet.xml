@@ -38,6 +38,7 @@
         android:inputType="number"
         android:theme="@style/EdtSettingTheme"
         android:gravity="center"
+        android:maxLength="7"
         app:layout_constraintTop_toBottomOf="@id/txt_top"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
