@@ -17,10 +17,21 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        releaseKey {
+            storeFile file(SIGNED_STORE_FILE)
+            storePassword SIGNED_STORE_PWD
+            keyAlias SIGNED_KEY_ALIAS
+            keyPassword SIGNED_KEY_PWD
+        }
+    }
+
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.releaseKey
         }
     }
 
