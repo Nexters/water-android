@@ -31,7 +31,8 @@
         app:layout_constraintTop_toTopOf="@id/icon"
         app:layout_constraintLeft_toRightOf="@id/icon"
         app:layout_constraintBottom_toTopOf="@id/amountText"
-        android:fontFamily="@font/spoqa_han_sans_bold"
+        android:fontFamily="@font/spoqa_han_sans_regular"
+        android:textColor="@color/black"
         />
     <TextView
         android:id="@+id/amountText"
