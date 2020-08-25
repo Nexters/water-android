@@ -9,7 +9,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="68dp"
-        android:background="@color/white"
+        android:background="@color/grey_1"
         app:layout_constraintTop_toTopOf="parent"
         />
     <ImageView
