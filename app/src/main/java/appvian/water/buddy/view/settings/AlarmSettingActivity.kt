@@ -80,6 +80,9 @@ class AlarmSettingActivity : AppCompatActivity() {
                 viewModel.setAlarmFlag(false)
             }
         }
+        binding.imgBack.setOnClickListener{
+            onBackPressed()
+        }
     }
 
     private fun setAlarm(){
