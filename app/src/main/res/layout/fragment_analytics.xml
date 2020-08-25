@@ -13,9 +13,9 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/analytics_header"
             android:layout_width="match_parent"
-            android:layout_height="96dp"
-            android:background="@color/grey_1"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/analytics_pager">
 
             <TextView
                 android:id="@+id/analytics_title"
@@ -29,6 +29,7 @@
                 android:padding="@dimen/common_spacing"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/analytics_tab"
                 android:fontFamily="@font/spoqa_han_sans_bold"/>
 
             <ImageView
@@ -45,10 +46,16 @@
                 android:layout_width="216dp"
                 android:layout_height="35dp"
                 android:layout_marginStart="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/analytics_title"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:fontFamily="@font/spoqa_han_sans_bold"/>
+                app:tabSelectedTextColor="@color/black"
+                app:tabTextAppearance="@style/TabText"
+                app:tabTextColor="@color/grey_7"
+                app:tabIndicatorColor="@color/blue_1"
+                app:tabIndicatorFullWidth="false"
+                app:tabPaddingStart="24dp"
+                app:tabPaddingEnd="24dp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -2,7 +2,7 @@ package appvian.water.buddy.viewmodel.analytics
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import appvian.water.buddy.util.TimeUtil
+import java.util.*
 
 class AnalyticsViewModel {
     private val _curYear = MutableLiveData<Int>()
@@ -14,9 +14,10 @@ class AnalyticsViewModel {
     val curDay = _curDay as LiveData<Int>
 
     init {
-        _curDay.value = TimeUtil.day
-        _curMonth.value = TimeUtil.month
-        _curYear.value = TimeUtil.year
+        val now = Calendar.getInstance()
+        _curDay.value = now[Calendar.DATE]
+        _curMonth.value = now[Calendar.MONTH] + 1
+        _curYear.value = now[Calendar.YEAR]
     }
 
     fun setDay(day: Int) {
