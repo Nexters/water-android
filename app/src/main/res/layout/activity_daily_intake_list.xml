@@ -67,6 +67,7 @@
             app:layout_constraintTop_toBottomOf="@id/daily_intake_RecyclerView"
             app:layout_constraintLeft_toLeftOf="@id/daily_intake_RecyclerView"
             android:fontFamily="@font/spoqa_han_sans_regular"
+            android:layout_marginTop="16dp"
             />
         <Button
             android:id="@+id/set_delete_button"
