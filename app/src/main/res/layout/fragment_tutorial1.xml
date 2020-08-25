@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@android:color/transparent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.Intro.TutorialFragment1">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:scaleType="fitXY"
+        android:src="@mipmap/navigation_bar_background"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main_navigation"
+        android:layout_width="0dp"
+        android:layout_height="75dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintWidth_percent="0.6585369">
+
+        <ImageView
+            android:id="@+id/home_icon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/home_icon"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/analytics_icon"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="34.5dp"
+            android:tint="@color/blue_1"
+            />
+        <TextView
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="홈"
+            android:textSize="9.5sp"
+            android:fontFamily="@font/spoqa_han_sans_regular"
+            app:layout_constraintTop_toBottomOf="@id/home_icon"
+            app:layout_constraintLeft_toLeftOf="@id/home_icon"
+            android:textColor="@color/blue_1"
+            />
+
+        <ImageView
+            android:id="@+id/analytics_icon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/analysis_icon"
+            app:layout_constraintTop_toTopOf="@id/home_icon"
+            app:layout_constraintLeft_toRightOf="@id/home_icon"
+            app:layout_constraintRight_toLeftOf="@id/setting_icon"
+            android:layout_marginEnd="20dp"
+            android:tint="#505050"
+            />
+
+        <TextView
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="통계"
+            android:textSize="9.5sp"
+            android:fontFamily="@font/spoqa_han_sans_regular"
+            app:layout_constraintTop_toBottomOf="@id/analytics_icon"
+            app:layout_constraintLeft_toLeftOf="@id/analytics_icon"
+            android:textColor="#505050"
+            />
+
+        <ImageView
+            android:id="@+id/setting_icon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/setting_icon"
+            app:layout_constraintTop_toTopOf="@id/home_icon"
+            app:layout_constraintLeft_toRightOf="@id/analytics_icon"
+            app:layout_constraintRight_toRightOf="parent"
+            android:tint="#505050"
+            />
+
+        <TextView
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="설정"
+            android:textSize="9.5sp"
+            android:fontFamily="@font/spoqa_han_sans_regular"
+            app:layout_constraintTop_toBottomOf="@id/setting_icon"
+            app:layout_constraintLeft_toLeftOf="@id/setting_icon"
+            android:textColor="#505050"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    <ImageView
+        android:id="@+id/floating_button"
+        android:layout_width="84dp"
+        android:layout_height="84dp"
+        android:src="@drawable/fab_plus"
+        android:scaleType="fitXY"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/main_navigation"
+        android:layout_marginBottom="28dp"
+        />
+
+    <TextView
+        android:text="@string/tutorial_add_intake"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/floating_button"
+        app:layout_constraintRight_toRightOf="@id/floating_button"
+        android:gravity="center"
+        android:fontFamily="@font/spoqa_han_sans_bold"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="120dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/step"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/step1"
+            android:textSize="15sp"
+            android:fontFamily="@font/spoqa_han_sans_bold"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            />
+
+        <ImageView
+            android:id="@+id/floating_button2"
+            android:layout_width="84dp"
+            android:layout_height="84dp"
+            android:src="@drawable/fab_plus"
+            app:layout_constraintTop_toBottomOf="@id/step"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="20dp"
+            />
+
+        <TextView
+            android:id="@+id/text_explain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tutorial_explain_1"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:fontFamily="@font/spoqa_han_sans_regular"
+            app:layout_constraintTop_toBottomOf="@id/floating_button2"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            />
+
+        <ImageView
+            android:id="@+id/indicator1"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:src="@drawable/switch_thumb_on"
+            app:layout_constraintTop_toBottomOf="@id/text_explain"
+            app:layout_constraintLeft_toLeftOf="@id/floating_button2"
+            app:layout_constraintRight_toLeftOf="@id/indicator2"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            />
+
+        <ImageView
+            android:id="@+id/indicator2"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:src="@drawable/switch_thumb_off"
+            app:layout_constraintTop_toBottomOf="@id/text_explain"
+            app:layout_constraintRight_toRightOf="@id/floating_button2"
+            app:layout_constraintLeft_toRightOf="@id/indicator1"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
