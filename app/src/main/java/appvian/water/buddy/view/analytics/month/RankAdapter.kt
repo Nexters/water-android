@@ -31,9 +31,14 @@ class RankAdapter : RecyclerView.Adapter<RankAdapter.RankViewHolder>() {
         totalList.clear()
         totalList.addAll(rankData)
 
-        val subSize = if (rankData.size < 4) rankData.size else 3
+        setSubData()
+    }
+
+    fun setSubData() {
+        val subSize = if (totalList.size < 4) totalList.size else 3
         rankList.clear()
         rankList.addAll(totalList.subList(0, subSize))
+
         notifyDataSetChanged()
     }
 

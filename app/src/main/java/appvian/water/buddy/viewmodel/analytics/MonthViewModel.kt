@@ -27,6 +27,7 @@ class MonthViewModel(val sharedPrefsRepository: SharedPrefsRepository, private v
 
     init {
         _observeIntakeDays.value = Pair(0, curMaxDay)
+        _loadMoreActive.value = false
     }
 
     fun setMonth(month: Int) {
@@ -94,7 +95,11 @@ class MonthViewModel(val sharedPrefsRepository: SharedPrefsRepository, private v
         }
     }
 
-    fun activeLoadMore() {
-        _loadMoreActive.value = true
+    fun isLoadMore() {
+        android.util.Log.d("month fragment", "is load more")
+        _loadMoreActive.value?.let {
+            android.util.Log.d("month fragment", "is load more $it")
+            _loadMoreActive.value = !it
+        }
     }
 }

@@ -165,11 +165,13 @@
                     android:gravity="center"
                     android:background="@drawable/radius"
                     android:backgroundTint="@color/grey_2"
-                    android:onClick="@{() -> vm.activeLoadMore()}"
+                    android:onClick="@{() -> vm.isLoadMore()}"
+                    android:visibility="@{vm.monthlyRank.size() &lt; 4 ? View.INVISIBLE : View.VISIBLE}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/month_rank_list">
 
                     <TextView
+                        android:id="@+id/month_load_more_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/month_btn_load_more"
@@ -179,10 +181,11 @@
                         />
                     
                     <ImageView
+                        android:id="@+id/month_load_more_iv"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_marginStart="1dp"
-                        android:src="@drawable/btn_load_more"/>
+                        android:src="@drawable/load_more"/>
 
                 </LinearLayout>
 
