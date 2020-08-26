@@ -7,96 +7,70 @@
 
     </data>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/weekly_first"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:elevation="0dp">
-            <com.google.android.material.appbar.CollapsingToolbarLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fitsSystemWindows="true"
-                app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fitsSystemWindows="true"
-                    app:layout_collapseMode="none">
-                    <TextView
-                        android:id="@+id/header1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="18sp"
-                        android:lineSpacingExtra="8sp"
-                        android:text="@string/analytics_weekly_header1"
-                        android:textColor="@color/black"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginTop="35dp"
-                        android:fontFamily="@font/spoqa_han_sans_bold"/>
-
-                    <LinearLayout
-                        android:id="@+id/weekly_spinner"
-                        android:layout_width="wrap_content"
-                        android:layout_height="27dp"
-                        android:layout_marginTop="35dp"
-                        android:layout_marginEnd="@dimen/daily_common_spacing"
-                        android:background="@drawable/radius"
-                        android:backgroundTint="@color/grey_2"
-                        android:orientation="horizontal"
-                        android:gravity="center"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <TextView
-                            android:id="@+id/weekly_spinner_tv"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/spoqa_han_sans_regular"
-                            android:textSize="11sp"
-                            android:layout_marginStart="12dp"
-                            tools:text="1주" />
-                        
-                        <ImageView
-                            android:layout_width="16dp"
-                            android:layout_height="16dp"
-                            android:layout_marginEnd="9dp"
-                            android:src="@drawable/load_more"/>
-
-                    </LinearLayout>
-
-
-                    <com.github.mikephil.charting.charts.BarChart
-                        android:id="@+id/weekly_barchart_by_week"
-                        android:layout_width="match_parent"
-                        android:layout_height="212dp"
-                        android:layout_marginTop="22dp"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginEnd="32dp"
-                        app:layout_constraintTop_toBottomOf="@id/weekly_spinner"
-                        app:layout_constraintStart_toStartOf="parent"/>
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </com.google.android.material.appbar.CollapsingToolbarLayout>
-        </com.google.android.material.appbar.AppBarLayout>
-
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
+            android:layout_height="match_parent">
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:background="@color/white"
-                android:paddingBottom="35dp">
+                android:paddingBottom="110dp"
+                android:layout_marginBottom="35dp"
+                android:fitsSystemWindows="true"
+                app:layout_collapseMode="none">
+                <TextView
+                    android:id="@+id/header1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:lineSpacingExtra="8sp"
+                    android:text="@string/analytics_weekly_header1"
+                    android:textColor="@color/black"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="35dp"
+                    android:fontFamily="@font/spoqa_han_sans_bold"/>
+
+                <LinearLayout
+                    android:id="@+id/weekly_spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="27dp"
+                    android:layout_marginTop="35dp"
+                    android:layout_marginEnd="@dimen/daily_common_spacing"
+                    android:background="@drawable/radius"
+                    android:backgroundTint="@color/grey_2"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/weekly_spinner_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/spoqa_han_sans_regular"
+                        android:textSize="11sp"
+                        android:layout_marginStart="12dp"
+                        tools:text="1주" />
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_marginEnd="9dp"
+                        android:src="@drawable/load_more"/>
+
+                </LinearLayout>
+
+                <com.github.mikephil.charting.charts.BarChart
+                    android:id="@+id/weekly_barchart_by_week"
+                    android:layout_width="match_parent"
+                    android:layout_height="212dp"
+                    android:layout_marginTop="22dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginEnd="32dp"
+                    app:layout_constraintTop_toBottomOf="@id/weekly_spinner"
+                    app:layout_constraintStart_toStartOf="parent"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -108,7 +82,7 @@
                     android:textSize="18sp"
                     android:lineSpacingExtra="8sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/weekly_barchart_by_week"
                     android:fontFamily="@font/spoqa_han_sans_bold"/>
 
                 <TextView
@@ -117,7 +91,7 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toEndOf="@id/front_mark"
                     app:layout_constraintEnd_toStartOf="@id/back_mark"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/weekly_barchart_by_week"
                     android:layout_marginTop="98dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
@@ -135,7 +109,7 @@
                     android:layout_marginTop="98dp"
                     android:layout_marginStart="48dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/weekly_barchart_by_week"
                     app:layout_constraintEnd_toStartOf="@id/weekly_sys_text"/>
 
                 <ImageView
@@ -147,8 +121,7 @@
                     android:layout_marginEnd="48dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/weekly_sys_text"
-                    app:layout_constraintTop_toTopOf="parent"/>
-
+                    app:layout_constraintTop_toBottomOf="@id/weekly_barchart_by_week"/>
 
                 <com.github.mikephil.charting.charts.BarChart
                     android:id="@+id/weekly_barchart_by_total"
@@ -158,8 +131,6 @@
                     android:layout_marginStart="40dp"
                     android:layout_marginEnd="40dp"
                     app:layout_constraintTop_toBottomOf="@id/weekly_sys_text"/>
-
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
