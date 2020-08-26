@@ -54,7 +54,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="32dp"
-                        android:layout_marginTop="98dp"
+                        android:layout_marginTop="91dp"
                         android:src="@drawable/ic_quotation_mark_front"
                         android:tint="@color/mark_color"
                         app:layout_constraintEnd_toStartOf="@id/month_sys_tv"
@@ -65,7 +65,7 @@
                         android:id="@+id/month_sys_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="95dp"
+                        android:layout_marginTop="91dp"
                         android:text="@string/month_sys_text"
                         android:textColor="@color/white"
                         android:textSize="14sp"
@@ -78,7 +78,7 @@
                         android:id="@+id/month_end_mark"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="98dp"
+                        android:layout_marginTop="91dp"
                         android:layout_marginEnd="47dp"
                         android:src="@drawable/ic_quotation_mark_back"
                         android:tint="@color/mark_color"
@@ -92,7 +92,7 @@
                         android:layout_marginStart="40dp"
                         android:layout_marginEnd="40dp"
                         android:layout_marginBottom="53dp"
-                        android:layout_marginTop="23dp"
+                        android:layout_marginTop="19dp"
                         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                         app:spanCount="7"
                         tools:itemCount="31"
@@ -114,7 +114,9 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingBottom="24dp">
 
                 <TextView
                     android:id="@+id/month_header_rank"
@@ -161,7 +163,6 @@
                     android:layout_marginStart="@dimen/daily_common_spacing"
                     android:layout_marginTop="24dp"
                     android:layout_marginEnd="@dimen/daily_common_spacing"
-                    android:layout_marginBottom="24dp"
                     android:gravity="center"
                     android:background="@drawable/radius"
                     android:backgroundTint="@color/grey_2"
