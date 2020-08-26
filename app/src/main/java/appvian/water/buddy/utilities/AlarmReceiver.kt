@@ -161,7 +161,7 @@ class AlarmReceiver : BroadcastReceiver() {
         //OREO API 26 이상에서는 채널 필요
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             builder.setSmallIcon(R.drawable.ic_drink_1) //mipmap 사용시 Oreo 이상에서 시스템 UI 에러남
-            builder.setLargeIcon(context.resources.getDrawable(R.drawable.google_play_store_icon, null).toBitmap())
+            builder.setLargeIcon(context.resources.getDrawable(R.mipmap.ic_launcher, null).toBitmap())
             val channelName = "워비의 수분섭취 알"
             val description = "설정한 시간에 알람합니다."
             val importance = NotificationManager.IMPORTANCE_HIGH //소리와 알림메시지를 같이 보여줌
@@ -169,7 +169,7 @@ class AlarmReceiver : BroadcastReceiver() {
                 NotificationChannel("default", channelName, importance)
             channel.description = description
             notificationManager?.createNotificationChannel(channel)
-        } else builder.setSmallIcon(R.mipmap.google_play_store_icon) // Oreo 이하에서 mipmap 사용하지 않으면 Couldn't create icon: StatusBarIcon 에러남
+        } else builder.setSmallIcon(R.mipmap.ic_launcher) // Oreo 이하에서 mipmap 사용하지 않으면 Couldn't create icon: StatusBarIcon 에러남
 
         builder.setAutoCancel(true)
             .setDefaults(NotificationCompat.DEFAULT_ALL)
