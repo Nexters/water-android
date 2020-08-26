@@ -153,31 +153,46 @@
                     app:layout_constraintTop_toBottomOf="@id/month_header_rank"
                     tools:listitem="@layout/item_month_intake" />
 
-                <Button
+                <LinearLayout
                     android:id="@+id/month_load_more"
-                    style="?android:attr/borderlessButtonStyle"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="52dp"
+                    android:orientation="horizontal"
                     android:layout_marginStart="@dimen/daily_common_spacing"
                     android:layout_marginTop="24dp"
                     android:layout_marginEnd="@dimen/daily_common_spacing"
                     android:layout_marginBottom="24dp"
-                    android:background="@drawable/btn_load_more"
+                    android:gravity="center"
+                    android:background="@drawable/radius"
+                    android:backgroundTint="@color/grey_2"
                     android:onClick="@{() -> vm.activeLoadMore()}"
-                    android:text="@string/month_btn_load_more"
-                    android:textColor="@color/grey_8"
-                    android:textSize="13sp"
-                    android:visibility="@{ vm.loadMoreActive || vm.monthlyRank.size() &lt; 4 ? View.INVISIBLE : View.VISIBLE}"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/month_rank_list"
-                    android:fontFamily="@font/spoqa_han_sans_regular"/>
+                    app:layout_constraintTop_toBottomOf="@id/month_rank_list">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/month_btn_load_more"
+                        android:textColor="@color/grey_8"
+                        android:textSize="13sp"
+                        android:fontFamily="@font/spoqa_han_sans_regular"
+                        />
+                    
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="1dp"
+                        android:src="@drawable/btn_load_more"/>
+
+                </LinearLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/month_none"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:visibility="@{vm.monthlyRank.size() != 0 ? View.GONE : View.VISIBLE}"
-                    app:layout_constraintTop_toBottomOf="@id/month_header_rank">
+                    app:layout_constraintTop_toBottomOf="@id/month_header_rank"
+                    tools:layout_editor_absoluteX="-16dp">
 
                     <ImageView
                         android:id="@+id/none_water_iv"
@@ -193,27 +208,27 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
+                        android:fontFamily="@font/spoqa_han_sans_bold"
                         android:lineSpacingExtra="20sp"
                         android:text="@string/month_rank_none"
                         android:textColor="@color/grey_7"
                         android:textSize="15sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/none_water_iv"
-                        android:fontFamily="@font/spoqa_han_sans_bold"/>
+                        app:layout_constraintTop_toBottomOf="@id/none_water_iv" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="28dp"
+                        android:fontFamily="@font/spoqa_han_sans_regular"
                         android:lineSpacingExtra="18sp"
                         android:text="@string/month_rank_none_sub"
                         android:textColor="@color/grey_7"
                         android:textSize="13sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/none_water_iv"
-                        android:fontFamily="@font/spoqa_han_sans_regular"/>
+                        app:layout_constraintTop_toBottomOf="@id/none_water_iv" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
