@@ -165,7 +165,7 @@ class WeeklyChartFragment(val analyVm: AnalyticsViewModel) : Fragment() {
             )
             limitLine.lineColor = resources.getColor(R.color.sub_red_1, null)
             limitLine.textColor = resources.getColor(R.color.sub_red_1, null)
-            limitLine.textSize = 15f
+            limitLine.textSize = 10f
             limitLine.typeface =
                 ResourcesCompat.getFont(requireContext(), R.font.spoqa_han_sans_bold)
 
