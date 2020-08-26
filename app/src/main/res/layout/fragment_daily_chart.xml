@@ -12,12 +12,11 @@
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white">
+        android:layout_height="match_parent">
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/transparent"
+            android:background="@color/white"
             android:fitsSystemWindows="true">
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:layout_width="match_parent"
@@ -126,7 +125,9 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="35dp">
+                android:background="@color/white"
+                android:paddingTop="35dp"
+                android:paddingBottom="38dp">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/daily_chart_detail"
