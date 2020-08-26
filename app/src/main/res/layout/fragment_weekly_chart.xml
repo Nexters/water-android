@@ -42,19 +42,36 @@
                         android:layout_marginTop="35dp"
                         android:fontFamily="@font/spoqa_han_sans_bold"/>
 
-                    <TextView
+                    <LinearLayout
                         android:id="@+id/weekly_spinner"
-                        android:layout_width="54dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="27dp"
                         android:layout_marginTop="35dp"
                         android:layout_marginEnd="@dimen/daily_common_spacing"
-                        android:background="@drawable/picker_background"
-                        android:fontFamily="@font/spoqa_han_sans_regular"
+                        android:background="@drawable/radius"
+                        android:backgroundTint="@color/grey_2"
+                        android:orientation="horizontal"
                         android:gravity="center"
-                        android:textSize="11sp"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:text="1주" />
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/weekly_spinner_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/spoqa_han_sans_regular"
+                            android:textSize="11sp"
+                            android:layout_marginStart="12dp"
+                            tools:text="1주" />
+                        
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:layout_marginEnd="9dp"
+                            android:src="@drawable/load_more"/>
+
+                    </LinearLayout>
+
 
                     <com.github.mikephil.charting.charts.BarChart
                         android:id="@+id/weekly_barchart_by_week"

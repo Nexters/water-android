@@ -125,7 +125,7 @@ class WeeklyChartFragment(val analyVm: AnalyticsViewModel) : Fragment() {
     }
 
     private fun setWeeklySpinnertext() {
-        binding.weeklySpinner.text = getString(
+        binding.weeklySpinnerTv.text = getString(
             R.string.weekly_picker_item,
             TimeUtil.getWeekOfMonth(weeklyVm.curYear, weeklyVm.curMonth, weeklyVm.curDay)
         )
