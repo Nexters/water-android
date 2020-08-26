@@ -25,18 +25,17 @@
                 android:textStyle="bold"
                 android:textSize="@dimen/tab_text_title"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="16dp"
-                android:padding="@dimen/common_spacing"
+                android:layout_marginTop="26dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/analytics_tab"
-                android:fontFamily="@font/spoqa_han_sans_bold"/>
+                style="@style/CommonBoldStyle"/>
 
             <ImageView
                 android:id="@+id/analytics_month_picker"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_marginTop="31dp"
+                android:layout_marginTop="33dp"
                 android:src="@drawable/ic_full"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toEndOf="@id/analytics_title"/>
