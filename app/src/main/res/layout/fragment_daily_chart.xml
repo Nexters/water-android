@@ -12,7 +12,8 @@
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/white">
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -35,12 +36,13 @@
                         android:layout_height="wrap_content"
                         android:text="@string/analytics_header_daily"
                         android:textSize="@dimen/daily_header_size"
+                        android:textColor="@color/black"
                         android:lineSpacingExtra="26sp"
                         android:layout_marginStart="@dimen/daily_common_spacing"
                         android:layout_marginTop="@dimen/daily_common_spacing"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        android:fontFamily="@font/spoqa_han_sans_bold"/>
+                        android:fontFamily="@font/spoqa_han_sans_bold" />
 
                     <TextView
                         android:id="@+id/daily_date_picker"
@@ -73,6 +75,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/daily_sys_none_water"
                         android:textSize="@dimen/daily_sys_size"
+                        android:textColor="@color/black"
                         android:lineSpacingExtra="3sp"
                         android:layout_marginTop="@dimen/daily_common_spacing"
                         android:layout_marginStart="@dimen/daily_pie_sys_spacing"
