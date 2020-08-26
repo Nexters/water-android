@@ -21,8 +21,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/txt_top"
             app:layout_constraintBottom_toBottomOf="@id/txt_top"
-            android:src="@drawable/arrow_left"
-            android:layout_marginStart="15dp"
+            android:src="@drawable/back_button"
+            android:layout_marginStart="18dp"
             />
         <TextView
             android:id="@+id/txt_top"
@@ -45,7 +45,7 @@
             app:layout_constraintTop_toTopOf="@id/txt_top"
             app:layout_constraintBottom_toBottomOf="@id/txt_top"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="25dp"
+            android:layout_marginEnd="18dp"
             />
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_favorites"

@@ -64,7 +64,7 @@ class MainFragment : Fragment() {
                         withContext(Dispatchers.Main){
                             setEmotion(it)
                         }
-                        delay(5000L)
+                        delay(4000L)
                         withContext(Dispatchers.Main){
                             setCharacter(it)
                             adjustAnimation(it)
@@ -82,12 +82,7 @@ class MainFragment : Fragment() {
                         }
                     }
                 } else{
-                    GlobalScope.launch(Dispatchers.Main) {
-                        delay(200L)
-                        withContext(Dispatchers.Main) {
-                            adjustAnimation(it)
-                        }
-                    }
+                    adjustAnimation(it)
                 }
                 changeText(it)
             } else{
@@ -101,12 +96,7 @@ class MainFragment : Fragment() {
                         }
                     }
                 } else{
-                    GlobalScope.launch(Dispatchers.Main) {
-                        delay(200L)
-                        withContext(Dispatchers.Main) {
-                            adjustAnimation(0F)
-                        }
-                    }
+                    adjustAnimation(0F)
                 }
                 changeText(0F)
                 setCharacter(0F)
@@ -236,9 +226,19 @@ class MainFragment : Fragment() {
 
     private fun setCharacter(percent: Float){
         binding.animationCharacter.setOnClickListener {
-            val bottomSheet = SetIntakeModal(Code.MAIN_FRAGMENT, null)
-            val fragmentManager = childFragmentManager
-            bottomSheet.show(fragmentManager,bottomSheet.tag)
+            adjustAnimation(percent)
+            binding.animationCharacter.isClickable = false
+            GlobalScope.launch(Dispatchers.Main) {
+                withContext(Dispatchers.Main){
+                    setEmotion(percent)
+                }
+                delay(5000L)
+                withContext(Dispatchers.Main){
+                    setCharacter(percent)
+                    adjustAnimation(percent)
+                }
+                binding.animationCharacter.isClickable = true
+            }
         }
         when(percent){
             in 0F..25F -> {
@@ -269,32 +269,30 @@ class MainFragment : Fragment() {
     }
 
     private fun setEmotion(percent: Float){
-        if(homeViewModel.currentPercent<percent){
-            when(percent){
-                in 0F..25F -> {
-                    binding.animationCharacter.setPadding(20,20,20,20)
-                    binding.animationCharacter.setAnimation("0-25-Emotion/0-25-Emotion.json")
-                    binding.animationCharacter.imageAssetsFolder = "0-25-Emotion/images"
-                    binding.animationCharacter.playAnimation()
-                }
-                in 25F..50F -> {
-                    binding.animationCharacter.setPadding(20,20,20,20)
-                    binding.animationCharacter.setAnimation("25-50-Emotion/25-50-Emotion.json")
-                    binding.animationCharacter.imageAssetsFolder = "25-50-Emotion/images"
-                    binding.animationCharacter.playAnimation()
-                }
-                in 50F..70F -> {
-                    binding.animationCharacter.setPadding(20,20,20,20)
-                    binding.animationCharacter.setAnimation("50-75-Emotion/50-75-Emotion.json")
-                    binding.animationCharacter.imageAssetsFolder = "50-75-Emotion/images"
-                    binding.animationCharacter.playAnimation()
-                }
-                else -> {
-                    binding.animationCharacter.setPadding(0,0,0,0)
-                    binding.animationCharacter.setAnimation("75-100-Emotion/75-100-Emotion.json")
-                    binding.animationCharacter.imageAssetsFolder = "75-100-Emotion/images"
-                    binding.animationCharacter.playAnimation()
-                }
+        when(percent){
+            in 0F..25F -> {
+                binding.animationCharacter.setPadding(20,20,20,20)
+                binding.animationCharacter.setAnimation("0-25-Emotion/0-25-Emotion.json")
+                binding.animationCharacter.imageAssetsFolder = "0-25-Emotion/images"
+                binding.animationCharacter.playAnimation()
+            }
+            in 25F..50F -> {
+                binding.animationCharacter.setPadding(20,20,20,20)
+                binding.animationCharacter.setAnimation("25-50-Emotion/25-50-Emotion.json")
+                binding.animationCharacter.imageAssetsFolder = "25-50-Emotion/images"
+                binding.animationCharacter.playAnimation()
+            }
+            in 50F..70F -> {
+                binding.animationCharacter.setPadding(20,20,20,20)
+                binding.animationCharacter.setAnimation("50-75-Emotion/50-75-Emotion.json")
+                binding.animationCharacter.imageAssetsFolder = "50-75-Emotion/images"
+                binding.animationCharacter.playAnimation()
+            }
+            else -> {
+                binding.animationCharacter.setPadding(0,0,0,0)
+                binding.animationCharacter.setAnimation("75-100-Emotion/75-100-Emotion.json")
+                binding.animationCharacter.imageAssetsFolder = "75-100-Emotion/images"
+                binding.animationCharacter.playAnimation()
             }
         }
     }
