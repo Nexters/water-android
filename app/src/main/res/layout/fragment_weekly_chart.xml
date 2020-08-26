@@ -15,7 +15,7 @@
             android:id="@+id/weekly_first"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/transparent"
+            android:background="@color/white"
             android:elevation="0dp">
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:layout_width="match_parent"
@@ -35,6 +35,7 @@
                         android:textSize="18sp"
                         android:lineSpacingExtra="8sp"
                         android:text="@string/analytics_weekly_header1"
+                        android:textColor="@color/black"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         android:layout_marginStart="32dp"
@@ -76,7 +77,9 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingBottom="35dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -84,6 +87,7 @@
                     android:layout_marginTop="35dp"
                     android:layout_marginStart="32dp"
                     android:text="@string/analytics_weekly_header2"
+                    android:textColor="@color/black"
                     android:textSize="18sp"
                     android:lineSpacingExtra="8sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -101,6 +105,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
                     android:text="저번 주보다 평균 수분 섭취량이\n800ml 줄었어요"
+                    android:textColor="@color/black"
                     android:textSize="14sp"
                     android:textAlignment="center"
                     android:fontFamily="@font/spoqa_han_sans_bold"/>
