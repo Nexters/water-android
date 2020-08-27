@@ -32,7 +32,7 @@
         android:textSize="13sp"
         android:textColor="@color/settingTxtBlack"
         android:layout_marginTop="24dp"
-        android:fontFamily="@font/spoqa_han_sans_bold"
+        android:fontFamily="@font/spoqa_han_sans_regular"
         />
     <ImageView
         android:id="@+id/img_cancel"
@@ -64,7 +64,7 @@
         android:textSize="13sp"
         android:textColor="@color/settingTxtBlack"
         android:layout_marginTop="20dp"
-        android:fontFamily="@font/spoqa_han_sans_bold"/>
+        android:fontFamily="@font/spoqa_han_sans_regular"/>
 
     <EditText
         android:id="@+id/edt_amount"

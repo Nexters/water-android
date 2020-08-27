@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
     <data>
         <variable
             name="homeViewModel"
@@ -10,7 +11,8 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/white">
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/animation_water_full"
@@ -68,42 +70,33 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <TextView
-                android:id="@+id/nickname_text"
-                android:text="@{String.format(@string/polite_name,homeViewModel.nickname)}"
+                android:id="@+id/home_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:lineSpacingExtra="3dp"
                 android:textColor="#030303"
                 android:textSize="22sp"
-                android:lineHeight="29sp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 android:layout_marginStart="35dp"
                 android:layout_marginTop="51dp"
                 android:fontFamily="@font/spoqa_han_sans_light"
                 />
-            <TextView
-                android:id="@+id/home_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#030303"
-                android:textSize="22sp"
-                android:lineHeight="29sp"
-                app:layout_constraintTop_toBottomOf="@id/nickname_text"
-                app:layout_constraintLeft_toLeftOf="@id/nickname_text"
-                android:fontFamily="@font/spoqa_han_sans_light"
-                />
             <Button
                 android:id="@+id/intake_list_button"
-                android:layout_width="122dp"
+                android:layout_width="138dp"
                 android:layout_height="29dp"
                 android:textSize="11sp"
                 android:textColor="#868686"
+                android:drawableEnd="@drawable/main_arrow_icon"
+                android:paddingEnd="13dp"
                 android:background="@drawable/intake_list_button_radius"
                 app:layout_constraintTop_toBottomOf="@id/home_text"
                 app:layout_constraintLeft_toLeftOf="parent"
                 android:layout_marginTop="14dp"
                 android:layout_marginStart="32dp"
                 android:fontFamily="@font/spoqa_han_sans_regular"
+                android:stateListAnimator="@null"
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

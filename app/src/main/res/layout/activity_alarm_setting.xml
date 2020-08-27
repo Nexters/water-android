@@ -25,6 +25,16 @@
             android:layout_marginTop="46dp"
             android:fontFamily="@font/spoqa_han_sans_bold"
             />
+        <ImageView
+            android:id="@+id/img_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/txt_top"
+            app:layout_constraintTop_toTopOf="@id/txt_top"
+            android:src="@drawable/arrow_left"
+            android:layout_marginStart="15dp"
+            />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_switch"

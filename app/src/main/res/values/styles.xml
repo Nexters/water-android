@@ -38,6 +38,7 @@
     <style name="Picker" parent="AppTheme">
         <item name="colorControlNormal">@color/grey_2</item>
         <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily">@font/spoqa_han_sans_bold</item>
     </style>
     <style name="Transparent" parent="@style/Theme.AppCompat">
         <item name="windowNoTitle">true</item>
@@ -46,6 +47,17 @@
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowAnimationStyle">@android:style/Animation</item>
         <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="TabText" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="android:fontFamily">@font/spoqa_han_sans_bold</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="CommonBoldStyle" parent="Widget.AppCompat.TextView">
+        <item name="android:fontFamily">@font/spoqa_han_sans_bold</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 
 </resources>

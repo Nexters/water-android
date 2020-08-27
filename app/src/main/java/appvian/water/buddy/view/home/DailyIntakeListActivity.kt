@@ -30,6 +30,12 @@ class DailyIntakeListActivity : AppCompatActivity() {
         setVisibleCheckbox()
         setButton()
         initToast()
+        binding.dailyBackButton.setOnClickListener {
+            finish()
+        }
+        binding.dailyIntakeLayout.setOnClickListener {
+            homeViewModel.isDeleteButtonClicked.value = false
+        }
     }
 
     override fun onBackPressed() {
