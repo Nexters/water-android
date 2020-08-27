@@ -10,7 +10,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.settings.TargetAmountSettingActivity">
+        tools:context=".view.settings.TargetAmountSettingActivity"
+        android:background="@color/white"
+        >
         <ImageView
             android:id="@+id/img_back"
             android:layout_width="wrap_content"
@@ -33,12 +35,13 @@
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="46dp"
             android:fontFamily="@font/spoqa_han_sans_bold"
+            android:includeFontPadding="false"
             />
         <TextView
             android:id="@+id/txt_top_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="@id/txt_top"
+            app:layout_constraintTop_toBottomOf="@id/txt_top"
             android:layout_marginTop="32dp"
             android:text="하루 수분 섭취 목표량"
             app:layout_constraintStart_toStartOf="@id/txt_top"
@@ -46,6 +49,7 @@
             android:textColor="@color/grey_8"
             android:textSize="13sp"
             android:fontFamily="@font/spoqa_han_sans_regular"
+            android:includeFontPadding="false"
             />
         <TextView
             android:id="@+id/txt_target_amount"
@@ -58,6 +62,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:fontFamily="@font/spoqa_han_sans_bold"
+            android:includeFontPadding="false"
             />
         <RelativeLayout
             android:id="@+id/layout_bubble"

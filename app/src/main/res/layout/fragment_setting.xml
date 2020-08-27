@@ -14,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".view.settings.SettingFragment"
+        android:background="@color/white"
 
         >
         <ImageView
@@ -66,7 +67,6 @@
                 android:textSize="13sp"
                 android:textColor="@color/settingTxtBlack"
                 android:text="목표랑 설정"
-                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -113,7 +113,6 @@
                 android:textSize="13sp"
                 android:textColor="@color/settingTxtBlack"
                 android:text="자주 마시는 음료"
-                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -147,7 +146,6 @@
                 android:textSize="13sp"
                 android:textColor="@color/settingTxtBlack"
                 android:text="알림 설정"
-                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"

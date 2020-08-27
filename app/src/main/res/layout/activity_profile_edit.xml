@@ -16,7 +16,9 @@
         tools:context=".view.settings.ProfileEditActivity"
         android:focusableInTouchMode="true"
         android:clickable="true"
-        android:focusable="true">
+        android:focusable="true"
+        android:background="@color/white"
+        >
 
         <ImageView
             android:id="@+id/img_profile_edt_arrow"

@@ -7,6 +7,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -25,6 +26,8 @@ class TargetAmountSettingActivity : AppCompatActivity() {
     private var target_amount_change_flag = false
     private var weight_change_flag = false
     private var height_change_flag = false
+    private var inital_focus_flag = true
+    private var first_edt_click = true
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bindig = DataBindingUtil.setContentView(this, R.layout.activity_target_amount_setting)
@@ -64,10 +67,45 @@ class TargetAmountSettingActivity : AppCompatActivity() {
         edt_height.setSelection(settingViewModel.heightLiveData.value.toString().length)
         edt_weight.setText(settingViewModel.weightLiveData.value.toString())
         edt_weight.setSelection(settingViewModel.weightLiveData.value.toString().length)
+        edt_height.setOnFocusChangeListener { v, hasFocus ->
+            if(hasFocus){
+                edt_height.text.clear()
+            }else{
+                if(edt_height.text.isNullOrBlank()){
+                    edt_height.setText(settingViewModel.heightLiveData.value.toString())
+                }
+            }
+        }
+        edt_weight.setOnFocusChangeListener{ v, hasFocus ->
+            if(hasFocus){
+                if(inital_focus_flag){
+                    inital_focus_flag = false
+                }else {
+                    edt_weight.text.clear()
+                }
+            }else{
+                if(edt_weight.text.isNullOrBlank()){
+                    edt_weight.setText(settingViewModel.weightLiveData.value.toString())
+                }
+            }
+        }
+        edt_weight.setOnEditorActionListener { v, actionId, event ->
+            if(actionId == EditorInfo.IME_ACTION_NEXT){
+                edt_height.requestFocus()
+                true
+            }else false
+        }
         checkbox.setOnCheckedChangeListener { buttonView, isChecked ->
             if(isChecked){
                 //목표량 자동 계산
                 setTargetAmount()
+            }
+        }
+        edt_weight.setOnClickListener{
+            if(first_edt_click){
+                first_edt_click = false
+                edt_weight.text.clear()
+
             }
         }
         bindig.btnSave.setOnClickListener {
@@ -89,14 +127,18 @@ class TargetAmountSettingActivity : AppCompatActivity() {
     inner class TxtTargetWatcher(var initText : String) : TextWatcher{
         override fun afterTextChanged(s: Editable?) {
             //변경되었다면 저장버튼 활성화
-            if(s.toString() != initText){
-                saveBtnClickable()
-                target_amount_change_flag = true
-            }else{
-                target_amount_change_flag = false
-                if(!height_change_flag && !weight_change_flag){
-                    saveBtnUnClickable()
+            if(!s.isNullOrBlank()) {
+                if (s.toString() != initText) {
+                    saveBtnClickable()
+                    target_amount_change_flag = true
+                } else {
+                    target_amount_change_flag = false
+                    if (!height_change_flag && !weight_change_flag) {
+                        saveBtnUnClickable()
+                    }
                 }
+            }else{
+                saveBtnUnClickable()
             }
 
         }
@@ -110,19 +152,23 @@ class TargetAmountSettingActivity : AppCompatActivity() {
     inner class EdtHeightWatcher(var initText : String) : TextWatcher{
         override fun afterTextChanged(s: Editable?) {
             //변경되었다면 저장버튼 활성화
-            if(s.toString() != initText){
-                saveBtnClickable()
-                height_change_flag = true
-                edt_height.setTextColor(resources.getColor(R.color.settingTxtBlack, null))
-            }else{
-                height_change_flag = false
-                if(!weight_change_flag && !target_amount_change_flag){
-                    saveBtnUnClickable()
+            if(!s.isNullOrBlank()) {
+                if (s.toString() != initText) {
+                    saveBtnClickable()
+                    height_change_flag = true
+                    edt_height.setTextColor(resources.getColor(R.color.settingTxtBlack, null))
+                } else {
+                    height_change_flag = false
+                    if (!weight_change_flag && !target_amount_change_flag) {
+                        saveBtnUnClickable()
+                    }
+                    edt_height.setTextColor(resources.getColor(R.color.grey_6, null))
                 }
-                edt_height.setTextColor(resources.getColor(R.color.grey_6, null))
-            }
-            if(checkbox.isChecked){
-                setTargetAmount()
+                if (checkbox.isChecked) {
+                    setTargetAmount()
+                }
+            }else{
+                saveBtnUnClickable()
             }
         }
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -136,19 +182,23 @@ class TargetAmountSettingActivity : AppCompatActivity() {
     inner class EdtWeightWatcher(var initText: String) : TextWatcher{
         override fun afterTextChanged(s: Editable?) {
             //변경되었다면 저장버튼 활성화
-            if(s.toString() != initText){
-                saveBtnClickable()
-                weight_change_flag = true
-                edt_weight.setTextColor(resources.getColor(R.color.settingTxtBlack, null))
-            }else{
-                weight_change_flag = false
-                if(!height_change_flag && !target_amount_change_flag){
-                    saveBtnUnClickable()
+            if(!s.isNullOrBlank()) {
+                if (s.toString() != initText) {
+                    saveBtnClickable()
+                    weight_change_flag = true
+                    edt_weight.setTextColor(resources.getColor(R.color.settingTxtBlack, null))
+                } else {
+                    weight_change_flag = false
+                    if (!height_change_flag && !target_amount_change_flag) {
+                        saveBtnUnClickable()
+                    }
+                    edt_weight.setTextColor(resources.getColor(R.color.grey_6, null))
                 }
-                edt_weight.setTextColor(resources.getColor(R.color.grey_6, null))
-            }
-            if(checkbox.isChecked){
-                setTargetAmount()
+                if (checkbox.isChecked) {
+                    setTargetAmount()
+                }
+            }else{
+                saveBtnUnClickable()
             }
         }
 
