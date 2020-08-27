@@ -87,11 +87,15 @@ class MonthFragment(val analyVm: AnalyticsViewModel) : Fragment() {
     }
 
     private fun checkLoadAllData(isLoadAll: Boolean) {
+        android.util.Log.d("month fragment", "check load all $isLoadAll")
         if (isLoadAll) {
-            binding.monthLoadMore.visibility = View.GONE
             rankAdapter.setAllData()
+            binding.monthLoadMoreTv.text = getText(R.string.month_btn_load_close)
+            binding.monthLoadMoreIv.scaleY = -1f
         } else {
-            binding.monthLoadMore.visibility = View.VISIBLE
+            rankAdapter.setSubData()
+            binding.monthLoadMoreTv.text = getText(R.string.month_btn_load_more)
+            binding.monthLoadMoreIv.scaleY = 1f
         }
     }
 
