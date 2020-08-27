@@ -16,7 +16,7 @@
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/transparent"
+            android:background="@color/white"
             android:fitsSystemWindows="true">
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:layout_width="match_parent"
@@ -35,26 +35,42 @@
                         android:layout_height="wrap_content"
                         android:text="@string/analytics_header_daily"
                         android:textSize="@dimen/daily_header_size"
+                        android:textColor="@color/black"
                         android:lineSpacingExtra="26sp"
                         android:layout_marginStart="@dimen/daily_common_spacing"
                         android:layout_marginTop="@dimen/daily_common_spacing"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        android:fontFamily="@font/spoqa_han_sans_bold"/>
+                        android:fontFamily="@font/spoqa_han_sans_bold" />
 
-                    <TextView
+                    <LinearLayout
                         android:id="@+id/daily_date_picker"
                         android:layout_width="62dp"
                         android:layout_height="27dp"
+                        android:orientation="horizontal"
+                        android:background="@drawable/radius"
+                        android:backgroundTint="@color/grey_2"
                         android:layout_marginTop="@dimen/daily_common_spacing"
                         android:layout_marginEnd="31dp"
                         android:gravity="center"
-                        android:textAlignment="center"
-                        android:textSize="11sp"
-                        android:background="@drawable/picker_background"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:text="15일"/>
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/daily_date_picker_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:textSize="11sp"
+                            tools:text="15일"/>
+
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:layout_marginEnd="8dp"
+                            android:src="@drawable/load_more"
+                            />
+                    </LinearLayout>
 
                     <com.github.mikephil.charting.charts.PieChart
                         android:id="@+id/daily_piechart"
@@ -73,6 +89,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/daily_sys_none_water"
                         android:textSize="@dimen/daily_sys_size"
+                        android:textColor="@color/black"
                         android:lineSpacingExtra="3sp"
                         android:layout_marginTop="@dimen/daily_common_spacing"
                         android:layout_marginStart="@dimen/daily_pie_sys_spacing"
@@ -108,7 +125,9 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="35dp">
+                android:background="@color/white"
+                android:paddingTop="35dp"
+                android:paddingBottom="38dp">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/daily_chart_detail"

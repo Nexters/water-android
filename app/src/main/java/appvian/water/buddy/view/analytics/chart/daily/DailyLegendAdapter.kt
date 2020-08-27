@@ -1,5 +1,6 @@
 package appvian.water.buddy.view.analytics.chart.daily
 
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -11,15 +12,17 @@ import appvian.water.buddy.util.DrinkMapper
 class DailyLegendAdapter : RecyclerView.Adapter<DailyLegendAdapter.LegendVh>() {
     private val legends = ArrayList<String>()
 
-    inner class LegendVh(val binding: ItemDailyLegendBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class LegendVh(val binding: ItemDailyLegendBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun bindLegends(position: Int, item: String) {
-            binding.dailyLegendImg.setBackgroundColor(binding.root.context.getColor(DrinkMapper.drinkColor[position]))
+            binding.dailyLegendImg.backgroundTintList =
+                ColorStateList.valueOf(binding.root.context.getColor(DrinkMapper.drinkColor[position]))
             binding.dailyLegendTxt.text = item
         }
     }
 
-    fun addData(items: Array<String>){
+    fun addData(items: Array<String>) {
         legends.clear()
         legends.addAll(items)
         notifyDataSetChanged()

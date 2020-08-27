@@ -119,7 +119,7 @@ class DailyChartFragment(val analyVm: AnalyticsViewModel) : Fragment(), Calendar
     }
 
     private fun setSpinnertext() {
-        binding.dailyDatePicker.text = getString(R.string.daily_date, dailyVm.curDay)
+        binding.dailyDatePickerTv.text = getString(R.string.daily_date, dailyVm.curDay)
     }
 
     private fun setNoneData() {
@@ -186,7 +186,7 @@ class DailyChartFragment(val analyVm: AnalyticsViewModel) : Fragment(), Calendar
         dailyVm.curMonth = month - 1
         dailyVm.curDay = day
 
-        binding.dailyDatePicker.text = getString(R.string.daily_date, dailyVm.curDay)
+        binding.dailyDatePickerTv.text = getString(R.string.daily_date, dailyVm.curDay)
         dailyVm.getDailyIntake()
     }
 }
