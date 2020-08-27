@@ -55,7 +55,7 @@
                 app:layout_constraintRight_toRightOf="parent"
                 android:backgroundTint="@color/grey_6"
                 android:textColorHint="@color/grey_6"
-                android:fontFamily="@font/spoqa_han_sans_light"
+                android:fontFamily="@font/spoqa_han_sans_bold"
                 />
 
             <Button
