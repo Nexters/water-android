@@ -56,7 +56,7 @@ class IntroFourthFragment : Fragment() {
         Observer<Any> { o -> nametext.text = o!!.toString() })
 
         introViewModel.targetamountliveText.observe(viewLifecycleOwner,
-            Observer<Any> { o -> tagetamounttext.text = o!!.toString() + " L" })
+            Observer<Any> { o -> tagetamounttext.text = o!!.toString() + "L" })
     }
     override fun onAttach(context: Context) {
         super.onAttach(context)

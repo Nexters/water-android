@@ -48,7 +48,7 @@
     <string name="intro_second_description2">닉네임은 언제든지 변경할 수 있어요.</string>
     <string name="intro_second_inputhint">최대 6자 입력 </string>
     <string name="intro_second_textcount">/6자 </string>
-    <string name="intro_third_description1">키와 몸무게\n알려주세요.</string>
+    <string name="intro_third_description1">키와 몸무게를\n알려주세요.</string>
     <string name="intro_third_description2">하루 목표 섭취량을 계산 해드릴게요.</string>
     <string name="intro_third_kghint"> kg 없이 입력 </string>
     <string name="intro_third_kg"> 체중 (kg) </string>
@@ -59,7 +59,7 @@
     <string name="intro_fourth_welcome3">하루 목표 수분 섭취량은</string>
     <string name="intro_fourth_welcome4">" 입니다."</string>
     <string name="intro_fourth_welcome5">캐릭터 워비와 함께 </string>
-    <string name="intro_fourth_welcome6">목표량을 달성 보아요. </string>
+    <string name="intro_fourth_welcome6">목표를 달성 보아요. </string>
     <string name="intro_main_btn">시작하기</string>
     <string name="intro_second_btn">다음 1/2</string>
     <string name="intro_third_btn">다음 2/2</string>
