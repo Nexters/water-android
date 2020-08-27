@@ -13,6 +13,13 @@ class CalendarItemDecoration : RecyclerView.ItemDecoration() {
         state: RecyclerView.State
     ) {
         super.getItemOffsets(outRect, view, parent, state)
+
+        val position = parent.getChildLayoutPosition(view)
+        val rowCnt = Math.round(state.itemCount / 7f)
+
         outRect.bottom = space
+        if (rowCnt > 0 && Math.round(position / 7f) == rowCnt) {
+            outRect.bottom = 0
+        }
     }
 }
