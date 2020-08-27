@@ -9,8 +9,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/month_wabi_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="50dp"
+        android:layout_height="50dp">
 
         <ImageView
             android:layout_width="38dp"
@@ -23,9 +23,10 @@
 
         <ImageView
             android:id="@+id/month_wabi_character"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_margin="2dp"
+            android:scaleType="centerInside"
             tools:src="@mipmap/artboard_8_3_x"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
