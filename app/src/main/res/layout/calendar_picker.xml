@@ -49,23 +49,24 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/arrow_left"
-                android:layout_marginTop="35dp"
+                android:layout_marginTop="89dp"
                 android:layout_marginStart="15dp"
                 android:clickable="true"
                 android:focusable="true"
                 android:onClick="@{vm.prevMonth}"
-                app:layout_constraintTop_toBottomOf="@id/cal_picker_close"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"/>
 
             <TextView
                 android:id="@+id/cal_year_month"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="89dp"
                 android:textSize="15sp"
                 app:layout_constraintStart_toEndOf="@id/cal_prev"
-                app:layout_constraintTop_toBottomOf="@id/cal_picker_close"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/cal_next"
+                app:layout_constraintBottom_toTopOf="@id/cal_legend"
                 tools:text="2020년7월"
                 style="@style/CommonBoldStyle"/>
 
@@ -73,14 +74,14 @@
                 android:id="@+id/cal_next"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginTop="35dp"
+                android:layout_marginTop="89dp"
                 android:layout_marginEnd="15dp"
                 android:src="@drawable/arrow_right"
                 android:clickable="true"
                 android:focusable="true"
                 android:onClick="@{vm.nextMonth}"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cal_picker_close"/>
+                app:layout_constraintTop_toTopOf="parent"/>
 
             <include
                 android:id="@+id/cal_legend"
