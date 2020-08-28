@@ -53,7 +53,6 @@ class CalendarModal(
             dismiss()
         }
         binding.calView.adapter = calendarAdapter
-        binding.calView.addItemDecoration(CalendarItemDecoration())
 
         observeData()
     }
