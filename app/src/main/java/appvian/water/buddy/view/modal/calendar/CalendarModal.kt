@@ -99,8 +99,14 @@ class CalendarModal(
     override fun getCalendarDay(day: Int) {
         if (day > 0) {
             selectDay = day
+            binding.calConfirmBtn.isClickable = true
             binding.calConfirmBtn.backgroundTintList =
                 ColorStateList.valueOf(resources.getColor(R.color.blue_1, null))
+        } else {
+            selectDay = -1
+            binding.calConfirmBtn.isClickable = false
+            binding.calConfirmBtn.isFocusable = false
+            binding.calConfirmBtn.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.blue_2, null))
         }
     }
 }

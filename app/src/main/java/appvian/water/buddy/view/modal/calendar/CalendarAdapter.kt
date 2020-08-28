@@ -77,7 +77,14 @@ class CalendarAdapter(val calendarVm:CalendarViewModel, val calendarDayListener:
     fun setDayList(dayList: List<Int?>) {
         this.dayList.clear()
         this.dayList.addAll(dayList)
+
+        initItemCheckPosition()
         notifyDataSetChanged()
+    }
+
+    private fun initItemCheckPosition() {
+        checkedPos = -1
+        calendarDayListener.getCalendarDay(-1)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CalendarVh {
