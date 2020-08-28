@@ -6,11 +6,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import appvian.water.buddy.R
 import appvian.water.buddy.databinding.CalendarPickerBinding
 import appvian.water.buddy.viewmodel.modal.CalendarViewModel
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
@@ -39,6 +41,18 @@ class CalendarModal(
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.calendar_picker, container, false)
         binding.vm = calendarVm
+
+        //modal 길이 수정
+        dialog?.let {dialog ->
+            dialog.setOnShowListener { it ->
+                val bottomSheetDialog = (it as BottomSheetDialog).findViewById<FrameLayout>(com.google.android.material.R.id.design_bottom_sheet)
+                bottomSheetDialog?.let {
+                    BottomSheetBehavior.from(it).state = BottomSheetBehavior.STATE_EXPANDED
+                    BottomSheetBehavior.from(it).skipCollapsed = true
+                    BottomSheetBehavior.from(it).isHideable = true
+                }
+            }
+        }
 
         initUi()
 
