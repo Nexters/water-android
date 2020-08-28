@@ -10,7 +10,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.settings.AlarmSettingActivity">
+        tools:context=".view.settings.AlarmSettingActivity"
+        android:background="@color/white"
+        >
 
         <TextView
             android:id="@+id/txt_top"
@@ -52,7 +54,8 @@
                 android:textSize="15sp"
                 android:textColor="@color/settingTxtBlack"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toTopOf="@id/switch_alarm"
+                app:layout_constraintBottom_toBottomOf="@id/switch_alarm"
                 android:fontFamily="@font/spoqa_han_sans_regular"
                 />
             <Switch
