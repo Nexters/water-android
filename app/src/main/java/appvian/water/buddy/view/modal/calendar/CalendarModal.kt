@@ -25,9 +25,9 @@ class CalendarModal(
     private lateinit var binding: CalendarPickerBinding
     private var selectDay = -1
 
-    private val calendarAdapter = CalendarAdapter(this)
     private val calendarVm =
         CalendarViewModel(curYear, curMonth)
+    private val calendarAdapter = CalendarAdapter(calendarVm, this)
 
     override fun getTheme(): Int = R.style.RoundBottomSheetDialog
 
@@ -42,6 +42,26 @@ class CalendarModal(
         binding = DataBindingUtil.inflate(inflater, R.layout.calendar_picker, container, false)
         binding.vm = calendarVm
 
+        initUi()
+
+        return binding.root
+    }
+
+    private fun initUi() {
+        setDialogExpand()
+
+        binding.calPickerClose.setOnClickListener { dismiss() }
+        binding.calConfirmBtn.setOnClickListener {
+            if (selectDay != -1)
+                calendarTotalListener.getCalendarTotal(curYear, curMonth, selectDay)
+            dismiss()
+        }
+        binding.calView.adapter = calendarAdapter
+
+        observeData()
+    }
+
+    private fun setDialogExpand() {
         //modal 길이 수정
         dialog?.let {dialog ->
             dialog.setOnShowListener { it ->
@@ -53,22 +73,6 @@ class CalendarModal(
                 }
             }
         }
-
-        initUi()
-
-        return binding.root
-    }
-
-    private fun initUi() {
-        binding.calPickerClose.setOnClickListener { dismiss() }
-        binding.calConfirmBtn.setOnClickListener {
-            if (selectDay != -1)
-                calendarTotalListener.getCalendarTotal(curYear, curMonth, selectDay)
-            dismiss()
-        }
-        binding.calView.adapter = calendarAdapter
-
-        observeData()
     }
 
     private fun observeData() {
