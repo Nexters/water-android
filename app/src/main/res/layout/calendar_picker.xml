@@ -89,6 +89,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="17dp"
             android:layout_marginEnd="17dp"
+            android:paddingEnd="3dp"
             tools:listitem="@layout/wb_calendar_item"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="7"
