@@ -1,20 +1,17 @@
 package appvian.water.buddy.view.Intro
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
+import appvian.water.buddy.R
 import appvian.water.buddy.R.drawable
 import appvian.water.buddy.R.layout.intro_fragment
 import appvian.water.buddy.view.CircleIndicator
-import appvian.water.buddy.view.MainActivity
-import appvian.water.buddy.viewmodel.IntroViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.intro_fragment.view.*
 
@@ -34,23 +31,29 @@ class IntroFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(intro_fragment, container, false)
         val listImage: ArrayList<Int> = ArrayList()
+        val listText:ArrayList<String> = ArrayList()
 
         listImage.add(drawable.onboarding_1)
         listImage.add(drawable.onboarding_2)
         listImage.add(drawable.onboarding_3)
+        listText.add(getString(R.string.intro_onboarding1))
+        listText.add(getString(R.string.intro_onboarding2))
+        listText.add(getString(R.string.intro_onboarding3))
 
         viewpager = view.viewPager
         circleindicator = view.circleindicator
         val pageAdapter = IntroViewpagerAdapter(childFragmentManager)
         viewpager.adapter = pageAdapter
-
+        var index = 0
         for(i in listImage) {
             val imageFragment = onBoardingFragment()
             val bundle by lazy { Bundle() }
             bundle.putInt("imgRes", i)
+            bundle.putString("textRes", listText[index++])
             imageFragment.arguments = bundle
             pageAdapter.addItem(imageFragment)
         }
+
         pageAdapter.notifyDataSetChanged()
 
         viewpager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
