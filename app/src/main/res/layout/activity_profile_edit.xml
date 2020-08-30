@@ -73,13 +73,15 @@
             />
         <Button
             android:id="@+id/btn_save"
-            android:layout_width="322dp"
+            android:layout_width="match_parent"
             android:layout_height="52dp"
             android:background="@drawable/setting_save_btn"
             android:text="저장"
             android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="19dp"
+            android:layout_marginEnd="19dp"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="24dp"
             android:fontFamily="@font/spoqa_han_sans_bold"
