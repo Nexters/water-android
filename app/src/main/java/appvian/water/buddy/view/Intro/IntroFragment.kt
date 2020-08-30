@@ -33,9 +33,9 @@ class IntroFragment : Fragment() {
         val listImage: ArrayList<Int> = ArrayList()
         val listText:ArrayList<String> = ArrayList()
 
-        listImage.add(drawable.onboarding_1)
-        listImage.add(drawable.onboarding_2)
-        listImage.add(drawable.onboarding_3)
+        listImage.add(drawable.ic_onboarding_1)
+        listImage.add(drawable.ic_onboarding_2)
+        listImage.add(drawable.ic_onboarding_3)
         listText.add(getString(R.string.intro_onboarding1))
         listText.add(getString(R.string.intro_onboarding2))
         listText.add(getString(R.string.intro_onboarding3))

@@ -37,7 +37,7 @@
                 app:layout_constraintLeft_toLeftOf="@id/onboarding_text"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:srcCompat="@drawable/onboarding_1" />
+                app:srcCompat="@drawable/ic_onboarding_1" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>

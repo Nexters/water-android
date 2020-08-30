@@ -36,7 +36,7 @@
                 android:layout_marginStart="35dp"
                 app:layout_constraintTop_toBottomOf="@+id/intro_fourth_main1"
                 app:layout_constraintLeft_toLeftOf="parent"
-                android:fontFamily="@font/spoqa_han_sans_light"
+                android:fontFamily="@font/spoqa_han_sans_bold"
                 />
             <TextView
                 android:id="@+id/intro_fourth_main2"
@@ -70,7 +70,7 @@
                 android:layout_marginStart="35dp"
                 app:layout_constraintTop_toBottomOf="@+id/intro_fourth_main3"
                 app:layout_constraintLeft_toLeftOf="parent"
-                android:fontFamily="@font/spoqa_han_sans_light"
+                android:fontFamily="@font/spoqa_han_sans_bold"
                 />
             <TextView
                 android:id="@+id/intro_fourth_main4"
@@ -108,7 +108,7 @@
             <ImageView
                 android:layout_width="220dp"
                 android:layout_height="157dp"
-                android:src="@drawable/wabi"
+                android:src="@drawable/ic_wabi"
                 android:layout_marginEnd="40dp"
                 android:layout_marginBottom="45dp"
                 app:layout_constraintBottom_toTopOf="@+id/startbtn"
