@@ -60,7 +60,7 @@
 
             <Button
                 android:id="@+id/nextbtn"
-                android:layout_width="360dp"
+                android:layout_width="0dp"
                 android:layout_height="52dp"
                 android:text="@string/intro_second_btn"
                 android:background="@drawable/setting_save_btn_inactive"
