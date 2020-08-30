@@ -7,8 +7,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import appvian.water.buddy.R
 import appvian.water.buddy.databinding.WbCalendarItemBinding
+import appvian.water.buddy.viewmodel.modal.CalendarViewModel
 
-class CalendarAdapter(val calendarDayListener: CalendarDayListener) :
+class CalendarAdapter(val calendarVm:CalendarViewModel, val calendarDayListener: CalendarDayListener) :
     RecyclerView.Adapter<CalendarAdapter.CalendarVh>() {
     private var dayList = arrayListOf<Int?>()
     private lateinit var binding: WbCalendarItemBinding
@@ -20,30 +21,54 @@ class CalendarAdapter(val calendarDayListener: CalendarDayListener) :
             item?.let {
                 binding.calDayTv.text = item.toString()
 
-                if (checkedPos != -1) {
-                    if (checkedPos == adapterPosition) {
-                        binding.calDayView.background =
-                            binding.root.resources.getDrawable(R.drawable.circle, null)
-                        binding.calDayTv.setTextColor(Color.WHITE)
-                    } else {
-                        binding.calDayView.setBackgroundColor(
-                            binding.root.resources.getColor(
-                                R.color.transparent,
-                                null
-                            )
-                        )
-                        binding.calDayTv.setTextColor(Color.BLACK)
-                    }
+                if(calendarVm.isFutureDay(item)) {
+                   setTextColor(binding.root.resources.getColor(R.color.grey_7, null))
+                    return@bind
                 }
 
-                binding.calDayView.setOnClickListener {
-                    if (checkedPos != adapterPosition) {
-                        checkedPos = adapterPosition
-                        notifyDataSetChanged()
+                setDayCheck()
+                setViewClick(item)
+            }
+        }
 
-                        calendarDayListener.getCalendarDay(item)
-                    }
+        private fun setDayCheck() {
+            if (checkedPos != -1) {
+                if (checkedPos == adapterPosition) {
+                    setBackground(true)
+                    setTextColor(Color.WHITE)
+                } else {
+                    setBackground(false)
+                    setTextColor(Color.BLACK)
                 }
+            }
+        }
+
+        private fun setViewClick(item:Int) {
+            binding.calDayView.setOnClickListener {
+                if (checkedPos != adapterPosition) {
+                    checkedPos = adapterPosition
+                    notifyDataSetChanged()
+
+                    calendarDayListener.getCalendarDay(item)
+                }
+            }
+        }
+
+        private fun setTextColor(color:Int) {
+            binding.calDayTv.setTextColor(color)
+        }
+
+        private fun setBackground(isChecked:Boolean) {
+            if(isChecked) {
+                binding.calDayView.background =
+                    binding.root.resources.getDrawable(R.drawable.circle, null)
+            } else {
+                binding.calDayView.setBackgroundColor(
+                    binding.root.resources.getColor(
+                        R.color.transparent,
+                        null
+                    )
+                )
             }
         }
 
@@ -52,7 +77,14 @@ class CalendarAdapter(val calendarDayListener: CalendarDayListener) :
     fun setDayList(dayList: List<Int?>) {
         this.dayList.clear()
         this.dayList.addAll(dayList)
+
+        initItemCheckPosition()
         notifyDataSetChanged()
+    }
+
+    private fun initItemCheckPosition() {
+        checkedPos = -1
+        calendarDayListener.getCalendarDay(-1)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CalendarVh {

@@ -37,7 +37,9 @@
             android:id="@+id/month_picker_select"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="25dp"
+            android:selectionDividerHeight="1dp"
             app:layout_constraintTop_toBottomOf="@id/month_picker_close"
             app:layout_constraintHeight_percent=".5"
             android:theme="@style/Picker" />
@@ -55,7 +57,8 @@
             android:layout_marginBottom="24dp"
             app:layout_constraintTop_toBottomOf="@id/month_picker_select"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:fontFamily="@font/spoqa_han_sans_bold"/>
+            android:fontFamily="@font/spoqa_han_sans_bold"
+            style="?attr/borderlessButtonStyle"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
