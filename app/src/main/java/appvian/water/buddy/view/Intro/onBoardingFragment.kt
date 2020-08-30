@@ -19,11 +19,13 @@ class onBoardingFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_on_boarding, container, false)
         val imageView = view.imageView
-
+        val textView= view.onboarding_text
+        val args = arguments
         if (arguments != null) {
-            val args = arguments
-            // MainActivity에서 받아온 Resource를 ImageView에 셋팅
             imageView.setImageResource(args!!.getInt("imgRes"))
+        }
+        if (arguments != null) {
+            textView.text = args!!.getString("textRes")
         }
 
         return view
