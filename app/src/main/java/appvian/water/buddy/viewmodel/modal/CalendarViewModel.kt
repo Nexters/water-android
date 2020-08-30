@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import appvian.water.buddy.util.TimeUtil
 import java.util.*
 
-class CalendarViewModel(val curYear:Int, val curMonth: Int) {
+class CalendarViewModel(val curYear: Int, val curMonth: Int) {
 
     private val mCal = TimeUtil.getCalendarInstance()
     val year: MutableLiveData<Int> = MutableLiveData()
@@ -47,7 +47,7 @@ class CalendarViewModel(val curYear:Int, val curMonth: Int) {
         mCal.set(year.value!!, month.value!! - 1, 1)
 
         var dayOfWeek = mCal.get(Calendar.DAY_OF_WEEK)
-        
+
         //달력 공백 추가
         if (dayOfWeek != -1) {
             while (dayOfWeek - 1 > 0) {
@@ -61,5 +61,20 @@ class CalendarViewModel(val curYear:Int, val curMonth: Int) {
         }
 
         dateList.value = dates
+    }
+
+    fun isFutureDay(day: Int) : Boolean {
+        var isFuture = false
+        val today = TimeUtil.getCalendarInstance()
+
+        val dayInfo = TimeUtil.getCalendarInstance()
+        dayInfo.set(year.value as Int, month.value?.minus(1) as Int, day)
+
+        android.util.Log.d("cal vm", "day info ${dayInfo.timeInMillis},  today ${today.timeInMillis}")
+        if(dayInfo.timeInMillis > today.timeInMillis) {
+            isFuture = true
+        }
+        android.util.Log.d("cal vm", "is future result : $day, $isFuture")
+        return isFuture
     }
 }
