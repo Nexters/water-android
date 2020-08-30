@@ -70,6 +70,7 @@ class MainActivity : AppCompatActivity() {
             val category_num = CategoryMapper.getCategoryNum(st.nextToken())
             val tmp = st.nextToken()
             viewModel.addIntake(Intake(System.currentTimeMillis(), category_num, tmp.substring(0, tmp.length-2).toInt()))
+            binding.mainNavigation.selectedItemId = R.id.menu_home
             fabAnim()
         }
         binding.fabFav2.setOnClickListener{
@@ -78,6 +79,7 @@ class MainActivity : AppCompatActivity() {
             val category_num = CategoryMapper.getCategoryNum(st.nextToken())
             val tmp = st.nextToken()
             viewModel.addIntake(Intake(System.currentTimeMillis(), category_num, tmp.substring(0, tmp.length-2).toInt()))
+            binding.mainNavigation.selectedItemId = R.id.menu_home
             fabAnim()
         }
         viewModel.fav_1_liveData.observe(this, Observer {
@@ -140,6 +142,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
     private fun openAddModal(){
+        binding.mainNavigation.selectedItemId = R.id.menu_home
         val bottomSheet = SetIntakeModal(Code.MAIN_FRAGMENT, null)
         val fragmentManager = supportFragmentManager
         bottomSheet.show(fragmentManager,bottomSheet.tag)
