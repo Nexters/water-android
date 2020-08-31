@@ -6,7 +6,9 @@ import android.view.View
 import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import appvian.water.buddy.R
 import appvian.water.buddy.model.data.Intake
 import appvian.water.buddy.model.repository.HomeRepository
@@ -29,6 +31,8 @@ class MainViewModel(val activity: FragmentActivity) {
     var fav_2_liveData = sharedPreRepo.fav_2_livedata
     var showInsertToast: MutableLiveData<Boolean> = MutableLiveData(false)
     var latestIntake: Intake = Intake(0,0,0)
+
+    var is_emotion_playing = sharedPreRepo.is_emotion_playing_live_data
 
     private val intakeWaitList: MutableLiveData<ArrayList<Intake>> = MutableLiveData(ArrayList())
 
@@ -79,24 +83,53 @@ class MainViewModel(val activity: FragmentActivity) {
         latestIntake = intake
         showInsertToast.value = true
         intakeWaitList.value!!.add(intake)
+        var approveIntake : Boolean = true
+        is_emotion_playing.observeForever(Observer {
+            approveIntake = !it
+        })
         intakeWaitList.observeForever {
             if (it.isNotEmpty()){
                 when(it.size){
+                    0 -> {
+                        sharedPreRepo.setIsInsertingIntakeLiveData(false)
+                    }
+
                     1 -> {
-                        GlobalScope.launch(Dispatchers.Main) {
-                            delay(2500)
-                            withContext(Dispatchers.Main){
-                                insert(it[0])
-                                it.removeAt(0)
+                        sharedPreRepo.setIsInsertingIntakeLiveData(true)
+                        if(approveIntake) {
+                            GlobalScope.launch(Dispatchers.Main) {
+                                withContext(Dispatchers.Main) {
+                                    insert(it[0])
+                                }
+                                delay(4000L)
+                                withContext(Dispatchers.Main) {
+                                    it.removeAt(0)
+                                }
+                            }
+                        } else{
+                            GlobalScope.launch(Dispatchers.Main) {
+                                sharedPreRepo.setIsInsertingIntakeLiveData(true)
+                                delay(4000L)
+                                withContext(Dispatchers.Main){
+                                    insert(it[0])
+                                }
+                                delay(4000L)
+                                withContext(Dispatchers.Main){
+                                    it.removeAt(0)
+                                }
                             }
                         }
                     }
 
                     else -> {
+                        sharedPreRepo.setIsInsertingIntakeLiveData(true)
                         GlobalScope.launch(Dispatchers.Main) {
-                            delay(6500)
+                            delay(4000L+4000L*(it.size-2))
                             withContext(Dispatchers.Main){
                                 insert(it[0])
+                            }
+                            delay(4000L+4000L*(it.size-2))
+                            withContext(Dispatchers.Main){
                                 it.removeAt(0)
                             }
                         }
