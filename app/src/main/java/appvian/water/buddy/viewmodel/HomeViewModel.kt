@@ -31,6 +31,11 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     var percent = getDailyPercent()
     var showDeleteToast: MutableLiveData<Boolean> = MutableLiveData(false)
     var isDeleteButtonClicked: MutableLiveData<Boolean> = MutableLiveData(false)
+    var is_inserting = sharedPrefsRepository.is_inserting_intake_live_data
+
+    fun setEmotionPlaying(value: Boolean){
+        sharedPrefsRepository.setIsEmotionPlayingLiveData(value)
+    }
 
     val deleteButton = View.OnClickListener {
         isDeleteButtonClicked.value = !isDeleteButtonClicked.value!!
