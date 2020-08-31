@@ -11,10 +11,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import appvian.water.buddy.R
 import appvian.water.buddy.databinding.CalendarPickerBinding
+import appvian.water.buddy.util.TimeUtil
 import appvian.water.buddy.viewmodel.modal.CalendarViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import java.util.*
 
 class CalendarModal(
     private var curYear: Int,
@@ -63,9 +65,10 @@ class CalendarModal(
 
     private fun setDialogExpand() {
         //modal 길이 수정
-        dialog?.let {dialog ->
+        dialog?.let { dialog ->
             dialog.setOnShowListener { it ->
-                val bottomSheetDialog = (it as BottomSheetDialog).findViewById<FrameLayout>(com.google.android.material.R.id.design_bottom_sheet)
+                val bottomSheetDialog =
+                    (it as BottomSheetDialog).findViewById<FrameLayout>(com.google.android.material.R.id.design_bottom_sheet)
                 bottomSheetDialog?.let {
                     BottomSheetBehavior.from(it).state = BottomSheetBehavior.STATE_EXPANDED
                     BottomSheetBehavior.from(it).skipCollapsed = true
@@ -84,12 +87,20 @@ class CalendarModal(
         calendarVm.month.observe(viewLifecycleOwner, Observer {
             curMonth = it
             setCalYearMonthText()
+            setNextButtonVisible(curMonth)
         })
 
         calendarVm.year.observe(viewLifecycleOwner, Observer {
             curYear = it
             setCalYearMonthText()
         })
+    }
+
+    private fun setNextButtonVisible(curMonth: Int) {
+        if(curMonth >= TimeUtil.getCalendarInstance()[Calendar.MONTH] + 1)
+            binding.calNext.visibility = View.INVISIBLE
+        else
+            binding.calNext.visibility = View.VISIBLE
     }
 
     private fun setCalYearMonthText() {
@@ -106,7 +117,8 @@ class CalendarModal(
             selectDay = -1
             binding.calConfirmBtn.isClickable = false
             binding.calConfirmBtn.isFocusable = false
-            binding.calConfirmBtn.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.blue_2, null))
+            binding.calConfirmBtn.backgroundTintList =
+                ColorStateList.valueOf(resources.getColor(R.color.blue_2, null))
         }
     }
 }
