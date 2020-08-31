@@ -51,7 +51,7 @@ class MonthModal(val curYear:Int, curMonth: Int, val monthCallbackListener: Mont
 
     private fun setMonthPicker() {
         binding.monthPickerSelect.minValue = 1
-        binding.monthPickerSelect.maxValue = TimeUtil.getCalendarInstance().get(Calendar.MONTH) + 1
+        binding.monthPickerSelect.maxValue = setMaxMonth()
         binding.monthPickerSelect.wrapSelectorWheel = false
         binding.monthPickerSelect.value = curVal
         binding.monthPickerSelect.displayedValues = monthArray.map {
@@ -61,5 +61,17 @@ class MonthModal(val curYear:Int, curMonth: Int, val monthCallbackListener: Mont
         binding.monthPickerSelect.setOnValueChangedListener { picker, oldVal, newVal ->
             curVal = newVal
         }
+    }
+
+    private fun setMaxMonth() : Int {
+        val today = TimeUtil.getCalendarInstance()
+
+        val year = today[Calendar.YEAR]
+        val month = today[Calendar.MONTH] + 1
+
+        if(year == curYear)
+            return month
+
+        return 12
     }
 }
