@@ -21,6 +21,7 @@ class DeviceBootReceiver : BroadcastReceiver() {
         }
     }
     private fun setAlarm(context: Context){
+        setWidgetAlarm(context)
         repository = SharedPrefsRepository(context)
 
         alarmMgr = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
@@ -125,5 +126,19 @@ class DeviceBootReceiver : BroadcastReceiver() {
         var minutesformat = SimpleDateFormat("mm")
         var str = minutesformat.format(Date(System.currentTimeMillis()))
         return str.toInt()
+    }
+    private fun setWidgetAlarm(context: Context){
+        val calendar = Calendar.getInstance()
+        calendar.timeInMillis = System.currentTimeMillis()
+        calendar.add(Calendar.DATE, 1)
+        calendar.set(Calendar.HOUR_OF_DAY, 0)
+        calendar.set(Calendar.MINUTE, 0)
+        calendar.set(Calendar.SECOND, 0)
+
+        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val alarmIntent = Intent(context, WidgetAlarmReceiver::class.java).let { intent ->
+            PendingIntent.getBroadcast(context, 1, intent, 0)
+        }
+        alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, alarmIntent)
     }
 }
