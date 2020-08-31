@@ -24,7 +24,8 @@
         <item name="android:backgroundDimEnabled">true</item>
         <item name="android:backgroundDimAmount">0.5</item>
         <item name="android:windowFrame">@null</item>
-        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
     </style>
     <style name="EdtSettingTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorAccent">@color/settingTxtGray</item>
