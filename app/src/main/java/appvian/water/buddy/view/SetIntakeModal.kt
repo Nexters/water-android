@@ -74,7 +74,11 @@ class SetIntakeModal(var parent_context_code : Int, var intake : Intake?) : Bott
                 categoryList
             ) { category ->
                 typeofDrink = category.id
-                setBtnClickable()
+                if(v.edt_amount.text.isNullOrBlank() || v.edt_amount.text.equals("ml")) {
+                    setBtnUnClickable()
+                }else{
+                    setBtnClickable()
+                }
             }
         }
         if(parent_context_code == Code.MAIN_FRAGMENT) {
