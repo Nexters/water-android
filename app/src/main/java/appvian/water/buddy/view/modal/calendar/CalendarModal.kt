@@ -97,7 +97,11 @@ class CalendarModal(
     }
 
     private fun setNextButtonVisible(curMonth: Int) {
-        if(curMonth >= TimeUtil.getCalendarInstance()[Calendar.MONTH] + 1)
+        val today = TimeUtil.getCalendarInstance()
+        val year = today[Calendar.YEAR]
+        val month = today[Calendar.MONTH] + 1
+
+        if(year == calendarVm.year.value?: curYear && curMonth >= month)
             binding.calNext.visibility = View.INVISIBLE
         else
             binding.calNext.visibility = View.VISIBLE
