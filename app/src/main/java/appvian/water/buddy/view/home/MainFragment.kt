@@ -16,11 +16,11 @@ import appvian.water.buddy.R
 import appvian.water.buddy.viewmodel.HomeViewModel
 import kotlinx.android.synthetic.main.fragment_main.*
 import android.util.DisplayMetrics
+import android.util.Log
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import appvian.water.buddy.databinding.FragmentMainBinding
-import appvian.water.buddy.utilities.Code
-import appvian.water.buddy.view.SetIntakeModal
+import appvian.water.buddy.viewmodel.MainViewModel
 import kotlinx.coroutines.*
 import kotlin.random.Random
 
@@ -76,13 +76,29 @@ class MainFragment : Fragment() {
                 if (isFirst) {
                     isFirst = false
                     GlobalScope.launch(Dispatchers.Main) {
+                        withContext(Dispatchers.Main) {
+                            homeViewModel.setEmotionPlaying(true)
+                        }
                         delay(1500L)
                         withContext(Dispatchers.Main) {
                             adjustAnimation(it)
                         }
+                        delay(2500L)
+                        withContext(Dispatchers.Main) {
+                            homeViewModel.setEmotionPlaying(false)
+                        }
                     }
                 } else{
-                    adjustAnimation(it)
+                    GlobalScope.launch(Dispatchers.Main) {
+                        withContext(Dispatchers.Main) {
+                            homeViewModel.setEmotionPlaying(true)
+                            adjustAnimation(it)
+                        }
+                        delay(2500L)
+                        withContext(Dispatchers.Main) {
+                            homeViewModel.setEmotionPlaying(false)
+                        }
+                    }
                 }
                 changeText(it)
             } else{
@@ -90,17 +106,36 @@ class MainFragment : Fragment() {
                 if(isFirst){
                     isFirst = false
                     GlobalScope.launch(Dispatchers.Main) {
+                        withContext(Dispatchers.Main) {
+                            homeViewModel.setEmotionPlaying(true)
+                        }
                         delay(1500L)
                         withContext(Dispatchers.Main) {
                             adjustAnimation(0F)
                         }
+                        delay(2500L)
+                        withContext(Dispatchers.Main) {
+                            homeViewModel.setEmotionPlaying(false)
+                        }
                     }
                 } else{
-                    adjustAnimation(0F)
+                    GlobalScope.launch(Dispatchers.Main) {
+                        withContext(Dispatchers.Main) {
+                            homeViewModel.setEmotionPlaying(true)
+                            adjustAnimation(0F)
+                        }
+                        delay(2500L)
+                        withContext(Dispatchers.Main) {
+                            homeViewModel.setEmotionPlaying(false)
+                        }
+                    }
                 }
                 changeText(0F)
                 setCharacter(0F)
             }
+            homeViewModel.is_inserting.observeForever(Observer {
+                binding.animationCharacter.isClickable = !it
+            })
         })
 
         return binding.root
@@ -121,7 +156,6 @@ class MainFragment : Fragment() {
     private fun adjustAnimation(percent: Float){
         binding.percent.text = homeViewModel.currentPercent.toInt().toString()
         var waterGoalY = homeViewModel.waterStartY - homeViewModel.waterStartY * percent / 100
-        var characterGoalY: Float
         var goalPercentY = homeViewModel.startPercentTextY - homeViewModel.waterStartY * percent / 100 + 100F * (Resources.getSystem().displayMetrics.densityDpi).toFloat() / DisplayMetrics.DENSITY_DEFAULT
         if (waterGoalY<0F){
             waterGoalY=0F
@@ -135,6 +169,31 @@ class MainFragment : Fragment() {
         }
         val waterTranslate = TranslateAnimation(0F, 0F, homeViewModel.waterCurrentY, waterGoalY)
         val newanim_percent_text = TranslateAnimation(0F,0F,homeViewModel.currentPercentTextY,goalPercentY)
+        val anim_value = ValueAnimator.ofInt(homeViewModel.currentPercent.toInt(), percent.toInt())
+        waterTranslate.duration = 2000
+        waterTranslate.fillAfter = true
+        newanim_percent_text.duration = 2000
+        newanim_percent_text.fillAfter = true
+        binding.animationWaterFull.startAnimation(waterTranslate)
+        binding.animationWaterLine.startAnimation(waterTranslate)
+        binding.percentText.startAnimation(newanim_percent_text)
+        adjustCharacterY(percent)
+        homeViewModel.waterCurrentY = waterGoalY
+        homeViewModel.currentPercentTextY = goalPercentY
+        homeViewModel.currentPercent = percent
+        anim_value.duration = 2000
+        anim_value.addUpdateListener {
+            binding.percent.text = it.animatedValue.toString()
+        }
+        anim_value.start()
+    }
+
+    private fun adjustCharacterY(percent: Float){
+        var waterGoalY = homeViewModel.waterStartY - homeViewModel.waterStartY * percent / 100
+        if (waterGoalY<0F){
+            waterGoalY=0F
+        }
+        val characterGoalY: Float
         when(percent){
             in 0F..25F -> characterGoalY = 0F
             in 25F..50F -> characterGoalY=-homeViewModel.waterStartY+waterGoalY+160F*(Resources.getSystem().displayMetrics.densityDpi).toFloat() / DisplayMetrics.DENSITY_DEFAULT
@@ -158,23 +217,7 @@ class MainFragment : Fragment() {
         characterTranslate.duration = 2500
         characterTranslate.isFillEnabled = true
         binding.animationCharacter.startAnimation(characterTranslate)
-        val anim_value = ValueAnimator.ofInt(homeViewModel.currentPercent.toInt(), percent.toInt())
-        waterTranslate.duration = 2000
-        waterTranslate.fillAfter = true
-        newanim_percent_text.duration = 2000
-        newanim_percent_text.fillAfter = true
-        binding.animationWaterFull.startAnimation(waterTranslate)
-        binding.animationWaterLine.startAnimation(waterTranslate)
-        binding.percentText.startAnimation(newanim_percent_text)
-        homeViewModel.waterCurrentY = waterGoalY
         homeViewModel.characterCurrentY = characterGoalY
-        homeViewModel.currentPercentTextY = goalPercentY
-        homeViewModel.currentPercent = percent
-        anim_value.duration = 2000
-        anim_value.addUpdateListener {
-            binding.percent.text = it.animatedValue.toString()
-        }
-        anim_value.start()
     }
 
     private fun changeText(percent: Float){
@@ -226,18 +269,23 @@ class MainFragment : Fragment() {
 
     private fun setCharacter(percent: Float){
         binding.animationCharacter.setOnClickListener {
-            adjustAnimation(percent)
             binding.animationCharacter.isClickable = false
             GlobalScope.launch(Dispatchers.Main) {
                 withContext(Dispatchers.Main){
+                    homeViewModel.setEmotionPlaying(true)
+                    adjustCharacterY(percent)
                     setEmotion(percent)
                 }
-                delay(5000L)
+                delay(4000L)
                 withContext(Dispatchers.Main){
                     setCharacter(percent)
-                    adjustAnimation(percent)
+                    adjustCharacterY(percent)
+                    homeViewModel.setEmotionPlaying(false)
                 }
-                binding.animationCharacter.isClickable = true
+                delay(2500L)
+                withContext(Dispatchers.Main){
+                    binding.animationCharacter.isClickable = true
+                }
             }
         }
         when(percent){

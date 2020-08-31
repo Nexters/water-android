@@ -35,6 +35,12 @@ class SharedPrefsRepository(val context: Context) {
     var is_auto_setting_pref = context.getSharedPreferences("is_auto_setting", Context.MODE_PRIVATE)
     var is_auto_settiing_live_data = SharedPreferenceBooleanLiveData(is_auto_setting_pref, "is_auto_setting", true)
 
+    var is_inserting_intake_pref = context.getSharedPreferences("is_inserting_intake", Context.MODE_PRIVATE)
+    var is_inserting_intake_live_data = SharedPreferenceBooleanLiveData(is_inserting_intake_pref, "is_inserting_intake", false)
+
+    var is_emotion_playing_pref = context.getSharedPreferences("is_emotion_playing", Context.MODE_PRIVATE)
+    var is_emotion_playing_live_data = SharedPreferenceBooleanLiveData(is_emotion_playing_pref, "is_emotion_playing", false)
+
     //자주 마시는 음료 1
     val fav_1_pref = context.getSharedPreferences("favorite_1", Context.MODE_PRIVATE)
     var fav_1_livedata: SharedPreferenceStringLiveData = SharedPreferenceStringLiveData(fav_1_pref, "favorite_1", fav_1_pref.getString("favorite_1", "")!!)
@@ -139,6 +145,18 @@ class SharedPrefsRepository(val context: Context) {
         editor.putBoolean("is_auto_setting", value)
         editor.apply()
         is_auto_settiing_live_data = SharedPreferenceBooleanLiveData(is_auto_setting_pref, "is_auto_setting", value)
+    }
+    fun setIsInsertingIntakeLiveData(value : Boolean){
+        val editor = is_inserting_intake_pref.edit()
+        editor.putBoolean("is_inserting_intake", value)
+        editor.apply()
+        is_inserting_intake_live_data = SharedPreferenceBooleanLiveData(is_inserting_intake_pref, "is_inserting_intake", value)
+    }
+    fun setIsEmotionPlayingLiveData(value : Boolean){
+        val editor = is_emotion_playing_pref.edit()
+        editor.putBoolean("is_emotion_playing", value)
+        editor.apply()
+        is_emotion_playing_live_data = SharedPreferenceBooleanLiveData(is_emotion_playing_pref, "is_emotion_playing", value)
     }
     fun setHeightLiveData(value : Int){
         val editor = height_pref.edit()
