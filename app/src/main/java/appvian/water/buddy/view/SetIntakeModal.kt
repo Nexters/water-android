@@ -13,6 +13,7 @@ import android.view.*
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
+import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat.getColor
 import androidx.lifecycle.ViewModelProvider
@@ -27,6 +28,7 @@ import appvian.water.buddy.view.settings.PopupActivity
 import appvian.water.buddy.viewmodel.FavoriteViewModel
 import appvian.water.buddy.viewmodel.HomeViewModel
 import appvian.water.buddy.viewmodel.MainViewModel
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.snackbar.Snackbar
@@ -53,7 +55,21 @@ class SetIntakeModal(var parent_context_code : Int, var intake : Intake?) : Bott
     private val TUMBLER_CUP = "600"
     override fun getTheme(): Int = R.style.RoundBottomSheetDialog
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog = BottomSheetDialog(requireActivity(),theme)
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val dialog = BottomSheetDialog(requireActivity(),theme)
+
+        dialog.setOnShowListener {
+            val bottomSheetDialog =
+                (it as BottomSheetDialog).findViewById<FrameLayout>(com.google.android.material.R.id.design_bottom_sheet)
+            bottomSheetDialog?.let {
+                BottomSheetBehavior.from(it).state = BottomSheetBehavior.STATE_EXPANDED
+                BottomSheetBehavior.from(it).skipCollapsed = true
+                BottomSheetBehavior.from(it).isHideable = true
+            }
+        }
+
+        return dialog
+    }
 
     @InternalCoroutinesApi
     override fun onCreateView(
