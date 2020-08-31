@@ -76,13 +76,29 @@ class MainFragment : Fragment() {
                 if (isFirst) {
                     isFirst = false
                     GlobalScope.launch(Dispatchers.Main) {
+                        withContext(Dispatchers.Main) {
+                            homeViewModel.setEmotionPlaying(true)
+                        }
                         delay(1500L)
                         withContext(Dispatchers.Main) {
                             adjustAnimation(it)
                         }
+                        delay(2500L)
+                        withContext(Dispatchers.Main) {
+                            homeViewModel.setEmotionPlaying(false)
+                        }
                     }
                 } else{
-                    adjustAnimation(it)
+                    GlobalScope.launch(Dispatchers.Main) {
+                        withContext(Dispatchers.Main) {
+                            homeViewModel.setEmotionPlaying(true)
+                            adjustAnimation(it)
+                        }
+                        delay(2500L)
+                        withContext(Dispatchers.Main) {
+                            homeViewModel.setEmotionPlaying(false)
+                        }
+                    }
                 }
                 changeText(it)
             } else{
@@ -90,13 +106,29 @@ class MainFragment : Fragment() {
                 if(isFirst){
                     isFirst = false
                     GlobalScope.launch(Dispatchers.Main) {
+                        withContext(Dispatchers.Main) {
+                            homeViewModel.setEmotionPlaying(true)
+                        }
                         delay(1500L)
                         withContext(Dispatchers.Main) {
                             adjustAnimation(0F)
                         }
+                        delay(2500L)
+                        withContext(Dispatchers.Main) {
+                            homeViewModel.setEmotionPlaying(false)
+                        }
                     }
                 } else{
-                    adjustAnimation(0F)
+                    GlobalScope.launch(Dispatchers.Main) {
+                        withContext(Dispatchers.Main) {
+                            homeViewModel.setEmotionPlaying(true)
+                            adjustAnimation(0F)
+                        }
+                        delay(2500L)
+                        withContext(Dispatchers.Main) {
+                            homeViewModel.setEmotionPlaying(false)
+                        }
+                    }
                 }
                 changeText(0F)
                 setCharacter(0F)
