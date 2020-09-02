@@ -52,6 +52,6 @@ class CharacterAdapter : RecyclerView.Adapter<CharacterAdapter.CharacterVh>() {
 
     override fun onBindViewHolder(holder: CharacterVh, position: Int) {
         holder.setIsRecyclable(false)
-        holder.bind(position)
+        holder.bind(position + 1)
     }
 }
