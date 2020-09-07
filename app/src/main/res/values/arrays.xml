@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="analytics_tab_name">
+        <item>월간</item>
+        <item>주간</item>
+        <item>일간</item>
+    </string-array>
+    <string-array name="weekly">
+        <item>월</item>
+        <item>화</item>
+        <item>수</item>
+        <item>목</item>
+        <item>금</item>
+        <item>토</item>
+        <item>일</item>
+        <item> </item>
+    </string-array>
+
+    <string-array name="drink_category">
+        <item>물</item>
+        <item>커피</item>
+        <item>차</item>
+        <item>우유</item>
+        <item>탄산</item>
+        <item>주스</item>
+        <item>알코올</item>
+        <item>이온</item>
+        <item>기타</item>
+    </string-array>
+
+    <string-array name="drink_first_txt">
+        <item>짝짝짝! 첫 수분 섭취를 축하해요!\n이렇게 쭉쭉 마셔봐요!</item>
+        <item>짝짝짝!\n이대로 하루 목표량을 채워봐요!</item>
+        <item>하루 첫 물 한 잔 달성!\n더 마셔볼까요?</item>
+        <item>좋아요! 이제 시작이예요!\n우리 같이 힘내봐요!</item>
+        <item>시작이 반이라지만\n물 마실땐 아니라구요!</item>
+        <item>한 잔이 어렵지만\n이제부턴 쭉쭉 마셔봐요.</item>
+        <item>시작을 위한 첫 발걸음!\n참 잘했어요!</item>
+        <item>그래요 이렇게 천천히\n한 잔씩 늘려가면 돼요</item>
+    </string-array>
+    <string-array name="drink_0_txt">
+        <item>아직 마신 물이 없어요.\n지금 이 순간 한 잔!!</item>
+        <item>물 많이 마시기!\n지금부터 워비화 함께 도전해봐요:)</item>
+        <item>아직 물을 마시지 않은자 반성하라!!\n지금 당장 한 잔 마셔요!</item>
+        <item>건강을 위한 습관, 수분섭취!\n잊지마세요.</item>
+        <item>마신 물이 아직 하나도 없어요!\n어서 나에게 물을 주세요!</item>
+        <item>물을 안마시니 힘이 안나요...\n얼른 나에게 물을 주세요!</item>
+        <item>오늘 하루 물 한 잔,\n함께 마셔요!</item>
+        <item>오늘 시작해 볼까요\n물 한 잔!!</item>
+        <item>물 마시기 한 걸음\n같이 시작해 볼까요?</item>
+        <item>물 마시고,\n몸과 정신을 깨워 보세요</item>
+    </string-array>
+    <string-array name="drink_0_25_txt">
+        <item>바쁜 하루지만,\n수분 섭취 잊지마세요!</item>
+        <item>이대로 같이 수분을\n섭취하자구요!</item>
+        <item>한잔씩 마실때마다 변하는\n제 모습이 궁금하지 않아요?</item>
+        <item>아직 목이 말라요!\n물을 마셔요!</item>
+        <item>목표량 까지 금방 갈 수 있어요.\n아자! 아자!</item>
+        <item>다이어트 중이라면\n수분 섭취는 필수!</item>
+        <item>이정도도 물놀이 하긴 좋지만\n전 수영이 하고 싶어요!</item>
+        <item>아직 부족해요!\n저 물놀이 할려고 장화도 신었어요!</item>
+        <item>제 장화보세요! 귀엽죠?\n얼른 물을 줘서 날 놀게 해주세요!</item>
+        <item>건강을 위해 원샷!\n잘했어요.</item>
+    </string-array>
+    <string-array name="drink_25_50_txt">
+        <item>이 페이스 그대로\n100%에 도전하세요~!</item>
+        <item>좋아요 좋아요\n잘하고 있어요!</item>
+        <item>맑고 시원한 물 한 잔\n마시고 있죠?</item>
+        <item>물을 잘 마시면\n피부에 생기가 넘쳐요~</item>
+        <item>건강한 내 몸을 위해서\n오늘도 화이팅!</item>
+        <item>열심히 하고 있어요!\n조금 더 마셔볼까요?</item>
+        <item>잘했어요!\n한 잔 더 마셔볼까요?</item>
+        <item>건강한 수분 섭취\n함께 해요!</item>
+        <item>꾸준한 수분섭취는\n만병통치약!</item>
+        <item>잘하고 있어요! 목표 달성을 위해 한 잔 더 마셔요!</item>
+    </string-array>
+    <string-array name="drink_50_75_txt">
+        <item>핫 둘 핫 둘!\n지금 먹은 만큼만 한 번 더!</item>
+        <item>워비가 당신의 페이스 메이커가\n되어드릴게요!</item>
+        <item>캬아~\n벌써 건강해진 것 같지 않나요?</item>
+        <item>이정도 물은 배영하기 딱 좋지요~\n더 물을 주세요!</item>
+        <item>지금 마신만큼 앞으로 쭉쭉!\n마셔주세요!</item>
+        <item>오늘의 목표량 까지\n금방 갈 수 있을 거 같은데요!?</item>
+        <item>똑소리 나게\n잘 마셔주고 있어요!</item>
+        <item>괜찮아요? 많이 힘들죠?\n얼마 안남았어요 화이팅!!</item>
+        <item>오늘 목표량 채우면\n얼~마나 기분이 좋게요~</item>
+        <item>첨벙첨벙!\n목표량 달성에 가까워지고 있어!</item>
+    </string-array>
+    <string-array name="drink_75_100_txt">
+        <item>당신의 실력에\n워비 기절~!</item>
+        <item>잠수할 정도로 물이 생겼어요!\n조금만 더 마시면 달성이예요!</item>
+        <item>티끌 모아 물 마시다 보면\n산이 되겠죠?</item>
+        <item>조금만 더 마시면\n목표량 달성이야!</item>
+        <item>진짜 의지 최고!\n워비가 놀랐어요 @.@</item>
+        <item>100프로를 향해\n조금만 더!</item>
+        <item>목표량을 채우면\n정말 뿌듯할 거에요!</item>
+        <item>이제 잠수해야겠어요!\n물이 넘쳐나요!</item>
+        <item>워비랑 같이\n물 계속 잘 마셔요~</item>
+        <item>가끔 따뜻한 물도\n자주 마셔 주세요~</item>
+    </string-array>
+    <string-array name="drink_100_txt">
+        <item>당신은 오늘의\n진정한 승자!</item>
+        <item>내일도 워비와 함께\n끝까지 함께해요 :)</item>
+        <item>목표량 달성!\n수분 섭취 이상무!</item>
+        <item>얏호! 우리가 해냈어요!\n내일도 나랑 놀아줄거죠?</item>
+        <item>전 믿고 있었다구요!\n내일도 같이 성공해보아요!</item>
+        <item>와!\n역시 꾸준히 하면 된다니까요!</item>
+        <item>건강한 하루였어요!\n내일도 워비 보러 와줄거죠?</item>
+        <item>오늘도 수분 그득한\n하루였네요.</item>
+        <item>오늘 하루도 수고했어요!\n내일 봐요!</item>
+        <item>내일도 워비\n놀아주러 올거죠?</item>
+    </string-array>
+    <string-array name="alarm_txt">
+        <item>물 마실 시간이에요! 건강한 물 한 잔 쭈욱 들이켜봐요!</item>
+        <item>물 마실 시간이야! 건강한 물 한 잔 마셔보자!</item>
+        <item>수분섭취할 시간이에요. 워비와 함께 치얼스!</item>
+        <item>지금 물 한 잔 마시면 워비가 행복할 것 같은데 한 잔 고?</item>
+    </string-array>
+</resources>

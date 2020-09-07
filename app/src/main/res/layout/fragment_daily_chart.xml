@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="dailyVm"
+            type="appvian.water.buddy.viewmodel.analytics.DailyChartViewModel" />
+
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true">
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_collapseMode="none">
+
+                    <TextView
+                        android:id="@+id/daily_header"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/analytics_header_daily"
+                        android:textSize="@dimen/daily_header_size"
+                        android:textColor="@color/black"
+                        android:lineSpacingExtra="26sp"
+                        android:layout_marginStart="@dimen/daily_common_spacing"
+                        android:layout_marginTop="@dimen/daily_common_spacing"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:fontFamily="@font/spoqa_han_sans_bold" />
+
+                    <LinearLayout
+                        android:id="@+id/daily_date_picker"
+                        android:layout_width="62dp"
+                        android:layout_height="27dp"
+                        android:orientation="horizontal"
+                        android:background="@drawable/radius"
+                        android:backgroundTint="@color/grey_2"
+                        android:layout_marginTop="@dimen/daily_common_spacing"
+                        android:layout_marginEnd="31dp"
+                        android:gravity="center"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/daily_date_picker_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:textSize="11sp"
+                            tools:text="15일"/>
+
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:layout_marginEnd="8dp"
+                            android:src="@drawable/load_more"
+                            />
+                    </LinearLayout>
+
+                    <com.github.mikephil.charting.charts.PieChart
+                        android:id="@+id/daily_piechart"
+                        android:layout_width="@dimen/daily_pie_chart"
+                        android:layout_height="@dimen/daily_pie_chart"
+                        android:layout_marginTop="@dimen/daily_common_spacing"
+                        android:layout_marginStart="@dimen/daily_common_spacing"
+                        android:fillViewport="true"
+                        app:layout_constraintTop_toBottomOf="@id/daily_header"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+                    <TextView
+                        android:id="@+id/daily_sys_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/daily_sys_none_water"
+                        android:textSize="@dimen/daily_sys_size"
+                        android:textColor="@color/black"
+                        android:lineSpacingExtra="3sp"
+                        android:layout_marginTop="@dimen/daily_common_spacing"
+                        android:layout_marginStart="@dimen/daily_pie_sys_spacing"
+                        app:layout_constraintStart_toEndOf="@id/daily_piechart"
+                        app:layout_constraintTop_toBottomOf="@id/daily_header"
+                        android:fontFamily="@font/spoqa_han_sans_bold"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/daily_chart_legend"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/daily_pie_sys_spacing"
+                        android:layout_marginTop="19dp"
+                        android:layout_marginEnd="@dimen/daily_common_spacing"
+                        tools:listitem="@layout/item_daily_legend"
+                        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                        app:spanCount="2"
+                        app:layout_constraintTop_toBottomOf="@id/daily_sys_text"
+                        app:layout_constraintStart_toEndOf="@id/daily_piechart"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="35dp"
+                android:paddingBottom="38dp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/daily_chart_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:listitem="@layout/item_daily_intake_list"
+                    android:paddingBottom="40dp"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/daily_view_none"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/iv_no_water"
+                        android:layout_width="49dp"
+                        android:layout_height="44dp"
+                        android:src="@mipmap/no_water_grey_icon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/daily_none_water_1"
+                        android:textColor="@color/grey_7"
+                        android:textSize="@dimen/daily_sys_target_size"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/iv_no_water" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:text="@string/daily_none_water_2"
+                        android:textColor="@color/grey_7"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/iv_no_water" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

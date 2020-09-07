@@ -1,0 +1,118 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_back"
+    android:layout_width="226dp"
+    android:layout_height="98dp"
+    android:background="@drawable/widget_back"
+    >
+    <TextView
+        android:id="@+id/txt_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="오늘의 수분 섭취"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/settingTxtBlack"
+        android:textSize="12sp"
+        android:fontFamily="@font/spoqa_han_sans_regular"
+        android:includeFontPadding="false"/>
+
+    <TextView
+        android:id="@+id/txt_percent_val"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="6sp"
+        android:text="20"
+        android:textSize="40sp"
+        android:textColor="@color/blue_1"
+        android:fontFamily="@font/spoqa_han_sans_light"
+        android:includeFontPadding="false"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="%"
+        android:layout_toEndOf="@id/txt_percent_val"
+        android:layout_alignBottom="@id/txt_percent_val"
+        android:layout_marginBottom="9sp"
+        android:textSize="15sp"
+        android:textColor="@color/blue_1"
+        android:fontFamily="@font/spoqa_han_sans_regular"
+        android:includeFontPadding="false"
+        />
+
+    
+    <TextView
+        android:id="@+id/txt_target"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="22dp"
+        android:textSize="10sp"
+        android:textColor="@color/grey_8"
+        android:layout_alignParentBottom="true"
+        android:text="목표량"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="@font/spoqa_han_sans_regular"
+        android:includeFontPadding="false"
+        />
+    <TextView
+        android:id="@+id/txt_target_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:textColor="@color/grey_10"
+        android:layout_alignStart="@id/txt_target"
+        android:layout_above="@id/txt_target"
+        android:fontFamily="@font/spoqa_han_sans_regular"
+        android:includeFontPadding="false"
+        />
+
+    <TextView
+        android:id="@+id/line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="|"
+        android:layout_toStartOf="@id/txt_target_amount"
+        android:layout_marginEnd="7dp"
+        android:textSize="15sp"
+        android:layout_alignTop="@id/txt_target_amount"
+        android:textColor="@color/grey_6"
+        android:fontFamily="@font/spoqa_han_sans_regular"
+        android:includeFontPadding="false"
+        />
+    
+    <TextView
+        android:id="@+id/txt_intake_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@id/line"
+        android:layout_marginEnd="7dp"
+        android:textColor="@color/grey_10"
+        android:layout_alignTop="@id/txt_target_amount"
+        android:fontFamily="@font/spoqa_han_sans_regular"
+        android:includeFontPadding="false"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="섭취량"
+        android:textColor="@color/grey_8"
+        android:textSize="10sp"
+        android:layout_alignTop="@id/txt_target"
+        android:layout_alignStart="@id/txt_intake_amount"
+        android:fontFamily="@font/spoqa_han_sans_regular"
+        android:includeFontPadding="false"
+        />
+
+
+
+
+
+
+
+
+</RelativeLayout>
